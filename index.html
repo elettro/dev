@@ -1496,31 +1496,47 @@
     const PLAYLIST_ID = 'PLUyy1UkCd1TIkokLl7tTQw_hhOzhw3G67';
 
     
-    // ── STASHBOX LATEST UPLOAD (AUTO) ─────────────────────────
-    // Uses YouTube's public RSS feed for the /user/stashboxband channel.
-    // Note: This grabs the latest upload. If your channel is mostly Shorts, this will usually be a Short.
-    const STASHBOX_RSS = 'https://www.youtube.com/feeds/videos.xml?user=stashboxband';
+    // ── STASHBOX LATEST SHORT (AUTO) ──────────────────────────
+    // Scans recent uploads via RSS and finds the most recent Short
+    // (Shorts are <= 60 seconds — detected via YouTube oEmbed duration)
+    const STASHBOX_CHANNEL_RSS = 'https://www.youtube.com/feeds/videos.xml?channel_id=UC6C6Z_erONmKW67pF5AyYkA';
     const stashboxShortFrame = document.getElementById('stashboxShort');
 
-    async function loadLatestStashboxUpload() {
+    async function loadLatestStashboxShort() {
       try {
-        const res = await fetch(STASHBOX_RSS, { cache: 'no-store' });
+        const res = await fetch(STASHBOX_CHANNEL_RSS, { cache: 'no-store' });
         if (!res.ok) return;
         const xmlText = await res.text();
         const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
-        const firstEntry = xml.querySelector('entry');
-        if (!firstEntry) return;
+        const entries = Array.from(xml.querySelectorAll('entry'));
 
-        // <yt:videoId>VIDEOID</yt:videoId>
-        const vidNode = firstEntry.getElementsByTagName('yt:videoId')[0];
-        const vid = vidNode ? vidNode.textContent.trim() : '';
-        if (!vid) return;
+        // Check each video via oEmbed to find one that is a Short
+        // Shorts have URLs that work under youtube.com/shorts/ID
+        // We test by fetching the /shorts/ URL via oEmbed and checking if it resolves
+        for (const entry of entries.slice(0, 15)) {
+          const vidNode = entry.getElementsByTagName('yt:videoId')[0];
+          const vid = vidNode ? vidNode.textContent.trim() : '';
+          if (!vid) continue;
 
-        stashboxShortFrame.src = `https://www.youtube.com/embed/${vid}?autoplay=0&rel=0&modestbranding=1`;
-      } catch (e) {
-        // fail silently
-      }
+          // Shorts respond to the /shorts/ URL — regular videos redirect away
+          // We detect by checking the oEmbed title which includes the word "Short"
+          // or by checking thumbnail aspect ratio (Shorts = portrait 9:16)
+          try {
+            const oembed = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/shorts/${vid}&format=json`);
+            if (oembed.ok) {
+              const data = await oembed.json();
+              // oEmbed for Shorts returns height > width (portrait)
+              if (data.thumbnail_height > data.thumbnail_width) {
+                stashboxShortFrame.src = `https://www.youtube.com/embed/${vid}?autoplay=0&rel=0&modestbranding=1`;
+                return;
+              }
+            }
+          } catch (e) { continue; }
+        }
+      } catch (e) { /* fail silently — placeholder iframe stays */ }
     }
+
+    loadLatestStashboxShort();
 const videos = [
       { id: 'Mc6SdHHh2po', tag: 'Elettro® Production', title: 'Video 01', desc: 'AI-powered content production for South Florida businesses and beyond.' },
       { id: 'ATbfh4fptQI', tag: 'Elettro® Production', title: 'Video 02', desc: 'AI-powered content production for South Florida businesses and beyond.' },
@@ -1710,22 +1726,19 @@ const videos = [
     startAuto();
 
 
-    // ── PIANO CAROUSEL ─────────────────────────────────────────
-    // Playlist: PLOyOvFNu5XB3SUqVDxYHyUUeeV9vq0z4B
-    // Add more IDs here as you publish more videos on @PianoMusicSoothing
+    // ── PIANO CAROUSEL — mirrors main carousel pattern exactly ──
+    const PIANO_PLAYLIST = 'PLOyOvFNu5XB3SUqVDxYHyUUeeV9vq0z4B';
     const pianoItems = [
-      { id: '6pZPMv8ULgI', tag: 'Piano' },
-      { id: '2iQPP1NxMR0', tag: 'Piano' },
-      { id: '27rrCGiNo3g', tag: 'Piano' },
-      { id: 'k8zFEpokdPY', tag: 'Piano' },
-      { id: 'Q213zB6O0NQ', tag: 'Piano' },
-      { id: 'pwzH3t5wBgM', tag: 'Piano' },
-      { id: 'xuS0x1BK1-Q', tag: 'Piano' },
-      { id: '-_AbmJk1IwU', tag: 'Piano' },
+      { id: '6pZPMv8ULgI' },
+      { id: '2iQPP1NxMR0' },
+      { id: '27rrCGiNo3g' },
+      { id: 'k8zFEpokdPY' },
+      { id: 'Q213zB6O0NQ' },
+      { id: 'pwzH3t5wBgM' },
+      { id: 'xuS0x1BK1-Q' },
+      { id: '-_AbmJk1IwU' },
     ];
 
-
-    const PIANO_PLAYLIST = 'PLOyOvFNu5XB3SUqVDxYHyUUeeV9vq0z4B';
     const track2    = document.getElementById('track2');
     const wrap3     = document.getElementById('trackWrap2');
     const prevBtn2  = document.getElementById('prevBtn2');
@@ -1735,7 +1748,8 @@ const videos = [
     const cNum2     = document.getElementById('currentNum2');
     const tNum2     = document.getElementById('totalNum2');
 
-    function buildPianoCard(v) {
+    // Build cards — same pattern as main carousel
+    pianoItems.forEach(v => {
       const card = document.createElement('a');
       card.className = 'c-card';
       card.href = `https://www.youtube.com/watch?v=${v.id}&list=${PIANO_PLAYLIST}`;
@@ -1745,12 +1759,10 @@ const videos = [
       const img = document.createElement('img');
       img.alt = 'Piano Music Soothing';
       img.loading = 'lazy';
-      // mqdefault (320x180) always exists for any public video — use as primary
-      img.src = `https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
-      // Upgrade to maxres once we know it exists
+      img.src = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
       img.onload = function() {
         const hi = new Image();
-        hi.onload = () => { img.src = hi.src; };
+        hi.onload = () => { if (hi.naturalHeight > 90) img.src = hi.src; };
         hi.src = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
       };
 
@@ -1761,73 +1773,52 @@ const videos = [
       card.appendChild(img);
       card.appendChild(ov);
       track2.appendChild(card);
+    });
+
+    // Init immediately after building — same as main carousel
+    const pcards2  = track2.querySelectorAll('.c-card');
+    const ptotal   = pcards2.length;
+    tNum2.textContent = ptotal;
+    let vis2  = window.innerWidth <= 768 ? 1 : 3;
+    let cur2  = 0;
+    const pmaxIdx = ptotal - vis2;
+
+    const ppages = Math.ceil(ptotal / vis2);
+    for (let i = 0; i < ppages; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot-ind' + (i === 0 ? ' active' : '');
+      d.onclick = () => pGoTo(i * vis2);
+      dotsWrap2.appendChild(d);
     }
 
-    pianoItems.forEach(buildPianoCard);
-    setTimeout(initPianoCarousel, 1500);
-
-
-    function rebuildPiano() {
-      const rem = track2.querySelectorAll('.c-card');
-      tNum2.textContent = rem.length;
-      if (cur2 > rem.length - vis2) cur2 = Math.max(0, rem.length - vis2);
-      updateUI2();
-    }
-
-    let cur2 = 0;
-    let vis2 = window.innerWidth <= 768 ? 1 : 3;
-
-    function initPianoCarousel() {
-      const pcards = track2.querySelectorAll('.c-card');
-      if (pcards.length === 0) {
-        // Try again if cards haven't rendered yet
-        setTimeout(initPianoCarousel, 500);
-        return;
-      }
-      tNum2.textContent = pcards.length;
-      dotsWrap2.innerHTML = '';
-      const pages2 = Math.ceil(pcards.length / vis2);
-      for (let i = 0; i < pages2; i++) {
-        const d = document.createElement('div');
-        d.className = 'dot-ind' + (i === 0 ? ' active' : '');
-        d.onclick = () => goTo2(i * vis2);
-        dotsWrap2.appendChild(d);
-      }
-      // Force initial position calculation after layout
-      requestAnimationFrame(() => {
-        track2.style.transform = 'translateX(0)';
-        updateUI2();
-      });
-    }
-
-    function goTo2(idx) {
-      const pcards = track2.querySelectorAll('.c-card');
-      const maxI = pcards.length - vis2;
-      cur2 = Math.max(0, Math.min(idx, maxI));
-      const w = pcards[0]?.getBoundingClientRect().width + 16 || 0;
+    function pGoTo(idx) {
+      cur2 = Math.max(0, Math.min(idx, pmaxIdx));
+      const w = pcards2[0].getBoundingClientRect().width + 16;
       track2.style.transform = `translateX(-${cur2 * w}px)`;
-      updateUI2();
+      pUpdateUI();
     }
 
-    function updateUI2() {
-      const pcards = track2.querySelectorAll('.c-card');
-      const maxI = pcards.length - vis2;
+    function pMove(dir) { pGoTo(cur2 + dir); }
+
+    function pUpdateUI() {
       prevBtn2.disabled = cur2 === 0;
-      nextBtn2.disabled = cur2 >= maxI;
+      nextBtn2.disabled = cur2 >= pmaxIdx;
       cNum2.textContent = cur2 + 1;
-      pfill2.style.width = (maxI <= 0 ? 100 : (cur2 / maxI) * 100) + '%';
+      pfill2.style.width = (pmaxIdx === 0 ? 100 : (cur2 / pmaxIdx) * 100) + '%';
       document.querySelectorAll('#dots2 .dot-ind').forEach((d, i) => d.classList.toggle('active', i === Math.floor(cur2 / vis2)));
     }
 
-    prevBtn2.onclick = () => { cur2 = Math.max(0, cur2 - 1); goTo2(cur2); };
-    nextBtn2.onclick = () => { cur2++; goTo2(cur2); };
+    prevBtn2.onclick = () => pMove(-1);
+    nextBtn2.onclick = () => pMove(1);
 
     let isDrag2 = false, sx2 = 0, st2 = 0;
     wrap3.addEventListener('mousedown', e => { isDrag2 = true; wrap3.classList.add('dragging'); sx2 = e.clientX; st2 = new WebKitCSSMatrix(getComputedStyle(track2).transform).m41; });
     document.addEventListener('mousemove', e => { if (!isDrag2) return; track2.style.transition = 'none'; track2.style.transform = `translateX(${st2 + e.clientX - sx2}px)`; });
-    document.addEventListener('mouseup', e => { if (!isDrag2) return; isDrag2 = false; wrap3.classList.remove('dragging'); track2.style.transition = ''; const d = e.clientX - sx2; if (Math.abs(d) > 60) { if (d < 0) cur2++; else cur2 = Math.max(0, cur2 - 1); } goTo2(cur2); });
+    document.addEventListener('mouseup', e => { if (!isDrag2) return; isDrag2 = false; wrap3.classList.remove('dragging'); track2.style.transition = ''; const d = e.clientX - sx2; if (Math.abs(d) > 60) pMove(d < 0 ? 1 : -1); else pGoTo(cur2); });
     wrap3.addEventListener('touchstart', e => { sx2 = e.touches[0].clientX; }, { passive: true });
-    wrap3.addEventListener('touchend', e => { const d = e.changedTouches[0].clientX - sx2; if (Math.abs(d) > 50) { if (d < 0) cur2++; else cur2 = Math.max(0, cur2 - 1); goTo2(cur2); } });
+    wrap3.addEventListener('touchend', e => { const d = e.changedTouches[0].clientX - sx2; if (Math.abs(d) > 50) pMove(d < 0 ? 1 : -1); });
+
+    pUpdateUI();
 
     // Init is triggered after playlist items are loaded
     const allProducts = [
@@ -1865,11 +1856,10 @@ const videos = [
       grid.innerHTML = '';
       uniqByUrl(products).slice(0, 5).forEach((p, i) => {
         const card = document.createElement('a');
-        card.className = 'product-card fade-in';
+        card.className = 'product-card';
         card.href = p.url;
         card.target = '_blank';
         card.rel = 'noopener';
-        card.style.animationDelay = `${i * 60}ms`;
         card.innerHTML = `
           <div class="product-img-wrap">
             ${p.badge ? `<div class="badge-new">${p.badge}</div>` : ''}
