@@ -108,7 +108,7 @@
       white-space: nowrap;
     }
 
-    .client-name:hover { color: rgba(240,236,228,0.55); }
+    .client-name:hover { color: rgba(240,236,228,0.9); }
 
     /* Stats row */
     .stats-row {
@@ -140,7 +140,7 @@
     .stat-cell .desc {
       font-size: 12px;
       font-weight: 300;
-      color: rgba(240,236,228,0.35);
+      color: rgba(240,236,228,0.85);
       letter-spacing: 0.06em;
       line-height: 1.5;
     }
@@ -215,7 +215,7 @@
       font-size: 10px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(240,236,228,0.35);
+      color: rgba(240,236,228,0.85);
     }
 
     .queue-count {
@@ -271,7 +271,7 @@
       font-size: 9px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(240,236,228,0.3);
+      color: rgba(240,236,228,0.75);
       margin-bottom: 3px;
     }
 
@@ -632,7 +632,7 @@
     .problem-solve {
       font-size: 13px;
       font-weight: 300;
-      color: rgba(240,236,228,0.45);
+      color: rgba(240,236,228,0.85);
       line-height: 1.6;
     }
 
@@ -1352,29 +1352,10 @@
 
     renderProducts(shuffleArr(allProducts));
 
-    // ── DYNAMIC SUBSCRIBER COUNT ───────────────────────────────
-    // The YouTube API key has been moved out of this file for security.
-    // The subscriber count is hardcoded below and should be updated manually
-    // when you want to refresh it. Alternatively set up a Cloudflare Worker
-    // proxy so the key never appears in public source code.
-    (async () => {
-      const el = document.getElementById('stashboxSubs');
-      if (!el) return;
-
-      // Fetch via a serverless proxy (set up at /api/subs) so no key is exposed.
-      // Until that proxy exists, shows the static count below.
-      try {
-        const res = await fetch('/api/subs');
-        if (res.ok) {
-          const data = await res.json();
-          const count = data?.subscriberCount;
-          if (count) { el.textContent = Number(count).toLocaleString(); return; }
-        }
-        throw new Error('no proxy');
-      } catch {
-        el.textContent = '6,000+';
-      }
-    })();
+    // ── SUBSCRIBER COUNT ───────────────────────────────────────
+    // GitHub Pages can't make server-side API calls — update this number
+    // manually whenever you want to refresh it.
+    document.getElementById('stashboxSubs').textContent = '5,726';
   </script>
 </body>
 </html>
