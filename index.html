@@ -404,7 +404,15 @@
       transition: border-color 0.3s, transform 0.3s;
       text-decoration: none;
       color: inherit;
+      opacity: 1;
     }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in  { animation: fadeUp 0.4s ease forwards; }
+    .fade-out { opacity: 0; transition: opacity 0.2s; }
 
     .product-card:hover {
       border-color: var(--border-hover);
@@ -1194,7 +1202,7 @@
       <div class="wrap">
         <div class="section-head">
           <span class="label">Is This For You?</span>
-          <h2>What Is This Consulting <span>&amp; Production</span> For?</h2>
+          <h2>Who Is This Consulting <span>&amp; Production</span> For?</h2>
         </div>
 
         <div class="who-grid">
@@ -1235,7 +1243,7 @@
       <div class="wrap">
         <div class="section-head">
           <span class="label">Creator Economy</span>
-          <h2>Influencer — <span>Revenue Collab Manager</span></h2>
+          <h2>Influencer — <span>Revenue Projects</span></h2>
         </div>
 
         <div class="split-section">
@@ -1734,12 +1742,13 @@ const videos = [
       const img = document.createElement('img');
       img.alt = 'Piano Music Soothing';
       img.loading = 'lazy';
-      // Try maxres first, fall back to hqdefault — no private filtering
-      // since all piano videos are confirmed public
-      img.src = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
-      img.onerror = function() {
-        this.onerror = null;
-        this.src = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+      // mqdefault (320x180) always exists for any public video — use as primary
+      img.src = `https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
+      // Upgrade to maxres once we know it exists
+      img.onload = function() {
+        const hi = new Image();
+        hi.onload = () => { img.src = hi.src; };
+        hi.src = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
       };
 
       const ov = document.createElement('div');
@@ -1752,7 +1761,7 @@ const videos = [
     }
 
     pianoItems.forEach(buildPianoCard);
-    setTimeout(initPianoCarousel, 800);
+    setTimeout(initPianoCarousel, 1500);
 
 
     function rebuildPiano() {
