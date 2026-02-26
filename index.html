@@ -1275,25 +1275,59 @@
     const cNum     = document.getElementById('currentNum');
     const tNum     = document.getElementById('totalNum');
 
-    carouselItems.forEach(v => {
+    // YouTube serves a 120x90 grey placeholder for private/unlisted videos.
+    // We detect it by checking if the image is that exact size after loading,
+    // and if so we remove the card entirely and rebuild the carousel.
+    const PRIVATE_THUMB_HEIGHT = 90; // px — YouTube's "no thumbnail" sentinel size
+
+    function buildCard(v) {
       const card = document.createElement('a');
       card.className = 'c-card';
       card.href = `https://www.youtube.com/watch?v=${v.id}`;
       card.target = '_blank';
       card.rel = 'noopener';
-      // Try maxresdefault first, fall back to hqdefault if it 404s
-      const imgSrc = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
-      const fallback = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
-      card.innerHTML = `
-        <img src="${imgSrc}" alt="${v.tag} video"
-             onerror="this.src='${fallback}'"
-             loading="lazy">
-        <div class="c-overlay">
-          <div class="c-tag">${v.tag} · ${v.channel}</div>
-          <div class="c-play">▶</div>
-        </div>`;
+      card.dataset.videoId = v.id;
+
+      const img = document.createElement('img');
+      img.alt = `${v.tag} video`;
+      img.loading = 'lazy';
+
+      // Start with hqdefault (always exists for public videos, 
+      // private ones still return the grey placeholder at 120x90)
+      img.src = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+
+      img.onload = function() {
+        // Grey placeholder is exactly 120×90 — remove card if detected
+        if (this.naturalHeight === PRIVATE_THUMB_HEIGHT) {
+          card.remove();
+          rebuildCarousel();
+        } else {
+          // Try upgrading to maxres now we know the video is public
+          const hires = new Image();
+          hires.onload = () => { if (hires.naturalHeight > PRIVATE_THUMB_HEIGHT) img.src = hires.src; };
+          hires.src = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
+        }
+      };
+
+      const overlay = document.createElement('div');
+      overlay.className = 'c-overlay';
+      overlay.innerHTML = `<div class="c-tag">${v.tag} · ${v.channel}</div><div class="c-play">▶</div>`;
+
+      card.appendChild(img);
+      card.appendChild(overlay);
       track.appendChild(card);
-    });
+    }
+
+    carouselItems.forEach(buildCard);
+
+    function rebuildCarousel() {
+      // Recalculate after a private card is removed
+      const remaining = track.querySelectorAll('.c-card');
+      tNum.textContent = remaining.length;
+      const newMax = remaining.length - vis;
+      if (cur > newMax) cur = Math.max(0, newMax);
+      updateUI();
+    }
 
     const cards2 = track.querySelectorAll('.c-card');
     const total  = cards2.length;
