@@ -1255,20 +1255,30 @@
               <a class="btn" href="#contact">Let's Talk Revenue</a>
             </div>
           </div>
+          
           <div class="split-aside">
-            <div class="aside-stat-block">
-              <div class="aside-stat-num">4,500%</div>
-              <div class="aside-stat-label">YouTube growth in 2 months — Stashbox® 2026</div>
-            </div>
-            <div class="aside-stat-block">
-              <div class="aside-stat-num">500K+</div>
-              <div class="aside-stat-label">AI creative assets produced since 2023</div>
-            </div>
-            <div class="aside-stat-block">
-              <div class="aside-stat-num">Full Stack</div>
-              <div class="aside-stat-label">Video · Merch · Web · Distribution · Automation</div>
+            <div class="panel" style="padding: 22px;">
+              <div class="label" style="margin-bottom: 10px;">Collaborations</div>
+              <div style="font-family: var(--font-display); font-size: 22px; letter-spacing: 0.04em; line-height: 1.1; margin-bottom: 10px;">Artists • Talent • Management</div>
+              <div class="chips" style="margin-top: 14px;">
+                <span class="chip">Maxi Priest</span>
+                <span class="chip">Darcey &amp; Stacey Silva</span>
+                <span class="chip">Slightly Stoopid</span>
+                <span class="chip">Tahiti Cora</span>
+                <span class="chip">Kari Nautique</span>
+                <span class="chip">Reggae.Land</span>
+                <span class="chip">Katchafire</span>
+                <span class="chip">Ian Ziering</span>
+                <span class="chip">Ali Campbell</span>
+                <span class="chip">Toots and the Maytals</span>
+                <span class="chip">Squidly Cole</span>
+                <span class="chip">Silverback Management</span>
+                <span class="chip">Michael London Management</span>
+              </div>
+              <div class="muted" style="margin-top: 14px; font-size: 12px;">Select list shown. Additional collaborations available on request.</div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -1309,6 +1319,22 @@
                   <div class="release-desc">Looping 3–8 second visual stories that play behind your track on Spotify — proven to increase streams and shares.</div>
                 </div>
               </div>
+
+              <div class="release-bullet">
+                <div class="release-icon">✦</div>
+                <div>
+                  <div class="release-title">AI Music Production</div>
+                  <div class="release-desc">Bring your demo at any stage. We finish multiple full versions aligned with your intended style — different arrangements, energy levels, and hooks.</div>
+                </div>
+              </div>
+              <div class="release-bullet">
+                <div class="release-icon">✓</div>
+                <div>
+                  <div class="release-title">Distribution &amp; Publishing Setup</div>
+                  <div class="release-desc">We upload your releases to streaming platforms and help with ASCAP/BMI registration so your metadata and publishing are set up correctly from day one.</div>
+                </div>
+              </div>
+
             </div>
 
             <div style="margin-top: 28px;">
@@ -1331,7 +1357,7 @@
                   allowfullscreen>
                 </iframe>
               </div>
-              <div class="short-note">Auto-loads the latest upload from @Stashboxband. If you want this to always be a Short, send your Shorts playlist ID and we’ll lock it to Shorts only.</div>
+              <div class="short-note">Auto-loads the latest upload that looks vertical (Short-like) from @Stashboxband.</div>
             </div>
           </div>
         </div>
@@ -1471,51 +1497,15 @@
         if (!res.ok) return;
         const xmlText = await res.text();
         const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+        const firstEntry = xml.querySelector('entry');
+        if (!firstEntry) return;
 
-        // Grab a handful of recent uploads, then pick the first one that looks vertical (Shorts-style).
-        const entries = Array.from(xml.querySelectorAll('entry')).slice(0, 15);
-        if (!entries.length) return;
+        // <yt:videoId>VIDEOID</yt:videoId>
+        const vidNode = firstEntry.getElementsByTagName('yt:videoId')[0];
+        const vid = vidNode ? vidNode.textContent.trim() : '';
+        if (!vid) return;
 
-        const ids = entries.map(e => {
-          const node = e.getElementsByTagName('yt:videoId')[0];
-          return node ? node.textContent.trim() : '';
-        }).filter(Boolean);
-
-        async function imageDims(url) {
-          return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.onload = () => resolve({ w: img.naturalWidth || 0, h: img.naturalHeight || 0 });
-            img.onerror = reject;
-            img.src = url;
-          });
-        }
-
-        async function looksVertical(videoId) {
-          // Thumbnails for Shorts are often portrait. We'll test a few common thumbnail endpoints.
-          const urls = [
-            `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
-            `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`,
-            `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
-            `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
-          ];
-          for (const u of urls) {
-            try {
-              const d = await imageDims(u);
-              if (d.h > d.w) return true;
-            } catch (e) {
-              // try next url
-            }
-          }
-          return false;
-        }
-
-        let chosen = ids[0] || '';
-        for (const id of ids) {
-          if (await looksVertical(id)) { chosen = id; break; }
-        }
-        if (!chosen) return;
-
-        stashboxShortFrame.src = `https://www.youtube.com/embed/${chosen}?autoplay=0&rel=0&modestbranding=1`;
+        stashboxShortFrame.src = `https://www.youtube.com/embed/${vid}?autoplay=0&rel=0&modestbranding=1`;
       } catch (e) {
         // fail silently
       }
@@ -1715,6 +1705,11 @@ const videos = [
     // Add video IDs from the playlist below — paste from YouTube URL ?v=XXXXX
     const pianoItems = [
       { id: '6pZPMv8ULgI', tag: 'Piano' },
+      { id: '2iQPP1NxMR0', tag: 'Piano' },
+      { id: '2iQPP1NxMR0', tag: 'Piano' },
+      { id: '2iQPP1NxMR0', tag: 'Piano' },
+      { id: '2iQPP1NxMR0', tag: 'Piano' },
+      { id: '2iQPP1NxMR0', tag: 'Piano' },
       { id: '2iQPP1NxMR0', tag: 'Piano' },
     ];
 
