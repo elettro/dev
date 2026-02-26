@@ -292,6 +292,8 @@
       overflow: hidden;
       border-radius: var(--radius);
       cursor: grab;
+      min-height: 220px;
+      width: 100%;
     }
 
     .carousel-track-wrap.dragging { cursor: grabbing; }
@@ -301,6 +303,7 @@
       gap: var(--gap);
       transition: transform 0.55s cubic-bezier(0.77,0,0.175,1);
       will-change: transform;
+      width: 100%;
     }
 
     .c-card {
@@ -1776,6 +1779,11 @@ const videos = [
 
     function initPianoCarousel() {
       const pcards = track2.querySelectorAll('.c-card');
+      if (pcards.length === 0) {
+        // Try again if cards haven't rendered yet
+        setTimeout(initPianoCarousel, 500);
+        return;
+      }
       tNum2.textContent = pcards.length;
       dotsWrap2.innerHTML = '';
       const pages2 = Math.ceil(pcards.length / vis2);
@@ -1785,7 +1793,11 @@ const videos = [
         d.onclick = () => goTo2(i * vis2);
         dotsWrap2.appendChild(d);
       }
-      updateUI2();
+      // Force initial position calculation after layout
+      requestAnimationFrame(() => {
+        track2.style.transform = 'translateX(0)';
+        updateUI2();
+      });
     }
 
     function goTo2(idx) {
