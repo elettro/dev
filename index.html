@@ -1357,7 +1357,7 @@
             <!-- Most popular Stashbox Short — update ID when known -->
             <div class="short-player-wrap">
               <div class="short-label">
-                <span class="label" style="margin-bottom: 6px;">Most Viewed Short</span>
+                <span class="label" style="margin-bottom: 6px;">Latest Video</span>
                 <div class="short-channel">@Stashboxband</div>
               </div>
               <div class="short-frame">
@@ -1882,4 +1882,53 @@ const videos = [
     renderProducts(pickRandomUnique(allProducts, 5));
 
     // ── SUBSCRIBER COUNT ───────────────────────────────────────
-    // GitHub Pages can't make server-side API
+    // Try multiple public endpoints; gracefully fallback so UI never stays "loading..."
+    async function loadSubscriberCount() {
+      const subEl = document.getElementById('stashboxSubs');
+      if (!subEl) return;
+
+      const CHANNEL_HANDLE = 'Stashboxband';
+      const channelUrl = `https://www.youtube.com/@${CHANNEL_HANDLE}`;
+
+      const attempts = [
+        // CORS-friendly community mirrors/proxies (no API key required)
+        `https://r.jina.ai/http://youtube.com/@${CHANNEL_HANDLE}`,
+        `https://r.jina.ai/http://www.youtube.com/@${CHANNEL_HANDLE}`,
+        // Fallback through allorigins if available
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(channelUrl)}`,
+      ];
+
+      const parseSubs = (raw) => {
+        if (!raw) return null;
+        const text = raw.replace(/\s+/g, ' ');
+        const match = text.match(/([0-9][0-9.,]*\s*[KMB]?)(?:\+)?\s+subscribers?/i)
+          || text.match(/"subscriberCountText"[\s\S]*?"simpleText"\s*:\s*"([^"]+)"/i)
+          || text.match(/"subscriberCountText"[\s\S]*?"text"\s*:\s*"([^"]+)"/i);
+
+        if (!match) return null;
+        return match[1].trim().replace(/\s+/g, ' ');
+      };
+
+      for (const url of attempts) {
+        try {
+          const res = await fetch(url, { cache: 'no-store' });
+          if (!res.ok) continue;
+          const body = await res.text();
+          const parsed = parseSubs(body);
+          if (parsed) {
+            subEl.textContent = parsed;
+            return;
+          }
+        } catch (e) {
+          // keep trying next endpoint
+        }
+      }
+
+      // Never leave the UI in a loading state.
+      subEl.textContent = 'N/A';
+    }
+
+    loadSubscriberCount();
+  </script>
+</body>
+</html>
