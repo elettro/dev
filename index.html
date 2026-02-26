@@ -1724,8 +1724,6 @@ const videos = [
     const cNum2     = document.getElementById('currentNum2');
     const tNum2     = document.getElementById('totalNum2');
 
-    const PRIVATE_H = 90;
-
     function buildPianoCard(v) {
       const card = document.createElement('a');
       card.className = 'c-card';
@@ -1736,15 +1734,12 @@ const videos = [
       const img = document.createElement('img');
       img.alt = 'Piano Music Soothing';
       img.loading = 'lazy';
-      img.src = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
-      img.onload = function() {
-        if (this.naturalHeight === PRIVATE_H) {
-          card.remove(); rebuildPiano();
-        } else {
-          const hi = new Image();
-          hi.onload = () => { if (hi.naturalHeight > PRIVATE_H) img.src = hi.src; };
-          hi.src = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
-        }
+      // Try maxres first, fall back to hqdefault — no private filtering
+      // since all piano videos are confirmed public
+      img.src = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
+      img.onerror = function() {
+        this.onerror = null;
+        this.src = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
       };
 
       const ov = document.createElement('div');
@@ -1757,7 +1752,7 @@ const videos = [
     }
 
     pianoItems.forEach(buildPianoCard);
-    setTimeout(initPianoCarousel, 500);
+    setTimeout(initPianoCarousel, 800);
 
 
     function rebuildPiano() {
