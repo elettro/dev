@@ -1427,7 +1427,7 @@
           <div class="card">
             <h3>Reach Dean directly</h3>
             <p class="contact-line" style="margin-top: 16px;">
-              Email: <a class="contact-strong" href="/cdn-cgi/l/email-protection#197d6978757c6b7476597c757c6d6d6b76377a7674"><span class="__cf_email__" data-cfemail="b4d0c4d5d8d1c6d9dbf4d1d8d1c0c0c6db9ad7dbd9">[email&#160;protected]</span></a><br />
+              Email: <a class="contact-strong" href="mailto:contact@Elettro.com">contact@Elettro.com</a><br />
               Phone: <a class="contact-strong" href="tel:+13104086687">310-408-6687</a><br />
               Location: Davie, FL — serving all of South Florida
             </p>
@@ -1442,12 +1442,16 @@
 
           <div class="card">
             <h3>Quick request</h3>
-            <form class="form" onsubmit="event.preventDefault(); alert('Thanks! Dean will be in touch within 24 hours.');">
+            <form class="form" action="https://formsubmit.co/contact@elettro.com" method="POST">
+              <input type="hidden" name="_subject" value="New Quick Request from Elettro.com" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_next" value="https://elettro.com/#contact" />
               <div class="form-grid">
-                <input class="field" required placeholder="Your name" />
-                <input class="field" required type="email" placeholder="Your email" />
-                <input class="field" required type="tel" placeholder="Phone number" />
-                <select class="field" required>
+                <input class="field" name="name" required placeholder="Your name" />
+                <input class="field" name="email" required type="email" placeholder="Your email" />
+                <input class="field" name="phone" required type="tel" placeholder="Phone number" />
+                <select class="field" name="service" required>
                   <option value="" selected disabled>What do you need help with?</option>
                   <option>Social content & video</option>
                   <option>Website design & build</option>
@@ -1456,7 +1460,7 @@
                   <option>3D printed merch</option>
                   <option>Not sure — let's talk</option>
                 </select>
-                <textarea class="field" placeholder="Tell me about your business and your goals (optional)" rows="3"></textarea>
+                <textarea class="field" name="details" placeholder="Tell me about your business and your goals (optional)" rows="3"></textarea>
                 <button class="btn" type="submit">Send Request</button>
               </div>
             </form>
@@ -1491,7 +1495,7 @@
   </footer>
 
   <!-- ── SCRIPTS ── -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // ── YOUTUBE QUEUE ──────────────────────────────────────────
     const PLAYLIST_ID = 'PLUyy1UkCd1TIkokLl7tTQw_hhOzhw3G67';
 
@@ -1836,25 +1840,25 @@ const videos = [
 
     function shuffleArr(a) { return [...a].sort(() => Math.random() - 0.5); }
 
-    function uniqByUrl(items) {
+    function uniqProducts(items) {
       const seen = new Set();
       const out = [];
       items.forEach(p => {
-        const key = (p && (p.url || p.handle || p.name)) || JSON.stringify(p);
+        const key = [p?.url || "", p?.name || "", p?.collection || "", p?.img || ""].join("|");
         if (!seen.has(key)) { seen.add(key); out.push(p); }
       });
       return out;
     }
 
     function pickRandomUnique(items, count) {
-      const pool = shuffleArr(uniqByUrl(items));
+      const pool = shuffleArr(uniqProducts(items));
       return pool.slice(0, count);
     }
 
     function renderProducts(products) {
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
-      uniqByUrl(products).slice(0, 5).forEach((p, i) => {
+      uniqProducts(products).slice(0, 5).forEach((p, i) => {
         const card = document.createElement('a');
         card.className = 'product-card';
         card.href = p.url;
@@ -1874,12 +1878,36 @@ const videos = [
       });
     }
 
-    function shuffleProducts() {
-      document.querySelectorAll('.product-card').forEach(c => c.classList.add('fade-out'));
-      setTimeout(() => renderProducts(pickRandomUnique(allProducts, 5)), 220);
+    let currentProductKeys = [];
+
+    function toProductKeys(products) {
+      return uniqProducts(products).slice(0, 5).map(p => p.url || p.name);
     }
 
-    renderProducts(pickRandomUnique(allProducts, 5));
+    function getNextProducts() {
+      let next = pickRandomUnique(allProducts, 5);
+      let nextKeys = toProductKeys(next);
+      let tries = 0;
+
+      while (tries < 8 && nextKeys.join('|') === currentProductKeys.join('|')) {
+        next = pickRandomUnique(allProducts, 5);
+        nextKeys = toProductKeys(next);
+        tries += 1;
+      }
+
+      currentProductKeys = nextKeys;
+      return next;
+    }
+
+    function shuffleProducts() {
+      document.querySelectorAll('.product-card').forEach(c => c.classList.add('fade-out'));
+      setTimeout(() => renderProducts(getNextProducts()), 220);
+    }
+
+    // Make available for inline onclick handlers in all browsers/environments.
+    window.shuffleProducts = shuffleProducts;
+
+    renderProducts(getNextProducts());
 
     // ── SUBSCRIBER COUNT ───────────────────────────────────────
     // Try multiple public endpoints; gracefully fallback so UI never stays "loading..."
