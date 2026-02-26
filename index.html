@@ -1194,7 +1194,7 @@
       <div class="wrap">
         <div class="section-head">
           <span class="label">Is This For You?</span>
-          <h2>Who Is This Consulting <span>&amp; Production</span> For?</h2>
+          <h2>What Is This Consulting <span>&amp; Production</span> For?</h2>
         </div>
 
         <div class="who-grid">
@@ -1416,7 +1416,7 @@
           <div class="card">
             <h3>Reach Dean directly</h3>
             <p class="contact-line" style="margin-top: 16px;">
-              Email: <a class="contact-strong" href="mailto:dpalermo@elettro.com">dpalermo@elettro.com</a><br />
+              Email: <a class="contact-strong" href="/cdn-cgi/l/email-protection#197d6978757c6b7476597c757c6d6d6b76377a7674"><span class="__cf_email__" data-cfemail="b4d0c4d5d8d1c6d9dbf4d1d8d1c0c0c6db9ad7dbd9">[email&#160;protected]</span></a><br />
               Phone: <a class="contact-strong" href="tel:+13104086687">310-408-6687</a><br />
               Location: Davie, FL — serving all of South Florida
             </p>
@@ -1480,7 +1480,7 @@
   </footer>
 
   <!-- ── SCRIPTS ── -->
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // ── YOUTUBE QUEUE ──────────────────────────────────────────
     const PLAYLIST_ID = 'PLUyy1UkCd1TIkokLl7tTQw_hhOzhw3G67';
 
@@ -1701,38 +1701,17 @@ const videos = [
 
     // ── PIANO CAROUSEL ─────────────────────────────────────────
     // Playlist: PLOyOvFNu5XB3SUqVDxYHyUUeeV9vq0z4B
-    // Channel: UCNlho-vPk4Cv8umbJf5T_oA (@PianoMusicSoothing)
-    // Add video IDs from the playlist below — paste from YouTube URL ?v=XXXXX
-    let pianoItems = [
-      { id: '6pZPMv8ULgI', tag: 'Piano' }, // fixed first video
+    // Add more IDs here as you publish more videos on @PianoMusicSoothing
+    const pianoItems = [
+      { id: '6pZPMv8ULgI', tag: 'Piano' },
+      { id: '2iQPP1NxMR0', tag: 'Piano' },
+      { id: '27rrCGiNo3g', tag: 'Piano' },
+      { id: 'k8zFEpokdPY', tag: 'Piano' },
+      { id: 'Q213zB6O0NQ', tag: 'Piano' },
+      { id: 'pwzH3t5wBgM', tag: 'Piano' },
+      { id: 'xuS0x1BK1-Q', tag: 'Piano' },
+      { id: '-_AbmJk1IwU', tag: 'Piano' },
     ];
-
-    async function loadPianoPlaylistItems() {
-      const desiredTotal = 7; // your slot count
-      try {
-        const feedUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${PIANO_PLAYLIST}`;
-        const res = await fetch(feedUrl);
-        const xmlText = await res.text();
-        const doc = new DOMParser().parseFromString(xmlText, 'text/xml');
-        const entries = Array.from(doc.getElementsByTagName('entry'));
-        let ids = entries
-          .map(e => e.getElementsByTagName('yt:videoId')[0]?.textContent?.trim())
-          .filter(Boolean);
-
-        // de-dupe while preserving order
-        const seen = new Set();
-        ids = ids.filter(id => (seen.has(id) ? false : (seen.add(id), true)));
-
-        // keep your first video first, then pull the next unique ones from the playlist
-        const fixedFirst = pianoItems[0].id;
-        ids = ids.filter(id => id !== fixedFirst);
-
-        const needed = Math.max(0, desiredTotal - pianoItems.length);
-        ids.slice(0, needed).forEach(id => pianoItems.push({ id, tag: 'Piano' }));
-      } catch (e) {
-        // If feed fetch fails, keep the fixed first video only.
-      }
-    }
 
 
     const PIANO_PLAYLIST = 'PLOyOvFNu5XB3SUqVDxYHyUUeeV9vq0z4B';
@@ -1777,11 +1756,8 @@ const videos = [
       track2.appendChild(card);
     }
 
-    loadPianoPlaylistItems().then(() => {
-      pianoItems.forEach(buildPianoCard);
-      // Init after items are populated
-      setTimeout(initPianoCarousel, 500);
-    });
+    pianoItems.forEach(buildPianoCard);
+    setTimeout(initPianoCarousel, 500);
 
 
     function rebuildPiano() {
@@ -1853,10 +1829,25 @@ const videos = [
 
     function shuffleArr(a) { return [...a].sort(() => Math.random() - 0.5); }
 
+    function uniqByUrl(items) {
+      const seen = new Set();
+      const out = [];
+      items.forEach(p => {
+        const key = (p && (p.url || p.handle || p.name)) || JSON.stringify(p);
+        if (!seen.has(key)) { seen.add(key); out.push(p); }
+      });
+      return out;
+    }
+
+    function pickRandomUnique(items, count) {
+      const pool = shuffleArr(uniqByUrl(items));
+      return pool.slice(0, count);
+    }
+
     function renderProducts(products) {
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
-      products.slice(0, 5).forEach((p, i) => {
+      uniqByUrl(products).slice(0, 5).forEach((p, i) => {
         const card = document.createElement('a');
         card.className = 'product-card fade-in';
         card.href = p.url;
@@ -1879,18 +1870,10 @@ const videos = [
 
     function shuffleProducts() {
       document.querySelectorAll('.product-card').forEach(c => c.classList.add('fade-out'));
-      setTimeout(() => renderProducts(shuffleArr(allProducts)), 220);
+      setTimeout(() => renderProducts(pickRandomUnique(allProducts, 5)), 220);
     }
 
-    renderProducts(shuffleArr(allProducts));
+    renderProducts(pickRandomUnique(allProducts, 5));
 
     // ── SUBSCRIBER COUNT ───────────────────────────────────────
-    // GitHub Pages can't make server-side API calls — update this number
-    // manually whenever you want to refresh it.
-    document.getElementById('stashboxSubs').textContent = '5,726';
-  
-    // Kick off dynamic latest upload
-    loadLatestStashboxUpload();
-</script>
-</body>
-</html>
+    // GitHub Pages can't make server-side API
