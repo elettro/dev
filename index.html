@@ -743,11 +743,47 @@
     }
     .short-frame iframe { width: 100%; height: 100%; border: none; }
     .short-note { font-size: 10px; color: rgba(240,236,228,0.25); padding: 10px 16px; line-height: 1.5; border-top: 1px solid var(--border); }
+
+    /* ── LANGUAGE TOGGLE ── */
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+      background: var(--mid2);
+    }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: rgba(240,236,228,0.7);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 12px;
+      transition: all 0.2s;
+    }
+    .lang-btn:hover { color: var(--off-white); background: rgba(255,255,255,0.04); }
+    .lang-btn.active { background: var(--accent); color: var(--black); }
+    @media (max-width: 600px) {
+      .lang-btn { padding: 6px 10px; font-size: 10px; }
+    }
+
+
+    /* ── GOOGLE TRANSLATE OVERRIDES ── */
+    #google_translate_element { display: none; }
+    .goog-te-banner-frame.skiptranslate,
+    .goog-logo-link,
+    .goog-te-gadget span,
+    .goog-te-gadget-icon { display: none !important; }
+    body { top: 0 !important; }
   </style>
 </head>
 
 <body>
   <div class="grain" aria-hidden="true"></div>
+  <div id="google_translate_element" aria-hidden="true"></div>
 
   <!-- ── HEADER ── -->
   <header class="topbar">
@@ -757,20 +793,24 @@
           <div class="logo" aria-hidden="true"></div>
           <div class="brandname">
             Elettro<sup>®</sup>
-            <span>AI Marketing · South Florida</span>
+            <span data-i18n="brand_tagline">AI Marketing · South Florida</span>
           </div>
         </a>
 
         <nav class="links" aria-label="Primary navigation">
-          <a href="#services">Services</a>
-          <a href="#work">Work</a>
+          <a href="#services" data-i18n="nav_services">Services</a>
+          <a href="#work" data-i18n="nav_work">Work</a>
           <a href="#stashbox">Stashbox</a>
-          <a href="#contact">Contact</a>
+          <a href="#contact" data-i18n="nav_contact">Contact</a>
         </nav>
 
         <div class="actions">
+          <div class="lang-toggle" role="tablist" aria-label="Language switcher">
+            <button class="lang-btn active" data-lang="en" role="tab" aria-selected="true">EN</button>
+            <button class="lang-btn" data-lang="es" role="tab" aria-selected="false">ES</button>
+          </div>
           <a class="pill" href="tel:+13104086687">310-408-6687</a>
-          <a class="btn" href="#contact">Book a Call</a>
+          <a class="btn" href="#contact" data-i18n="book_call">Book a Call</a>
         </div>
       </div>
     </div>
@@ -780,7 +820,7 @@
   <div class="avail-bar">
     <div class="avail-inner">
       <span class="avail-dot" aria-hidden="true"></span>
-      <span class="avail-text">AVAILABLE FOR WORK</span>
+      <span class="avail-text" data-i18n="available_for_work">AVAILABLE FOR WORK</span>
     </div>
   </div>
 
@@ -789,17 +829,17 @@
       <div class="hero-grid-photo">
 
         <div class="hero-card">
-          <div class="kicker"><span class="dot" aria-hidden="true"></span> Davie, FL — South Florida's AI Marketing Studio</div>
-          <h1>Marketing that looks <span>premium</span><br>and ships fast.</h1>
-          <p class="lead">
+          <div class="kicker"><span class="dot" aria-hidden="true"></span> <span data-i18n="hero_kicker">Davie, FL — South Florida's AI Marketing Studio</span></div>
+          <h1 data-i18n-html="hero_title">Marketing that looks <span>premium</span><br>and ships fast.</h1>
+          <p class="lead" data-i18n="hero_lead">
             Elettro<sup>®</sup> helps South Florida businesses compete like the big guys —
             through branded content, social video, websites, and AI-powered workflows.
             One accountable partner. Real results.
           </p>
           <div class="hero-cta">
-            <a class="btn" href="#contact">Book a Free Discovery Call</a>
-            <a class="ghost" href="#services">See Services</a>
-            <a class="ghost" href="#work">See Work</a>
+            <a class="btn" href="#contact" data-i18n="hero_discovery">Book a Free Discovery Call</a>
+            <a class="ghost" href="#services" data-i18n="see_services">See Services</a>
+            <a class="ghost" href="#work" data-i18n="see_work">See Work</a>
           </div>
         </div>
 
@@ -1496,6 +1536,118 @@
 
   <!-- ── SCRIPTS ── -->
   <script>
+    const i18n = {
+      en: {
+        page_title: "Elettro® | AI-Powered Marketing for South Florida Businesses",
+        page_description: "Elettro® builds branded marketing systems and high-volume social content for South Florida businesses. Strategy, design, production, web, and AI-assisted workflows.",
+        brand_tagline: "AI Marketing · South Florida",
+        nav_services: "Services",
+        nav_work: "Work",
+        nav_contact: "Contact",
+        book_call: "Book a Call",
+        available_for_work: "AVAILABLE FOR WORK",
+        hero_kicker: "Davie, FL — South Florida's AI Marketing Studio",
+        hero_title: "Marketing that looks <span>premium</span><br>and ships fast.",
+        hero_lead: "Elettro® helps South Florida businesses compete like the big guys — through branded content, social video, websites, and AI-powered workflows. One accountable partner. Real results.",
+        hero_discovery: "Book a Free Discovery Call",
+        see_services: "See Services",
+        see_work: "See Work"
+      },
+      es: {
+        page_title: "Elettro® | Marketing con IA para Negocios del Sur de Florida",
+        page_description: "Elettro® crea sistemas de marketing de marca y contenido social de alto volumen para negocios del Sur de Florida. Estrategia, diseño, producción, web y flujos asistidos por IA.",
+        brand_tagline: "Marketing con IA · Sur de Florida",
+        nav_services: "Servicios",
+        nav_work: "Proyectos",
+        nav_contact: "Contacto",
+        book_call: "Agendar llamada",
+        available_for_work: "DISPONIBLE PARA TRABAJAR",
+        hero_kicker: "Davie, FL — Estudio de marketing con IA del Sur de Florida",
+        hero_title: "Marketing que se ve <span>premium</span><br>y se lanza rápido.",
+        hero_lead: "Elettro® ayuda a empresas del Sur de Florida a competir como las grandes marcas con contenido, video para redes, sitios web y flujos de trabajo con IA. Un solo socio responsable. Resultados reales.",
+        hero_discovery: "Agenda una llamada gratuita",
+        see_services: "Ver servicios",
+        see_work: "Ver proyectos"
+      }
+    };
+
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const descriptionMeta = document.querySelector('meta[name="description"]');
+
+    function syncUiLanguage(lang) {
+      const strings = i18n[lang] || i18n.en;
+      document.documentElement.lang = lang;
+      document.title = strings.page_title;
+      if (descriptionMeta) descriptionMeta.setAttribute('content', strings.page_description);
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.dataset.i18n;
+        if (strings[key]) el.textContent = strings[key];
+      });
+
+      document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+        const key = el.dataset.i18nHtml;
+        if (strings[key]) el.innerHTML = strings[key];
+      });
+
+      langButtons.forEach((btn) => {
+        const active = btn.dataset.lang === lang;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-selected', String(active));
+      });
+    }
+
+    function applyGoogleLanguage(lang) {
+      const combo = document.querySelector('.goog-te-combo');
+      if (!combo) return false;
+      combo.value = lang;
+      combo.dispatchEvent(new Event('change'));
+      return true;
+    }
+
+    function resetGoogleTranslation() {
+      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+      document.cookie = `googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=${location.hostname}`;
+    }
+
+    function setTranslatedLanguage(lang) {
+      if (lang === 'es') {
+        let attempts = 0;
+        const timer = setInterval(() => {
+          attempts += 1;
+          if (applyGoogleLanguage('es') || attempts > 25) clearInterval(timer);
+        }, 250);
+        return;
+      }
+
+      resetGoogleTranslation();
+      const isTranslated = document.body.classList.contains('translated-ltr') || document.body.classList.contains('translated-rtl');
+      if (isTranslated) location.reload();
+    }
+
+    function applyLanguage(lang) {
+      syncUiLanguage(lang);
+      setTranslatedLanguage(lang);
+      localStorage.setItem('siteLang', lang);
+    }
+
+    const savedLang = localStorage.getItem('siteLang');
+    applyLanguage(savedLang || 'en');
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+    });
+
+    window.googleTranslateElementInit = function () {
+      new google.translate.TranslateElement(
+        { pageLanguage: 'en', autoDisplay: false, includedLanguages: 'en,es' },
+        'google_translate_element'
+      );
+      if ((localStorage.getItem('siteLang') || 'en') === 'es') {
+        setTranslatedLanguage('es');
+      }
+    };
+
     // ── YOUTUBE QUEUE ──────────────────────────────────────────
     const PLAYLIST_ID = 'PLUyy1UkCd1TIkokLl7tTQw_hhOzhw3G67';
 
@@ -1958,5 +2110,6 @@ const videos = [
 
     loadSubscriberCount();
   </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
