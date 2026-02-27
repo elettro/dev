@@ -744,31 +744,6 @@
     .short-frame iframe { width: 100%; height: 100%; border: none; }
     .short-note { font-size: 10px; color: rgba(240,236,228,0.25); padding: 10px 16px; line-height: 1.5; border-top: 1px solid var(--border); }
 
-    /* ── LANGUAGE TOGGLE ── */
-    .lang-toggle {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      overflow: hidden;
-      background: var(--mid2);
-    }
-    .lang-btn {
-      border: none;
-      background: transparent;
-      color: rgba(240,236,228,0.7);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 8px 12px;
-      transition: all 0.2s;
-    }
-    .lang-btn:hover { color: var(--off-white); background: rgba(255,255,255,0.04); }
-    .lang-btn.active { background: var(--accent); color: var(--black); }
-    @media (max-width: 600px) {
-      .lang-btn { padding: 6px 10px; font-size: 10px; }
-    }
   </style>
 </head>
 
@@ -795,10 +770,6 @@
         </nav>
 
         <div class="actions">
-          <div class="lang-toggle" role="tablist" aria-label="Language switcher">
-            <button class="lang-btn active" data-lang="en" role="tab" aria-selected="true">EN</button>
-            <button class="lang-btn" data-lang="es" role="tab" aria-selected="false">ES</button>
-          </div>
           <a class="pill" href="tel:+13104086687">310-408-6687</a>
           <a class="btn" href="#contact" data-i18n="book_call">Book a Call</a>
         </div>
@@ -1542,31 +1513,14 @@
         hero_discovery: "Book a Free Discovery Call",
         see_services: "See Services",
         see_work: "See Work"
-      },
-      es: {
-        page_title: "Elettro® | Marketing con IA para Negocios del Sur de Florida",
-        page_description: "Elettro® crea sistemas de marketing de marca y contenido social de alto volumen para negocios del Sur de Florida. Estrategia, diseño, producción, web y flujos asistidos por IA.",
-        brand_tagline: "Marketing con IA · Sur de Florida",
-        nav_services: "Servicios",
-        nav_work: "Proyectos",
-        nav_contact: "Contacto",
-        book_call: "Agendar llamada",
-        available_for_work: "DISPONIBLE PARA TRABAJAR",
-        hero_kicker: "Davie, FL — Estudio de marketing con IA del Sur de Florida",
-        hero_title: "Marketing que se ve <span>premium</span><br>y se lanza rápido.",
-        hero_lead: "Elettro® ayuda a empresas del Sur de Florida a competir como las grandes marcas con contenido, video para redes, sitios web y flujos de trabajo con IA. Un solo socio responsable. Resultados reales.",
-        hero_discovery: "Agenda una llamada gratuita",
-        see_services: "Ver servicios",
-        see_work: "Ver proyectos"
       }
     };
 
-    const langButtons = document.querySelectorAll('.lang-btn');
     const descriptionMeta = document.querySelector('meta[name="description"]');
 
-    function applyLanguage(lang) {
-      const strings = i18n[lang] || i18n.en;
-      document.documentElement.lang = lang;
+    function applyLanguage() {
+      const strings = i18n.en;
+      document.documentElement.lang = 'en';
       document.title = strings.page_title;
       if (descriptionMeta) descriptionMeta.setAttribute('content', strings.page_description);
 
@@ -1579,22 +1533,9 @@
         const key = el.dataset.i18nHtml;
         if (strings[key]) el.innerHTML = strings[key];
       });
-
-      langButtons.forEach((btn) => {
-        const active = btn.dataset.lang === lang;
-        btn.classList.toggle('active', active);
-        btn.setAttribute('aria-selected', String(active));
-      });
-
-      localStorage.setItem('siteLang', lang);
     }
 
-    const savedLang = localStorage.getItem('siteLang');
-    applyLanguage(savedLang || 'en');
-
-    langButtons.forEach((btn) => {
-      btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
-    });
+    applyLanguage();
 
     // ── YOUTUBE QUEUE ──────────────────────────────────────────
     const PLAYLIST_ID = 'PLUyy1UkCd1TIkokLl7tTQw_hhOzhw3G67';
