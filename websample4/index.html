@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stashbox | 10 Advanced Interactive Header Concepts</title>
+  <meta name="description" content="10 advanced interactive premium hero section concepts for Stashbox Does Dylan. Clean HTML, CSS, and JavaScript for GitHub hosting." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#04050a;
+      --bg2:#090b12;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.1);
+      --line:rgba(255,255,255,.12);
+      --text:#f5f7fb;
+      --muted:#aeb8cb;
+      --gold:#d7b16b;
+      --blue:#7ca9ff;
+      --rose:#f07ea7;
+      --green:#75d2b4;
+      --radius:26px;
+      --shadow:0 26px 80px rgba(0,0,0,.42);
+      --max:1320px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 16%, rgba(124,169,255,.10), transparent 30%),
+        radial-gradient(circle at 85% 10%, rgba(240,126,167,.08), transparent 26%),
+        linear-gradient(180deg, #04050a 0%, #090b12 48%, #05060a 100%);
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img,video{display:block;max-width:100%}
+
+    .site-nav{
+      position:sticky;
+      top:0;
+      z-index:99999;
+      backdrop-filter:blur(18px);
+      background:rgba(5,6,10,.72);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .site-nav-inner{
+      width:min(100%, var(--max));
+      margin:0 auto;
+      padding:14px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .brand-mark{
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--gold), rgba(255,255,255,.5));
+      box-shadow:0 0 0 1px rgba(255,255,255,.1), 0 14px 36px rgba(215,177,107,.24);
+      flex:0 0 auto;
+    }
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      font-size:12px;
+      color:var(--muted);
+      padding:9px 11px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:.22s ease;
+    }
+    .nav-links a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+      border-color:rgba(255,255,255,.1);
+    }
+
+    .section{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      isolation:isolate;
+    }
+
+    .container{
+      width:min(100%, var(--max));
+      margin:0 auto;
+      padding:72px 20px;
+      position:relative;
+      z-index:2;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#e3e9f5;
+      backdrop-filter:blur(12px);
+    }
+    .eyebrow::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--gold), #fff3d7);
+      box-shadow:0 0 18px rgba(215,177,107,.8);
+    }
+
+    h1,h2,h3,p{margin:0}
+    h1,h2{
+      letter-spacing:-.05em;
+      line-height:.94;
+    }
+    h1{font-size:clamp(56px, 10vw, 128px);font-weight:900}
+    h2{font-size:clamp(40px, 7vw, 90px);font-weight:900}
+    h3{font-size:clamp(22px, 3vw, 36px);font-weight:800}
+    .serif{
+      font-family:"Cormorant Garamond", serif;
+      font-weight:700;
+      letter-spacing:-.03em;
+    }
+
+    .lead{
+      margin-top:18px;
+      max-width:760px;
+      font-size:clamp(16px, 2.1vw, 20px);
+      line-height:1.65;
+      color:var(--muted);
+    }
+
+    .cta-row{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      padding:0 22px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,.12);
+      transition:.22s ease;
+      cursor:pointer;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg, rgba(215,177,107,.96), rgba(255,244,217,.96));
+      color:#0f1014;
+      box-shadow:0 18px 40px rgba(215,177,107,.22);
+    }
+    .btn-primary:hover{transform:translateY(-2px) scale(1.01)}
+    .btn-secondary{
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(12px);
+      color:var(--text);
+    }
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.08);
+      transform:translateY(-2px);
+    }
+
+    .glass{
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(18px);
+    }
+
+    .kicker-number{
+      position:absolute;
+      right:24px;
+      top:20px;
+      font-size:13px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.45);
+      font-weight:800;
+    }
+
+    .chip-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:22px;
+    }
+    .chip{
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      font-size:13px;
+      color:#dde5f2;
+      font-weight:700;
+    }
+
+    .section-bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+    }
+    .section-bg img,
+    .section-bg video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .section-bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(4,5,10,.3), rgba(4,5,10,.76));
+    }
+
+    .orb{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(26px);
+      opacity:.55;
+      pointer-events:none;
+      z-index:1;
+    }
+    .orb.a{width:260px;height:260px;background:rgba(124,169,255,.18);left:-50px;top:10%}
+    .orb.b{width:220px;height:220px;background:rgba(240,126,167,.16);right:4%;bottom:8%}
+    .orb.c{width:180px;height:180px;background:rgba(117,210,180,.12);left:45%;top:16%}
+
+    .mouse-light{
+      position:absolute;
+      width:420px;
+      height:420px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(215,177,107,.14), transparent 68%);
+      filter:blur(26px);
+      pointer-events:none;
+      z-index:1;
+      transform:translate(-50%, -50%);
+      opacity:.45;
+    }
+
+    /* 1 */
+    .spotlight-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:28px;
+      align-items:center;
+    }
+    .spotlight-copy{
+      position:relative;
+      padding:34px;
+    }
+    .spotlight-stage{
+      position:relative;
+      min-height:560px;
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      background:#090b12;
+      transform-style:preserve-3d;
+    }
+    .spotlight-stage img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transform:scale(1.04);
+    }
+    .spotlight-stage::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.18), transparent 22%),
+        linear-gradient(180deg, rgba(4,5,10,.12), rgba(4,5,10,.55));
+      mix-blend-mode:screen;
+      pointer-events:none;
+    }
+    .spotlight-floating{
+      position:absolute;
+      right:18px;
+      bottom:18px;
+      width:220px;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 18px 60px rgba(0,0,0,.45);
+      transform:translateZ(40px);
+    }
+
+    /* 2 */
+    .tilt-hero{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+      align-items:center;
+    }
+    .tilt-stack{
+      perspective:1400px;
+      min-height:620px;
+      position:relative;
+    }
+    .tilt-card{
+      position:absolute;
+      width:72%;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:var(--shadow);
+      background:#0b0e15;
+      transform-style:preserve-3d;
+      transition:transform .22s ease, box-shadow .22s ease;
+    }
+    .tilt-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .tilt-card.one{left:0; top:30px; height:360px; transform:rotate(-9deg)}
+    .tilt-card.two{right:0; top:170px; height:320px; transform:rotate(8deg)}
+    .tilt-card.three{left:14%; bottom:10px; height:300px; transform:rotate(-2deg)}
+    .tilt-card .badge{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(8,10,16,.7);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:13px;
+      font-weight:700;
+      backdrop-filter:blur(10px);
+    }
+    .tilt-copy{
+      padding:34px;
+      position:relative;
+    }
+
+    /* 3 */
+    .youtube-wrap{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      overflow:hidden;
+      pointer-events:none;
+      background:#000;
+    }
+    .youtube-wrap iframe{
+      position:absolute;
+      top:50%;
+      left:50%;
+      width:177.77777778vh;
+      height:56.25vw;
+      min-width:100%;
+      min-height:100%;
+      transform:translate(-50%, -50%) scale(1.15);
+      opacity:.8;
+    }
+    .youtube-wrap::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(4,5,10,.28), rgba(4,5,10,.76)),
+        radial-gradient(circle at 18% 25%, rgba(124,169,255,.16), transparent 28%),
+        radial-gradient(circle at 84% 14%, rgba(240,126,167,.15), transparent 22%);
+    }
+    .hotspot-board{
+      position:relative;
+      min-height:78vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .hotspot-center{
+      text-align:center;
+      max-width:900px;
+      padding:30px;
+    }
+    .hotspot{
+      position:absolute;
+      width:180px;
+      padding:14px;
+      border-radius:18px;
+      background:rgba(12,15,24,.72);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter:blur(12px);
+      box-shadow:var(--shadow);
+      transition:.25s ease;
+      cursor:pointer;
+      pointer-events:auto;
+    }
+    .hotspot:hover{
+      transform:translateY(-6px) scale(1.03);
+      background:rgba(18,22,34,.88);
+    }
+    .hotspot strong{
+      display:block;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      margin-bottom:6px;
+      color:#f2f5fb;
+    }
+    .hotspot span{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+      display:block;
+    }
+    .hotspot::before{
+      content:"";
+      position:absolute;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--gold), #fff1d0);
+      box-shadow:0 0 18px rgba(215,177,107,.8);
+      top:-6px;
+      left:20px;
+    }
+    .hs-1{left:4%; top:12%}
+    .hs-2{right:6%; top:16%}
+    .hs-3{left:10%; bottom:12%}
+    .hs-4{right:8%; bottom:14%}
+
+    /* 4 */
+    .expand-hero{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      min-height:68vh;
+    }
+    .expand-panel{
+      position:relative;
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      transition:flex .35s ease, transform .35s ease, width .35s ease;
+      min-height:560px;
+      cursor:pointer;
+    }
+    .expand-panel img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .6s ease;
+    }
+    .expand-panel:hover img{
+      transform:scale(1.07);
+    }
+    .expand-panel .overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:end;
+      padding:24px;
+      background:linear-gradient(180deg, rgba(4,5,10,.06), rgba(4,5,10,.74));
+    }
+    .expand-panel .small{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#d7e0f0;
+      font-weight:800;
+      margin-bottom:8px;
+    }
+    .expand-panel p{
+      color:#d4dbe8;
+      margin-top:10px;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .35s ease, opacity .35s ease;
+      opacity:0;
+      line-height:1.55;
+    }
+    .expand-panel.active{
+      flex:1.8;
+      transform:translateY(-4px);
+    }
+    .expand-panel.active p{
+      max-height:120px;
+      opacity:1;
+    }
+
+    /* 5 */
+    .ring-grid{
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+      gap:28px;
+      align-items:center;
+    }
+    .ring-wrap{
+      position:relative;
+      width:min(78vw, 620px);
+      aspect-ratio:1/1;
+      margin:auto;
+      display:grid;
+      place-items:center;
+    }
+    .ring-core{
+      position:absolute;
+      width:220px;
+      aspect-ratio:1/1;
+      border-radius:50%;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:var(--shadow);
+      z-index:5;
+    }
+    .ring-core img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .orbit{
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+      border:1px dashed rgba(255,255,255,.14);
+      animation:spin 24s linear infinite;
+    }
+    .orbit.two{inset:50px; animation-duration:18s; animation-direction:reverse}
+    .orbit.three{inset:100px; animation-duration:14s}
+    .orbit-item{
+      position:absolute;
+      width:140px;
+      padding:14px;
+      border-radius:18px;
+      background:rgba(12,15,24,.78);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(12px);
+      transform:translate(-50%, -50%);
+      text-align:center;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .orbit-item:hover{
+      transform:translate(-50%, -50%) scale(1.06);
+      background:rgba(18,22,34,.92);
+    }
+    .orbit-item strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:6px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .orbit-item span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.4;
+    }
+    @keyframes spin{
+      from{transform:rotate(0)}
+      to{transform:rotate(360deg)}
+    }
+
+    /* 6 */
+    .poster-split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      min-height:74vh;
+      gap:18px;
+    }
+    .poster{
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      background:#090b12;
+      cursor:pointer;
+    }
+    .poster img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transform:scale(1.05);
+      transition:transform .4s ease;
+    }
+    .poster:hover img{
+      transform:scale(1.1);
+    }
+    .poster::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.16), transparent 22%),
+        linear-gradient(180deg, rgba(4,5,10,.08), rgba(4,5,10,.7));
+      mix-blend-mode:screen;
+    }
+    .poster-copy{
+      position:absolute;
+      left:24px;
+      right:24px;
+      bottom:24px;
+    }
+    .poster-copy p{
+      color:#d4dbe8;
+      margin-top:10px;
+      max-width:420px;
+      line-height:1.55;
+    }
+
+    /* 7 */
+    .story-grid{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:24px;
+      align-items:start;
+    }
+    .story-sticky{
+      position:sticky;
+      top:96px;
+      padding:28px;
+    }
+    .story-cards{
+      display:grid;
+      gap:18px;
+    }
+    .story-card{
+      min-height:320px;
+      position:relative;
+      overflow:hidden;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      transform:translateY(40px);
+      opacity:.45;
+      transition:transform .6s ease, opacity .6s ease;
+    }
+    .story-card.in-view{
+      transform:translateY(0);
+      opacity:1;
+    }
+    .story-card img,
+    .story-card video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .story-card .overlay{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding:24px;
+      background:linear-gradient(180deg, transparent, rgba(4,5,10,.8));
+    }
+    .story-card .overlay p{
+      margin-top:10px;
+      color:#d4dbe8;
+      max-width:540px;
+      line-height:1.55;
+    }
+
+    /* 8 */
+    .reveal-strip{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:12px;
+      min-height:68vh;
+    }
+    .reveal-item{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      transition:grid-column .35s ease, transform .25s ease;
+      cursor:pointer;
+      min-height:520px;
+    }
+    .reveal-item img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .6s ease, filter .35s ease;
+      filter:grayscale(.15);
+    }
+    .reveal-item:hover img{
+      transform:scale(1.08);
+      filter:none;
+    }
+    .reveal-item .overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:end;
+      padding:20px;
+      background:linear-gradient(180deg, rgba(4,5,10,.04), rgba(4,5,10,.78));
+    }
+    .reveal-item .content{
+      transform:translateY(16px);
+      opacity:.65;
+      transition:.3s ease;
+    }
+    .reveal-item:hover .content{
+      transform:translateY(0);
+      opacity:1;
+    }
+    .reveal-item .content p{
+      margin-top:10px;
+      color:#d4dbe8;
+      line-height:1.55;
+      max-width:320px;
+    }
+
+    /* 9 */
+    .mask-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+      align-items:center;
+    }
+    .mask-stage{
+      position:relative;
+      min-height:620px;
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      background:#090b12;
+    }
+    .mask-stage video,
+    .mask-stage img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .mask-shape{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 50% 50%, transparent 0 18%, rgba(4,5,10,.02) 18% 22%, rgba(4,5,10,.84) 22%),
+        linear-gradient(135deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+      mix-blend-mode:normal;
+      pointer-events:none;
+    }
+    .mask-tag{
+      position:absolute;
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(10,13,20,.78);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(10px);
+      box-shadow:var(--shadow);
+      font-size:14px;
+      font-weight:700;
+    }
+    .mask-tag.one{left:18px; top:18px}
+    .mask-tag.two{right:18px; bottom:18px}
+    .mask-copy{
+      padding:34px;
+      position:relative;
+    }
+
+    /* 10 */
+    .beam-hero{
+      position:relative;
+      min-height:82vh;
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      background:
+        radial-gradient(circle at 18% 28%, rgba(124,169,255,.12), transparent 28%),
+        radial-gradient(circle at 82% 20%, rgba(240,126,167,.1), transparent 22%),
+        linear-gradient(180deg, #090b12, #06070b);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      isolation:isolate;
+    }
+    .beam-hero::before{
+      content:"";
+      position:absolute;
+      width:320px;
+      height:320px;
+      left:var(--beamx, 50%);
+      top:var(--beamy, 50%);
+      transform:translate(-50%, -50%);
+      background:radial-gradient(circle, rgba(215,177,107,.18), transparent 62%);
+      filter:blur(18px);
+      pointer-events:none;
+      z-index:0;
+    }
+    .beam-lines{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:radial-gradient(circle at center, black 34%, transparent 84%);
+      opacity:.55;
+    }
+    .beam-copy{
+      position:relative;
+      z-index:2;
+      max-width:920px;
+      padding:34px;
+    }
+
+    .footer-note{
+      padding:40px 20px 70px;
+      color:var(--muted);
+      text-align:center;
+      font-size:14px;
+    }
+
+    @media (max-width: 1100px){
+      .spotlight-grid,
+      .tilt-hero,
+      .ring-grid,
+      .poster-split,
+      .story-grid,
+      .mask-grid{
+        grid-template-columns:1fr;
+      }
+      .expand-hero{
+        grid-template-columns:1fr 1fr;
+      }
+      .reveal-strip{
+        grid-template-columns:1fr 1fr;
+      }
+      .story-sticky{
+        position:relative;
+        top:auto;
+      }
+    }
+
+    @media (max-width: 760px){
+      .site-nav-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .expand-hero,
+      .reveal-strip{
+        grid-template-columns:1fr;
+      }
+      .spotlight-copy,
+      .tilt-copy,
+      .mask-copy,
+      .story-sticky,
+      .beam-copy{
+        padding:24px;
+      }
+      .tilt-stack{
+        min-height:700px;
+      }
+      .tilt-card{
+        width:84%;
+      }
+      .hotspot{
+        position:relative;
+        inset:auto;
+        left:auto;
+        right:auto;
+        top:auto;
+        bottom:auto;
+        width:auto;
+        margin:12px 0;
+      }
+      .hotspot-board{
+        display:block;
+        min-height:auto;
+      }
+      .hotspot-center{
+        margin-bottom:18px;
+      }
+      .ring-wrap{
+        width:min(96vw, 520px);
+      }
+      .orbit-item{
+        width:112px;
+        padding:10px;
+      }
+      .reveal-item,
+      .expand-panel{
+        min-height:360px;
+      }
+      .spotlight-stage,
+      .mask-stage{
+        min-height:420px;
+      }
+      .poster-split{
+        min-height:auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <span>Stashbox</span>
+      </div>
+      <div class="nav-links">
+        <a href="#concept-1">01</a>
+        <a href="#concept-2">02</a>
+        <a href="#concept-3">03</a>
+        <a href="#concept-4">04</a>
+        <a href="#concept-5">05</a>
+        <a href="#concept-6">06</a>
+        <a href="#concept-7">07</a>
+        <a href="#concept-8">08</a>
+        <a href="#concept-9">09</a>
+        <a href="#concept-10">10</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 1 -->
+  <section class="section" id="concept-1">
+    <div class="orb a"></div>
+    <div class="orb b"></div>
+    <div class="mouse-light"></div>
+    <div class="container">
+      <div class="spotlight-grid">
+        <div class="spotlight-copy glass">
+          <div class="kicker-number">Concept 01</div>
+          <div class="eyebrow">Parallax Spotlight Hero</div>
+          <h1>Stashbox <span class="serif">Does Dylan</span></h1>
+          <p class="lead">
+            This concept uses a mouse-reactive spotlight over large artwork. It feels more alive than a static hero and pushes the page into premium campaign territory.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://stashbox.com" target="_blank" rel="noopener">Visit Stashbox.com</a>
+            <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=N92iE0h6s0M&list=RDN92iE0h6s0M&start_radio=1&pp=ygUMc3Rhc2hib3hiYW5koAcB" target="_blank" rel="noopener">Watch Video</a>
+          </div>
+          <div class="chip-row">
+            <span class="chip">Mouse spotlight</span>
+            <span class="chip">Parallax feel</span>
+            <span class="chip">Luxury campaign intro</span>
+          </div>
+        </div>
+        <div class="spotlight-stage interactive-spotlight">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-21.png" alt="Stashbox visual artwork">
+          <div class="spotlight-floating">
+            <img src="https://stashbox.com/wp-content/uploads/2026/02/StashboxDoesDylan-AlbumCover-Stashbox.jpg" alt="Album art">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="section" id="concept-2">
+    <div class="container">
+      <div class="tilt-hero">
+        <div class="tilt-stack" id="tiltStack">
+          <div class="tilt-card one tilt-item">
+            <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-18.jpg" alt="Stashbox image one">
+            <div class="badge">Visual Identity</div>
+          </div>
+          <div class="tilt-card two tilt-item">
+            <img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-f291912b-a33f-4126-98d7-e27c85d24aff.png" alt="Stashbox image two">
+            <div class="badge">Album Motion</div>
+          </div>
+          <div class="tilt-card three tilt-item">
+            <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-6.png" alt="Stashbox image three">
+            <div class="badge">Collector Feel</div>
+          </div>
+        </div>
+        <div class="tilt-copy glass">
+          <div class="kicker-number">Concept 02</div>
+          <div class="eyebrow">3D Tilt Layer Hero</div>
+          <h2>Stacked media that tilts with the cursor</h2>
+          <p class="lead">
+            This one feels like premium product design. Use it when you want a layered creative presentation, not a normal music page.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://stashbox.com" target="_blank" rel="noopener">Open Official Site</a>
+            <a class="btn btn-secondary" href="#concept-3">Next Concept</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="section" id="concept-3">
+    <div class="youtube-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/N92iE0h6s0M?autoplay=1&mute=1&controls=0&loop=1&playlist=N92iE0h6s0M&modestbranding=1&playsinline=1&rel=0&enablejsapi=1"
+        title="Stashbox YouTube background"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
+    </div>
+    <div class="container">
+      <div class="hotspot-board">
+        <div class="hotspot-center">
+          <div class="eyebrow">YouTube Hotspot Hero</div>
+          <h2>Motion background with floating detail callouts</h2>
+          <p class="lead" style="margin-left:auto;margin-right:auto;">
+            Instead of one block of text, this concept places floating story tags around the hero. It feels like a premium launch or digital exhibit.
+          </p>
+          <div class="cta-row" style="justify-content:center;">
+            <a class="btn btn-primary" href="https://www.youtube.com/watch?v=N92iE0h6s0M&list=RDN92iE0h6s0M&start_radio=1&pp=ygUMc3Rhc2hib3hiYW5koAcB" target="_blank" rel="noopener">Play on YouTube</a>
+            <a class="btn btn-secondary" href="https://stashbox.com" target="_blank" rel="noopener">Visit Stashbox</a>
+          </div>
+        </div>
+
+        <div class="hotspot hs-1">
+          <strong>Visual Layer</strong>
+          <span>Background motion creates instant atmosphere.</span>
+        </div>
+        <div class="hotspot hs-2">
+          <strong>Album Focus</strong>
+          <span>Use tags to direct attention around the hero.</span>
+        </div>
+        <div class="hotspot hs-3">
+          <strong>Collector Feel</strong>
+          <span>Premium presentation with less clutter.</span>
+        </div>
+        <div class="hotspot hs-4">
+          <strong>Campaign Ready</strong>
+          <span>Works for launch, merch, or feature pages.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="section" id="concept-4">
+    <div class="container">
+      <div class="eyebrow" style="margin-bottom:18px;">Expanding Panel Hero</div>
+      <div class="expand-hero" id="expandHero">
+        <article class="expand-panel active">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-15.png" alt="Panel one">
+          <div class="overlay">
+            <div class="small">Mood 01</div>
+            <h3>Atmosphere</h3>
+            <p>A cinematic opener for strong brand mood and emotional tone.</p>
+          </div>
+        </article>
+        <article class="expand-panel">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-9e4b024c-7edc-4115-a9aa-2c99fd1ce07d.png" alt="Panel two">
+          <div class="overlay">
+            <div class="small">Mood 02</div>
+            <h3>Texture</h3>
+            <p>Build visual depth with different layers of campaign art.</p>
+          </div>
+        </article>
+        <article class="expand-panel">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-18.png" alt="Panel three">
+          <div class="overlay">
+            <div class="small">Mood 03</div>
+            <h3>Movement</h3>
+            <p>Encourage exploration by rewarding hover with more space.</p>
+          </div>
+        </article>
+        <article class="expand-panel">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-6.png" alt="Panel four">
+          <div class="overlay">
+            <div class="small">Mood 04</div>
+            <h3>Finish</h3>
+            <p>Ends like a premium campaign wall, not a basic gallery.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="section" id="concept-5">
+    <div class="container">
+      <div class="ring-grid">
+        <div class="glass" style="padding:34px; position:relative;">
+          <div class="kicker-number">Concept 05</div>
+          <div class="eyebrow">Interactive Track Ring</div>
+          <h2>Orbiting detail tags around the album core</h2>
+          <p class="lead">
+            This hero turns the album art into the center of a system. Great for track highlights, campaign themes, or different visual chapters.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://stashbox.com" target="_blank" rel="noopener">Explore the Album</a>
+            <a class="btn btn-secondary" href="#concept-6">See More</a>
+          </div>
+        </div>
+        <div class="ring-wrap">
+          <div class="orbit">
+            <div class="orbit-item" style="top:8%; left:50%;">
+              <strong>Legacy</strong>
+              <span>Classic roots influence</span>
+            </div>
+            <div class="orbit-item" style="top:50%; left:92%;">
+              <strong>Rework</strong>
+              <span>Fresh new treatment</span>
+            </div>
+            <div class="orbit-item" style="top:90%; left:50%;">
+              <strong>Release</strong>
+              <span>Built for engagement</span>
+            </div>
+            <div class="orbit-item" style="top:50%; left:8%;">
+              <strong>Visuals</strong>
+              <span>Album-first campaign</span>
+            </div>
+          </div>
+          <div class="orbit two">
+            <div class="orbit-item" style="top:18%; left:78%;">
+              <strong>Motion</strong>
+              <span>Moving layers</span>
+            </div>
+            <div class="orbit-item" style="top:80%; left:72%;">
+              <strong>World</strong>
+              <span>Immersive design</span>
+            </div>
+          </div>
+          <div class="orbit three"></div>
+          <div class="ring-core">
+            <img src="https://stashbox.com/wp-content/uploads/2026/02/StashboxDoesDylan-AlbumCover-Stashbox.jpg" alt="Stashbox album art">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="section" id="concept-6">
+    <div class="container">
+      <div class="eyebrow" style="margin-bottom:18px;">Mouse-Reactive Poster Wall</div>
+      <div class="poster-split">
+        <article class="poster interactive-poster">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-21.png" alt="Poster one">
+          <div class="poster-copy">
+            <h3>Sound World</h3>
+            <p>Large poster treatment with a live cursor glow creates a more interactive campaign feel.</p>
+          </div>
+        </article>
+        <article class="poster interactive-poster">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-2d08b38f-483a-4c60-bba1-4555169fa650.png" alt="Poster two">
+          <div class="poster-copy">
+            <h3>Visual World</h3>
+            <p>This is strong for split narratives, deluxe versions, alternate editions, or artist versus album storytelling.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="section" id="concept-7">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-sticky glass">
+          <div class="eyebrow">Pinned Scroll Narrative</div>
+          <h2>Copy stays anchored while chapters animate into view</h2>
+          <p class="lead">
+            This is one of the best options for a long luxury release page. It keeps the messaging stable while each visual chapter arrives with motion.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Scroll reveal</span>
+            <span class="chip">Premium narrative flow</span>
+            <span class="chip">Great for release storytelling</span>
+          </div>
+        </div>
+        <div class="story-cards">
+          <article class="story-card reveal-on-scroll">
+            <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-18.jpg" alt="Story image one">
+            <div class="overlay">
+              <h3>Chapter One</h3>
+              <p>Open with a visual chapter that introduces tone, texture, and creative confidence.</p>
+            </div>
+          </article>
+          <article class="story-card reveal-on-scroll">
+            <video src="https://stashbox.com/wp-content/uploads/2026/02/Gen-4_5-Dynamic-motion-1096243112.gen-4_5-dynamic-motion-1096243112.mp4" autoplay muted loop playsinline></video>
+            <div class="overlay">
+              <h3>Chapter Two</h3>
+              <p>Add motion to create a stronger sense of transition and increase time on page.</p>
+            </div>
+          </article>
+          <article class="story-card reveal-on-scroll">
+            <img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-f291912b-a33f-4126-98d7-e27c85d24aff.png" alt="Story image three">
+            <div class="overlay">
+              <h3>Chapter Three</h3>
+              <p>Finish with a visual payoff that feels like the end of a premium digital feature.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="section" id="concept-8">
+    <div class="container">
+      <div class="eyebrow" style="margin-bottom:18px;">Hover-Reveal Strip Hero</div>
+      <div class="reveal-strip">
+        <article class="reveal-item">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-15.png" alt="Reveal one">
+          <div class="overlay">
+            <div class="content">
+              <h3>Layer 01</h3>
+              <p>Thin visual strip that expands into a fuller story when hovered.</p>
+            </div>
+          </div>
+        </article>
+        <article class="reveal-item">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-18.png" alt="Reveal two">
+          <div class="overlay">
+            <div class="content">
+              <h3>Layer 02</h3>
+              <p>This feels upscale and interactive without heavy scripting.</p>
+            </div>
+          </div>
+        </article>
+        <article class="reveal-item">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-6.png" alt="Reveal three">
+          <div class="overlay">
+            <div class="content">
+              <h3>Layer 03</h3>
+              <p>Strong fit for showcasing multiple creative directions.</p>
+            </div>
+          </div>
+        </article>
+        <article class="reveal-item">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-9e4b024c-7edc-4115-a9aa-2c99fd1ce07d.png" alt="Reveal four">
+          <div class="overlay">
+            <div class="content">
+              <h3>Layer 04</h3>
+              <p>Works well for alt covers, merch, visuals, and campaign art.</p>
+            </div>
+          </div>
+        </article>
+        <article class="reveal-item">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-19a88e29-41cb-4955-a112-94b67dc92052.png" alt="Reveal five">
+          <div class="overlay">
+            <div class="content">
+              <h3>Layer 05</h3>
+              <p>High-end gallery energy with direct engagement cues.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="section" id="concept-9">
+    <div class="container">
+      <div class="mask-grid">
+        <div class="mask-stage">
+          <video src="https://stashbox.com/wp-content/uploads/2026/02/Gen-4_5-Dynamic-motion-1096243112.gen-4_5-dynamic-motion-1096243112.mp4" autoplay muted loop playsinline></video>
+          <div class="mask-shape"></div>
+          <div class="mask-tag one">Cinematic mask treatment</div>
+          <div class="mask-tag two">Motion framed by darkness</div>
+        </div>
+        <div class="mask-copy glass">
+          <div class="kicker-number">Concept 09</div>
+          <div class="eyebrow">Media Mask Hero</div>
+          <h2>Video framed through a shaped cinematic window</h2>
+          <p class="lead">
+            This section feels advanced because the media is not simply placed on the page. It is art directed through a mask treatment. Great for a premium release splash.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://stashbox.com" target="_blank" rel="noopener">Visit Site</a>
+            <a class="btn btn-secondary" href="#concept-10">Final Concept</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="section" id="concept-10">
+    <div class="container">
+      <div class="beam-hero" id="beamHero">
+        <div class="beam-lines"></div>
+        <div class="beam-copy">
+          <div class="eyebrow">Cursor Beam Finale</div>
+          <h2>Advanced interactive finish for a world-class digital launch</h2>
+          <p class="lead" style="margin-left:auto;margin-right:auto;">
+            This last concept uses a live cursor beam and subtle grid to create a futuristic premium close. It feels expensive, modern, and highly intentional.
+          </p>
+          <div class="cta-row" style="justify-content:center;">
+            <a class="btn btn-primary" href="https://stashbox.com" target="_blank" rel="noopener">Go to Stashbox.com</a>
+            <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=N92iE0h6s0M&list=RDN92iE0h6s0M&start_radio=1&pp=ygUMc3Rhc2hib3hiYW5koAcB" target="_blank" rel="noopener">Watch YouTube</a>
+          </div>
+          <div class="chip-row" style="justify-content:center;">
+            <span class="chip">Live beam tracking</span>
+            <span class="chip">Premium finale</span>
+            <span class="chip">Minimal futuristic look</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    Advanced interactive Stashbox header showcase. Pure HTML, CSS, and JavaScript. GitHub Pages ready.
+  </div>
+
+  <script>
+    // General mouse light on section 1
+    const light = document.querySelector('.mouse-light');
+    window.addEventListener('mousemove', (e) => {
+      if (light) {
+        light.style.left = e.clientX + 'px';
+        light.style.top = e.clientY + 'px';
+      }
+    });
+
+    // Interactive spotlight
+    document.querySelectorAll('.interactive-spotlight').forEach(stage => {
+      stage.addEventListener('mousemove', (e) => {
+        const rect = stage.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        stage.style.setProperty('--mx', x + '%');
+        stage.style.setProperty('--my', y + '%');
+      });
+    });
+
+    // Tilt stack
+    const tiltStack = document.getElementById('tiltStack');
+    if (tiltStack) {
+      tiltStack.addEventListener('mousemove', (e) => {
+        const rect = tiltStack.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+        const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+        tiltStack.querySelectorAll('.tilt-item').forEach((card, i) => {
+          const depth = (i + 1) * 8;
+          card.style.transform =
+            `rotateX(${-y * depth}deg) rotateY(${x * depth}deg) translateZ(${(i + 1) * 6}px)`;
+        });
+      });
+      tiltStack.addEventListener('mouseleave', () => {
+        const cards = tiltStack.querySelectorAll('.tilt-item');
+        cards[0].style.transform = 'rotate(-9deg)';
+        cards[1].style.transform = 'rotate(8deg)';
+        cards[2].style.transform = 'rotate(-2deg)';
+      });
+    }
+
+    // Expand panels
+    document.querySelectorAll('#expandHero .expand-panel').forEach(panel => {
+      panel.addEventListener('mouseenter', () => {
+        document.querySelectorAll('#expandHero .expand-panel').forEach(p => p.classList.remove('active'));
+        panel.classList.add('active');
+      });
+    });
+
+    // Posters mouse reactive
+    document.querySelectorAll('.interactive-poster').forEach(poster => {
+      poster.addEventListener('mousemove', (e) => {
+        const rect = poster.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        poster.style.setProperty('--mx', x + '%');
+        poster.style.setProperty('--my', y + '%');
+      });
+    });
+
+    // Scroll reveal cards
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('in-view');
+      });
+    }, { threshold: 0.22 });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+    // Reveal strip grow behavior
+    const revealItems = document.querySelectorAll('.reveal-item');
+    revealItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        revealItems.forEach(i => i.style.flex = '1');
+        item.style.flex = '1.8';
+      });
+    });
+
+    // Beam hero
+    const beamHero = document.getElementById('beamHero');
+    if (beamHero) {
+      beamHero.addEventListener('mousemove', (e) => {
+        const rect = beamHero.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        beamHero.style.setProperty('--beamx', x + '%');
+        beamHero.style.setProperty('--beamy', y + '%');
+      });
+    }
+  </script>
+</body>
+</html>
