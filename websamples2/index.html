@@ -1,0 +1,905 @@
+
+
+can you show me any examples of really cool websites for music artists, that helps handle an artist who has many releases? even its section of a webite not a whole page
+
+Mar 7
+
+Check frontend design skill
+Check frontend design skill
+Let me build you a visually striking discography section that handles an artist with many releases — with filtering, a layout that scales beau
+
+Claude's response was interrupted
+and what I mean is visual , artsy , maybe some section background paralaxing
+
+Mar 7
+Let me build you something visually stunning!
+
+
+Created a file, read a file
+Created a file, read a file
+Here's a full concept for a music artist discography section — scroll through it to see everything in action. Here's what's packed in:
+
+Parallax layers — the hero background, the grid lines, and the full-bleed dividers all move at different speeds as you scroll, creating real depth.
+
+Three layout modes for handling many releases:
+
+A featured wide grid for flagship albums (biggest real estate to the newest/best)
+A 4-column tight grid for the catalog
+A tracklist-style list view for singles, great for large volume without overwhelming the page
+Sticky filter bar — lets users cut through everything by type (Albums, EPs, Singles, Collabs, Live) with a live count that updates
+
+Visual details — each album cover is a unique SVG composition (geometric, gradient, textured), gold accent color system, cinematic overlay gradients on hover, and a Bebas Neue / Playfair combo for that editorial feel.
+
+You can swap the SVG placeholder covers for real <img> tags whenever you have artwork. Want me to adapt this to a specific artist's aesthetic, add more interactivity, or try a completely different visual direction?
+
+Artist discography
+Code · HTML 
+Can you show me some world class examples of sections for a website that are dynamic tha tyou can do for a music artist? ?
+
+Mar 7
+
+Read frontend design skill
+Read frontend design skill
+Let me build you a showcase of several distinct world-class section concepts — all on one page you can scroll through.
+
+
+Created a file, read a file
+Created a file, read a file
+Here's a full showcase of 7 world-class sections — scroll through all of them. Here's what each one demonstrates:
+
+① Magnetic Hero — the title words physically repel/attract to your mouse. A live ticker scrolls at the bottom. The glow follows your cursor.
+
+② Discography Shelf — drag-scrollable horizontal album row with vinyl records that slide out on hover. Each card lifts and reveals a play button.
+
+③ Tour Dates — brutalist editorial layout on a cream background. Each row has a slide-in accent bar on hover, live status colors (Sold Out / Few Left / Available), and a filter bar.
+
+④ Cinematic Player — animated waveform you can click to scrub, a full tracklist you can switch between, and a fake play animation so you can feel the interaction.
+
+⑤ Masonry Gallery — an irregular grid with hover-reveal overlays. Images scale and darken to expose location/context text.
+
+⑥ Merch Store — a 4-column product grid where a "Quick Add" tray slides up from the bottom of each card on hover.
+
+⑦ Newsletter CTA — pulsing concentric rings with an email capture form and a confirmation state on submit.
+
+The entire page has a custom cursor with a lagging ring, and a sticky nav bar that highlights the active section as you scroll. Want me to go deeper on any specific section?
+
+Music artist sections
+Code · HTML 
+Can you give me another examples page like that but with 10 different engaging headers sections at the level of interactive and interesting as the one you showed, also include example some example header sections that have youtube video background if you do, please use this as an example for the youtube video  https://www.youtube.com/watch?v=N92iE0h6s0M&list=RDN92iE0h6s0M&start_radio=1&pp=ygUMc3Rhc2hib3hiYW5koAcB
+
+12:57 PM
+
+Read frontend design skill
+Read frontend design skill
+Now let me build 10 completely distinct, world-class hero headers — including YouTube video backgrounds using that exact video ID.
+
+
+10 world-class interactive music artist header sections with YouTube video backgrounds
+10 world-class interactive music artist header sections with YouTube video backgrounds
+Claude's response was interrupted
+only do 2-3 youtube based one but 10 total
+
+12:59 PM
+Got it — let me rebuild this cleanly with 10 total headers, 2-3 using YouTube backgrounds and the rest being purely interactive/animated.
+
+
+Created a file, read a file
+Created a file, read a file
+Here's the full showcase — use the sticky nav at the top to jump between all 10. Here's what each one does:
+
+YouTube-backed headers (3):
+
+#01 — YT Glitch — Your video plays full-bleed behind a CSS glitch title with red/cyan split channels. Mute toggle button included.
+#04 — YT Newspaper — Same video under a dark veil, laid out as a luxury editorial newspaper with a masthead and column grid.
+#06 — YT Countdown — Video plays behind frosted glass numerals, with a live ticking countdown clock to your album drop date.
+Pure interactive headers (7):
+
+#02 — Particle Field — 160 connected particles that repel from your mouse cursor in real time.
+#03 — Split Light/Dark — Warm blob of light follows your mouse on the cream side, floating vinyl album on the dark side, track ticker scrolling at the bottom.
+#05 — Waveform — Three animated sine wave layers create a living audio visualization behind the title.
+#07 — Marquee Layers — Five rows of scrolling text at different speeds and directions, with a bold centered lock-up and filter pills.
+#08 — 3D Cube + Stars — CSS 3D rotating cube floats in a drifting star field.
+#09 — Noise Distort — The right panel is a live canvas that warps and distorts color in real-time based on where your mouse is.
+#10 — Word Reveal — Words slide up from below on scroll, with a rotating conic gradient underneath.
+Want me to go deeper on any specific one?
+
+Music headers 10
+Code · HTML 
+
+
+
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+Music headers 10 · HTML
+Copy
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 Epic Music Artist Headers</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Mono:wght@300;400&family=Anton&family=Syne:wght@400;700;800;900&family=Playfair+Display:ital,wght@0,900;1,400;1,900&family=Oswald:wght@200;700&family=Unbounded:wght@300;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#000;overflow-x:hidden;cursor:none}
+
+/* CUSTOM CURSOR */
+#cur{position:fixed;width:10px;height:10px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .3s,height .3s}
+#cur2{position:fixed;width:38px;height:38px;border:1px solid rgba(255,255,255,.3);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+
+/* STICKY NAV */
+#topnav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:.85rem 3vw;display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none
+}
+#topnav::-webkit-scrollbar{display:none}
+#topnav .logo{font-family:'Bebas Neue';font-size:1rem;letter-spacing:.2em;color:rgba(255,255,255,.5);margin-right:2.5rem;white-space:nowrap}
+.nb{font-family:'DM Mono';font-size:.5rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.25);background:none;border:none;cursor:pointer;padding:.4rem .8rem;white-space:nowrap;transition:color .2s}
+.nb:hover,.nb.on{color:#fff}
+
+/* SECTION LABEL STRIP */
+.strip{background:#080808;padding:1.2rem 5vw;display:flex;align-items:center;gap:1.5rem;border-top:1px solid rgba(255,255,255,.04)}
+.strip .sn{font-family:'DM Mono';font-size:.5rem;letter-spacing:.35em;color:rgba(255,255,255,.18);text-transform:uppercase}
+.strip .st{font-family:'Syne';font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.strip .sx{margin-left:auto;font-family:'DM Mono';font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.12)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ══════════════════════════════════════════════════
+   H1 — YOUTUBE VIDEO BG + GLITCH TITLE
+══════════════════════════════════════════════════ */
+#h1{position:relative;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.ytframe-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.ytframe-wrap iframe{
+  position:absolute;top:50%;left:50%;border:none;
+  width:177.78vh;height:100vh;
+  min-width:100vw;min-height:56.25vw;
+  transform:translate(-50%,-50%)
+}
+.yt-dim{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.5) 0%,rgba(0,0,0,.15) 45%,rgba(0,0,0,.75) 85%,#000 100%)
+}
+.h1-body{position:relative;z-index:2;text-align:center}
+.glitch{
+  font-family:'Unbounded';font-size:clamp(3.5rem,11vw,9.5rem);font-weight:900;
+  color:#fff;line-height:.88;letter-spacing:-.03em;text-transform:uppercase;
+  position:relative;display:inline-block
+}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%}
+.glitch::before{color:#ff003c;clip-path:polygon(0 25%,100% 25%,100% 45%,0 45%);animation:g1 3.5s infinite}
+.glitch::after{color:#00e5ff;clip-path:polygon(0 62%,100% 62%,100% 80%,0 80%);animation:g2 3.5s infinite}
+@keyframes g1{0%,88%,100%{transform:translate(0)}90%{transform:translate(-5px,2px)}93%{transform:translate(5px,-2px)}96%{transform:translate(-3px,1px)}}
+@keyframes g2{0%,85%,100%{transform:translate(0)}87%{transform:translate(5px,-2px)}91%{transform:translate(-5px,3px)}95%{transform:translate(3px,-1px)}}
+.h1-sub{font-family:'DM Mono';font-size:.65rem;letter-spacing:.55em;color:rgba(255,255,255,.45);text-transform:uppercase;margin-top:1.8rem;animation:fadeUp 1s .4s both}
+.h1-btns{display:flex;gap:1rem;justify-content:center;margin-top:2.5rem;animation:fadeUp 1s .7s both}
+.h1-btn{font-family:'DM Mono';font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;padding:.85rem 2rem;cursor:pointer;transition:all .25s}
+.h1-btn.solid{background:#fff;color:#000;border:1px solid #fff}
+.h1-btn.solid:hover{background:transparent;color:#fff}
+.h1-btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+.h1-btn.ghost:hover{border-color:#fff}
+#muteBtn1{position:absolute;bottom:5.5rem;right:4vw;z-index:3;font-family:'DM Mono';font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:.5rem 1rem;cursor:pointer;transition:all .2s}
+#muteBtn1:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+.scroll-pill{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:.7rem;font-family:'DM Mono';font-size:.5rem;letter-spacing:.3em;color:rgba(255,255,255,.2);text-transform:uppercase;animation:arrowBob 2s ease-in-out infinite}
+.scroll-pill::after{content:'↓'}
+@keyframes arrowBob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+
+/* ══════════════════════════════════════════════════
+   H2 — PARTICLE FIELD + LUXURY MINIMAL
+══════════════════════════════════════════════════ */
+#h2{position:relative;height:100vh;overflow:hidden;background:#040404;display:flex;align-items:center;justify-content:center}
+#pCanvas{position:absolute;inset:0;width:100%;height:100%}
+.h2-body{position:relative;z-index:2;text-align:center;pointer-events:none}
+.h2-pre{font-family:'DM Mono';font-size:.55rem;letter-spacing:.7em;color:rgba(255,255,255,.2);text-transform:uppercase;margin-bottom:3.5rem;animation:fadeIn 2s 1s both}
+.h2-name{font-family:'Cormorant Garamond';font-size:clamp(4.5rem,13vw,12rem);font-weight:300;color:#fff;line-height:.9;letter-spacing:.08em}
+.h2-name .ital{font-style:italic;color:rgba(255,255,255,.35)}
+.h2-sep{width:1px;height:90px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);margin:2.5rem auto}
+.h2-tagline{font-family:'DM Mono';font-size:.6rem;letter-spacing:.4em;color:rgba(255,255,255,.22);text-transform:uppercase}
+
+/* ══════════════════════════════════════════════════
+   H3 — SPLIT SCREEN: LIGHT/DARK + FLOATING ALBUM
+══════════════════════════════════════════════════ */
+#h3{position:relative;height:100vh;overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+.h3-left{background:#f2ede4;display:flex;flex-direction:column;justify-content:center;padding:0 5vw 0 7vw;position:relative;overflow:hidden}
+.h3-blob-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at var(--bx,50%) var(--by,50%),rgba(255,160,40,.28) 0%,transparent 65%);transition:background .1s}
+.h3-eyebrow{font-family:'DM Mono';font-size:.58rem;letter-spacing:.45em;text-transform:uppercase;color:rgba(0,0,0,.35);margin-bottom:1.5rem;position:relative;z-index:1}
+.h3-title{font-family:'Playfair Display';font-size:clamp(2.8rem,4.5vw,5rem);font-weight:900;font-style:italic;color:#111;line-height:1.02;margin-bottom:1.5rem;position:relative;z-index:1}
+.h3-body{font-family:'DM Mono';font-size:.6rem;line-height:1.9;color:rgba(0,0,0,.45);max-width:300px;margin-bottom:2.5rem;position:relative;z-index:1}
+.h3-cta{display:inline-flex;align-items:center;gap:1rem;background:#111;color:#f2ede4;padding:.95rem 1.8rem;font-family:'DM Mono';font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;border:none;cursor:pointer;transition:transform .3s,gap .3s;position:relative;z-index:1}
+.h3-cta:hover{transform:translateX(5px);gap:1.5rem}
+.h3-right{background:#0d0d0d;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.h3-right-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.h3-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.04);animation:pulse-ring 5s ease-in-out infinite}
+.h3-ring:nth-child(1){width:60%;height:60%;animation-delay:0s}
+.h3-ring:nth-child(2){width:80%;height:80%;animation-delay:1s}
+.h3-ring:nth-child(3){width:100%;height:100%;animation-delay:2s}
+@keyframes pulse-ring{0%,100%{opacity:.6;transform:scale(.97)}50%{opacity:.15;transform:scale(1.02)}}
+.h3-album{animation:floatAlbum 5s ease-in-out infinite;filter:drop-shadow(0 40px 80px rgba(0,0,0,.9))}
+.h3-album svg{width:min(42vw,360px);height:min(42vw,360px)}
+@keyframes floatAlbum{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-18px) rotate(3deg)}}
+.h3-track-ticker{position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,.04);padding:.7rem 0;overflow:hidden}
+.h3-tt-inner{display:flex;gap:3rem;animation:marqueeL 18s linear infinite;white-space:nowrap}
+.h3-tt-inner span{font-family:'DM Mono';font-size:.52rem;letter-spacing:.25em;color:rgba(255,255,255,.2);flex-shrink:0}
+@keyframes marqueeL{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ══════════════════════════════════════════════════
+   H4 — YOUTUBE + EDITORIAL NEWSPAPER LAYOUT
+══════════════════════════════════════════════════ */
+#h4{position:relative;height:100vh;overflow:hidden}
+#h4 .ytb{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#h4 .ytb iframe{position:absolute;top:50%;left:50%;border:none;width:177.78vh;height:100vh;min-width:100vw;min-height:56.25vw;transform:translate(-50%,-50%)}
+.h4-news-overlay{position:absolute;inset:0;background:rgba(0,0,0,.78)}
+.h4-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:5.5rem 6vw 3.5rem}
+.h4-top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid rgba(255,255,255,.7);padding-bottom:.8rem}
+.h4-top .masthead{font-family:'Playfair Display';font-size:clamp(1.8rem,3.5vw,3.2rem);font-weight:900;color:#fff;letter-spacing:.02em}
+.h4-top .edition{text-align:right}
+.h4-top .edition div{font-family:'DM Mono';font-size:.5rem;letter-spacing:.25em;color:rgba(255,255,255,.3);line-height:1.8;text-transform:uppercase}
+.h4-mid{display:grid;grid-template-columns:2fr .8fr;gap:4vw;align-items:end;flex:1;padding:2rem 0 0}
+.h4-hl{font-family:'Playfair Display';font-size:clamp(3rem,6.5vw,6.5rem);font-weight:900;color:#fff;line-height:.9;border-top:1px solid rgba(255,255,255,.2);padding-top:1.2rem}
+.h4-col2{border-top:1px solid rgba(255,255,255,.2);padding-top:1.2rem}
+.h4-col2 p{font-family:'DM Mono';font-size:.58rem;line-height:2;color:rgba(255,255,255,.4);margin-bottom:1rem}
+.h4-col2 .byline{font-family:'DM Mono';font-size:.5rem;letter-spacing:.3em;color:rgba(255,255,255,.2);text-transform:uppercase}
+.h4-bottom{display:flex;gap:3rem;border-top:1px solid rgba(255,255,255,.1);padding-top:1.2rem;flex-wrap:wrap}
+.h4-bottom a{font-family:'DM Mono';font-size:.52rem;letter-spacing:.25em;color:rgba(255,255,255,.25);text-transform:uppercase;cursor:pointer;transition:color .2s;text-decoration:none}
+.h4-bottom a:hover{color:rgba(255,255,255,.7)}
+
+/* ══════════════════════════════════════════════════
+   H5 — ANIMATED WAVEFORM HERO + CENTERED LOCK-UP
+══════════════════════════════════════════════════ */
+#h5{position:relative;height:100vh;overflow:hidden;background:#060606;display:flex;align-items:center;justify-content:center}
+#waveCanvas{position:absolute;bottom:0;left:0;width:100%;height:50%;opacity:.35}
+.h5-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(255,80,0,.08) 0%,transparent 65%)}
+.h5-body{position:relative;z-index:2;text-align:center}
+.h5-now{font-family:'DM Mono';font-size:.55rem;letter-spacing:.55em;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:2rem;display:flex;align-items:center;justify-content:center;gap:.8rem}
+.h5-dot{width:7px;height:7px;border-radius:50%;background:#ff5000;animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.5)}}
+.h5-title{font-family:'Anton';font-size:clamp(4rem,13vw,12rem);color:#fff;line-height:.85;letter-spacing:-.02em;text-transform:uppercase}
+.h5-title .alt{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.25)}
+.h5-meta{display:flex;justify-content:center;gap:4rem;margin-top:3rem}
+.h5-stat .n{font-family:'Syne';font-size:1.6rem;font-weight:900;color:#fff}
+.h5-stat .l{font-family:'DM Mono';font-size:.5rem;letter-spacing:.3em;color:rgba(255,255,255,.25);text-transform:uppercase;margin-top:.2rem}
+.h5-divv{width:1px;height:40px;background:rgba(255,255,255,.1);align-self:center}
+
+/* ══════════════════════════════════════════════════
+   H6 — YOUTUBE + COUNTDOWN ALBUM RELEASE
+══════════════════════════════════════════════════ */
+#h6{position:relative;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#h6 .ytb2{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#h6 .ytb2 iframe{position:absolute;top:50%;left:50%;border:none;width:177.78vh;height:100vh;min-width:100vw;min-height:56.25vw;transform:translate(-50%,-50%)}
+.h6-veil{position:absolute;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(3px)}
+.h6-body{position:relative;z-index:2;text-align:center;padding:0 2rem}
+.h6-pre{font-family:'DM Mono';font-size:.58rem;letter-spacing:.55em;color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:2.5rem}
+.h6-album-name{font-family:'Syne';font-size:clamp(2rem,5.5vw,5rem);font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.6rem}
+.h6-sub{font-family:'DM Mono';font-size:.6rem;letter-spacing:.3em;color:rgba(255,255,255,.35);margin-bottom:3rem}
+.h6-cd{display:flex;gap:1.5rem;justify-content:center;margin-bottom:3rem;flex-wrap:wrap}
+.h6-unit{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.h6-num{
+  font-family:'Unbounded';font-size:clamp(2rem,5vw,4.5rem);font-weight:900;color:#fff;line-height:1;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  padding:.7rem 1.4rem;min-width:90px;text-align:center;
+  backdrop-filter:blur(12px)
+}
+.h6-lbl{font-family:'DM Mono';font-size:.48rem;letter-spacing:.3em;color:rgba(255,255,255,.3);text-transform:uppercase}
+.h6-notify{font-family:'DM Mono';font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;padding:.85rem 2.5rem;border:1px solid rgba(255,255,255,.3);color:#fff;background:none;cursor:pointer;transition:all .3s}
+.h6-notify:hover{background:rgba(255,255,255,.1);border-color:#fff}
+
+/* ══════════════════════════════════════════════════
+   H7 — SCROLLING MARQUEE BG + STACKED BOLD TITLE
+══════════════════════════════════════════════════ */
+#h7{position:relative;height:100vh;overflow:hidden;background:#0a0a0a;display:flex;align-items:center;justify-content:center}
+.mq-layer{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:0;pointer-events:none}
+.mq-row{overflow:hidden;padding:.2rem 0}
+.mq-inner{display:flex;gap:2.5rem;white-space:nowrap;flex-shrink:0;animation:mql 22s linear infinite}
+.mq-inner.rev{animation:mqr 28s linear infinite}
+.mq-inner.slow{animation:mql 35s linear infinite}
+.mq-inner span{font-family:'Bebas Neue';font-size:clamp(3.5rem,7vw,6.5rem);color:rgba(255,255,255,.04);flex-shrink:0;letter-spacing:.04em}
+.mq-inner .hi{color:rgba(255,200,0,.07)}
+@keyframes mql{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mqr{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.h7-center{position:relative;z-index:2;text-align:center}
+.h7-big{font-family:'Anton';font-size:clamp(5rem,15vw,14rem);color:#fff;line-height:.84;text-align:center;letter-spacing:-.02em;text-transform:uppercase}
+.h7-big .hollow{color:transparent;-webkit-text-stroke:2px rgba(255,200,0,.5)}
+.h7-pills{display:flex;gap:.8rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap}
+.h7-pill{font-family:'DM Mono';font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;padding:.5rem 1.2rem;border:1px solid rgba(255,200,0,.25);color:rgba(255,200,0,.6);cursor:pointer;transition:all .25s}
+.h7-pill:hover,.h7-pill.on{background:rgba(255,200,0,.1);border-color:rgba(255,200,0,.6);color:rgba(255,200,0,1)}
+
+/* ══════════════════════════════════════════════════
+   H8 — 3D CSS CUBE + DARK COSMIC
+══════════════════════════════════════════════════ */
+#h8{position:relative;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse 90% 80% at 50% 50%,#0a0a1e 0%,#000 100%)}
+.stars-canvas{position:absolute;inset:0;width:100%;height:100%}
+.cube-wrap{position:absolute;perspective:900px;width:300px;height:300px}
+.cube3d{width:100%;height:100%;transform-style:preserve-3d;animation:spinCube 18s linear infinite}
+@keyframes spinCube{from{transform:rotateX(12deg) rotateY(0)}to{transform:rotateX(12deg) rotateY(360deg)}}
+.cface{position:absolute;width:300px;height:300px;border:1px solid rgba(120,120,255,.18);background:rgba(30,30,80,.06);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:2.2rem;color:rgba(120,120,255,.25);letter-spacing:.1em;backdrop-filter:blur(4px)}
+.cface.fr{transform:translateZ(150px)}
+.cface.bk{transform:rotateY(180deg) translateZ(150px)}
+.cface.lt{transform:rotateY(-90deg) translateZ(150px)}
+.cface.rt{transform:rotateY(90deg) translateZ(150px)}
+.cface.tp{transform:rotateX(90deg) translateZ(150px)}
+.cface.bt{transform:rotateX(-90deg) translateZ(150px)}
+.h8-body{position:relative;z-index:2;text-align:center;pointer-events:none}
+.h8-title{font-family:'Syne';font-size:clamp(3rem,9vw,8rem);font-weight:900;color:#fff;line-height:.88;text-shadow:0 0 100px rgba(100,100,255,.35)}
+.h8-title .dim{color:rgba(255,255,255,.18)}
+.h8-under{font-family:'DM Mono';font-size:.6rem;letter-spacing:.4em;color:rgba(255,255,255,.2);text-transform:uppercase;margin-top:1.5rem}
+.h8-glow-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50vw;height:50vh;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(80,80,255,.06) 0%,transparent 70%);pointer-events:none}
+
+/* ══════════════════════════════════════════════════
+   H9 — INTERACTIVE NOISE/DISTORT HOVER + EDITORIAL
+══════════════════════════════════════════════════ */
+#h9{position:relative;height:100vh;overflow:hidden;background:#f0ebe0}
+.h9-noise{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px}
+.h9-layout{height:100%;display:grid;grid-template-columns:1fr 1fr;padding-top:5rem}
+.h9-left{display:flex;flex-direction:column;justify-content:center;padding:0 5vw 0 7vw;position:relative;z-index:2}
+.h9-big-num{position:absolute;top:6rem;left:5vw;font-family:'Bebas Neue';font-size:12rem;color:rgba(0,0,0,.05);line-height:1;pointer-events:none;user-select:none}
+.h9-label{font-family:'DM Mono';font-size:.55rem;letter-spacing:.5em;text-transform:uppercase;color:rgba(0,0,0,.3);margin-bottom:1.5rem}
+.h9-title{font-family:'Syne';font-size:clamp(2.5rem,4.5vw,4.8rem);font-weight:900;color:#111;line-height:1.02;margin-bottom:1.5rem}
+.h9-desc{font-family:'DM Mono';font-size:.6rem;line-height:1.9;color:rgba(0,0,0,.42);max-width:310px;margin-bottom:2.5rem}
+.h9-row{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.h9-btn{padding:.9rem 1.8rem;font-family:'DM Mono';font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;border:none;cursor:pointer;transition:all .25s}
+.h9-btn.dark{background:#111;color:#f0ebe0}
+.h9-btn.dark:hover{background:#333}
+.h9-btn.lite{background:transparent;color:#111;border:1px solid rgba(0,0,0,.25)}
+.h9-btn.lite:hover{background:rgba(0,0,0,.06)}
+.h9-right{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.h9-canvas-wrap{position:absolute;inset:0}
+#noiseCanvas{width:100%;height:100%;display:block}
+.h9-overlay-text{position:absolute;bottom:2.5rem;left:2rem;font-family:'DM Mono';font-size:.52rem;letter-spacing:.25em;color:rgba(255,255,255,.3);text-transform:uppercase}
+
+/* ══════════════════════════════════════════════════
+   H10 — HORIZONTAL WORD REVEAL + CINEMATIC GRADIENT
+══════════════════════════════════════════════════ */
+#h10{position:relative;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000}
+.h10-grad{position:absolute;inset:0;background:conic-gradient(from 230deg at 60% 50%,#0d0010 0deg,#00060f 90deg,#0a0500 180deg,#050014 270deg,#0d0010 360deg);animation:gradSpin 20s linear infinite}
+@keyframes gradSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.h10-grad-mask{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.h10-body{position:relative;z-index:2;text-align:center;padding:0 5vw}
+.h10-words{display:flex;flex-direction:column;gap:.2rem;margin-bottom:3rem}
+.h10-word-row{overflow:hidden}
+.h10-word{
+  font-family:'Oswald';font-size:clamp(4rem,13vw,12rem);font-weight:700;
+  color:#fff;line-height:.88;text-transform:uppercase;letter-spacing:-.01em;
+  display:inline-block;
+  transform:translateY(110%);
+  transition:transform .9s cubic-bezier(0.16,1,0.3,1)
+}
+.h10-word.out{transform:translateY(0)}
+.h10-word.right{text-align:right;display:block}
+.h10-word-row:nth-child(2) .h10-word{transition-delay:.15s}
+.h10-word-row:nth-child(3) .h10-word{transition-delay:.3s;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.3)}
+.h10-details{display:flex;justify-content:center;gap:4rem;opacity:0;transition:opacity 1s .8s;flex-wrap:wrap}
+.h10-details.out{opacity:1}
+.h10-detail{text-align:center}
+.h10-detail .dv{font-family:'Cormorant Garamond';font-size:1.3rem;font-weight:600;color:#fff;font-style:italic}
+.h10-detail .dl{font-family:'DM Mono';font-size:.5rem;letter-spacing:.3em;color:rgba(255,255,255,.25);text-transform:uppercase;margin-top:.2rem}
+.h10-line{width:1px;height:35px;background:rgba(255,255,255,.1);align-self:center}
+
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- NAV -->
+<nav id="topnav">
+  <span class="logo">NOVA</span>
+  <button class="nb on" onclick="goto('h1')">01 — YT Glitch</button>
+  <button class="nb" onclick="goto('h2')">02 — Particles</button>
+  <button class="nb" onclick="goto('h3')">03 — Split</button>
+  <button class="nb" onclick="goto('h4')">04 — YT News</button>
+  <button class="nb" onclick="goto('h5')">05 — Waveform</button>
+  <button class="nb" onclick="goto('h6')">06 — YT Countdown</button>
+  <button class="nb" onclick="goto('h7')">07 — Marquee</button>
+  <button class="nb" onclick="goto('h8')">08 — 3D Cube</button>
+  <button class="nb" onclick="goto('h9')">09 — Noise Distort</button>
+  <button class="nb" onclick="goto('h10')">10 — Word Reveal</button>
+</nav>
+
+<!-- ═══════════════════════════════════
+     H1: YOUTUBE VIDEO BG + GLITCH TITLE
+═══════════════════════════════════ -->
+<section id="h1">
+  <div class="ytframe-wrap">
+    <iframe id="yt1"
+      src="https://www.youtube.com/embed/N92iE0h6s0M?autoplay=1&mute=1&loop=1&playlist=N92iE0h6s0M&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1"
+      allow="autoplay; encrypted-media" allowfullscreen>
+    </iframe>
+  </div>
+  <div class="yt-dim"></div>
+  <div class="h1-body">
+    <div class="glitch" data-text="ALWAYS">ALWAYS</div>
+    <div class="glitch" data-text="LOSING">LOSING</div>
+    <div class="glitch" data-text="LIGHT">LIGHT</div>
+    <p class="h1-sub">New Album · Out Everywhere Now</p>
+    <div class="h1-btns">
+      <button class="h1-btn solid">Listen Now</button>
+      <button class="h1-btn ghost">Watch Video</button>
+    </div>
+  </div>
+  <button id="muteBtn1" onclick="toggleMute1()">🔇 Unmute</button>
+  <div class="scroll-pill">Scroll</div>
+</section>
+
+<div class="strip"><span class="sn">01 / 10</span><span class="st">YouTube Video BG + Glitch Typography</span><span class="sx">Drag-to-corner video, glitch CSS animation, CTA buttons</span></div>
+
+<!-- ═══════════════════════════════════
+     H2: PARTICLE FIELD + LUXURY MINIMAL
+═══════════════════════════════════ -->
+<section id="h2">
+  <canvas id="pCanvas"></canvas>
+  <div class="h2-body">
+    <div class="h2-pre">Performing Artist · Est. 2011</div>
+    <div class="h2-name">
+      NOVA<br>
+      <span class="ital">Celestine</span>
+    </div>
+    <div class="h2-sep"></div>
+    <div class="h2-tagline">World Tour 2025 · 7 Albums · 200M Streams</div>
+  </div>
+</section>
+
+<div class="strip"><span class="sn">02 / 10</span><span class="st">Interactive Particle Field — Mouse Repel</span><span class="sx">Canvas particle physics, mouse interaction, luxury serif typography</span></div>
+
+<!-- ═══════════════════════════════════
+     H3: SPLIT SCREEN LIGHT/DARK + FLOATING ALBUM
+═══════════════════════════════════ -->
+<section id="h3">
+  <div class="h3-left" id="h3left">
+    <div class="h3-blob-bg" id="h3blob"></div>
+    <div class="h3-eyebrow">New Album · Available Now</div>
+    <h1 class="h3-title">Hollow<br>Earth</h1>
+    <p class="h3-body">Twelve tracks of controlled chaos. Produced over three years across four continents. Her most personal work yet.</p>
+    <button class="h3-cta">Stream Now →</button>
+  </div>
+  <div class="h3-right">
+    <div class="h3-right-rings">
+      <div class="h3-ring"></div>
+      <div class="h3-ring"></div>
+      <div class="h3-ring"></div>
+    </div>
+    <div class="h3-album">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="400" fill="#0c0508"/>
+        <defs>
+          <radialGradient id="alb1" cx="40%" cy="60%" r="55%">
+            <stop offset="0%" stop-color="#ff3c00" stop-opacity=".45"/>
+            <stop offset="100%" stop-color="#0c0508" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="400" height="400" fill="url(#alb1)"/>
+        <circle cx="200" cy="200" r="170" fill="none" stroke="rgba(255,60,0,.12)" stroke-width="1"/>
+        <circle cx="200" cy="200" r="110" fill="none" stroke="rgba(255,60,0,.08)" stroke-width="1"/>
+        <circle cx="200" cy="200" r="55" fill="none" stroke="rgba(255,60,0,.06)" stroke-width="1"/>
+        <text x="200" y="225" text-anchor="middle" font-family="serif" font-style="italic" font-size="85" fill="rgba(255,60,0,.3)">H</text>
+      </svg>
+    </div>
+    <div class="h3-track-ticker">
+      <div class="h3-tt-inner">
+        <span>Ghost Signal</span><span>·</span><span>Ultraviolet</span><span>·</span>
+        <span>Hollow</span><span>·</span><span>Bloodlines</span><span>·</span>
+        <span>Meridian</span><span>·</span><span>Third Light</span><span>·</span>
+        <span>Ghost Signal</span><span>·</span><span>Ultraviolet</span><span>·</span>
+        <span>Hollow</span><span>·</span><span>Bloodlines</span><span>·</span>
+        <span>Meridian</span><span>·</span><span>Third Light</span><span>·</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><span class="sn">03 / 10</span><span class="st">Split Screen Light/Dark + Floating Album + Warm Blob</span><span class="sx">CSS blob follows mouse on light side, vinyl float animation, track ticker</span></div>
+
+<!-- ═══════════════════════════════════
+     H4: YOUTUBE + EDITORIAL NEWSPAPER
+═══════════════════════════════════ -->
+<section id="h4">
+  <div class="ytb">
+    <iframe
+      src="https://www.youtube.com/embed/N92iE0h6s0M?autoplay=1&mute=1&loop=1&playlist=N92iE0h6s0M&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1"
+      allow="autoplay; encrypted-media" allowfullscreen>
+    </iframe>
+  </div>
+  <div class="h4-news-overlay"></div>
+  <div class="h4-content">
+    <div class="h4-top">
+      <div class="masthead">The Artist Post</div>
+      <div class="edition">
+        <div>Vol. XIV · No. 4</div>
+        <div>Special Edition</div>
+        <div>March 2025</div>
+      </div>
+    </div>
+    <div class="h4-mid">
+      <div class="h4-hl">NOVA Returns<br>With Career-<br>Defining Record</div>
+      <div class="h4-col2">
+        <p>After three years of silence, the artist emerges with a record that redefines the boundaries of contemporary sound. Twelve tracks, four continents, one vision.</p>
+        <p>Collaborators include Grammy-winning producers and an orchestra of twenty-four musicians recorded live in Berlin.</p>
+        <div class="byline">By Staff · Music Desk</div>
+      </div>
+    </div>
+    <div class="h4-bottom">
+      <a>Stream Now</a>
+      <a>Tour Dates</a>
+      <a>Behind The Record</a>
+      <a>Interview</a>
+      <a>Merch</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><span class="sn">04 / 10</span><span class="st">YouTube Video BG + Brutalist Newspaper Layout</span><span class="sx">Editorial newspaper grid over live video, Playfair Display type</span></div>
+
+<!-- ═══════════════════════════════════
+     H5: ANIMATED WAVEFORM HERO
+═══════════════════════════════════ -->
+<section id="h5">
+  <canvas id="waveCanvas"></canvas>
+  <div class="h5-glow"></div>
+  <div class="h5-body">
+    <div class="h5-now"><div class="h5-dot"></div>Now Playing · Ghost Signal</div>
+    <div class="h5-title">
+      NOVA<br>
+      <span class="alt">CELESTINE</span>
+    </div>
+    <div class="h5-meta">
+      <div class="h5-stat"><div class="n">7</div><div class="l">Albums</div></div>
+      <div class="h5-divv"></div>
+      <div class="h5-stat"><div class="n">200M</div><div class="l">Streams</div></div>
+      <div class="h5-divv"></div>
+      <div class="h5-stat"><div class="n">2025</div><div class="l">World Tour</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><span class="sn">05 / 10</span><span class="st">Live-Animated Audio Waveform Background</span><span class="sx">Canvas sine wave animation, pulsing now-playing indicator, dark gradient</span></div>
+
+<!-- ═══════════════════════════════════
+     H6: YOUTUBE + COUNTDOWN RELEASE
+═══════════════════════════════════ -->
+<section id="h6">
+  <div class="ytb2">
+    <iframe
+      src="https://www.youtube.com/embed/N92iE0h6s0M?autoplay=1&mute=1&loop=1&playlist=N92iE0h6s0M&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1"
+      allow="autoplay; encrypted-media" allowfullscreen>
+    </iframe>
+  </div>
+  <div class="h6-veil"></div>
+  <div class="h6-body">
+    <div class="h6-pre">Dropping In</div>
+    <div class="h6-album-name">Hollow Earth</div>
+    <div class="h6-sub">The New Album · Pre-Save Now</div>
+    <div class="h6-cd">
+      <div class="h6-unit"><div class="h6-num" id="cd-d">12</div><div class="h6-lbl">Days</div></div>
+      <div class="h6-unit"><div class="h6-num" id="cd-h">08</div><div class="h6-lbl">Hours</div></div>
+      <div class="h6-unit"><div class="h6-num" id="cd-m">44</div><div class="h6-lbl">Mins</div></div>
+      <div class="h6-unit"><div class="h6-num" id="cd-s">21</div><div class="h6-lbl">Secs</div></div>
+    </div>
+    <button class="h6-notify">Notify Me</button>
+  </div>
+</section>
+
+<div class="strip"><span class="sn">06 / 10</span><span class="st">YouTube BG + Frosted Glass Album Countdown</span><span class="sx">Live countdown timer, glassmorphism numerals, blur veil over video</span></div>
+
+<!-- ═══════════════════════════════════
+     H7: SCROLLING MARQUEE + STACKED BOLD
+═══════════════════════════════════ -->
+<section id="h7">
+  <div class="mq-layer">
+    <div class="mq-row"><div class="mq-inner"><span>NOVA</span><span>·</span><span class="hi">ALWAYS LOSING LIGHT</span><span>·</span><span>GHOST SIGNAL</span><span>·</span><span>WORLD TOUR 2025</span><span>·</span><span>NOVA</span><span>·</span><span class="hi">ALWAYS LOSING LIGHT</span><span>·</span><span>GHOST SIGNAL</span><span>·</span><span>WORLD TOUR 2025</span><span>·</span></div></div>
+    <div class="mq-row"><div class="mq-inner rev"><span>ULTRAVIOLET</span><span>·</span><span>HOLLOW EARTH</span><span>·</span><span class="hi">STREAM NOW</span><span>·</span><span>MERIDIAN</span><span>·</span><span>ZENITH</span><span>·</span><span>ULTRAVIOLET</span><span>·</span><span>HOLLOW EARTH</span><span>·</span><span class="hi">STREAM NOW</span><span>·</span><span>MERIDIAN</span><span>·</span><span>ZENITH</span><span>·</span></div></div>
+    <div class="mq-row"><div class="mq-inner slow"><span>BLOODLINES</span><span>·</span><span>THIRD LIGHT</span><span>·</span><span class="hi">200M STREAMS</span><span>·</span><span>AXIS DRIFT</span><span>·</span><span>FAULTLINES</span><span>·</span><span>BLOODLINES</span><span>·</span><span>THIRD LIGHT</span><span>·</span><span class="hi">200M STREAMS</span><span>·</span><span>AXIS DRIFT</span><span>·</span><span>FAULTLINES</span><span>·</span></div></div>
+    <div class="mq-row"><div class="mq-inner rev slow"><span>NOVA</span><span>·</span><span class="hi">ALWAYS LOSING LIGHT</span><span>·</span><span>GHOST SIGNAL</span><span>·</span><span>WORLD TOUR 2025</span><span>·</span><span>NOVA</span><span>·</span><span class="hi">ALWAYS LOSING LIGHT</span><span>·</span><span>GHOST SIGNAL</span><span>·</span><span>WORLD TOUR 2025</span><span>·</span></div></div>
+    <div class="mq-row"><div class="mq-inner"><span>OVERGROWTH</span><span>·</span><span>BLUE MERIDIAN</span><span>·</span><span class="hi">INFINITE MINOR</span><span>·</span><span>STATIC SHORE</span><span>·</span><span>OVERGROWTH</span><span>·</span><span>BLUE MERIDIAN</span><span>·</span><span class="hi">INFINITE MINOR</span><span>·</span><span>STATIC SHORE</span><span>·</span></div></div>
+  </div>
+  <div class="h7-center">
+    <div class="h7-big">
+      NOVA<br>
+      <span class="hollow">LIVE</span><br>
+      2025
+    </div>
+    <div class="h7-pills">
+      <div class="h7-pill on">All Shows</div>
+      <div class="h7-pill">North America</div>
+      <div class="h7-pill">Europe</div>
+      <div class="h7-pill">Asia</div>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><span class="sn">07 / 10</span><span class="st">Multi-Speed Scrolling Marquee Background</span><span class="sx">5 rows at different speeds/directions, hollow outlined text, filter pills</span></div>
+
+<!-- ═══════════════════════════════════
+     H8: 3D CSS CUBE + COSMIC STARS
+═══════════════════════════════════ -->
+<section id="h8">
+  <canvas class="stars-canvas" id="starCanvas"></canvas>
+  <div class="h8-glow-orb"></div>
+  <div class="cube-wrap">
+    <div class="cube3d">
+      <div class="cface fr">NOVA</div>
+      <div class="cface bk">2025</div>
+      <div class="cface lt">TOUR</div>
+      <div class="cface rt">LIVE</div>
+      <div class="cface tp">ALL</div>
+      <div class="cface bt">NIGHT</div>
+    </div>
+  </div>
+  <div class="h8-body">
+    <div class="h8-title">BEYOND<br><span class="dim">THE</span><br>HORIZON</div>
+    <div class="h8-under">The World Tour · Tickets Available Now</div>
+  </div>
+</section>
+
+<div class="strip"><span class="sn">08 / 10</span><span class="st">3D CSS Cube + Star Field Canvas</span><span class="sx">Pure CSS 3D transforms, canvas particle stars, cosmic gradient atmosphere</span></div>
+
+<!-- ═══════════════════════════════════
+     H9: NOISE CANVAS + EDITORIAL LIGHT
+═══════════════════════════════════ -->
+<section id="h9">
+  <div class="h9-noise"></div>
+  <div class="h9-layout">
+    <div class="h9-left">
+      <div class="h9-big-num">09</div>
+      <div class="h9-label">Ghost Signal · New Single</div>
+      <h2 class="h9-title">The Sound<br>of Empty<br>Rooms</h2>
+      <p class="h9-desc">A meditation on distance and frequency. Written during a 72-hour studio blackout. Produced by NOVA and Ethan Voss.</p>
+      <div class="h9-row">
+        <button class="h9-btn dark">Stream Now</button>
+        <button class="h9-btn lite">Watch Video</button>
+      </div>
+    </div>
+    <div class="h9-right">
+      <div class="h9-canvas-wrap"><canvas id="noiseCanvas"></canvas></div>
+      <div class="h9-overlay-text">Move cursor to distort</div>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><span class="sn">09 / 10</span><span class="st">Mouse-Distorted Canvas Artwork + Light Editorial</span><span class="sx">Real-time canvas distortion follows mouse, cream editorial left, interactive right</span></div>
+
+<!-- ═══════════════════════════════════
+     H10: WORD REVEAL + CINEMATIC GRADIENT
+═══════════════════════════════════ -->
+<section id="h10">
+  <div class="h10-grad"></div>
+  <div class="h10-grad-mask"></div>
+  <div class="h10-body">
+    <div class="h10-words" id="h10words">
+      <div class="h10-word-row"><div class="h10-word" id="w1">ALWAYS</div></div>
+      <div class="h10-word-row"><div class="h10-word" id="w2">LOSING</div></div>
+      <div class="h10-word-row"><div class="h10-word right" id="w3">LIGHT</div></div>
+    </div>
+    <div class="h10-details" id="h10det">
+      <div class="h10-detail"><div class="dv">VII</div><div class="dl">Studio Albums</div></div>
+      <div class="h10-line"></div>
+      <div class="h10-detail"><div class="dv">2025</div><div class="dl">World Tour</div></div>
+      <div class="h10-line"></div>
+      <div class="h10-detail"><div class="dv">200M</div><div class="dl">Total Streams</div></div>
+      <div class="h10-line"></div>
+      <div class="h10-detail"><div class="dv">Mar 14</div><div class="dl">New Album</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="strip"><span class="sn">10 / 10</span><span class="st">Cinematic Word Reveal + Rotating Gradient</span><span class="sx">Words slide in from below on scroll, conic-gradient rotates infinitely</span></div>
+
+<script>
+// ── CURSOR ──────────────────────────────
+const cur = document.getElementById('cur'), cur2 = document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx+'px'; cur.style.top = my+'px';
+});
+(function loop(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; cur2.style.left=rx+'px'; cur2.style.top=ry+'px'; requestAnimationFrame(loop); })();
+
+// ── NAV SCROLL ──────────────────────────
+function goto(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+const secs = ['h1','h2','h3','h4','h5','h6','h7','h8','h9','h10'];
+const nbs = document.querySelectorAll('.nb');
+const secObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ const i=secs.indexOf(e.target.id); nbs.forEach((b,j)=>b.classList.toggle('on',i===j)); }
+  });
+},{threshold:.4});
+secs.forEach(id=>{const el=document.getElementById(id);if(el)secObs.observe(el);});
+
+// ── H1: MUTE TOGGLE ─────────────────────
+let muted1=true;
+function toggleMute1(){
+  const f=document.getElementById('yt1');
+  const btn=document.getElementById('muteBtn1');
+  if(muted1){ f.src=f.src.replace('mute=1','mute=0'); btn.textContent='🔊 Mute'; }
+  else { f.src=f.src.replace('mute=0','mute=1'); btn.textContent='🔇 Unmute'; }
+  muted1=!muted1;
+}
+
+// ── H2: PARTICLE FIELD ──────────────────
+(function(){
+  const canvas=document.getElementById('pCanvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[],mouse={x:null,y:null};
+  function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; }
+  resize(); window.addEventListener('resize',resize);
+  function Particle(){
+    this.x=Math.random()*W; this.y=Math.random()*H;
+    this.vx=(Math.random()-.5)*.4; this.vy=(Math.random()-.5)*.4;
+    this.r=Math.random()*1.5+.3;
+    this.alpha=Math.random()*.5+.1;
+  }
+  for(let i=0;i<160;i++) particles.push(new Particle());
+  document.getElementById('h2').addEventListener('mousemove',e=>{
+    const r=canvas.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top;
+  });
+  document.getElementById('h2').addEventListener('mouseleave',()=>{mouse.x=mouse.y=null;});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{
+      if(mouse.x!==null){
+        const dx=p.x-mouse.x, dy=p.y-mouse.y, d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){ const f=((120-d)/120)*1.5; p.vx+=dx/d*f; p.vy+=dy/d*f; }
+      }
+      p.vx*=.96; p.vy*=.96;
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=W; if(p.x>W)p.x=0; if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${p.alpha})`; ctx.fill();
+    });
+    // draw connecting lines
+    for(let i=0;i<particles.length;i++) for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){ ctx.strokeStyle=`rgba(255,255,255,${.06*(1-d/90)})`; ctx.lineWidth=.4; ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── H3: BLOB FOLLOW MOUSE ───────────────
+const h3left=document.getElementById('h3left');
+const h3blob=document.getElementById('h3blob');
+h3left.addEventListener('mousemove',e=>{
+  const r=h3left.getBoundingClientRect();
+  const x=((e.clientX-r.left)/r.width)*100;
+  const y=((e.clientY-r.top)/r.height)*100;
+  h3blob.style.background=`radial-gradient(ellipse 70% 70% at ${x}% ${y}%,rgba(255,160,40,.32) 0%,transparent 65%)`;
+});
+
+// ── H5: WAVEFORM CANVAS ─────────────────
+(function(){
+  const canvas=document.getElementById('waveCanvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,t=0;
+  function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; }
+  resize(); window.addEventListener('resize',resize);
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const waves=[
+      {freq:.008,amp:.28,speed:.018,color:'rgba(255,80,0,.18)',lw:1.5},
+      {freq:.012,amp:.18,speed:.025,color:'rgba(255,120,0,.12)',lw:1},
+      {freq:.006,amp:.35,speed:.012,color:'rgba(255,50,0,.1)',lw:2},
+    ];
+    waves.forEach(w=>{
+      ctx.beginPath(); ctx.strokeStyle=w.color; ctx.lineWidth=w.lw;
+      for(let x=0;x<=W;x+=2){
+        const y=H*.5+Math.sin(x*w.freq+t*w.speed)*H*w.amp+Math.sin(x*w.freq*2.3+t*w.speed*1.7)*H*w.amp*.4;
+        x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    });
+    t++; requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── H6: COUNTDOWN ───────────────────────
+(function(){
+  // Set target ~12 days from now
+  const target=new Date(Date.now()+12*24*60*60*1000+8*60*60*1000+44*60*1000+21*1000);
+  function tick(){
+    const now=new Date(), diff=target-now;
+    if(diff<=0){document.getElementById('cd-d').textContent=document.getElementById('cd-h').textContent=document.getElementById('cd-m').textContent=document.getElementById('cd-s').textContent='00';return;}
+    const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+    document.getElementById('cd-d').textContent=String(d).padStart(2,'0');
+    document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick,1000);
+})();
+
+// ── H8: STAR FIELD ──────────────────────
+(function(){
+  const canvas=document.getElementById('starCanvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,stars=[];
+  function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; }
+  resize(); window.addEventListener('resize',resize);
+  function Star(){ this.x=Math.random()*W; this.y=Math.random()*H; this.r=Math.random()*.9+.1; this.v=Math.random()*.15+.03; this.alpha=Math.random(); this.da=(Math.random()*.005+.002)*(Math.random()<.5?1:-1); }
+  for(let i=0;i<220;i++) stars.push(new Star());
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.y-=s.v; s.alpha+=s.da; if(s.alpha<=0||s.alpha>=1)s.da*=-1;
+      if(s.y<0)s.y=H;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(200,200,255,${Math.max(0,Math.min(1,s.alpha))})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── H9: NOISE CANVAS ────────────────────
+(function(){
+  const canvas=document.getElementById('noiseCanvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,mox=.5,moy=.5,t=0;
+  function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; }
+  const section=document.getElementById('h9');
+  section.addEventListener('mousemove',e=>{
+    const r=section.getBoundingClientRect();
+    mox=(e.clientX-r.left)/r.width; moy=(e.clientY-r.top)/r.height;
+  });
+  resize(); window.addEventListener('resize',resize);
+  function draw(){
+    const idata=ctx.createImageData(W,H);
+    const data=idata.data;
+    for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+      const nx=x/W, ny=y/H;
+      const dx=nx-mox, dy=ny-moy, d=Math.sqrt(dx*dx+dy*dy);
+      const warp=Math.sin(nx*18+t*.04+d*10)*20+Math.cos(ny*14-t*.03)*15;
+      const sx=Math.floor(Math.max(0,Math.min(W-1,(x+warp*mox*3))));
+      const sy=Math.floor(Math.max(0,Math.min(H-1,(y+warp*moy*3))));
+      // create gradient color
+      const hue=((sx/W)*60+t*.3)%360;
+      const sat=40+d*60;
+      const bright=15+((1-d)*30);
+      // simple hsl approximation
+      const angle=hue*Math.PI/180;
+      const R=Math.floor(bright+sat*Math.max(0,Math.cos(angle)));
+      const G=Math.floor(bright+sat*Math.max(0,Math.cos(angle-2.09)));
+      const B=Math.floor(bright+sat*Math.max(0,Math.cos(angle+2.09)));
+      const i=(y*W+x)*4;
+      data[i]=R; data[i+1]=G; data[i+2]=B; data[i+3]=255;
+    }
+    ctx.putImageData(idata,0,0);
+    t++; requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── H10: SCROLL WORD REVEAL ─────────────
+(function(){
+  const words=['w1','w2','w3'];
+  const det=document.getElementById('h10det');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        words.forEach(id=>document.getElementById(id).classList.add('out'));
+        det.classList.add('out');
+      } else {
+        words.forEach(id=>document.getElementById(id).classList.remove('out'));
+        det.classList.remove('out');
+      }
+    });
+  },{threshold:.3});
+  const s=document.getElementById('h10');
+  if(s) obs.observe(s);
+  // Also trigger immediately if in view
+  const r=s.getBoundingClientRect();
+  if(r.top < window.innerHeight*.7){
+    words.forEach(id=>document.getElementById(id).classList.add('out'));
+    det.classList.add('out');
+  }
+})();
+</script>
+</body>
+</html>
