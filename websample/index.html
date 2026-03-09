@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Artist — Dynamic Sections Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Mono:ital,wght@0,300;1,300&family=Anton&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: #000; color: #fff; overflow-x: hidden; cursor: none; }
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed; width: 10px; height: 10px;
+  background: #fff; border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, background 0.2s, width 0.3s, height 0.3s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed; width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,0.4); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s ease, width 0.3s, height 0.3s, opacity 0.3s;
+}
+
+/* SECTION LABELS */
+.section-label {
+  position: fixed; top: 50%; right: 2rem;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex; flex-direction: column; gap: 0.6rem;
+  align-items: flex-end;
+}
+.s-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer; transition: all 0.3s;
+}
+.s-dot.active { background: #fff; transform: scale(1.5); }
+
+/* ═══════════════════════════════════════════
+   SECTION 1: MAGNETIC HERO — Kinetic Typography
+═══════════════════════════════════════════ */
+#s1 {
+  position: relative; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  background: #000;
+}
+
+.mag-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at var(--mx,50%) var(--my,50%),
+    rgba(255,60,0,0.12) 0%, transparent 65%);
+  transition: background 0.1s;
+}
+
+.mag-title {
+  position: relative; z-index: 2;
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(5rem, 18vw, 18rem);
+  line-height: 0.85;
+  text-align: center;
+  color: #fff;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+.mag-title .word {
+  display: block;
+  transition: transform 0.15s cubic-bezier(0.23,1,0.32,1);
+}
+
+.mag-title .hollow {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
+}
+
+.mag-subtitle {
+  position: absolute; bottom: 12vh; left: 50%; transform: translateX(-50%);
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.5em; color: rgba(255,255,255,0.3);
+  text-transform: uppercase; white-space: nowrap;
+  z-index: 2;
+}
+
+.ticker {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: #ff3c00; padding: 0.6rem 0; overflow: hidden;
+  z-index: 10;
+}
+.ticker-inner {
+  display: flex; gap: 4rem;
+  animation: ticker 18s linear infinite;
+  white-space: nowrap;
+}
+.ticker-inner span {
+  font-family: 'Bebas Neue'; font-size: 0.9rem;
+  letter-spacing: 0.2em; color: #000;
+  flex-shrink: 0;
+}
+@keyframes ticker { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+
+/* ═══════════════════════════════════════════
+   SECTION 2: ALBUM SHOWCASE — 3D Horizontal Scroll
+═══════════════════════════════════════════ */
+#s2 {
+  position: relative; height: 100vh;
+  display: flex; flex-direction: column;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.s2-header {
+  padding: 4rem 6vw 2rem;
+  display: flex; align-items: baseline; gap: 2rem;
+}
+.s2-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300; font-style: italic;
+  color: #fff;
+}
+.s2-header p {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.3em; color: rgba(255,255,255,0.3); text-transform: uppercase;
+}
+
+.album-track {
+  flex: 1; display: flex; align-items: center;
+  padding: 0 6vw; gap: 2.5vw;
+  overflow-x: auto; overflow-y: hidden;
+  scrollbar-width: none; cursor: grab;
+}
+.album-track::-webkit-scrollbar { display: none; }
+.album-track:active { cursor: grabbing; }
+
+.album-card {
+  flex-shrink: 0; position: relative;
+  width: clamp(220px, 28vw, 380px);
+  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+  transform-origin: bottom center;
+}
+
+.album-card:hover { transform: translateY(-20px) scale(1.03); }
+
+.album-art {
+  width: 100%; aspect-ratio: 1;
+  position: relative; overflow: hidden;
+}
+
+.album-art svg { width: 100%; height: 100%; display: block; }
+
+.album-vinyl {
+  position: absolute; top: 10%; right: -15%;
+  width: 80%; height: 80%;
+  border-radius: 50%;
+  transition: transform 0.6s cubic-bezier(0.23,1,0.32,1), right 0.6s;
+  transform: rotate(0deg);
+}
+.album-card:hover .album-vinyl { right: -35%; transform: rotate(15deg); }
+
+.album-info { padding: 1.2rem 0 0; }
+.album-info .num {
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.3em; color: rgba(255,255,255,0.25);
+  margin-bottom: 0.4rem;
+}
+.album-info .name {
+  font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700;
+  color: #fff; margin-bottom: 0.2rem;
+}
+.album-info .year {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  color: rgba(255,255,255,0.3);
+}
+
+.album-play-btn {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: scale(0.8);
+  transition: opacity 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+.album-card:hover .album-play-btn { opacity: 1; transform: scale(1); }
+.album-play-btn svg { width: 14px; height: 14px; fill: #fff; margin-left: 2px; }
+
+/* ═══════════════════════════════════════════
+   SECTION 3: TOUR DATES — Editorial Brutalist
+═══════════════════════════════════════════ */
+#s3 {
+  background: #f0ece3; color: #0a0a0a;
+  padding: 6rem 6vw;
+  position: relative; overflow: hidden;
+}
+
+.s3-bg-text {
+  position: absolute; top: -0.1em; left: -0.05em;
+  font-family: 'Bebas Neue'; font-size: 30vw;
+  color: rgba(0,0,0,0.04); line-height: 1;
+  pointer-events: none; user-select: none;
+  white-space: nowrap;
+}
+
+.s3-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 3rem;
+}
+.s3-header h2 {
+  font-family: 'Syne', sans-serif; font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800; color: #0a0a0a; line-height: 1;
+}
+.s3-header .filter-group {
+  display: flex; gap: 0.5rem;
+}
+.s3-filter {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 0.5rem 1rem; border: 1px solid #0a0a0a;
+  background: none; cursor: pointer; transition: all 0.2s;
+}
+.s3-filter:hover, .s3-filter.active {
+  background: #0a0a0a; color: #f0ece3;
+}
+
+.tour-list {}
+
+.tour-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 200px 160px;
+  align-items: center; gap: 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(0,0,0,0.12);
+  position: relative;
+  transition: padding-left 0.3s;
+  cursor: pointer;
+}
+
+.tour-item::after {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0; width: 0;
+  background: #0a0a0a;
+  transition: width 0.4s cubic-bezier(0.23,1,0.32,1);
+}
+
+.tour-item:hover::after { width: 4px; }
+.tour-item:hover { padding-left: 1rem; }
+
+.tour-date-block { text-align: center; }
+.tour-date-block .day {
+  font-family: 'Bebas Neue'; font-size: 2.5rem; line-height: 1; color: #0a0a0a;
+}
+.tour-date-block .month {
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.3em; color: rgba(0,0,0,0.4); text-transform: uppercase;
+}
+
+.tour-info .city {
+  font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: #0a0a0a;
+}
+.tour-info .venue {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.1em; color: rgba(0,0,0,0.45); margin-top: 0.3rem;
+}
+
+.tour-status {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+.tour-status.sold-out { color: #cc2200; }
+.tour-status.available { color: #006600; }
+.tour-status.few-left { color: #cc7700; }
+
+.tour-ticket {
+  text-align: right;
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  text-decoration: none; color: #0a0a0a;
+  padding: 0.7rem 1.2rem; border: 1px solid #0a0a0a;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.tour-ticket:hover { background: #0a0a0a; color: #f0ece3; }
+.tour-ticket.disabled {
+  opacity: 0.3; pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION 4: WAVEFORM PLAYER — Cinematic
+═══════════════════════════════════════════ */
+#s4 {
+  position: relative; height: 100vh;
+  display: flex; align-items: center;
+  background: #060606;
+  overflow: hidden;
+}
+
+.player-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%, rgba(20,80,180,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(180,20,80,0.08) 0%, transparent 55%);
+}
+
+.player-wrap {
+  position: relative; z-index: 2;
+  width: 100%; padding: 0 8vw;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8vw; align-items: center;
+}
+
+.player-info .now-playing-label {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  letter-spacing: 0.4em; color: rgba(255,255,255,0.3);
+  text-transform: uppercase; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.pulse-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #4af;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.6); }
+}
+
+.player-info .track-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 600; line-height: 1; color: #fff;
+  margin-bottom: 0.5rem;
+}
+.player-info .track-album {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.35);
+  margin-bottom: 3rem;
+}
+
+/* Waveform */
+.waveform-container {
+  position: relative; margin-bottom: 1.5rem; cursor: pointer;
+}
+.waveform-canvas {
+  width: 100%; height: 80px; display: block;
+}
+
+.player-controls {
+  display: flex; align-items: center; gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ctrl-btn {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.4); transition: color 0.2s;
+  padding: 0;
+}
+.ctrl-btn:hover { color: #fff; }
+.ctrl-btn svg { width: 20px; height: 20px; }
+
+.play-btn-main {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #fff; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+.play-btn-main:hover { transform: scale(1.08); }
+.play-btn-main svg { width: 18px; height: 18px; fill: #000; margin-left: 3px; }
+.play-btn-main.playing svg { margin-left: 0; }
+
+.track-time {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  color: rgba(255,255,255,0.3); letter-spacing: 0.1em;
+}
+
+/* Tracklist */
+.tracklist {}
+.tracklist-header {
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.3em; color: rgba(255,255,255,0.2);
+  text-transform: uppercase; padding: 0 0 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 0.5rem;
+}
+
+.track-item {
+  display: flex; align-items: center; gap: 1.2rem;
+  padding: 0.9rem 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  cursor: pointer; border-radius: 4px;
+  transition: background 0.2s;
+}
+.track-item:hover, .track-item.active { background: rgba(255,255,255,0.04); }
+.track-item.active .track-num { color: #4af; }
+.track-item.active .track-name { color: #fff; }
+
+.track-num {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  color: rgba(255,255,255,0.2); width: 1.5rem; text-align: right;
+}
+.track-name {
+  flex: 1; font-family: 'Syne', sans-serif; font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+}
+.track-dur {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ═══════════════════════════════════════════
+   SECTION 5: PHOTO / VIDEO GALLERY — Masonry Hover Reveal
+═══════════════════════════════════════════ */
+#s5 {
+  background: #050505;
+  padding: 6rem 4vw;
+  overflow: hidden;
+}
+
+.s5-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 3rem; padding: 0 2vw;
+}
+.s5-header h2 {
+  font-family: 'Bebas Neue'; font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: 0.05em; color: #fff; line-height: 1;
+}
+.s5-header p {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.25em; color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+}
+
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(3, 22vw);
+  gap: 4px;
+}
+
+.mcard {
+  position: relative; overflow: hidden;
+  background: #111;
+}
+
+.mcard svg { width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.6s cubic-bezier(0.23,1,0.32,1), filter 0.4s; }
+.mcard:hover svg { transform: scale(1.08); filter: brightness(0.4) saturate(1.2); }
+
+.mcard .reveal {
+  position: absolute; inset: 0; padding: 1.5rem;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 0.35s, transform 0.35s;
+}
+.mcard:hover .reveal { opacity: 1; transform: translateY(0); }
+
+.reveal .rtag {
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 0.4rem;
+}
+.reveal .rtitle {
+  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #fff;
+}
+
+/* Grid placement */
+.mcard:nth-child(1) { grid-column: 1/5; grid-row: 1/3; }
+.mcard:nth-child(2) { grid-column: 5/8; grid-row: 1/2; }
+.mcard:nth-child(3) { grid-column: 8/10; grid-row: 1/2; }
+.mcard:nth-child(4) { grid-column: 10/13; grid-row: 1/3; }
+.mcard:nth-child(5) { grid-column: 5/7; grid-row: 2/4; }
+.mcard:nth-child(6) { grid-column: 7/10; grid-row: 2/3; }
+.mcard:nth-child(7) { grid-column: 1/3; grid-row: 3/4; }
+.mcard:nth-child(8) { grid-column: 3/5; grid-row: 3/4; }
+.mcard:nth-child(9) { grid-column: 7/10; grid-row: 3/4; }
+.mcard:nth-child(10) { grid-column: 10/13; grid-row: 3/4; }
+
+/* ═══════════════════════════════════════════
+   SECTION 6: MERCH — Floating Product Cards
+═══════════════════════════════════════════ */
+#s6 {
+  background: #0d0d0d;
+  padding: 6rem 6vw;
+  overflow: hidden;
+  position: relative;
+}
+
+.s6-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-weight: 300; color: #fff;
+  margin-bottom: 0.5rem;
+}
+.s6-header .sub {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.3em; color: rgba(255,255,255,0.25);
+  text-transform: uppercase; margin-bottom: 3rem;
+}
+
+.merch-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+}
+
+.merch-card {
+  position: relative; cursor: pointer;
+}
+
+.merch-img {
+  aspect-ratio: 3/4; width: 100%; overflow: hidden;
+  background: #1a1a1a; position: relative;
+}
+
+.merch-img svg { width: 100%; height: 100%; display: block;
+  transition: transform 0.6s cubic-bezier(0.23,1,0.32,1); }
+.merch-card:hover .merch-img svg { transform: scale(1.05); }
+
+.merch-quick-add {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+  padding: 1rem; text-align: center;
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.3em; text-transform: uppercase; color: #fff;
+  transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.23,1,0.32,1);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.merch-card:hover .merch-quick-add { transform: translateY(0); }
+
+.merch-info { padding: 1rem 0 0.5rem; }
+.merch-info .mname {
+  font-family: 'Syne', sans-serif; font-size: 0.9rem;
+  color: rgba(255,255,255,0.8); margin-bottom: 0.3rem;
+}
+.merch-info .mprice {
+  font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  color: rgba(255,255,255,0.35); letter-spacing: 0.1em;
+}
+
+.merch-badge {
+  position: absolute; top: 1rem; left: 1rem;
+  font-family: 'DM Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 0.3rem 0.7rem; background: #fff; color: #000;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION 7: NEWSLETTER — Dramatic CTA
+═══════════════════════════════════════════ */
+#s7 {
+  position: relative; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: #000; overflow: hidden;
+}
+
+.cta-bg-rings {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.04);
+  animation: ringExpand 6s ease-in-out infinite;
+}
+.ring:nth-child(1) { width: 30vw; height: 30vw; animation-delay: 0s; }
+.ring:nth-child(2) { width: 55vw; height: 55vw; animation-delay: 1.5s; }
+.ring:nth-child(3) { width: 80vw; height: 80vw; animation-delay: 3s; }
+.ring:nth-child(4) { width: 105vw; height: 105vw; animation-delay: 4.5s; }
+
+@keyframes ringExpand {
+  0% { opacity: 0.6; transform: scale(0.97); }
+  50% { opacity: 0.15; transform: scale(1.02); }
+  100% { opacity: 0.6; transform: scale(0.97); }
+}
+
+.cta-content {
+  position: relative; z-index: 2;
+  text-align: center; max-width: 700px; padding: 0 3rem;
+}
+.cta-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.5em; color: rgba(255,255,255,0.3);
+  text-transform: uppercase; margin-bottom: 2rem;
+}
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 300; line-height: 1.1;
+  color: #fff; margin-bottom: 1rem;
+}
+.cta-title em { font-style: italic; color: rgba(255,255,255,0.5); }
+.cta-sub {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.15em; color: rgba(255,255,255,0.3);
+  margin-bottom: 3rem;
+}
+
+.email-form {
+  display: flex; gap: 0;
+  border: 1px solid rgba(255,255,255,0.2);
+  max-width: 480px; margin: 0 auto;
+  transition: border-color 0.3s;
+}
+.email-form:focus-within { border-color: rgba(255,255,255,0.6); }
+
+.email-input {
+  flex: 1; background: none; border: none; outline: none;
+  padding: 1rem 1.5rem;
+  font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 0.1em; color: #fff;
+}
+.email-input::placeholder { color: rgba(255,255,255,0.2); }
+
+.email-submit {
+  background: #fff; border: none; cursor: pointer;
+  padding: 0 1.8rem;
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: #000; transition: background 0.2s;
+  white-space: nowrap;
+}
+.email-submit:hover { background: rgba(255,255,255,0.85); }
+
+/* ═══════════════════════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════════════════════ */
+.reveal-up {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1),
+              transform 0.8s cubic-bezier(0.23,1,0.32,1);
+}
+.reveal-up.visible { opacity: 1; transform: translateY(0); }
+
+/* NAV LABELS */
+.section-nav {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  z-index: 200; display: flex; gap: 0.5rem;
+}
+.snav-btn {
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); background: none; border: none;
+  cursor: pointer; padding: 0.4rem 0.8rem;
+  transition: color 0.2s;
+}
+.snav-btn:hover { color: #fff; }
+.snav-btn.active { color: #fff; border-bottom: 1px solid #fff; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Section Nav -->
+<nav class="section-nav">
+  <button class="snav-btn active" onclick="scrollTo(0,0)">Hero</button>
+  <button class="snav-btn" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">Albums</button>
+  <button class="snav-btn" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})">Tour</button>
+  <button class="snav-btn" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})">Listen</button>
+  <button class="snav-btn" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})">Gallery</button>
+  <button class="snav-btn" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})">Merch</button>
+  <button class="snav-btn" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})">Join</button>
+</nav>
+
+<!-- ══════════════════════ S1: HERO ══════════════════════ -->
+<section id="s1">
+  <div class="mag-bg" id="magBg"></div>
+
+  <div class="mag-title" id="magTitle">
+    <span class="word" data-speed="0.04">ALWAYS</span>
+    <span class="word hollow" data-speed="-0.03">LOSING</span>
+    <span class="word" data-speed="0.06">LIGHT</span>
+  </div>
+
+  <p class="mag-subtitle">New Album · Out Now · Stream Everywhere</p>
+
+  <div class="ticker">
+    <div class="ticker-inner" id="tickerInner">
+      <span>Always Losing Light</span><span>·</span>
+      <span>New Album Out Now</span><span>·</span>
+      <span>World Tour 2025</span><span>·</span>
+      <span>Stream Everywhere</span><span>·</span>
+      <span>Always Losing Light</span><span>·</span>
+      <span>New Album Out Now</span><span>·</span>
+      <span>World Tour 2025</span><span>·</span>
+      <span>Stream Everywhere</span><span>·</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ S2: ALBUMS ══════════════════════ -->
+<section id="s2">
+  <div class="s2-header reveal-up">
+    <h2>Discography</h2>
+    <p>Drag to explore · 7 albums</p>
+  </div>
+
+  <div class="album-track" id="albumTrack">
+
+    <!-- Album 1 -->
+    <div class="album-card">
+      <div class="album-art">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="400" fill="#0c0508"/>
+          <defs><radialGradient id="ag1" cx="40%" cy="60%" r="55%"><stop offset="0%" stop-color="#ff3c00" stop-opacity="0.4"/><stop offset="100%" stop-color="#0c0508" stop-opacity="0"/></radialGradient></defs>
+          <rect width="400" height="400" fill="url(#ag1)"/>
+          <circle cx="200" cy="200" r="160" fill="none" stroke="rgba(255,60,0,0.15)" stroke-width="1"/>
+          <circle cx="200" cy="200" r="100" fill="none" stroke="rgba(255,60,0,0.1)" stroke-width="1"/>
+          <text x="200" y="230" text-anchor="middle" font-family="serif" font-style="italic" font-size="100" fill="rgba(255,60,0,0.35)">ALL</text>
+        </svg>
+        <svg class="album-vinyl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:10%;right:-15%;width:80%;height:80%;border-radius:50%;">
+          <circle cx="100" cy="100" r="100" fill="#111"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+          <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="8"/>
+          <circle cx="100" cy="100" r="40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="8"/>
+          <circle cx="100" cy="100" r="8" fill="#333"/>
+        </svg>
+      </div>
+      <div class="album-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="album-info">
+        <div class="num">01 — 2024</div>
+        <div class="name">Always Losing Light</div>
+        <div class="year">12 tracks</div>
+      </div>
+    </div>
+
+    <!-- Album 2 -->
+    <div class="album-card">
+      <div class="album-art">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="400" fill="#04080f"/>
+          <defs><linearGradient id="ag2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0044aa" stop-opacity="0.35"/><stop offset="100%" stop-color="#001133" stop-opacity="0"/></linearGradient></defs>
+          <rect width="400" height="400" fill="url(#ag2)"/>
+          <line x1="0" y1="200" x2="400" y2="200" stroke="rgba(100,160,255,0.1)" stroke-width="1"/>
+          <line x1="200" y1="0" x2="200" y2="400" stroke="rgba(100,160,255,0.1)" stroke-width="1"/>
+          <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(100,160,255,0.12)" stroke-width="0.5" stroke-dasharray="5 10"/>
+          <circle cx="200" cy="200" r="30" fill="rgba(100,160,255,0.2)" filter="url(#gb2)"/>
+          <defs><filter id="gb2"><feGaussianBlur stdDeviation="15"/></filter></defs>
+        </svg>
+        <svg class="album-vinyl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:10%;right:-15%;width:80%;height:80%;border-radius:50%;">
+          <circle cx="100" cy="100" r="100" fill="#0a0a14"/>
+          <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(100,160,255,0.08)" stroke-width="10"/>
+          <circle cx="100" cy="100" r="50" fill="none" stroke="rgba(100,160,255,0.06)" stroke-width="10"/>
+          <circle cx="100" cy="100" r="8" fill="#222"/>
+        </svg>
+      </div>
+      <div class="album-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="album-info">
+        <div class="num">02 — 2022</div>
+        <div class="name">Zenith</div>
+        <div class="year">10 tracks</div>
+      </div>
+    </div>
+
+    <!-- Album 3 -->
+    <div class="album-card">
+      <div class="album-art">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="400" fill="#080f08"/>
+          <defs><radialGradient id="ag3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#00cc44" stop-opacity="0.2"/><stop offset="100%" stop-color="#080f08" stop-opacity="0"/></radialGradient></defs>
+          <rect width="400" height="400" fill="url(#ag3)"/>
+          <path d="M0 350 Q100 200 200 280 Q300 360 400 220" fill="none" stroke="rgba(0,200,80,0.2)" stroke-width="1.5"/>
+          <path d="M0 300 Q100 150 200 230 Q300 310 400 170" fill="none" stroke="rgba(0,200,80,0.12)" stroke-width="1"/>
+          <path d="M0 400 Q200 100 400 300" fill="none" stroke="rgba(0,200,80,0.08)" stroke-width="1"/>
+        </svg>
+        <svg class="album-vinyl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:10%;right:-15%;width:80%;height:80%;border-radius:50%;">
+          <circle cx="100" cy="100" r="100" fill="#080f08"/>
+          <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(0,200,80,0.08)" stroke-width="10"/>
+          <circle cx="100" cy="100" r="8" fill="#1a2a1a"/>
+        </svg>
+      </div>
+      <div class="album-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="album-info">
+        <div class="num">03 — 2020</div>
+        <div class="name">Overgrowth</div>
+        <div class="year">9 tracks</div>
+      </div>
+    </div>
+
+    <!-- Album 4 -->
+    <div class="album-card">
+      <div class="album-art">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="400" fill="#0f0a04"/>
+          <defs><radialGradient id="ag4" cx="60%" cy="40%" r="55%"><stop offset="0%" stop-color="#cc8800" stop-opacity="0.3"/><stop offset="100%" stop-color="#0f0a04" stop-opacity="0"/></radialGradient></defs>
+          <rect width="400" height="400" fill="url(#ag4)"/>
+          <rect x="80" y="80" width="240" height="240" fill="none" stroke="rgba(200,140,0,0.15)" stroke-width="1" transform="rotate(15 200 200)"/>
+          <rect x="110" y="110" width="180" height="180" fill="none" stroke="rgba(200,140,0,0.1)" stroke-width="1" transform="rotate(30 200 200)"/>
+          <circle cx="200" cy="200" r="40" fill="rgba(200,140,0,0.15)" filter="url(#gb4)"/>
+          <defs><filter id="gb4"><feGaussianBlur stdDeviation="20"/></filter></defs>
+        </svg>
+        <svg class="album-vinyl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:10%;right:-15%;width:80%;height:80%;border-radius:50%;">
+          <circle cx="100" cy="100" r="100" fill="#100c05"/>
+          <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(200,140,0,0.07)" stroke-width="10"/>
+          <circle cx="100" cy="100" r="8" fill="#2a2010"/>
+        </svg>
+      </div>
+      <div class="album-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="album-info">
+        <div class="num">04 — 2018</div>
+        <div class="name">Infinite Minor</div>
+        <div class="year">11 tracks</div>
+      </div>
+    </div>
+
+    <!-- Album 5 -->
+    <div class="album-card">
+      <div class="album-art">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="400" fill="#0a0010"/>
+          <defs><radialGradient id="ag5" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#aa00ff" stop-opacity="0.2"/><stop offset="100%" stop-color="#0a0010" stop-opacity="0"/></radialGradient></defs>
+          <rect width="400" height="400" fill="url(#ag5)"/>
+          <polygon points="200,40 360,340 40,340" fill="none" stroke="rgba(180,0,255,0.15)" stroke-width="1"/>
+          <polygon points="200,90 320,310 80,310" fill="none" stroke="rgba(180,0,255,0.1)" stroke-width="1"/>
+          <circle cx="200" cy="230" r="35" fill="rgba(180,0,255,0.2)" filter="url(#gb5)"/>
+          <defs><filter id="gb5"><feGaussianBlur stdDeviation="18"/></filter></defs>
+        </svg>
+        <svg class="album-vinyl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:10%;right:-15%;width:80%;height:80%;border-radius:50%;">
+          <circle cx="100" cy="100" r="100" fill="#0a0012"/>
+          <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(180,0,255,0.07)" stroke-width="10"/>
+          <circle cx="100" cy="100" r="8" fill="#1a0030"/>
+        </svg>
+      </div>
+      <div class="album-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="album-info">
+        <div class="num">05 — 2016</div>
+        <div class="name">Faultlines</div>
+        <div class="year">10 tracks</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════ S3: TOUR ══════════════════════ -->
+<section id="s3">
+  <div class="s3-bg-text">TOUR</div>
+
+  <div class="s3-header reveal-up">
+    <h2>On The Road<br>2025</h2>
+    <div class="filter-group">
+      <button class="s3-filter active">All</button>
+      <button class="s3-filter">NA</button>
+      <button class="s3-filter">EU</button>
+      <button class="s3-filter">Asia</button>
+    </div>
+  </div>
+
+  <div class="tour-list reveal-up">
+    <div class="tour-item">
+      <div class="tour-date-block"><div class="day">14</div><div class="month">Mar 25</div></div>
+      <div class="tour-info"><div class="city">Los Angeles, CA</div><div class="venue">Kia Forum · Inglewood</div></div>
+      <div class="tour-status sold-out">Sold Out</div>
+      <a class="tour-ticket disabled" href="#">Tickets</a>
+    </div>
+    <div class="tour-item">
+      <div class="tour-date-block"><div class="day">19</div><div class="month">Mar 25</div></div>
+      <div class="tour-info"><div class="city">New York, NY</div><div class="venue">Madison Square Garden</div></div>
+      <div class="tour-status few-left">Few Left</div>
+      <a class="tour-ticket" href="#">Tickets</a>
+    </div>
+    <div class="tour-item">
+      <div class="tour-date-block"><div class="day">28</div><div class="month">Mar 25</div></div>
+      <div class="tour-info"><div class="city">Chicago, IL</div><div class="venue">United Center</div></div>
+      <div class="tour-status available">Available</div>
+      <a class="tour-ticket" href="#">Tickets</a>
+    </div>
+    <div class="tour-item">
+      <div class="tour-date-block"><div class="day">04</div><div class="month">Apr 25</div></div>
+      <div class="tour-info"><div class="city">London, UK</div><div class="venue">O2 Arena · Greenwich</div></div>
+      <div class="tour-status sold-out">Sold Out</div>
+      <a class="tour-ticket disabled" href="#">Tickets</a>
+    </div>
+    <div class="tour-item">
+      <div class="tour-date-block"><div class="day">09</div><div class="month">Apr 25</div></div>
+      <div class="tour-info"><div class="city">Paris, FR</div><div class="venue">Accor Arena · Bercy</div></div>
+      <div class="tour-status few-left">Few Left</div>
+      <a class="tour-ticket" href="#">Tickets</a>
+    </div>
+    <div class="tour-item">
+      <div class="tour-date-block"><div class="day">17</div><div class="month">Apr 25</div></div>
+      <div class="tour-info"><div class="city">Berlin, DE</div><div class="venue">Mercedes-Benz Arena</div></div>
+      <div class="tour-status available">Available</div>
+      <a class="tour-ticket" href="#">Tickets</a>
+    </div>
+    <div class="tour-item">
+      <div class="tour-date-block"><div class="day">25</div><div class="month">Apr 25</div></div>
+      <div class="tour-info"><div class="city">Tokyo, JP</div><div class="venue">Budokan · Chiyoda</div></div>
+      <div class="tour-status available">Available</div>
+      <a class="tour-ticket" href="#">Tickets</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ S4: PLAYER ══════════════════════ -->
+<section id="s4">
+  <div class="player-bg"></div>
+  <div class="player-wrap">
+
+    <div class="player-info">
+      <div class="now-playing-label">
+        <div class="pulse-dot"></div>
+        Now Playing
+      </div>
+      <div class="track-title" id="playerTitle">Ghost Signal</div>
+      <div class="track-album" id="playerAlbum">Always Losing Light · 2024</div>
+
+      <div class="waveform-container" id="waveformContainer">
+        <canvas class="waveform-canvas" id="waveform" width="600" height="80"></canvas>
+      </div>
+
+      <div class="player-controls">
+        <button class="ctrl-btn" onclick="prevTrack()">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+        </button>
+        <button class="play-btn-main" id="playBtn" onclick="togglePlay()">
+          <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="ctrl-btn" onclick="nextTrack()">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zm2.5-6 8.5 6V6z"/></svg>
+        </button>
+        <span class="track-time" id="trackTime">0:00 / 3:44</span>
+      </div>
+    </div>
+
+    <!-- Tracklist -->
+    <div class="tracklist">
+      <div class="tracklist-header">Always Losing Light — 12 Tracks</div>
+      <div id="tracklistItems"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════ S5: GALLERY ══════════════════════ -->
+<section id="s5">
+  <div class="s5-header">
+    <h2>Visuals</h2>
+    <p>Photos · Video · Press</p>
+  </div>
+
+  <div class="masonry-grid">
+    <!-- 10 cells with unique SVG art -->
+    <div class="mcard"><svg viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="600" fill="#0a0508"/><defs><radialGradient id="mg1" cx="40%" cy="30%" r="60%"><stop offset="0%" stop-color="#ff2200" stop-opacity="0.3"/><stop offset="100%" stop-color="#0a0508" stop-opacity="0"/></radialGradient></defs><rect width="400" height="600" fill="url(#mg1)"/><circle cx="160" cy="200" r="200" fill="none" stroke="rgba(255,34,0,0.08)" stroke-width="1"/><circle cx="160" cy="200" r="130" fill="none" stroke="rgba(255,34,0,0.06)" stroke-width="1"/><text x="200" y="340" text-anchor="middle" font-family="serif" font-size="160" fill="rgba(255,255,255,0.04)">A</text></svg><div class="reveal"><div class="rtag">Press · 2024</div><div class="rtitle">European Tour Opener</div></div></div>
+
+    <div class="mcard"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#030a10"/><defs><linearGradient id="mg2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#004488" stop-opacity="0.4"/><stop offset="100%" stop-color="#030a10" stop-opacity="0"/></linearGradient></defs><rect width="400" height="300" fill="url(#mg2)"/><line x1="0" y1="150" x2="400" y2="150" stroke="rgba(100,180,255,0.1)" stroke-width="1"/><circle cx="200" cy="150" r="80" fill="none" stroke="rgba(100,180,255,0.1)" stroke-dasharray="4 8"/></svg><div class="reveal"><div class="rtag">Studio · 2023</div><div class="rtitle">Recording Sessions</div></div></div>
+
+    <div class="mcard"><svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="300" fill="#0c0c0c"/><rect x="40" y="40" width="220" height="220" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" transform="rotate(20 150 150)"/><rect x="70" y="70" width="160" height="160" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1" transform="rotate(40 150 150)"/><circle cx="150" cy="150" r="30" fill="rgba(255,255,255,0.05)"/></svg><div class="reveal"><div class="rtag">Editorial</div><div class="rtitle">NYLON Cover Shoot</div></div></div>
+
+    <div class="mcard"><svg viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="600" fill="#080c06"/><defs><radialGradient id="mg4" cx="60%" cy="70%" r="55%"><stop offset="0%" stop-color="#00cc44" stop-opacity="0.2"/><stop offset="100%" stop-color="#080c06" stop-opacity="0"/></radialGradient></defs><rect width="400" height="600" fill="url(#mg4)"/><path d="M0 500 Q100 300 200 400 Q300 500 400 300" fill="none" stroke="rgba(0,200,80,0.15)" stroke-width="2"/><path d="M0 400 Q200 100 400 500" fill="none" stroke="rgba(0,200,80,0.08)" stroke-width="1"/></svg><div class="reveal"><div class="rtag">Live · Tokyo 2024</div><div class="rtitle">Budokan Night 2</div></div></div>
+
+    <div class="mcard"><svg viewBox="0 0 300 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="600" fill="#0e060a"/><defs><linearGradient id="mg5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#cc0066" stop-opacity="0.2"/><stop offset="100%" stop-color="#0e060a" stop-opacity="0"/></linearGradient></defs><rect width="300" height="600" fill="url(#mg5)"/><circle cx="150" cy="300" r="150" fill="none" stroke="rgba(200,0,100,0.1)" stroke-width="1"/><circle cx="150" cy="300" r="80" fill="rgba(200,0,100,0.08)" filter="url(#gm5)"/><defs><filter id="gm5"><feGaussianBlur stdDeviation="30"/></filter></defs></svg><div class="reveal"><div class="rtag">Portrait · 2024</div><div class="rtitle">Press Kit — Solo</div></div></div>
+
+    <div class="mcard"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#0a0a06"/><defs><radialGradient id="mg6" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ccaa00" stop-opacity="0.2"/><stop offset="100%" stop-color="#0a0a06" stop-opacity="0"/></radialGradient></defs><rect width="400" height="300" fill="url(#mg6)"/><line x1="0" y1="0" x2="400" y2="300" stroke="rgba(200,170,0,0.1)" stroke-width="1"/><line x1="400" y1="0" x2="0" y2="300" stroke="rgba(200,170,0,0.07)" stroke-width="1"/></svg><div class="reveal"><div class="rtag">BTS</div><div class="rtitle">Ghost Signal — Music Video</div></div></div>
+
+    <div class="mcard"><svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="300" fill="#070710"/><defs><radialGradient id="mg7" cx="30%" cy="40%" r="55%"><stop offset="0%" stop-color="#4400cc" stop-opacity="0.3"/><stop offset="100%" stop-color="#070710" stop-opacity="0"/></radialGradient></defs><rect width="300" height="300" fill="url(#mg7)"/><polygon points="150,20 280,260 20,260" fill="none" stroke="rgba(120,0,255,0.15)" stroke-width="1"/></svg><div class="reveal"><div class="rtag">Festival · Coachella</div><div class="rtitle">Weekend 1 Set</div></div></div>
+
+    <div class="mcard"><svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="300" fill="#0a0808"/><circle cx="150" cy="150" r="100" fill="none" stroke="rgba(255,100,50,0.1)" stroke-width="1"/><circle cx="150" cy="150" r="60" fill="rgba(255,80,30,0.08)" filter="url(#gm8)"/><defs><filter id="gm8"><feGaussianBlur stdDeviation="20"/></filter></defs><circle cx="150" cy="150" r="15" fill="rgba(255,80,30,0.3)"/></svg><div class="reveal"><div class="rtag">Portrait</div><div class="rtitle">NME Feature 2024</div></div></div>
+
+    <div class="mcard"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#060c0a"/><path d="M0 200 Q100 80 200 160 Q300 240 400 120" fill="none" stroke="rgba(0,180,120,0.2)" stroke-width="2"/><path d="M0 250 Q150 100 400 200" fill="none" stroke="rgba(0,180,120,0.1)" stroke-width="1"/></svg><div class="reveal"><div class="rtag">Live · London</div><div class="rtitle">O2 Arena Sold Out</div></div></div>
+
+    <div class="mcard"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#0c0608"/><defs><radialGradient id="mg10" cx="70%" cy="40%" r="50%"><stop offset="0%" stop-color="#cc0044" stop-opacity="0.25"/><stop offset="100%" stop-color="#0c0608" stop-opacity="0"/></radialGradient></defs><rect width="400" height="300" fill="url(#mg10)"/><line x1="200" y1="0" x2="200" y2="300" stroke="rgba(200,0,60,0.1)" stroke-width="1"/></svg><div class="reveal"><div class="rtag">Tour Diary</div><div class="rtitle">Off Stage, New York</div></div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════ S6: MERCH ══════════════════════ -->
+<section id="s6">
+  <div class="s6-header reveal-up">
+    <h2>The Store</h2>
+    <p class="sub">Limited Edition Drops</p>
+  </div>
+
+  <div class="merch-grid">
+    <div class="merch-card">
+      <div class="merch-img">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="400" fill="#111"/><path d="M80 120 L150 80 L220 120 L220 200 L150 240 L80 200 Z" fill="none" stroke="rgba(255,60,0,0.3)" stroke-width="1.5"/><text x="150" y="310" text-anchor="middle" font-family="serif" font-size="18" fill="rgba(255,255,255,0.5)" letter-spacing="8">ALL</text><text x="150" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.2)" letter-spacing="4">2024 TOUR</text></svg>
+        <div class="merch-quick-add">Add to Cart</div>
+      </div>
+      <div class="merch-badge">New</div>
+      <div class="merch-info"><div class="mname">Tour Tee — Hexagon</div><div class="mprice">$38.00</div></div>
+    </div>
+
+    <div class="merch-card">
+      <div class="merch-img">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="400" fill="#0a0a14"/><circle cx="150" cy="180" r="80" fill="none" stroke="rgba(100,160,255,0.2)" stroke-width="1"/><circle cx="150" cy="180" r="50" fill="none" stroke="rgba(100,160,255,0.12)" stroke-width="1"/><circle cx="150" cy="180" r="12" fill="rgba(100,160,255,0.3)"/><text x="150" y="330" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.2)" letter-spacing="4">ZENITH LP</text></svg>
+        <div class="merch-quick-add">Add to Cart</div>
+      </div>
+      <div class="merch-info"><div class="mname">Zenith — Vinyl LP</div><div class="mprice">$32.00</div></div>
+    </div>
+
+    <div class="merch-card">
+      <div class="merch-img">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="400" fill="#141008"/><rect x="60" y="100" width="180" height="180" fill="none" stroke="rgba(200,160,0,0.2)" stroke-width="1" transform="rotate(10 150 190)"/><rect x="80" y="120" width="140" height="140" fill="none" stroke="rgba(200,160,0,0.12)" stroke-width="1" transform="rotate(25 150 190)"/><text x="150" y="340" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.2)" letter-spacing="4">CREWNECK</text></svg>
+        <div class="merch-quick-add">Add to Cart</div>
+      </div>
+      <div class="merch-badge">Ltd</div>
+      <div class="merch-info"><div class="mname">Infinite Minor Crewneck</div><div class="mprice">$68.00</div></div>
+    </div>
+
+    <div class="merch-card">
+      <div class="merch-img">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="400" fill="#0e0010"/><polygon points="150,80 250,260 50,260" fill="none" stroke="rgba(180,0,255,0.2)" stroke-width="1.5"/><polygon points="150,110 230,245 70,245" fill="none" stroke="rgba(180,0,255,0.1)" stroke-width="1"/><circle cx="150" cy="220" r="20" fill="rgba(180,0,255,0.15)" filter="url(#gme4)"/><defs><filter id="gme4"><feGaussianBlur stdDeviation="10"/></filter></defs><text x="150" y="340" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(255,255,255,0.2)" letter-spacing="4">HOODIE</text></svg>
+        <div class="merch-quick-add">Sold Out</div>
+      </div>
+      <div class="merch-info"><div class="mname">Faultlines Hoodie</div><div class="mprice">$75.00</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ S7: CTA ══════════════════════ -->
+<section id="s7">
+  <div class="cta-bg-rings">
+    <div class="ring"></div><div class="ring"></div>
+    <div class="ring"></div><div class="ring"></div>
+  </div>
+
+  <div class="cta-content">
+    <p class="cta-eyebrow">The Inner Circle</p>
+    <h2 class="cta-title">Be First.<br><em>Always.</em></h2>
+    <p class="cta-sub">Tour announcements · Exclusive drops · Early access</p>
+    <div class="email-form">
+      <input class="email-input" type="email" placeholder="your@email.com" id="emailInput">
+      <button class="email-submit" onclick="handleSignup()">Join</button>
+    </div>
+  </div>
+</section>
+
+<script>
+// ── CURSOR ──
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) *.12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+// ── MAGNETIC HERO ──
+const magBg = document.getElementById('magBg');
+const s1 = document.getElementById('s1');
+const words = document.querySelectorAll('.mag-title .word');
+s1.addEventListener('mousemove', e => {
+  const r = s1.getBoundingClientRect();
+  const px = ((e.clientX - r.left) / r.width) * 100;
+  const py = ((e.clientY - r.top) / r.height) * 100;
+  magBg.style.background = `radial-gradient(ellipse 70% 60% at ${px}% ${py}%, rgba(255,60,0,0.14) 0%, transparent 65%)`;
+  words.forEach(w => {
+    const spd = parseFloat(w.dataset.speed);
+    const ox = (e.clientX - window.innerWidth/2) * spd;
+    const oy = (e.clientY - window.innerHeight/2) * spd;
+    w.style.transform = `translate(${ox}px, ${oy}px)`;
+  });
+});
+s1.addEventListener('mouseleave', () => {
+  words.forEach(w => w.style.transform = 'translate(0,0)');
+});
+
+// ── ALBUM TRACK DRAG SCROLL ──
+const track = document.getElementById('albumTrack');
+let isDown = false, startX, scrollLeft;
+track.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+track.addEventListener('mouseleave', () => isDown = false);
+track.addEventListener('mouseup', () => isDown = false);
+track.addEventListener('mousemove', e => {
+  if (!isDown) return; e.preventDefault();
+  const x = e.pageX - track.offsetLeft;
+  track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+});
+
+// ── WAVEFORM ──
+const canvas = document.getElementById('waveform');
+const ctx2 = canvas.getContext('2d');
+const bars = 80;
+const waveData = Array.from({length:bars}, (_,i) => 0.2 + Math.abs(Math.sin(i*0.4)) * 0.6 + Math.random()*0.2);
+let playhead = 0, playing = false, animId;
+
+function drawWave(progress) {
+  const W = canvas.width, H = canvas.height;
+  ctx2.clearRect(0,0,W,H);
+  const bw = W/bars - 1.5;
+  for (let i=0; i<bars; i++) {
+    const h = waveData[i] * H * 0.85;
+    const x = i * (W/bars);
+    const y = (H - h) / 2;
+    const played = i/bars < progress;
+    ctx2.fillStyle = played ? 'rgba(100,180,255,0.9)' : 'rgba(255,255,255,0.15)';
+    ctx2.fillRect(x, y, bw, h);
+  }
+}
+drawWave(0);
+
+canvas.addEventListener('click', e => {
+  const r = canvas.getBoundingClientRect();
+  playhead = (e.clientX - r.left) / r.width;
+  drawWave(playhead);
+});
+
+// ── TRACKLIST ──
+const tracks = [
+  {title:'Ghost Signal', dur:'3:44'},
+  {title:'Always Losing Light', dur:'4:12'},
+  {title:'Hollow', dur:'3:28'},
+  {title:'Ultraviolet', dur:'4:55'},
+  {title:'Meridian', dur:'3:15'},
+  {title:'Bloodlines', dur:'5:01'},
+  {title:'Third Light', dur:'3:38'},
+  {title:'Static Shore', dur:'4:22'},
+  {title:'Axis Drift', dur:'3:50'},
+  {title:'Crossfade', dur:'4:08'},
+  {title:'Resonance', dur:'3:55'},
+  {title:'End Signal', dur:'5:30'},
+];
+let currentTrack = 0;
+const tlEl = document.getElementById('tracklistItems');
+const playerTitle = document.getElementById('playerTitle');
+const playerAlbum = document.getElementById('playerAlbum');
+
+function renderTracklist() {
+  tlEl.innerHTML = tracks.map((t,i) => `
+    <div class="track-item ${i===currentTrack?'active':''}" onclick="selectTrack(${i})">
+      <span class="track-num">${String(i+1).padStart(2,'0')}</span>
+      <span class="track-name">${t.title}</span>
+      <span class="track-dur">${t.dur}</span>
+    </div>
+  `).join('');
+}
+renderTracklist();
+
+function selectTrack(i) {
+  currentTrack = i;
+  playerTitle.textContent = tracks[i].title;
+  playerAlbum.textContent = 'Always Losing Light · 2024';
+  playhead = 0; drawWave(0);
+  document.getElementById('trackTime').textContent = `0:00 / ${tracks[i].dur}`;
+  renderTracklist();
+}
+function prevTrack() { selectTrack((currentTrack-1+tracks.length)%tracks.length); }
+function nextTrack() { selectTrack((currentTrack+1)%tracks.length); }
+
+// fake progress animation
+function togglePlay() {
+  playing = !playing;
+  const btn = document.getElementById('playBtn');
+  const icon = document.getElementById('playIcon');
+  if (playing) {
+    icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+    btn.classList.add('playing');
+    animProgress();
+  } else {
+    icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    btn.classList.remove('playing');
+    cancelAnimationFrame(animId);
+  }
+}
+function animProgress() {
+  playhead = Math.min(playhead + 0.001, 1);
+  drawWave(playhead);
+  const t = tracks[currentTrack];
+  const [m,s] = t.dur.split(':').map(Number);
+  const totalSec = m*60+s;
+  const elapsed = Math.floor(playhead*totalSec);
+  const em = Math.floor(elapsed/60), es = elapsed%60;
+  document.getElementById('trackTime').textContent = `${em}:${String(es).padStart(2,'0')} / ${t.dur}`;
+  if (playhead < 1) animId = requestAnimationFrame(animProgress);
+  else nextTrack();
+}
+
+// ── TOUR FILTERS ──
+document.querySelectorAll('.s3-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.s3-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// ── EMAIL SIGNUP ──
+function handleSignup() {
+  const input = document.getElementById('emailInput');
+  if (input.value.includes('@')) {
+    input.value = '✓ You\'re on the list.';
+    input.style.color = 'rgba(255,255,255,0.6)';
+  }
+}
+
+// ── SCROLL REVEAL ──
+const revealEls = document.querySelectorAll('.reveal-up');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+revealEls.forEach(el => observer.observe(el));
+
+// ── ACTIVE NAV ──
+const sections = ['s1','s2','s3','s4','s5','s6','s7'];
+const navBtns = document.querySelectorAll('.snav-btn');
+const sObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const i = sections.indexOf(e.target.id);
+      navBtns.forEach((b,j) => b.classList.toggle('active', i===j));
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(id => { const el = document.getElementById(id); if(el) sObs.observe(el); });
+</script>
+</body>
+</html>
