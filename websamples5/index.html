@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stashbox Does Dylan | 10 Header Section Concepts</title>
+  <meta name="description" content="10 advanced HTML/CSS header section concepts for Stashbox Does Dylan. Built for GitHub Pages hosting." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#07141d;
+      --bg-2:#0d1e2b;
+      --panel:rgba(255,255,255,.06);
+      --panel-2:rgba(255,255,255,.10);
+      --text:#f4f7fb;
+      --muted:#afbcc8;
+      --line:rgba(255,255,255,.14);
+      --gold:#efc15c;
+      --green:#75c96d;
+      --red:#db504a;
+      --blue:#3fb3ff;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:26px;
+      --max:1280px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(63,179,255,.13), transparent 30%),
+        radial-gradient(circle at top right, rgba(239,193,92,.11), transparent 32%),
+        linear-gradient(180deg, #061018 0%, #091824 30%, #07131b 100%);
+      font-family:"Inter",system-ui,sans-serif;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{width:min(calc(100% - 40px), var(--max));margin:0 auto}
+    .tiny{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      border-radius:999px;
+      color:#dce6ef;
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      backdrop-filter:blur(12px);
+    }
+
+    .site-top{
+      position:sticky;
+      top:0;
+      z-index:999;
+      backdrop-filter:blur(18px);
+      background:rgba(5,12,18,.62);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .site-top .inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      padding:14px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .brand-badge{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      font-family:"Bebas Neue", sans-serif;
+      font-size:24px;
+      color:#041019;
+      background:linear-gradient(135deg, var(--gold), #fff0bf);
+      box-shadow:var(--shadow);
+    }
+
+    .top-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:flex-end;
+    }
+
+    .top-links a{
+      padding:10px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      font-size:13px;
+      color:#dbe6ef;
+      transition:.25s ease;
+    }
+
+    .top-links a:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.07);
+    }
+
+    .concept-nav{
+      padding:24px 0 8px;
+    }
+
+    .concept-nav-grid{
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:10px;
+    }
+
+    .concept-nav a{
+      padding:14px;
+      text-align:center;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      font-size:13px;
+      color:#d0dae4;
+      transition:.25s ease;
+    }
+
+    .concept-nav a:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.08);
+    }
+
+    .section{
+      position:relative;
+      min-height:100svh;
+      display:flex;
+      align-items:center;
+      padding:72px 0;
+      border-top:1px solid rgba(255,255,255,.06);
+      overflow:hidden;
+    }
+
+    .section .bg-ornament{
+      position:absolute;
+      inset:auto auto -120px -120px;
+      width:420px;
+      height:420px;
+      background:radial-gradient(circle, rgba(117,201,109,.16), transparent 64%);
+      pointer-events:none;
+      filter:blur(12px);
+    }
+
+    .section .grid-bg{
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size:80px 80px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.45), transparent 92%);
+      opacity:.18;
+      pointer-events:none;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:36px;
+      align-items:center;
+      position:relative;
+      z-index:1;
+    }
+
+    h1,h2,h3,p{margin:0}
+    .display{
+      font-size:clamp(54px, 9vw, 124px);
+      line-height:.9;
+      letter-spacing:-.04em;
+      font-weight:900;
+    }
+
+    .display .stroke{
+      color:transparent;
+      -webkit-text-stroke:1px rgba(255,255,255,.65);
+    }
+
+    .display-mini{
+      font-size:clamp(42px, 6vw, 84px);
+      line-height:.93;
+      letter-spacing:-.04em;
+      font-weight:900;
+    }
+
+    .lede{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.7;
+      max-width:760px;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:52px;
+      padding:0 20px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      font-weight:700;
+      transition:.25s ease;
+      cursor:pointer;
+    }
+
+    .btn.primary{
+      color:#08131b;
+      background:linear-gradient(135deg, #fff3ca, var(--gold));
+      border-color:transparent;
+      box-shadow:0 14px 34px rgba(239,193,92,.28);
+    }
+
+    .btn.ghost{
+      background:rgba(255,255,255,.05);
+      color:#eef4fa;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(18px);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .stat{
+      padding:18px;
+      border-radius:20px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .stat strong{
+      display:block;
+      font-size:26px;
+      line-height:1;
+      margin-bottom:6px;
+    }
+
+    .stat span{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .album-card{
+      position:relative;
+      padding:18px;
+    }
+
+    .album-card img{
+      width:100%;
+      border-radius:22px;
+      object-fit:cover;
+      box-shadow:var(--shadow);
+    }
+
+    .album-floating{
+      position:absolute;
+      right:-20px;
+      bottom:20px;
+      width:min(86%, 360px);
+      padding:18px;
+      border-radius:24px;
+      background:rgba(8,16,24,.82);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter:blur(16px);
+    }
+
+    .eyebrow{
+      color:#dbe6ef;
+      text-transform:uppercase;
+      font-size:12px;
+      letter-spacing:.16em;
+      margin-bottom:10px;
+    }
+
+    .list{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .list div{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      color:#d9e5ef;
+      font-size:14px;
+    }
+
+    .list div span:last-child{color:#8fd08b}
+
+    .concept-tag{
+      position:absolute;
+      left:24px;
+      top:24px;
+      z-index:5;
+      padding:10px 14px;
+      background:rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:999px;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      backdrop-filter:blur(10px);
+    }
+
+    .video-shell{
+      position:relative;
+      border-radius:30px;
+      overflow:hidden;
+      min-height:620px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .video-shell .poster{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transform:scale(1.08);
+      filter:brightness(.55) saturate(1.04);
+    }
+
+    .video-shell .shade{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 70% 35%, rgba(63,179,255,.18), transparent 28%),
+        linear-gradient(90deg, rgba(4,9,15,.86), rgba(4,9,15,.25) 55%, rgba(4,9,15,.75));
+    }
+
+    .video-shell .center{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      z-index:2;
+    }
+
+    .play-button{
+      width:104px;
+      height:104px;
+      border:none;
+      border-radius:50%;
+      cursor:pointer;
+      background:linear-gradient(135deg, #fff4d3, var(--gold));
+      color:#07131b;
+      font-size:28px;
+      box-shadow:0 18px 40px rgba(239,193,92,.28);
+    }
+
+    .video-caption{
+      position:absolute;
+      left:28px;
+      bottom:28px;
+      right:28px;
+      z-index:2;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      align-items:end;
+    }
+
+    .video-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .video-badges span{
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .merch-grid{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:18px;
+      margin-top:28px;
+    }
+
+    .merch-card{
+      padding:18px;
+      border-radius:24px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      transition:.28s ease;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .merch-card:hover{
+      transform:translateY(-6px);
+      background:rgba(255,255,255,.08);
+    }
+
+    .merch-card::before{
+      content:"";
+      position:absolute;
+      inset:auto -40px -80px auto;
+      width:140px;
+      height:140px;
+      background:radial-gradient(circle, rgba(239,193,92,.18), transparent 70%);
+      pointer-events:none;
+    }
+
+    .merch-label{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#bfd0df;
+    }
+
+    .merch-title{
+      font-size:22px;
+      font-weight:800;
+      margin-top:10px;
+    }
+
+    .merch-price{
+      margin-top:10px;
+      color:#8fe087;
+      font-weight:700;
+    }
+
+    .merch-copy{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .diagonal{
+      position:absolute;
+      top:-5%;
+      right:-10%;
+      width:54%;
+      height:110%;
+      transform:skewX(-18deg);
+      overflow:hidden;
+      border-left:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+    }
+
+    .diagonal img{
+      width:140%;
+      height:100%;
+      object-fit:cover;
+      transform:skewX(18deg) translateX(-12%);
+      filter:brightness(.8);
+    }
+
+    .stacked-cards{
+      position:relative;
+      min-height:560px;
+    }
+
+    .stacked-cards .card{
+      position:absolute;
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .stacked-cards .card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .stacked-cards .a{width:54%;height:74%;left:0;top:8%;transform:rotate(-6deg)}
+    .stacked-cards .b{width:42%;height:58%;right:6%;top:0;transform:rotate(8deg)}
+    .stacked-cards .c{width:44%;height:52%;right:0;bottom:2%;transform:rotate(-3deg)}
+
+    .magazine{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:34px;
+      align-items:center;
+    }
+
+    .mag-cover{
+      position:relative;
+      min-height:680px;
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+    }
+
+    .mag-cover img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:brightness(.78);
+    }
+
+    .mag-cover::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(4,10,16,.1), rgba(4,10,16,.66));
+    }
+
+    .mag-text{
+      position:absolute;
+      inset:auto 26px 26px 26px;
+      z-index:2;
+    }
+
+    .marquee-wrap{
+      overflow:hidden;
+      border-top:1px solid rgba(255,255,255,.08);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      margin:26px 0 24px;
+      padding:16px 0;
+    }
+
+    .marquee{
+      display:flex;
+      gap:34px;
+      white-space:nowrap;
+      animation:move 20s linear infinite;
+      font-size:15px;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:#d9e3ec;
+    }
+
+    @keyframes move{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+
+    .glass-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:26px;
+      align-items:stretch;
+    }
+
+    .glass-left{
+      padding:34px;
+      min-height:620px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .glass-left::before{
+      content:"";
+      position:absolute;
+      inset:-20% auto auto -20%;
+      width:340px;
+      height:340px;
+      background:radial-gradient(circle, rgba(63,179,255,.20), transparent 68%);
+      pointer-events:none;
+    }
+
+    .glass-image{
+      min-height:620px;
+      overflow:hidden;
+      border-radius:30px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+    }
+
+    .glass-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:brightness(.82);
+    }
+
+    .floating-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+    }
+
+    .floating-tags span{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:#d4e1ec;
+      font-size:13px;
+    }
+
+    .split-panels{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:28px;
+    }
+
+    .split-box{
+      position:relative;
+      min-height:440px;
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+      cursor:pointer;
+    }
+
+    .split-box img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .45s ease;
+    }
+
+    .split-box:hover img{
+      transform:scale(1.05);
+    }
+
+    .split-box .overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.66));
+      display:flex;
+      align-items:end;
+      padding:24px;
+    }
+
+    .shape-band{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.95;
+    }
+
+    .shape-band .shape{
+      position:absolute;
+      filter:drop-shadow(0 20px 30px rgba(0,0,0,.25));
+      opacity:.92;
+    }
+
+    .shape-band .s1{width:260px;left:3%;top:10%}
+    .shape-band .s2{width:200px;right:8%;top:16%}
+    .shape-band .s3{width:180px;left:14%;bottom:10%}
+
+    .gallery-strip{
+      display:grid;
+      grid-template-columns:1.1fr .75fr .75fr;
+      gap:16px;
+      margin-top:30px;
+    }
+
+    .gallery-strip .cell{
+      min-height:260px;
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:var(--shadow);
+    }
+
+    .gallery-strip .cell img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .ending-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:26px;
+      align-items:center;
+    }
+
+    .product-rail{
+      display:grid;
+      gap:14px;
+      margin-top:20px;
+    }
+
+    .product-pill{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      align-items:center;
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .product-pill small{
+      display:block;
+      color:#93a5b6;
+      margin-bottom:4px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:11px;
+    }
+
+    .product-pill strong{
+      display:block;
+      font-size:16px;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(2,6,10,.82);
+      backdrop-filter:blur(12px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:2000;
+    }
+
+    .modal.active{display:flex}
+
+    .modal-card{
+      width:min(1200px, 100%);
+      aspect-ratio:16/9;
+      position:relative;
+      border-radius:24px;
+      overflow:hidden;
+      background:#000;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:var(--shadow);
+    }
+
+    .modal-card iframe{
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .close-modal{
+      position:absolute;
+      top:14px;
+      right:14px;
+      z-index:3;
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.58);
+      color:#fff;
+      cursor:pointer;
+      font-size:22px;
+    }
+
+    .footer-note{
+      padding:26px 0 48px;
+      color:#9eb0c0;
+      font-size:14px;
+    }
+
+    @media (max-width: 1100px){
+      .concept-nav-grid{grid-template-columns:repeat(2, minmax(0,1fr))}
+      .hero-grid,
+      .magazine,
+      .glass-grid,
+      .ending-grid{
+        grid-template-columns:1fr;
+      }
+      .merch-grid{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+      .gallery-strip{
+        grid-template-columns:1fr;
+      }
+      .diagonal{
+        position:relative;
+        width:100%;
+        height:420px;
+        transform:none;
+        right:auto;
+        top:auto;
+        margin-top:26px;
+        border-left:none;
+      }
+      .diagonal img{
+        width:100%;
+        transform:none;
+      }
+      .video-shell{min-height:560px}
+      .stacked-cards{min-height:620px}
+    }
+
+    @media (max-width: 760px){
+      .top-links{display:none}
+      .section{min-height:auto;padding:72px 0 56px}
+      .display{font-size:clamp(44px, 14vw, 78px)}
+      .display-mini{font-size:clamp(34px, 11vw, 58px)}
+      .stats,
+      .merch-grid,
+      .split-panels{
+        grid-template-columns:1fr;
+      }
+      .concept-nav-grid{grid-template-columns:1fr}
+      .video-caption{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .stacked-cards .a{width:72%;height:56%}
+      .stacked-cards .b{width:52%;height:42%}
+      .stacked-cards .c{width:56%;height:38%}
+      .shape-band .s1{width:180px}
+      .shape-band .s2{width:140px}
+      .shape-band .s3{width:120px}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-top">
+    <div class="wrap inner">
+      <div class="brand">
+        <div class="brand-badge">S</div>
+        <div>Stashbox Does Dylan</div>
+      </div>
+      <nav class="top-links">
+        <a href="https://stashbox.com" target="_blank" rel="noopener">Stashbox.com</a>
+        <a href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">Shop Merch</a>
+        <a href="https://www.youtube.com/watch?v=N92iE0h6s0M&list=RDN92iE0h6s0M&start_radio=1&pp=ygUMc3Rhc2hib3hiYW5koAcB" target="_blank" rel="noopener">Watch Video</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap concept-nav">
+    <div class="concept-nav-grid">
+      <a href="#concept-1">1. Cinematic Split</a>
+      <a href="#concept-2">2. YouTube Poster Hero</a>
+      <a href="#concept-3">3. Merch Commerce Hero</a>
+      <a href="#concept-4">4. Diagonal Reveal</a>
+      <a href="#concept-5">5. Editorial Cover</a>
+      <a href="#concept-6">6. Kinetic Marquee</a>
+      <a href="#concept-7">7. Glass Grid</a>
+      <a href="#concept-8">8. Layered Collage</a>
+      <a href="#concept-9">9. Dual Panel Story</a>
+      <a href="#concept-10">10. Closing Conversion Hero</a>
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <section class="section" id="concept-1">
+    <div class="grid-bg"></div>
+    <div class="bg-ornament"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="tiny">Concept 1 • Cinematic split hero</div>
+        <h1 class="display" style="margin-top:18px;">
+          Blues.<br>
+          Reggae.<br>
+          <span class="stroke">Dylan.</span>
+        </h1>
+        <p class="lede">
+          This version feels premium, direct, and investor-ready. Large type. Strong art direction. Simple conversion path. It works well as a homepage hero for a major album launch, music campaign, or press-focused landing page.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="https://stashbox.com" target="_blank" rel="noopener">Enter Stashbox.com</a>
+          <a class="btn ghost" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">Browse Merch</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>10</strong><span>Header concepts on one page</span></div>
+          <div class="stat"><strong>16:9</strong><span>Video-first visual direction</span></div>
+          <div class="stat"><strong>GitHub</strong><span>Simple deploy setup</span></div>
+        </div>
+      </div>
+
+      <div class="panel album-card">
+        <div class="concept-tag">High-end homepage look</div>
+        <img src="https://stashbox.com/wp-content/uploads/2026/02/StashboxDoesDylan-AlbumCover-Stashbox.jpg" alt="Stashbox Does Dylan album art">
+        <div class="album-floating">
+          <div class="eyebrow">Suggested micro layout</div>
+          <h3 style="font-size:26px;line-height:1.05;">Stashbox Does Dylan</h3>
+          <div class="list">
+            <div><span>Core CTA</span><span>Listen Now</span></div>
+            <div><span>Secondary CTA</span><span>Shop Collection</span></div>
+            <div><span>Visual Style</span><span>Luxury music editorial</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="section" id="concept-2">
+    <div class="wrap">
+      <div class="video-shell">
+        <div class="concept-tag">Concept 2 • YouTube poster hero</div>
+        <img class="poster" src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-21.png" alt="Stashbox scene art">
+        <div class="shade"></div>
+
+        <div class="center">
+          <button class="play-button js-open-video" aria-label="Play Stashbox video">▶</button>
+        </div>
+
+        <div class="video-caption">
+          <div>
+            <div class="tiny">YouTube-driven header</div>
+            <h2 class="display-mini" style="margin-top:16px;max-width:760px;">
+              Let the hero feel like a film trailer.
+            </h2>
+            <p class="lede" style="max-width:680px;">
+              Use a rich poster image, then launch the YouTube video inside a full-screen lightbox. This gives you the visual drama of a video header while keeping the page fast and polished.
+            </p>
+          </div>
+          <div class="video-badges">
+            <span>Video-led</span>
+            <span>Launch ready</span>
+            <span>Music brand</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="section" id="concept-3">
+    <div class="grid-bg"></div>
+    <div class="wrap">
+      <div class="tiny">Concept 3 • Merch commerce hero</div>
+      <h2 class="display-mini" style="margin-top:18px;max-width:900px;">
+        Mix the album launch with the product rail.
+      </h2>
+      <p class="lede">
+        This direction turns the hero into a premium storefront. It is ideal when you want music, fashion, and visual identity to feel part of one branded campaign.
+      </p>
+
+      <div class="merch-grid">
+        <a class="merch-card" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">
+          <div class="merch-label">Featured merch</div>
+          <div class="merch-title">Flat Bill Snapback</div>
+          <div class="merch-price">$18.40 USD</div>
+          <div class="merch-copy">Clean hero card for premium headwear. Great for a top-row drop feature.</div>
+        </a>
+
+        <a class="merch-card" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">
+          <div class="merch-label">Featured merch</div>
+          <div class="merch-title">Psychedelic Ceramic Mug</div>
+          <div class="merch-price">$9.99 USD</div>
+          <div class="merch-copy">Works well as a lifestyle item inside an album merch ecosystem.</div>
+        </a>
+
+        <a class="merch-card" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">
+          <div class="merch-label">Featured merch</div>
+          <div class="merch-title">In Love With You Tee</div>
+          <div class="merch-price">From $14.99 USD</div>
+          <div class="merch-copy">A wearable music title card. Strong choice for a visual song-driven grid.</div>
+        </a>
+
+        <a class="merch-card" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">
+          <div class="merch-label">Featured merch</div>
+          <div class="merch-title">Crusty Gnome Pint Glass</div>
+          <div class="merch-price">$19.99 USD</div>
+          <div class="merch-copy">Adds personality to the mix. Good for a quirky product spotlight section.</div>
+        </a>
+      </div>
+
+      <div class="actions" style="margin-top:24px;">
+        <a class="btn primary" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">Shop The Collection</a>
+        <a class="btn ghost" href="https://stashbox.com" target="_blank" rel="noopener">View Music Site</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="section" id="concept-4">
+    <div class="wrap" style="position:relative;">
+      <div class="tiny">Concept 4 • Diagonal reveal</div>
+      <div style="position:relative;z-index:2;max-width:620px;padding:56px 0 80px;">
+        <h2 class="display-mini" style="margin-top:18px;">
+          A bold angular hero with motion built into the layout.
+        </h2>
+        <p class="lede">
+          This concept feels expensive and modern. The diagonal reveal gives the section a sense of movement even before animation is added.
+        </p>
+        <div class="actions">
+          <a class="btn primary js-open-video" href="javascript:void(0)">Play Feature Video</a>
+          <a class="btn ghost" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">Merch Drop</a>
+        </div>
+      </div>
+
+      <div class="diagonal panel">
+        <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-18.jpg" alt="Dynamic Stashbox visual">
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="section" id="concept-5">
+    <div class="shape-band">
+      <img class="shape s1" src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-17243ece-03c6-43b1-96c3-eda733d1fd6d.png" alt="">
+      <img class="shape s2" src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-19a88e29-41cb-4955-a112-94b67dc92052.png" alt="">
+      <img class="shape s3" src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-2d08b38f-483a-4c60-bba1-4555169fa650.png" alt="">
+    </div>
+
+    <div class="wrap magazine">
+      <div class="mag-cover">
+        <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-18.png" alt="Stashbox editorial imagery">
+        <div class="mag-text">
+          <div class="tiny">Concept 5 • Editorial cover</div>
+          <h3 class="display-mini" style="margin-top:14px;">Stashbox.<br>Press kit energy.</h3>
+        </div>
+      </div>
+
+      <div>
+        <div class="tiny">Luxury art direction</div>
+        <h2 class="display-mini" style="margin-top:18px;">
+          Build the header like a magazine cover.
+        </h2>
+        <p class="lede">
+          This is ideal for artist press pages, album microsites, and premium campaign intros. It feels curated, fashion-forward, and highly intentional.
+        </p>
+        <div class="list" style="margin-top:26px;">
+          <div><span>Best use</span><span>Artist brand page</span></div>
+          <div><span>Visual tone</span><span>Editorial and cinematic</span></div>
+          <div><span>Upgrade path</span><span>Animated text entrances</span></div>
+          <div><span>Commerce layer</span><span>Drop a merch CTA at bottom</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="section" id="concept-6">
+    <div class="wrap">
+      <div class="tiny">Concept 6 • Kinetic marquee hero</div>
+      <h2 class="display" style="margin-top:18px;max-width:1080px;">
+        Loud type. Fast motion. Strong rhythm.
+      </h2>
+      <div class="marquee-wrap">
+        <div class="marquee">
+          <span>Stashbox Does Dylan</span>
+          <span>Blues Reggae</span>
+          <span>Album Art</span>
+          <span>Music Video</span>
+          <span>Merch Drop</span>
+          <span>Stashbox.com</span>
+          <span>Stashbox Does Dylan</span>
+          <span>Blues Reggae</span>
+          <span>Album Art</span>
+          <span>Music Video</span>
+          <span>Merch Drop</span>
+          <span>Stashbox.com</span>
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <p class="lede">
+            This concept is strong for audiences who respond to energy and momentum. It feels more like a live campaign, tour promo, or social-first takeover page.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="https://stashbox.com" target="_blank" rel="noopener">Launch Site</a>
+            <a class="btn ghost js-open-video" href="javascript:void(0)">Watch Visual</a>
+          </div>
+        </div>
+
+        <div class="gallery-strip">
+          <div class="cell"><img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-6.png" alt="Stashbox visual asset"></div>
+          <div class="cell"><img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-9e4b024c-7edc-4115-a9aa-2c99fd1ce07d.png" alt="Graphic asset"></div>
+          <div class="cell"><img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-f291912b-a33f-4126-98d7-e27c85d24aff.png" alt="Graphic asset"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="section" id="concept-7">
+    <div class="wrap glass-grid">
+      <div class="panel glass-left">
+        <div>
+          <div class="tiny">Concept 7 • Glassmorphism grid</div>
+          <h2 class="display-mini" style="margin-top:18px;max-width:780px;">
+            A polished interface feel for a modern music brand.
+          </h2>
+          <p class="lede">
+            This style feels current, tech-forward, and high-end. It is a strong fit when you want Stashbox to present as both art brand and modern media company.
+          </p>
+          <div class="floating-tags">
+            <span>Premium UI</span>
+            <span>Campaign ready</span>
+            <span>Artist-first</span>
+            <span>Commerce-friendly</span>
+            <span>Easy to animate</span>
+          </div>
+        </div>
+
+        <div class="product-rail">
+          <div class="product-pill">
+            <div>
+              <small>Feature product</small>
+              <strong>I Am AI Reggae Tank</strong>
+            </div>
+            <div style="color:#8fe087;font-weight:800;">From $12.72</div>
+          </div>
+          <div class="product-pill">
+            <div>
+              <small>Feature product</small>
+              <strong>Five of Clubs Heavy Cotton Shirt</strong>
+            </div>
+            <div style="color:#8fe087;font-weight:800;">$23.99</div>
+          </div>
+          <div class="product-pill">
+            <div>
+              <small>Feature product</small>
+              <strong>Round Rug Rasta Design</strong>
+            </div>
+            <div style="color:#8fe087;font-weight:800;">$99.99</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-image">
+        <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-15.png" alt="Stashbox AI generated artwork">
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="section" id="concept-8">
+    <div class="grid-bg"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="tiny">Concept 8 • Layered collage</div>
+        <h2 class="display-mini" style="margin-top:18px;">
+          Build dimension with overlapping visual cards.
+        </h2>
+        <p class="lede">
+          This concept feels handcrafted and bespoke. It works especially well when you have multiple campaign images and want the page to feel rich before a user scrolls.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="https://stashbox.com" target="_blank" rel="noopener">Explore Album World</a>
+          <a class="btn ghost" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">Open Merch</a>
+        </div>
+      </div>
+
+      <div class="stacked-cards">
+        <div class="card a"><img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-21.png" alt="Layered Stashbox art"></div>
+        <div class="card b"><img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-f291912b-a33f-4126-98d7-e27c85d24aff.png" alt="Design shape"></div>
+        <div class="card c"><img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-9e4b024c-7edc-4115-a9aa-2c99fd1ce07d.png" alt="Design shape"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="section" id="concept-9">
+    <div class="wrap">
+      <div class="tiny">Concept 9 • Dual panel story hero</div>
+      <h2 class="display-mini" style="margin-top:18px;max-width:960px;">
+        Give visitors two visual paths in the first screen.
+      </h2>
+      <p class="lede">
+        One side can sell the music. The other can sell the lifestyle, merch, or campaign mood. This is strong when you want both storytelling and action above the fold.
+      </p>
+
+      <div class="split-panels">
+        <div class="split-box">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-18.jpg" alt="Performance mood art">
+          <div class="overlay">
+            <div>
+              <div class="eyebrow">Music-first path</div>
+              <h3 style="font-size:34px;line-height:1.02;">Enter the album experience</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="split-box">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-6.png" alt="Merch and visual identity art">
+          <div class="overlay">
+            <div>
+              <div class="eyebrow">Commerce-first path</div>
+              <h3 style="font-size:34px;line-height:1.02;">Shop the Stashbox visual world</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top:24px;">
+        <a class="btn primary js-open-video" href="javascript:void(0)">Play Featured Video</a>
+        <a class="btn ghost" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">Go To Collection</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="section" id="concept-10">
+    <div class="wrap ending-grid">
+      <div class="panel" style="padding:34px;">
+        <div class="tiny">Concept 10 • Closing conversion hero</div>
+        <h2 class="display-mini" style="margin-top:18px;">
+          End with one clean decision.
+        </h2>
+        <p class="lede">
+          This is the best final hero on the page. It turns the full design showcase into one polished call to action and sends visitors where you want them next.
+        </p>
+
+        <div class="product-rail">
+          <div class="product-pill">
+            <div>
+              <small>Music</small>
+              <strong>Stashbox.com</strong>
+            </div>
+            <div>Visit</div>
+          </div>
+          <div class="product-pill">
+            <div>
+              <small>Merch</small>
+              <strong>Stashbox Music Merch</strong>
+            </div>
+            <div>Shop</div>
+          </div>
+          <div class="product-pill">
+            <div>
+              <small>Video</small>
+              <strong>YouTube Featured Visual</strong>
+            </div>
+            <div>Play</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn primary" href="https://stashbox.com" target="_blank" rel="noopener">Go To Stashbox.com</a>
+          <a class="btn ghost" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">Open Merch Collection</a>
+        </div>
+      </div>
+
+      <div class="panel" style="padding:18px;">
+        <img src="https://stashbox.com/wp-content/uploads/2026/02/StashboxDoesDylan-AlbumCover-Stashbox.jpg" alt="Stashbox Does Dylan cover" style="border-radius:24px;">
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap footer-note">
+    Product examples above were inspired by items currently shown in the Stashbox Music Merch collection, including hats, mugs, shirts, tank tops, pint glasses, and rugs. :contentReference[oaicite:1]{index=1}
+  </div>
+
+  <div class="modal" id="videoModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close-modal" id="closeModal" aria-label="Close video">×</button>
+      <iframe
+        id="videoFrame"
+        src=""
+        title="Stashbox YouTube Video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <script>
+    const videoUrl = "https://www.youtube.com/embed/N92iE0h6s0M?autoplay=1&rel=0";
+    const modal = document.getElementById("videoModal");
+    const frame = document.getElementById("videoFrame");
+    const openers = document.querySelectorAll(".js-open-video");
+    const closeBtn = document.getElementById("closeModal");
+
+    function openVideo() {
+      frame.src = videoUrl;
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeVideo() {
+      frame.src = "";
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    openers.forEach(btn => {
+      btn.addEventListener("click", openVideo);
+    });
+
+    closeBtn.addEventListener("click", closeVideo);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeVideo();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeVideo();
+    });
+  </script>
+</body>
+</html>
