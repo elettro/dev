@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stashbox Does Dylan | Premium Header Concepts</title>
+  <meta name="description" content="A premium HTML/CSS showcase page featuring four advanced Stashbox Does Dylan section concepts for GitHub hosting." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#071019;
+      --bg-2:#0b1621;
+      --panel:rgba(255,255,255,.06);
+      --panel-strong:rgba(255,255,255,.09);
+      --line:rgba(255,255,255,.12);
+      --line-soft:rgba(255,255,255,.08);
+      --text:#f5f7fb;
+      --muted:#aab7c6;
+      --gold:#efc15d;
+      --gold-2:#ffd98b;
+      --blue:#6ab6ff;
+      --green:#8fd77a;
+      --shadow:0 24px 80px rgba(0,0,0,.34);
+      --radius:28px;
+      --max:1320px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(106,182,255,.12), transparent 26%),
+        radial-gradient(circle at top right, rgba(239,193,93,.10), transparent 26%),
+        linear-gradient(180deg, #050d14 0%, #08131d 34%, #09121a 100%);
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+
+    .wrap{
+      width:min(calc(100% - 40px), var(--max));
+      margin:0 auto;
+    }
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:999;
+      backdrop-filter:blur(18px);
+      background:rgba(5,10,16,.72);
+      border-bottom:1px solid var(--line-soft);
+    }
+
+    .site-header .inner{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:14px;
+    }
+
+    .brand-mark{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      font-size:18px;
+      font-weight:900;
+      color:#08121a;
+      background:linear-gradient(135deg,var(--gold-2),var(--gold));
+      box-shadow:0 10px 26px rgba(239,193,93,.28);
+    }
+
+    .nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:flex-end;
+    }
+
+    .nav a{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:#d9e4ee;
+      font-size:13px;
+      transition:.25s ease;
+    }
+
+    .nav a:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.07);
+    }
+
+    .hero-intro{
+      padding:32px 0 20px;
+    }
+
+    .hero-intro-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .intro-card,
+    .quick-nav{
+      border:1px solid var(--line-soft);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      backdrop-filter:blur(16px);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+    }
+
+    .intro-card{
+      padding:28px;
+    }
+
+    .quick-nav{
+      padding:18px;
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+      align-content:start;
+    }
+
+    .quick-nav a{
+      min-height:78px;
+      padding:16px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      transition:.25s ease;
+    }
+
+    .quick-nav a:hover{
+      transform:translateY(-3px);
+      background:rgba(255,255,255,.08);
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:#d9e2ec;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .intro-title{
+      margin:18px 0 0;
+      font-size:clamp(40px,6vw,78px);
+      line-height:.92;
+      letter-spacing:-.05em;
+      font-weight:900;
+      max-width:860px;
+    }
+
+    .intro-title em{
+      font-style:normal;
+      font-family:"Cormorant Garamond", serif;
+      font-weight:600;
+      color:var(--gold-2);
+      letter-spacing:0;
+    }
+
+    .intro-copy{
+      margin-top:16px;
+      max-width:880px;
+      font-size:18px;
+      line-height:1.72;
+      color:var(--muted);
+    }
+
+    .section{
+      position:relative;
+      padding:42px 0 34px;
+    }
+
+    .section + .section{
+      padding-top:52px;
+    }
+
+    .concept-shell{
+      position:relative;
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid var(--line-soft);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)),
+        linear-gradient(180deg, #0a141e, #09131b);
+      box-shadow:var(--shadow);
+    }
+
+    .concept-shell::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size:72px 72px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.45), transparent 90%);
+      opacity:.2;
+      pointer-events:none;
+    }
+
+    .concept-label{
+      position:absolute;
+      top:24px;
+      left:24px;
+      z-index:6;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(0,0,0,.36);
+      backdrop-filter:blur(10px);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+
+    .btn-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:28px;
+    }
+
+    .btn{
+      min-height:54px;
+      padding:0 22px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.01em;
+      transition:.25s ease;
+      border:1px solid var(--line);
+      cursor:pointer;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{
+      background:linear-gradient(135deg,var(--gold-2),var(--gold));
+      color:#08121b;
+      border-color:transparent;
+      box-shadow:0 16px 36px rgba(239,193,93,.24);
+    }
+
+    .btn.ghost{
+      background:rgba(255,255,255,.04);
+      color:#eef4fa;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .stat{
+      padding:18px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+    }
+
+    .stat strong{
+      display:block;
+      font-size:26px;
+      line-height:1;
+      margin-bottom:8px;
+    }
+
+    .stat span{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    /* CONCEPT 1 */
+    .c1{
+      min-height:860px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      align-items:center;
+      gap:30px;
+      padding:84px 36px 36px;
+      position:relative;
+    }
+
+    .c1::after{
+      content:"";
+      position:absolute;
+      width:520px;
+      height:520px;
+      border-radius:50%;
+      right:-140px;
+      top:-120px;
+      background:radial-gradient(circle, rgba(106,182,255,.14), transparent 68%);
+      pointer-events:none;
+    }
+
+    .c1-content{
+      position:relative;
+      z-index:2;
+      padding:10px 0 10px 6px;
+    }
+
+    .mega{
+      margin:18px 0 0;
+      font-size:clamp(58px,8vw,122px);
+      line-height:.88;
+      letter-spacing:-.06em;
+      font-weight:900;
+      max-width:720px;
+    }
+
+    .mega .stroke{
+      color:transparent;
+      -webkit-text-stroke:1px rgba(255,255,255,.68);
+    }
+
+    .c1-copy{
+      margin-top:18px;
+      font-size:18px;
+      line-height:1.75;
+      max-width:620px;
+      color:var(--muted);
+    }
+
+    .c1-visual{
+      position:relative;
+      min-height:720px;
+      display:grid;
+      place-items:center;
+    }
+
+    .c1-main-card{
+      width:min(100%, 620px);
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:var(--shadow);
+      transform:rotate(-2deg);
+      position:relative;
+      z-index:2;
+    }
+
+    .c1-main-card img{
+      width:100%;
+      aspect-ratio:4/5;
+      object-fit:cover;
+    }
+
+    .c1-floating{
+      position:absolute;
+      padding:18px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(7,15,22,.78);
+      backdrop-filter:blur(16px);
+      box-shadow:var(--shadow);
+      z-index:3;
+    }
+
+    .c1-floating.top{
+      top:70px;
+      right:10px;
+      width:260px;
+    }
+
+    .c1-floating.bottom{
+      left:10px;
+      bottom:70px;
+      width:290px;
+    }
+
+    .mini-title{
+      margin:10px 0 0;
+      font-size:22px;
+      font-weight:800;
+      line-height:1.08;
+    }
+
+    .mini-copy{
+      margin-top:10px;
+      font-size:14px;
+      line-height:1.65;
+      color:var(--muted);
+    }
+
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .pill-list span{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      font-size:12px;
+      color:#d6e2ec;
+    }
+
+    /* CONCEPT 3 */
+    .c3{
+      padding:90px 34px 34px;
+    }
+
+    .c3-head{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:26px;
+      align-items:end;
+    }
+
+    .section-title{
+      margin:18px 0 0;
+      font-size:clamp(40px,5vw,76px);
+      line-height:.95;
+      letter-spacing:-.05em;
+      font-weight:900;
+      max-width:920px;
+    }
+
+    .section-copy{
+      margin-top:16px;
+      max-width:760px;
+      font-size:18px;
+      line-height:1.72;
+      color:var(--muted);
+    }
+
+    .c3-side{
+      padding:24px;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+    }
+
+    .c3-grid{
+      margin-top:30px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr .9fr;
+      gap:18px;
+    }
+
+    .feature-merch{
+      position:relative;
+      min-height:560px;
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(239,193,93,.08), rgba(255,255,255,.03)),
+        rgba(255,255,255,.03);
+      padding:26px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .feature-merch::before{
+      content:"";
+      position:absolute;
+      width:260px;
+      height:260px;
+      right:-60px;
+      top:-60px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(239,193,93,.16), transparent 72%);
+      pointer-events:none;
+    }
+
+    .feature-merch img{
+      width:100%;
+      max-width:340px;
+      margin:24px auto 12px;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .product-card{
+      min-height:560px;
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:.26s ease;
+    }
+
+    .product-card:hover{
+      transform:translateY(-5px);
+      background:rgba(255,255,255,.07);
+    }
+
+    .product-card .media{
+      padding:20px;
+      min-height:280px;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(circle at top, rgba(106,182,255,.08), transparent 48%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+
+    .product-card .media img{
+      max-width:85%;
+      max-height:220px;
+      border-radius:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .product-card .body{
+      padding:22px;
+    }
+
+    .product-label{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#c3d2e0;
+    }
+
+    .product-name{
+      margin-top:10px;
+      font-size:26px;
+      line-height:1.06;
+      font-weight:800;
+    }
+
+    .product-price{
+      margin-top:12px;
+      color:var(--green);
+      font-size:18px;
+      font-weight:800;
+    }
+
+    .product-desc{
+      margin-top:12px;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:15px;
+    }
+
+    /* CONCEPT 5 */
+    .c5{
+      min-height:900px;
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:0;
+      position:relative;
+    }
+
+    .editorial-cover{
+      position:relative;
+      min-height:900px;
+      overflow:hidden;
+      border-right:1px solid var(--line-soft);
+    }
+
+    .editorial-cover img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:brightness(.76) saturate(1.03);
+    }
+
+    .editorial-cover::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(4,10,16,.04), rgba(4,10,16,.72)),
+        radial-gradient(circle at 20% 20%, rgba(239,193,93,.12), transparent 28%);
+    }
+
+    .cover-text{
+      position:absolute;
+      left:28px;
+      right:28px;
+      bottom:28px;
+      z-index:3;
+    }
+
+    .cover-kicker{
+      font-family:"Cormorant Garamond", serif;
+      font-size:46px;
+      line-height:.95;
+      color:#fff1cb;
+    }
+
+    .editorial-body{
+      padding:92px 48px 48px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .editorial-body::before{
+      content:"";
+      position:absolute;
+      width:380px;
+      height:380px;
+      right:-120px;
+      bottom:-120px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(106,182,255,.12), transparent 72%);
+      pointer-events:none;
+    }
+
+    .editorial-quote{
+      margin-top:28px;
+      padding:26px;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      font-size:22px;
+      line-height:1.45;
+      color:#eaf2f9;
+      font-family:"Cormorant Garamond", serif;
+    }
+
+    .editorial-meta{
+      margin-top:24px;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .meta-box{
+      padding:18px;
+      border-radius:20px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+    }
+
+    .meta-box strong{
+      display:block;
+      font-size:18px;
+      margin-bottom:8px;
+    }
+
+    .meta-box span{
+      font-size:14px;
+      line-height:1.6;
+      color:var(--muted);
+    }
+
+    /* CONCEPT 10 */
+    .c10{
+      padding:92px 34px 34px;
+    }
+
+    .c10-grid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .cta-panel{
+      padding:34px;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(circle at top right, rgba(239,193,93,.10), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      min-height:620px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .cta-list{
+      display:grid;
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .cta-item{
+      padding:18px 18px;
+      border-radius:20px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+    }
+
+    .cta-item small{
+      display:block;
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#9fb2c4;
+      margin-bottom:6px;
+    }
+
+    .cta-item strong{
+      font-size:17px;
+      display:block;
+    }
+
+    .cta-right{
+      display:grid;
+      grid-template-rows:1fr auto;
+      gap:18px;
+    }
+
+    .art-card,
+    .video-card{
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow);
+    }
+
+    .art-card{
+      min-height:420px;
+      position:relative;
+    }
+
+    .art-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .art-card .overlay{
+      position:absolute;
+      inset:auto 22px 22px 22px;
+      padding:18px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(6,12,18,.72);
+      backdrop-filter:blur(12px);
+    }
+
+    .video-card{
+      padding:18px;
+      display:grid;
+      grid-template-columns:220px 1fr;
+      gap:18px;
+      align-items:center;
+    }
+
+    .video-thumb{
+      border-radius:20px;
+      overflow:hidden;
+      position:relative;
+      min-height:160px;
+      cursor:pointer;
+    }
+
+    .video-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:brightness(.82);
+    }
+
+    .play-ring{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+    }
+
+    .play-ring span{
+      width:74px;
+      height:74px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--gold-2),var(--gold));
+      color:#07111a;
+      font-weight:900;
+      font-size:20px;
+      box-shadow:0 14px 28px rgba(239,193,93,.28);
+    }
+
+    .footer-note{
+      padding:10px 0 44px;
+      color:#9fb0c0;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(2,6,10,.82);
+      backdrop-filter:blur(10px);
+      z-index:2000;
+    }
+
+    .modal.active{display:flex}
+
+    .modal-card{
+      position:relative;
+      width:min(1200px,100%);
+      aspect-ratio:16/9;
+      border-radius:24px;
+      overflow:hidden;
+      background:#000;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:var(--shadow);
+    }
+
+    .modal-card iframe{
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .modal-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.56);
+      color:#fff;
+      font-size:22px;
+      cursor:pointer;
+      z-index:3;
+    }
+
+    @media (max-width: 1120px){
+      .hero-intro-grid,
+      .c1,
+      .c3-head,
+      .c3-grid,
+      .c5,
+      .c10-grid,
+      .video-card{
+        grid-template-columns:1fr;
+      }
+
+      .editorial-cover{
+        min-height:520px;
+        border-right:none;
+        border-bottom:1px solid var(--line-soft);
+      }
+
+      .c1-visual{
+        min-height:620px;
+      }
+
+      .quick-nav{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 760px){
+      .nav{display:none}
+      .quick-nav{grid-template-columns:1fr}
+      .stats,
+      .editorial-meta{
+        grid-template-columns:1fr;
+      }
+
+      .c1,
+      .c3,
+      .c10{
+        padding-left:20px;
+        padding-right:20px;
+      }
+
+      .editorial-body{
+        padding:82px 22px 28px;
+      }
+
+      .video-card{
+        gap:14px;
+      }
+
+      .c1-floating.top,
+      .c1-floating.bottom{
+        position:relative;
+        width:100%;
+        inset:auto;
+        margin-top:16px;
+      }
+
+      .c1-visual{
+        display:block;
+        min-height:auto;
+      }
+
+      .c1-main-card{
+        transform:none;
+      }
+
+      .feature-merch,
+      .product-card,
+      .cta-panel{
+        min-height:auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap inner">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>Stashbox Does Dylan</div>
+      </div>
+      <nav class="nav">
+        <a href="#concept-1">Concept 1</a>
+        <a href="#concept-3">Concept 3</a>
+        <a href="#concept-5">Concept 5</a>
+        <a href="#concept-10">Concept 10</a>
+        <a href="https://stashbox.com" target="_blank" rel="noopener">Stashbox.com</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-intro">
+    <div class="wrap hero-intro-grid">
+      <div class="intro-card">
+        <div class="eyebrow">Focused showcase page</div>
+        <h1 class="intro-title">Four stronger directions for <em>Stashbox Does Dylan</em></h1>
+        <p class="intro-copy">
+          This page keeps only the four concepts you chose. Each section now feels more unified, more premium, and more suitable for a polished GitHub-hosted presentation page. The goal is clean visual drama, stronger structure, and clearer conversion paths.
+        </p>
+      </div>
+
+      <div class="quick-nav">
+        <a href="#concept-1">
+          <strong>1. Cinematic hero</strong>
+          <span style="color:var(--muted);margin-top:6px;font-size:14px;">Large album-first entrance</span>
+        </a>
+        <a href="#concept-3">
+          <strong>3. Merch commerce</strong>
+          <span style="color:var(--muted);margin-top:6px;font-size:14px;">Music meets branded product drop</span>
+        </a>
+        <a href="#concept-5">
+          <strong>5. Editorial cover</strong>
+          <span style="color:var(--muted);margin-top:6px;font-size:14px;">Press-quality art direction</span>
+        </a>
+        <a href="#concept-10">
+          <strong>10. Final CTA</strong>
+          <span style="color:var(--muted);margin-top:6px;font-size:14px;">One strong close and action path</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPT 1 -->
+  <section class="section" id="concept-1">
+    <div class="wrap">
+      <div class="concept-shell c1">
+        <div class="concept-label">Concept 1 • Advanced cinematic hero</div>
+
+        <div class="c1-content">
+          <div class="eyebrow">Album launch entrance</div>
+          <h2 class="mega">
+            Dylan<br />
+            reimagined<br />
+            in <span class="stroke">Stashbox form</span>
+          </h2>
+          <p class="c1-copy">
+            This is the strongest first-screen entrance of the set. Big typography. Bold visual hierarchy. Premium floating content. It feels like a serious album campaign page with enough polish to impress a client, partner, investor, or audience.
+          </p>
+
+          <div class="btn-row">
+            <a class="btn primary" href="https://stashbox.com" target="_blank" rel="noopener">Enter Stashbox.com</a>
+            <a class="btn ghost" href="#concept-3">See Merch Direction</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>Hero-first</strong>
+              <span>Built to make the album feel important in the first three seconds.</span>
+            </div>
+            <div class="stat">
+              <strong>Premium UI</strong>
+              <span>Glass cards and layered framing make it feel custom and expensive.</span>
+            </div>
+            <div class="stat">
+              <strong>Conversion-ready</strong>
+              <span>Simple path to listen, shop, or continue deeper into the page.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="c1-visual">
+          <div class="c1-main-card">
+            <img src="https://stashbox.com/wp-content/uploads/2026/02/StashboxDoesDylan-AlbumCover-Stashbox.jpg" alt="Stashbox Does Dylan album cover" />
+          </div>
+
+          <div class="c1-floating top">
+            <div class="eyebrow">Creative angle</div>
+            <div class="mini-title">Strong enough for a landing page or a pitch page</div>
+            <div class="mini-copy">
+              You can easily add subtle motion here later with hover parallax, animated entry timing, or scroll reveal.
+            </div>
+          </div>
+
+          <div class="c1-floating bottom">
+            <div class="eyebrow">Suggested content tags</div>
+            <div class="pill-list">
+              <span>Album Launch</span>
+              <span>Visual Campaign</span>
+              <span>Luxury Music Site</span>
+              <span>Press Ready</span>
+              <span>GitHub Friendly</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPT 3 -->
+  <section class="section" id="concept-3">
+    <div class="wrap">
+      <div class="concept-shell c3">
+        <div class="concept-label">Concept 3 • Premium merch-commerce hero</div>
+
+        <div class="c3-head">
+          <div>
+            <div class="eyebrow">Music plus product ecosystem</div>
+            <h2 class="section-title">Build the album page like a high-end merch campaign</h2>
+            <p class="section-copy">
+              This direction makes Stashbox feel bigger than a band page. It turns the experience into a branded world where music, visuals, and products all support each other. It works very well if you want to sell identity, not only songs.
+            </p>
+          </div>
+
+          <div class="c3-side">
+            <div class="eyebrow">Why this works</div>
+            <p class="section-copy" style="font-size:16px;max-width:none;margin-top:12px;">
+              The main feature card acts like a flagship drop. The two support cards feel like premium product highlights. You can later swap these for real Shopify pulls or custom merch imagery.
+            </p>
+          </div>
+        </div>
+
+        <div class="c3-grid">
+          <div class="feature-merch">
+            <div>
+              <div class="product-label">Feature drop</div>
+              <div class="product-name">Stashbox Music Merch Collection</div>
+              <div class="product-price">Music-led apparel and lifestyle products</div>
+              <div class="product-desc">
+                Use this large card for your strongest branded product group, a limited drop, or a song-inspired merch capsule tied directly to the album launch.
+              </div>
+            </div>
+
+            <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-6.png" alt="Merch campaign artwork" />
+
+            <div class="btn-row" style="margin-top:0;">
+              <a class="btn primary" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">Shop Stashbox.ai</a>
+            </div>
+          </div>
+
+          <a class="product-card" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">
+            <div class="media">
+              <img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-9e4b024c-7edc-4115-a9aa-2c99fd1ce07d.png" alt="Premium product visual placeholder" />
+            </div>
+            <div class="body">
+              <div class="product-label">Featured product</div>
+              <div class="product-name">Hero apparel slot</div>
+              <div class="product-price">Use for tees, tanks, or hats</div>
+              <div class="product-desc">
+                This is a clean, premium product card style you can reuse across a collection page or homepage strip.
+              </div>
+            </div>
+          </a>
+
+          <a class="product-card" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">
+            <div class="media">
+              <img src="https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-f291912b-a33f-4126-98d7-e27c85d24aff.png" alt="Product visual placeholder" />
+            </div>
+            <div class="body">
+              <div class="product-label">Featured product</div>
+              <div class="product-name">Lifestyle object slot</div>
+              <div class="product-price">Use for mugs, glassware, rugs, or collectibles</div>
+              <div class="product-desc">
+                This adds variety and helps the merch range feel broader and more mature without cluttering the layout.
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPT 5 -->
+  <section class="section" id="concept-5">
+    <div class="wrap">
+      <div class="concept-shell c5">
+        <div class="concept-label">Concept 5 • Refined editorial cover hero</div>
+
+        <div class="editorial-cover">
+          <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-18.png" alt="Editorial Stashbox visual" />
+          <div class="cover-text">
+            <div class="eyebrow">Editorial direction</div>
+            <div class="cover-kicker">Music. Art. Identity.</div>
+          </div>
+        </div>
+
+        <div class="editorial-body">
+          <div class="eyebrow">Press kit aesthetic</div>
+          <h2 class="section-title">A magazine-quality section for brand depth and visual authority</h2>
+          <p class="section-copy">
+            This is the strongest choice when you want Stashbox to feel highly curated. It presents the project like an artist feature, a luxury campaign, or a press spread rather than a typical band homepage.
+          </p>
+
+          <div class="editorial-quote">
+            “This section gives the project a level of seriousness that makes the music feel framed, elevated, and intentionally presented.”
+          </div>
+
+          <div class="editorial-meta">
+            <div class="meta-box">
+              <strong>Best use case</strong>
+              <span>Artist profile pages, album microsites, electronic press kits, campaign intros, and investor-facing pages that need more cultural weight.</span>
+            </div>
+            <div class="meta-box">
+              <strong>Best upgrade later</strong>
+              <span>Add type animation, subtle zoom motion, and alternating pull quotes. It would still remain lightweight and GitHub-friendly.</span>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <a class="btn primary" href="https://stashbox.com" target="_blank" rel="noopener">Visit Stashbox.com</a>
+            <a class="btn ghost" href="#concept-10">Go To Final CTA</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPT 10 -->
+  <section class="section" id="concept-10">
+    <div class="wrap">
+      <div class="concept-shell c10">
+        <div class="concept-label">Concept 10 • Strong final conversion close</div>
+
+        <div class="c10-grid">
+          <div class="cta-panel">
+            <div>
+              <div class="eyebrow">Final action section</div>
+              <h2 class="section-title">End the page with one clear next move</h2>
+              <p class="section-copy">
+                This section is designed to close the experience properly. It gives the user a clean choice between visiting the main site, shopping the collection, or playing the featured visual.
+              </p>
+
+              <div class="cta-list">
+                <div class="cta-item">
+                  <div>
+                    <small>Main site</small>
+                    <strong>Stashbox.com</strong>
+                  </div>
+                  <a class="btn ghost" href="https://stashbox.com" target="_blank" rel="noopener">Visit</a>
+                </div>
+
+                <div class="cta-item">
+                  <div>
+                    <small>Merch collection</small>
+                    <strong>Stashbox.ai collection</strong>
+                  </div>
+                  <a class="btn ghost" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">Shop</a>
+                </div>
+
+                <div class="cta-item">
+                  <div>
+                    <small>Featured video</small>
+                    <strong>Open YouTube visual</strong>
+                  </div>
+                  <button class="btn ghost js-open-video" type="button">Play</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-row">
+              <a class="btn primary" href="https://stashbox.com" target="_blank" rel="noopener">Launch Main Site</a>
+              <a class="btn ghost" href="https://stashbox.ai/collections/stashbox" target="_blank" rel="noopener">Open Merch</a>
+            </div>
+          </div>
+
+          <div class="cta-right">
+            <div class="art-card">
+              <img src="https://stashbox.com/wp-content/uploads/2026/02/StashboxDoesDylan-AlbumCover-Stashbox.jpg" alt="Album cover art" />
+              <div class="overlay">
+                <div class="eyebrow">Album anchor</div>
+                <div style="font-size:28px;font-weight:900;line-height:1.05;">Stashbox Does Dylan</div>
+                <div style="margin-top:8px;color:var(--muted);line-height:1.6;">
+                  Use this card as the final visual anchor after the viewer has seen the concept set.
+                </div>
+              </div>
+            </div>
+
+            <div class="video-card">
+              <button class="video-thumb js-open-video" type="button" aria-label="Play Stashbox video">
+                <img src="https://stashbox.com/wp-content/uploads/2026/02/image-gen-21.png" alt="Video thumbnail visual" />
+                <div class="play-ring"><span>▶</span></div>
+              </button>
+              <div>
+                <div class="eyebrow">Video support</div>
+                <div style="font-size:30px;font-weight:900;line-height:1.04;margin-top:10px;">
+                  Use the video as the final push.
+                </div>
+                <div style="margin-top:12px;color:var(--muted);line-height:1.7;">
+                  This gives the close of the page a richer finish. Instead of ending on text alone, you end on image, motion, and action.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap footer-note">
+    This version is designed as one cleaner premium sample page. The next upgrade would be turning your favorite single section into a production homepage hero with deeper animation, stronger hover behavior, and more custom image treatment.
+  </div>
+
+  <div class="modal" id="videoModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeModal" aria-label="Close video">×</button>
+      <iframe
+        id="videoFrame"
+        src=""
+        title="Stashbox Featured Video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('videoModal');
+    const frame = document.getElementById('videoFrame');
+    const closeModal = document.getElementById('closeModal');
+    const openButtons = document.querySelectorAll('.js-open-video');
+    const videoUrl = 'https://www.youtube.com/embed/N92iE0h6s0M?autoplay=1&rel=0';
+
+    function openVideo() {
+      frame.src = videoUrl;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function shutVideo() {
+      frame.src = '';
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    openButtons.forEach(button => {
+      button.addEventListener('click', openVideo);
+    });
+
+    closeModal.addEventListener('click', shutVideo);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        shutVideo();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        shutVideo();
+      }
+    });
+  </script>
+</body>
+</html>
