@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STASHBOX — Does Dylan · Fresh Ten</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,700&family=DM+Mono:wght@300;400&family=Barlow+Condensed:ital,wght@0,300;0,700;0,900;1,900&family=Space+Grotesk:wght@300;700&family=Abril+Fatface&family=Black+Han+Sans&family=Righteous&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden;cursor:none;background:#0a0f1e}
+
+#cr{position:fixed;width:12px;height:12px;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;background:#fff}
+#cr2{position:fixed;width:40px;height:40px;border:1.5px solid rgba(255,255,255,.3);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;padding:.65rem 2vw;background:rgba(10,15,30,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(100,160,255,.12);overflow-x:auto;scrollbar-width:none;gap:0}
+#nav::-webkit-scrollbar{display:none}
+.nl{font-family:'Bebas Neue';font-size:1.1rem;letter-spacing:.22em;color:#4a9eff;margin-right:1.8rem;flex-shrink:0;cursor:pointer}
+.nb{font-family:'DM Mono';font-size:.42rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2);background:none;border:none;cursor:pointer;padding:.38rem .7rem;white-space:nowrap;flex-shrink:0;transition:color .2s}
+.nb:hover,.nb.on{color:#4a9eff}
+.nb-rand{margin-left:auto;font-family:'DM Mono';font-size:.42rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(74,158,255,.5);border:1px solid rgba(74,158,255,.2);background:rgba(74,158,255,.05);padding:.38rem .9rem;cursor:pointer;flex-shrink:0;transition:all .22s;white-space:nowrap}
+.nb-rand:hover{color:#4a9eff;border-color:rgba(74,158,255,.5);background:rgba(74,158,255,.1)}
+
+.strip{padding:1rem 5vw;display:flex;align-items:center;gap:1.5rem;border-top:1px solid rgba(255,255,255,.04)}
+.sn{font-family:'DM Mono';font-size:.44rem;letter-spacing:.3em;color:rgba(255,255,255,.18);text-transform:uppercase}
+.st{font-family:'Barlow Condensed';font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.sx{margin-left:auto;font-family:'DM Mono';font-size:.42rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.12)}
+
+/* ═══════════════════════════════════════════════════
+   01 — DEEP ROYAL BLUE SPLIT WITH NEON ACCENT LINES
+═══════════════════════════════════════════════════ */
+#s1{min-height:100vh;display:grid;grid-template-columns:55% 45%;background:#0a0f1e;position:relative;overflow:hidden}
+.s1-left{display:flex;flex-direction:column;justify-content:center;padding:9vh 6vw 9vh 8vw;position:relative;z-index:2}
+.s1-lines{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.s1-line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(74,158,255,.4),transparent);animation:lineSweep 4s ease-in-out infinite}
+.s1-line:nth-child(1){top:22%;width:60%;animation-delay:0s}
+.s1-line:nth-child(2){top:48%;width:80%;animation-delay:1.5s}
+.s1-line:nth-child(3){top:72%;width:50%;animation-delay:3s}
+@keyframes lineSweep{0%,100%{opacity:0;transform:translateX(-100%)}50%{opacity:1;transform:translateX(0)}}
+.s1-badge{display:inline-flex;align-items:center;gap:.7rem;font-family:'DM Mono';font-size:.5rem;letter-spacing:.4em;color:#4a9eff;text-transform:uppercase;margin-bottom:2rem;padding:.5rem 1rem;border:1px solid rgba(74,158,255,.3);background:rgba(74,158,255,.06);width:fit-content}
+.s1-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:#4a9eff;box-shadow:0 0 12px #4a9eff;animation:blipA 1.5s ease-in-out infinite}
+@keyframes blipA{0%,100%{opacity:1}50%{opacity:.2}}
+.s1-title{font-family:'Barlow Condensed';font-size:clamp(4.5rem,10vw,10rem);font-weight:900;font-style:italic;color:#fff;line-height:.84;text-transform:uppercase;margin-bottom:1.2rem;letter-spacing:-.01em}
+.s1-title .blue{color:#4a9eff}
+.s1-body-text{font-family:'DM Mono';font-size:.6rem;line-height:1.9;color:rgba(255,255,255,.42);max-width:380px;margin-bottom:2.5rem}
+.s1-tags{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:2.8rem}
+.s1-tag{font-family:'DM Mono';font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;padding:.38rem .9rem;border:1px solid rgba(74,158,255,.25);color:rgba(74,158,255,.7)}
+.s1-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.s1-btn-a{font-family:'Barlow Condensed';font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 2.5rem;background:#4a9eff;color:#0a0f1e;border:none;cursor:pointer;transition:all .28s}
+.s1-btn-a:hover{background:#fff;transform:translateY(-2px)}
+.s1-btn-b{font-family:'DM Mono';font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;padding:.9rem 2rem;background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);cursor:pointer;transition:all .28s}
+.s1-btn-b:hover{border-color:#fff;color:#fff}
+.s1-right{position:relative;overflow:hidden}
+.s1-img-wrap{position:absolute;inset:0}
+.s1-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.6) saturate(.9)}
+.s1-img-over{position:absolute;inset:0;background:linear-gradient(to right,#0a0f1e 0%,transparent 40%),linear-gradient(to bottom,#0a0f1e 0%,transparent 15%,transparent 85%,#0a0f1e 100%)}
+.s1-counter{position:absolute;bottom:3rem;right:3rem;text-align:right}
+.s1-counter .big{font-family:'Barlow Condensed';font-size:4rem;font-weight:900;color:rgba(74,158,255,.25);line-height:1}
+.s1-counter .sm{font-family:'DM Mono';font-size:.46rem;letter-spacing:.3em;color:rgba(255,255,255,.2);text-transform:uppercase}
+
+/* ═══════════════════════════════════════════════════
+   02 — FULL WHITE LIGHT EDITORIAL (LIGHT THEME!)
+═══════════════════════════════════════════════════ */
+#s2{min-height:100vh;background:#f5f0e8;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative}
+.s2-left{padding:8vh 4vw 8vh 8vw;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid rgba(0,0,0,.08)}
+.s2-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4vh}
+.s2-iss{font-family:'DM Mono';font-size:.46rem;letter-spacing:.3em;color:rgba(0,0,0,.3);text-transform:uppercase}
+.s2-date{font-family:'DM Mono';font-size:.46rem;letter-spacing:.2em;color:rgba(0,0,0,.25);text-transform:uppercase}
+.s2-rule{width:100%;height:2px;background:#111;margin-bottom:2.5rem}
+.s2-kicker{font-family:'DM Mono';font-size:.52rem;letter-spacing:.45em;color:rgba(0,0,0,.4);text-transform:uppercase;margin-bottom:1.2rem}
+.s2-headline{font-family:'Abril Fatface';font-size:clamp(3rem,6vw,6.5rem);color:#111;line-height:.92;margin-bottom:1.8rem}
+.s2-deck{font-family:'Cormorant Garamond';font-size:1.2rem;font-style:italic;color:rgba(0,0,0,.55);line-height:1.6;max-width:360px;margin-bottom:2.5rem;font-weight:300}
+.s2-byline{font-family:'DM Mono';font-size:.46rem;letter-spacing:.3em;color:rgba(0,0,0,.35);text-transform:uppercase;padding-top:1.5rem;border-top:1px solid rgba(0,0,0,.1)}
+.s2-tracklist-light{margin-top:3rem}
+.s2-tr-l{display:flex;align-items:baseline;gap:1rem;padding:.7rem 0;border-bottom:1px solid rgba(0,0,0,.07);cursor:pointer;transition:padding-left .2s}
+.s2-tr-l:hover{padding-left:.5rem}
+.s2-tr-l:hover .s2-tname-l{color:#111}
+.s2-tnum-l{font-family:'DM Mono';font-size:.44rem;color:rgba(0,0,0,.3);width:1.4rem}
+.s2-tname-l{flex:1;font-family:'Cormorant Garamond';font-size:1rem;font-style:italic;color:rgba(0,0,0,.55);transition:color .2s}
+.s2-tdur-l{font-family:'DM Mono';font-size:.44rem;color:rgba(0,0,0,.25)}
+.s2-right{position:relative;overflow:hidden}
+.s2-img-full{width:100%;height:100%;object-fit:cover;display:block}
+.s2-img-caption{position:absolute;bottom:2rem;left:2rem;right:2rem;font-family:'DM Mono';font-size:.44rem;letter-spacing:.22em;color:rgba(255,255,255,.55);text-transform:uppercase}
+.s2-btn-light{margin-top:2rem;display:inline-block;padding:.85rem 2rem;background:#111;color:#f5f0e8;font-family:'Barlow Condensed';font-size:.8rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;border:none;transition:all .28s}
+.s2-btn-light:hover{background:#4a9eff;color:#fff;transform:translateY(-2px)}
+
+/* ═══════════════════════════════════════════════════
+   03 — ELECTRIC TEAL CONCERT POSTER LAYOUT
+═══════════════════════════════════════════════════ */
+#s3{min-height:100vh;background:#031a1a;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.s3-bg-img{position:absolute;inset:0}
+.s3-bg-img img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.2) saturate(1.2) hue-rotate(160deg)}
+.s3-teal-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(0,220,200,.12) 0%,transparent 65%)}
+.s3-scan{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(0,220,200,.5),transparent);animation:scanDown 5s linear infinite;box-shadow:0 0 20px rgba(0,220,200,.4)}
+@keyframes scanDown{0%{top:-3px}100%{top:100%}}
+.s3-frame{position:relative;z-index:2;width:min(90vw,620px);border:1px solid rgba(0,220,200,.2);padding:4rem 4rem 3.5rem;text-align:center;background:rgba(3,26,26,.7);backdrop-filter:blur(12px)}
+.s3-corner{position:absolute;width:20px;height:20px;border-color:rgba(0,220,200,.6)}
+.s3-corner.tl{top:-1px;left:-1px;border-top:2px solid;border-left:2px solid}
+.s3-corner.tr{top:-1px;right:-1px;border-top:2px solid;border-right:2px solid}
+.s3-corner.bl{bottom:-1px;left:-1px;border-bottom:2px solid;border-left:2px solid}
+.s3-corner.br{bottom:-1px;right:-1px;border-bottom:2px solid;border-right:2px solid}
+.s3-eyebrow{font-family:'DM Mono';font-size:.5rem;letter-spacing:.55em;color:rgba(0,220,200,.6);text-transform:uppercase;margin-bottom:1.8rem}
+.s3-title{font-family:'Black Han Sans';font-size:clamp(3.5rem,9vw,8.5rem);color:#fff;line-height:.88;margin-bottom:.6rem;text-shadow:0 0 40px rgba(0,220,200,.25)}
+.s3-title .teal{color:#00dcc8;text-shadow:0 0 30px rgba(0,220,200,.6)}
+.s3-rule{height:1px;background:linear-gradient(90deg,transparent,rgba(0,220,200,.4),transparent);margin:1.8rem 0}
+.s3-tracklist-teal{display:grid;grid-template-columns:1fr 1fr;gap:0;text-align:left;margin-bottom:2.5rem}
+.s3-item{padding:.6rem .8rem;border:1px solid rgba(0,220,200,.06);cursor:pointer;transition:background .2s}
+.s3-item:hover{background:rgba(0,220,200,.06)}
+.s3-item .n{font-family:'DM Mono';font-size:.44rem;color:rgba(0,220,200,.4);margin-bottom:.2rem}
+.s3-item .t{font-family:'Barlow Condensed';font-size:.78rem;font-weight:700;letter-spacing:.05em;color:rgba(255,255,255,.72)}
+.s3-btns-teal{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.s3-btn{font-family:'DM Mono';font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;padding:.82rem 1.8rem;cursor:pointer;transition:all .28s;border:1px solid}
+.s3-btn.fill{background:#00dcc8;color:#031a1a;border-color:#00dcc8}.s3-btn.fill:hover{background:transparent;color:#00dcc8}
+.s3-btn.out{background:transparent;color:rgba(0,220,200,.6);border-color:rgba(0,220,200,.3)}.s3-btn.out:hover{color:#00dcc8;border-color:#00dcc8}
+
+/* ═══════════════════════════════════════════════════
+   04 — STADIUM ROCK: MASSIVE PHOTO FILL + NEON MARQUEE
+═══════════════════════════════════════════════════ */
+#s4{position:relative;min-height:100vh;overflow:hidden}
+.s4-photo-fill{position:absolute;inset:0}
+.s4-photo-fill img{width:100%;height:100%;object-fit:cover;display:block}
+.s4-photo-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.15) 0%,rgba(0,0,0,.05) 30%,rgba(0,0,0,.08) 60%,rgba(0,0,0,.88) 100%)}
+.s4-marquee-bar{position:absolute;top:0;left:0;right:0;padding:.85rem 0;background:rgba(255,50,100,.92);overflow:hidden;z-index:3}
+.s4-marquee-inner{display:flex;gap:3rem;animation:mq 18s linear infinite;white-space:nowrap}
+.s4-marquee-inner span{font-family:'Barlow Condensed';font-size:1rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#fff;flex-shrink:0}
+.s4-marquee-inner .dot{color:rgba(255,255,255,.5)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.s4-bottom{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:0 7vw 6vh;display:flex;align-items:flex-end;justify-content:space-between;gap:3rem}
+.s4-left{max-width:550px}
+.s4-title-stadium{font-family:'Barlow Condensed';font-size:clamp(4.5rem,13vw,13rem);font-weight:900;font-style:italic;color:#fff;line-height:.8;text-transform:uppercase;text-shadow:0 4px 40px rgba(0,0,0,.5)}
+.s4-meta-row{display:flex;align-items:center;gap:2rem;margin-top:1.5rem;flex-wrap:wrap}
+.s4-meta-item{font-family:'DM Mono';font-size:.52rem;letter-spacing:.22em;color:rgba(255,255,255,.5);text-transform:uppercase}
+.s4-meta-item strong{display:block;color:#fff;font-family:'Barlow Condensed';font-size:1.1rem;font-weight:700;letter-spacing:.05em}
+.s4-right{flex-shrink:0;text-align:right}
+.s4-stream-pill{display:inline-flex;align-items:center;gap:.9rem;padding:1.1rem 2.2rem;background:rgba(255,50,100,.9);color:#fff;font-family:'Barlow Condensed';font-size:.95rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:none;transition:all .3s}
+.s4-stream-pill:hover{background:#fff;color:#ff3264;transform:scale(1.04)}
+
+/* ═══════════════════════════════════════════════════
+   05 — DEEP COBALT BLUE: VINYL + WAVEFORM PLAYER
+═══════════════════════════════════════════════════ */
+#s5{min-height:100vh;background:linear-gradient(135deg,#0b1a4a 0%,#0d2060 40%,#0a1535 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;padding:8vh 6vw}
+.s5-orb{position:absolute;border-radius:50%;pointer-events:none}
+.s5-orb.o1{width:500px;height:500px;background:radial-gradient(circle,rgba(74,100,255,.18) 0%,transparent 70%);top:-100px;right:-100px}
+.s5-orb.o2{width:350px;height:350px;background:radial-gradient(circle,rgba(100,50,255,.12) 0%,transparent 70%);bottom:-50px;left:-50px}
+.s5-inner{position:relative;z-index:2;display:flex;align-items:center;gap:6vw;width:100%;max-width:1100px;flex-wrap:wrap;justify-content:center}
+.s5-vinyl-zone{position:relative;width:min(38vw,360px);height:min(38vw,360px);flex-shrink:0}
+.s5-glow-ring{position:absolute;inset:-20px;border-radius:50%;background:conic-gradient(from 0deg,rgba(74,100,255,.4),rgba(150,50,255,.3),rgba(0,180,255,.4),rgba(74,100,255,.4));filter:blur(14px);animation:spinG 6s linear infinite;opacity:.6}
+@keyframes spinG{to{transform:rotate(360deg)}}
+.s5-disc{width:100%;height:100%;border-radius:50%;position:relative;overflow:hidden;animation:spinD 10s linear infinite;box-shadow:0 0 60px rgba(74,100,255,.25)}
+@keyframes spinD{to{transform:rotate(360deg)}}
+.s5-disc svg{width:100%;height:100%;display:block}
+.s5-player{flex:1;min-width:280px}
+.s5-now{font-family:'DM Mono';font-size:.48rem;letter-spacing:.45em;color:rgba(100,160,255,.6);text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem}
+.s5-now::before{content:'';width:7px;height:7px;border-radius:50%;background:#4a9eff;box-shadow:0 0 10px #4a9eff;animation:blipA 1.2s ease-in-out infinite}
+.s5-song-title{font-family:'Barlow Condensed';font-size:clamp(2rem,4.5vw,4rem);font-weight:900;color:#fff;line-height:.9;margin-bottom:.4rem;text-transform:uppercase}
+.s5-song-artist{font-family:'DM Mono';font-size:.6rem;letter-spacing:.28em;color:rgba(100,160,255,.55);text-transform:uppercase;margin-bottom:2.5rem}
+.s5-waveform{height:56px;margin-bottom:1.5rem;display:flex;align-items:center;gap:2px}
+.s5-bar{flex:1;background:rgba(74,100,255,.3);border-radius:1px;transition:height .1s,background .2s}
+.s5-bar.active{background:#4a9eff}
+.s5-progress{height:3px;background:rgba(255,255,255,.1);margin-bottom:.8rem;border-radius:2px;position:relative;cursor:pointer}
+.s5-prog-fill{height:100%;width:35%;background:linear-gradient(90deg,#4a9eff,#9664ff);border-radius:2px;position:relative}
+.s5-prog-fill::after{content:'';position:absolute;right:-5px;top:-4px;width:11px;height:11px;border-radius:50%;background:#fff;box-shadow:0 0 8px rgba(74,100,255,.8)}
+.s5-time{display:flex;justify-content:space-between;font-family:'DM Mono';font-size:.46rem;color:rgba(255,255,255,.3);margin-bottom:2rem}
+.s5-controls{display:flex;align-items:center;gap:1.5rem;margin-bottom:2.5rem}
+.s5-ctrl-btn{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.4);font-size:1.1rem;transition:color .2s;padding:.2rem}
+.s5-ctrl-btn:hover{color:#fff}
+.s5-play-btn{width:52px;height:52px;border-radius:50%;background:#4a9eff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .28s;box-shadow:0 0 30px rgba(74,100,255,.4)}
+.s5-play-btn:hover{background:#fff;box-shadow:0 0 50px rgba(74,100,255,.6);transform:scale(1.08)}
+.s5-play-icon{width:0;height:0;border-style:solid;border-width:9px 0 9px 16px;border-color:transparent transparent transparent #0a1535;margin-left:2px}
+.s5-queue{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,.06)}
+.s5-qi{display:flex;align-items:center;gap:.9rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .2s}
+.s5-qi:hover{background:rgba(74,100,255,.07);padding-left:.4rem}
+.s5-qi.playing .s5-qname{color:#4a9eff}
+.s5-qn{font-family:'DM Mono';font-size:.43rem;color:rgba(74,100,255,.4);width:1.2rem}
+.s5-qname{flex:1;font-family:'Barlow Condensed';font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.55);transition:all .2s}
+.s5-qdur{font-family:'DM Mono';font-size:.43rem;color:rgba(255,255,255,.2)}
+
+/* ═══════════════════════════════════════════════════
+   06 — VIVID SUNSET ORANGE/RED: MERCH HERO TAKEOVER
+═══════════════════════════════════════════════════ */
+#s6{min-height:100vh;background:#1a0508;overflow:hidden;position:relative;display:flex;align-items:stretch}
+.s6-grad{position:absolute;inset:0;background:linear-gradient(135deg,#1a0508 0%,#2d0a10 35%,#1a0508 100%)}
+.s6-sunburst{position:absolute;top:-20%;right:-10%;width:80vw;height:80vw;background:conic-gradient(from 180deg,rgba(255,60,30,.08) 0deg,rgba(255,120,0,.05) 60deg,transparent 120deg,rgba(255,60,30,.05) 240deg,rgba(255,120,0,.08) 300deg,rgba(255,60,30,.08) 360deg);border-radius:50%;animation:spinG 18s linear infinite;pointer-events:none}
+.s6-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.1fr;width:100%;align-items:stretch}
+.s6-left{display:flex;flex-direction:column;justify-content:center;padding:9vh 4vw 9vh 8vw}
+.s6-over{font-family:'DM Mono';font-size:.5rem;letter-spacing:.5em;color:rgba(255,100,50,.6);text-transform:uppercase;margin-bottom:1.5rem}
+.s6-title{font-family:'Abril Fatface';font-size:clamp(3rem,7vw,7.5rem);color:#fff;line-height:.9;margin-bottom:1.2rem}
+.s6-title .hot{color:#ff5a1e}
+.s6-sub{font-family:'DM Mono';font-size:.6rem;line-height:1.9;color:rgba(255,255,255,.35);max-width:340px;margin-bottom:2.8rem}
+.s6-merch-row{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2.5rem}
+.s6-merch-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,80,30,.12);padding:1.2rem;cursor:pointer;transition:all .28s;position:relative;overflow:hidden}
+.s6-merch-card:hover{background:rgba(255,80,30,.08);border-color:rgba(255,80,30,.35);transform:translateY(-3px)}
+.s6-merch-card img{width:100%;aspect-ratio:1;object-fit:cover;display:block;margin-bottom:.8rem;filter:brightness(.85)}
+.s6-merch-name{font-family:'DM Mono';font-size:.5rem;color:rgba(255,255,255,.6);letter-spacing:.05em;margin-bottom:.25rem;line-height:1.4}
+.s6-merch-price{font-family:'Barlow Condensed';font-size:.95rem;font-weight:700;color:#ff5a1e}
+.s6-cta-row{display:flex;gap:1rem}
+.s6-btn-hot{padding:.9rem 2rem;font-family:'Barlow Condensed';font-size:.9rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:#ff5a1e;color:#fff;border:none;cursor:pointer;transition:all .28s}
+.s6-btn-hot:hover{background:#fff;color:#ff5a1e;transform:translateY(-2px)}
+.s6-btn-ghost{padding:.9rem 1.8rem;font-family:'DM Mono';font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;background:transparent;color:rgba(255,90,30,.6);border:1px solid rgba(255,90,30,.3);cursor:pointer;transition:all .28s}
+.s6-btn-ghost:hover{border-color:#ff5a1e;color:#ff5a1e}
+.s6-right{position:relative;overflow:hidden}
+.s6-right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.5) saturate(1.1)}
+.s6-right-over{position:absolute;inset:0;background:linear-gradient(to right,#1a0508 0%,transparent 40%),linear-gradient(to bottom,#1a0508 0%,transparent 12%,transparent 88%,#1a0508 100%)}
+
+/* ═══════════════════════════════════════════════════
+   07 — YOUTUBE + FULLSCREEN OVERSIZED SUBTITLE BURN
+═══════════════════════════════════════════════════ */
+#s7{position:relative;min-height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.s7-yt{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.s7-yt iframe{position:absolute;top:50%;left:50%;border:none;width:177.78vh;height:100vh;min-width:100vw;min-height:56.25vw;transform:translate(-50%,-50%)}
+.s7-veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.3) 0%,rgba(0,0,0,.1) 35%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.92) 100%)}
+.s7-bottom{position:relative;z-index:2;padding:0 0 6vh}
+.s7-scroll-title{overflow:hidden;border-top:2px solid rgba(255,255,255,.15);border-bottom:2px solid rgba(255,255,255,.15);padding:.4rem 0;margin-bottom:4vh}
+.s7-scroll-inner{display:flex;gap:4rem;animation:mq 12s linear infinite;white-space:nowrap}
+.s7-scroll-inner span{font-family:'Barlow Condensed';font-size:3.5rem;font-weight:900;font-style:italic;text-transform:uppercase;color:rgba(255,255,255,.85);flex-shrink:0;letter-spacing:.02em}
+.s7-scroll-inner .dim{color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.35)}
+.s7-below{display:flex;align-items:flex-end;justify-content:space-between;padding:0 6vw;flex-wrap:wrap;gap:2rem}
+.s7-info .meta{font-family:'DM Mono';font-size:.52rem;letter-spacing:.4em;color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:.8rem}
+.s7-info .title{font-family:'Barlow Condensed';font-size:clamp(2rem,5vw,5rem);font-weight:900;font-style:italic;color:#fff;text-transform:uppercase;line-height:.9}
+.s7-btn-yt{padding:1rem 2.8rem;background:#fff;color:#000;font-family:'Barlow Condensed';font-size:.95rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;flex-shrink:0}
+.s7-btn-yt:hover{background:#4a9eff;color:#fff;transform:translateY(-3px)}
+.s7-mute{position:absolute;top:5.5rem;right:4vw;z-index:3;font-family:'DM Mono';font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.4);padding:.5rem .95rem;cursor:pointer;transition:all .2s}
+.s7-mute:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+
+/* ═══════════════════════════════════════════════════
+   08 — MAGAZINE COVER: CREAM + BLACK + PHOTO
+═══════════════════════════════════════════════════ */
+#s8{min-height:100vh;background:#e8e0d5;display:grid;grid-template-columns:1.1fr .9fr;overflow:hidden;position:relative}
+.s8-left{position:relative;overflow:hidden}
+.s8-left img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85) contrast(1.08)}
+.s8-left-over{position:absolute;inset:0;background:linear-gradient(to right,rgba(232,224,213,0) 60%,rgba(232,224,213,.9) 100%)}
+.s8-vinyl-badge{position:absolute;top:3rem;left:3rem;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#111,#333);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 10px 40px rgba(0,0,0,.4);animation:spinD 14s linear infinite}
+.s8-vinyl-badge .vt{font-family:'Barlow Condensed';font-size:.55rem;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.7);text-transform:uppercase;text-align:center;line-height:1.3}
+.s8-right{display:flex;flex-direction:column;justify-content:center;padding:8vh 8vw 8vh 4vw;position:relative}
+.s8-mag-head{font-family:'DM Mono';font-size:.48rem;letter-spacing:.5em;color:rgba(0,0,0,.35);text-transform:uppercase;margin-bottom:.5rem}
+.s8-mag-rule{height:3px;width:100%;background:#111;margin-bottom:2.5rem}
+.s8-mag-title{font-family:'Abril Fatface';font-size:clamp(2.8rem,5.5vw,5.5rem);color:#111;line-height:.9;margin-bottom:1.5rem}
+.s8-mag-sub{font-family:'Cormorant Garamond';font-size:1.25rem;font-style:italic;font-weight:300;color:rgba(0,0,0,.5);line-height:1.65;margin-bottom:2rem;max-width:320px}
+.s8-pull-quote{padding:1.5rem 1.8rem;border-left:4px solid #111;background:rgba(0,0,0,.04);margin-bottom:2rem}
+.s8-pull-quote p{font-family:'Cormorant Garamond';font-size:1.1rem;font-style:italic;color:#111;line-height:1.6}
+.s8-pull-quote cite{display:block;font-family:'DM Mono';font-size:.44rem;letter-spacing:.28em;color:rgba(0,0,0,.35);text-transform:uppercase;margin-top:.6rem}
+.s8-mag-btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.s8-btn-blk{padding:.85rem 2rem;background:#111;color:#e8e0d5;font-family:'Barlow Condensed';font-size:.85rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border:none;cursor:pointer;transition:all .28s}
+.s8-btn-blk:hover{background:#4a9eff;transform:translateY(-2px)}
+.s8-btn-out{padding:.85rem 1.8rem;background:transparent;color:#111;font-family:'DM Mono';font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;border:1px solid rgba(0,0,0,.25);cursor:pointer;transition:all .28s}
+.s8-btn-out:hover{border-color:#111;background:rgba(0,0,0,.04)}
+
+/* ═══════════════════════════════════════════════════
+   09 — MIDNIGHT INDIGO: INTERACTIVE SETLIST CARD
+═══════════════════════════════════════════════════ */
+#s9{min-height:100vh;background:linear-gradient(160deg,#0f0a2e 0%,#1a0f40 50%,#0a0820 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;padding:8vh 4vw}
+.s9-stars{position:absolute;inset:0;pointer-events:none}
+.s9-star{position:absolute;border-radius:50%;background:#fff;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.8}50%{opacity:.1}}
+.s9-container{position:relative;z-index:2;width:min(92vw,1000px);display:grid;grid-template-columns:1.1fr .9fr;gap:3px}
+.s9-setlist{background:rgba(255,255,255,.03);border:1px solid rgba(150,100,255,.15);padding:3rem 3rem 2.5rem}
+.s9-set-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(150,100,255,.1)}
+.s9-set-title{font-family:'Barlow Condensed';font-size:2rem;font-weight:900;font-style:italic;color:#fff;text-transform:uppercase;letter-spacing:.03em}
+.s9-set-sub{font-family:'DM Mono';font-size:.46rem;letter-spacing:.28em;color:rgba(150,100,255,.5);text-transform:uppercase}
+.s9-track{display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;position:relative;transition:all .22s}
+.s9-track:hover{padding-left:.6rem;background:rgba(150,100,255,.06)}
+.s9-track.active{background:rgba(150,100,255,.1);padding-left:.6rem}
+.s9-track.active .s9-tname{color:#b490ff}
+.s9-track.active .s9-num{color:#b490ff}
+.s9-num{font-family:'DM Mono';font-size:.44rem;color:rgba(150,100,255,.38);width:1.4rem}
+.s9-tname{flex:1;font-family:'Barlow Condensed';font-size:.85rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.62);transition:color .2s}
+.s9-tdur{font-family:'DM Mono';font-size:.44rem;color:rgba(255,255,255,.2)}
+.s9-eq{display:flex;align-items:center;gap:2px;opacity:0;transition:opacity .2s}
+.s9-track.active .s9-eq{opacity:1}
+.s9-eq-bar{width:3px;background:#b490ff;border-radius:1px;animation:eq 0.6s ease-in-out infinite alternate}
+.s9-eq-bar:nth-child(2){animation-delay:.1s;height:8px}
+.s9-eq-bar:nth-child(1){animation-delay:0s;height:12px}
+.s9-eq-bar:nth-child(3){animation-delay:.2s;height:6px}
+@keyframes eq{from{transform:scaleY(1)}to{transform:scaleY(.3)}}
+.s9-right-panel{display:flex;flex-direction:column;gap:3px}
+.s9-album-card{background:rgba(255,255,255,.03);border:1px solid rgba(150,100,255,.15);padding:2rem;flex-shrink:0}
+.s9-album-card img{width:100%;aspect-ratio:1;object-fit:cover;display:block;margin-bottom:1.2rem}
+.s9-album-meta .tn{font-family:'DM Mono';font-size:.46rem;letter-spacing:.28em;color:rgba(150,100,255,.5);text-transform:uppercase;margin-bottom:.3rem}
+.s9-album-meta .tt{font-family:'Barlow Condensed';font-size:1.3rem;font-weight:900;font-style:italic;color:#fff;text-transform:uppercase;line-height:.95}
+.s9-stats-card{background:rgba(255,255,255,.03);border:1px solid rgba(150,100,255,.15);padding:1.8rem;flex:1}
+.s9-stat-row{display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.s9-stat-row .sk{font-family:'DM Mono';font-size:.46rem;letter-spacing:.2em;color:rgba(150,100,255,.4);text-transform:uppercase}
+.s9-stat-row .sv{font-family:'Barlow Condensed';font-size:.85rem;font-weight:700;color:rgba(255,255,255,.75)}
+.s9-listen-btn{width:100%;margin-top:1.4rem;padding:.82rem;background:rgba(150,100,255,.12);border:1px solid rgba(150,100,255,.3);color:#b490ff;font-family:'DM Mono';font-size:.5rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;transition:all .28s}
+.s9-listen-btn:hover{background:rgba(150,100,255,.22);box-shadow:0 0 30px rgba(150,100,255,.15)}
+
+/* ═══════════════════════════════════════════════════
+   10 — BOLD RED WHITE BLUE: AMERICAN ROCK ANTHEM
+═══════════════════════════════════════════════════ */
+#s10{min-height:100vh;background:#0d1b2a;overflow:hidden;position:relative;display:flex;align-items:center}
+.s10-bg-img{position:absolute;inset:0;z-index:0}
+.s10-bg-img img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.22) saturate(.7)}
+.s10-usa-lines{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.s10-hline{position:absolute;left:0;right:0;height:2px}
+.s10-hline.red{background:linear-gradient(90deg,transparent,rgba(220,50,50,.5),rgba(220,50,50,.5),transparent)}
+.s10-hline.blue{background:linear-gradient(90deg,transparent,rgba(30,80,200,.5),rgba(30,80,200,.5),transparent)}
+.s10-hline:nth-child(1){top:18%;animation:lineShift 7s ease-in-out infinite alternate}
+.s10-hline:nth-child(2){top:38%}
+.s10-hline:nth-child(3){top:58%;animation:lineShift 9s ease-in-out infinite alternate-reverse}
+.s10-hline:nth-child(4){top:78%}
+@keyframes lineShift{from{transform:translateX(-8%)}to{transform:translateX(8%)}}
+.s10-body{position:relative;z-index:2;padding:0 8vw;max-width:750px}
+.s10-flag-badge{display:flex;gap:3px;margin-bottom:2.5rem}
+.s10-fb{height:5px}
+.s10-fb.r{background:#dc3232;flex:3}
+.s10-fb.w{background:#fff;flex:1}
+.s10-fb.b{background:#1e50c8;flex:2}
+.s10-super-title{font-family:'Barlow Condensed';font-size:clamp(5rem,14vw,14rem);font-weight:900;color:#fff;line-height:.8;text-transform:uppercase;margin-bottom:1rem;letter-spacing:-.01em}
+.s10-super-title .red{color:#dc3232;-webkit-text-stroke:0}
+.s10-super-title .outline{color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.38)}
+.s10-desc{font-family:'DM Mono';font-size:.62rem;line-height:1.88;color:rgba(255,255,255,.42);max-width:440px;margin-bottom:2.5rem}
+.s10-link-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.s10-link{font-family:'DM Mono';font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;padding:.7rem 1.4rem;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.38);cursor:pointer;transition:all .24s}
+.s10-link:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.04)}
+.s10-link.tw{border-color:rgba(29,161,242,.5);color:rgba(29,161,242,.7)}.s10-link.tw:hover{border-color:rgba(29,161,242,.9);color:rgba(29,161,242,.9)}
+.s10-link.ig{border-color:rgba(225,48,108,.5);color:rgba(225,48,108,.7)}.s10-link.ig:hover{border-color:rgba(225,48,108,.9);color:rgba(225,48,108,.9)}
+.s10-link.yt{border-color:rgba(255,0,0,.5);color:rgba(255,60,60,.7)}.s10-link.yt:hover{border-color:rgba(255,60,60,.9);color:rgba(255,60,60,.9)}
+.s10-main-cta{display:inline-flex;align-items:center;gap:1.2rem;padding:1.2rem 3rem;background:#dc3232;color:#fff;font-family:'Barlow Condensed';font-size:1.1rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s}
+.s10-main-cta:hover{background:#fff;color:#dc3232;transform:scale(1.04)}
+</style>
+</head>
+<body>
+<div id="cr"></div>
+<div id="cr2"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <span class="nl">STASHBOX</span>
+  <button class="nb on"  onclick="g('s1')">01 Blue Split</button>
+  <button class="nb" onclick="g('s2')">02 Light Editorial</button>
+  <button class="nb" onclick="g('s3')">03 Teal Concert</button>
+  <button class="nb" onclick="g('s4')">04 Stadium</button>
+  <button class="nb" onclick="g('s5')">05 Cobalt Player</button>
+  <button class="nb" onclick="g('s6')">06 Sunset Merch</button>
+  <button class="nb" onclick="g('s7')">07 YT Scroll Burn</button>
+  <button class="nb" onclick="g('s8')">08 Mag Cover</button>
+  <button class="nb" onclick="g('s9')">09 Indigo Setlist</button>
+  <button class="nb" onclick="g('s10')">10 Anthem</button>
+  <button class="nb-rand" onclick="randomizeAll()">⟳ Randomize</button>
+</nav>
+
+<!-- ══ 01: DEEP ROYAL BLUE SPLIT ══ -->
+<section id="s1">
+  <div class="s1-lines"><div class="s1-line"></div><div class="s1-line"></div><div class="s1-line"></div></div>
+  <div class="s1-left">
+    <div class="s1-badge">New Album · Live Now</div>
+    <h1 class="s1-title">STASHBOX<br><span class="blue">DOES</span><br>DYLAN</h1>
+    <p class="s1-body-text">Ten of the most powerful songs ever written, reclaimed by a Florida band that refuses to be quiet. Recorded live to tape. Every note exactly as it happened.</p>
+    <div class="s1-tags">
+      <span class="s1-tag">Rock · 2025</span>
+      <span class="s1-tag">10 Tracks</span>
+      <span class="s1-tag">38:44</span>
+      <span class="s1-tag">Live Recorded</span>
+    </div>
+    <div class="s1-actions">
+      <button class="s1-btn-a" onclick="window.open('https://stashbox.com','_blank')">▶ Stream Now</button>
+      <button class="s1-btn-b" onclick="window.open('https://stashbox.ai/collections/stashbox','_blank')">Shop Merch</button>
+    </div>
+  </div>
+  <div class="s1-right">
+    <div class="s1-img-wrap"><img id="s1img" src="" alt="Stashbox"></div>
+    <div class="s1-img-over"></div>
+    <div class="s1-counter"><div class="big">10</div><div class="sm">Dylan songs<br>reimagined</div></div>
+  </div>
+</section>
+<div class="strip" style="background:#080c18"><span class="sn">01/10</span><span class="st">Deep Royal Blue Split Layout</span><span class="sx">Animated sweep lines · Barlow Condensed · randomized photo · neon blue badge</span></div>
+
+<!-- ══ 02: LIGHT EDITORIAL ══ -->
+<section id="s2">
+  <div class="s2-left">
+    <div class="s2-top"><span class="s2-iss">Rolling Stone Special Edition · Vol. XLVII</span><span class="s2-date">2025</span></div>
+    <div class="s2-rule"></div>
+    <div class="s2-kicker">Album of the Year · Dylan Tribute</div>
+    <h1 class="s2-headline">Stashbox<br>Does<br>Dylan</h1>
+    <p class="s2-deck">A fearless, live-to-tape reimagining of Bob Dylan's most enduring catalogue — and it might be the most honest rock record of 2025.</p>
+    <div class="s2-tracklist-light">
+      <div class="s2-tr-l"><span class="s2-tnum-l">I</span><span class="s2-tname-l">Blowin' in the Wind</span><span class="s2-tdur-l">3:52</span></div>
+      <div class="s2-tr-l"><span class="s2-tnum-l">II</span><span class="s2-tname-l">Like a Rolling Stone</span><span class="s2-tdur-l">4:18</span></div>
+      <div class="s2-tr-l"><span class="s2-tnum-l">III</span><span class="s2-tname-l">Mr. Tambourine Man</span><span class="s2-tdur-l">3:44</span></div>
+      <div class="s2-tr-l"><span class="s2-tnum-l">IV</span><span class="s2-tname-l">The Times They Are A-Changin'</span><span class="s2-tdur-l">4:01</span></div>
+      <div class="s2-tr-l"><span class="s2-tnum-l">V</span><span class="s2-tname-l">Knockin' on Heaven's Door</span><span class="s2-tdur-l">3:30</span></div>
+    </div>
+    <div class="s2-byline">Album Review · By Staff · stashbox.com</div>
+    <button class="s2-btn-light" onclick="window.open('https://stashbox.com','_blank')">▶ Stream Full Album</button>
+  </div>
+  <div class="s2-right">
+    <img id="s2img" src="" alt="Stashbox" class="s2-img-full">
+    <div class="s2-img-caption">Photo: Stashbox Does Dylan, 2025</div>
+  </div>
+</section>
+<div class="strip" style="background:#eee8e0"><span class="sn" style="color:rgba(0,0,0,.25)">02/10</span><span class="st" style="color:rgba(0,0,0,.5)">Light Theme Editorial Magazine</span><span class="sx" style="color:rgba(0,0,0,.15)">Cream background · Abril Fatface · Cormorant italic · real photo fills right panel</span></div>
+
+<!-- ══ 03: ELECTRIC TEAL CONCERT POSTER ══ -->
+<section id="s3">
+  <div class="s3-bg-img"><img id="s3img" src="" alt=""></div>
+  <div class="s3-teal-glow"></div>
+  <div class="s3-scan"></div>
+  <div class="s3-frame">
+    <div class="s3-corner tl"></div><div class="s3-corner tr"></div>
+    <div class="s3-corner bl"></div><div class="s3-corner br"></div>
+    <div class="s3-eyebrow">New Album · Out Now · 2025</div>
+    <div class="s3-title">STASH<span class="teal">BOX</span><br>DOES<br>DYLAN</div>
+    <div class="s3-rule"></div>
+    <div class="s3-tracklist-teal">
+      <div class="s3-item"><div class="n">01</div><div class="t">Blowin' in the Wind</div></div>
+      <div class="s3-item"><div class="n">02</div><div class="t">Like a Rolling Stone</div></div>
+      <div class="s3-item"><div class="n">03</div><div class="t">Tambourine Man</div></div>
+      <div class="s3-item"><div class="n">04</div><div class="t">Times A-Changin'</div></div>
+      <div class="s3-item"><div class="n">05</div><div class="t">Heaven's Door</div></div>
+      <div class="s3-item"><div class="n">06</div><div class="t">Simple Twist of Fate</div></div>
+      <div class="s3-item"><div class="n">07</div><div class="t">Hurricane</div></div>
+      <div class="s3-item"><div class="n">08</div><div class="t">Forever Young</div></div>
+    </div>
+    <div class="s3-btns-teal">
+      <button class="s3-btn fill" onclick="window.open('https://stashbox.com','_blank')">▶ Stream Now</button>
+      <button class="s3-btn out" onclick="window.open('https://stashbox.ai/collections/stashbox','_blank')">Get Merch</button>
+    </div>
+  </div>
+</section>
+<div class="strip" style="background:#031a1a"><span class="sn">03/10</span><span class="st">Electric Teal Concert Poster</span><span class="sx">Scanline animation · hue-shifted photo bg · corner bracket frame · 2-col tracklist</span></div>
+
+<!-- ══ 04: STADIUM ROCK HERO ══ -->
+<section id="s4">
+  <div class="s4-photo-fill"><img id="s4img" src="" alt="Stashbox"></div>
+  <div class="s4-marquee-bar">
+    <div class="s4-marquee-inner">
+      <span>STASHBOX DOES DYLAN</span><span class="dot">◆</span><span>OUT NOW</span><span class="dot">◆</span><span>10 TRACKS</span><span class="dot">◆</span><span>STREAM NOW</span><span class="dot">◆</span><span>STASHBOX.COM</span><span class="dot">◆</span>
+      <span>STASHBOX DOES DYLAN</span><span class="dot">◆</span><span>OUT NOW</span><span class="dot">◆</span><span>10 TRACKS</span><span class="dot">◆</span><span>STREAM NOW</span><span class="dot">◆</span><span>STASHBOX.COM</span><span class="dot">◆</span>
+    </div>
+  </div>
+  <div class="s4-bottom">
+    <div class="s4-left">
+      <div class="s4-title-stadium">DOES<br>DYLAN</div>
+      <div class="s4-meta-row">
+        <div class="s4-meta-item"><strong>10</strong>Tracks</div>
+        <div class="s4-meta-item"><strong>38:44</strong>Runtime</div>
+        <div class="s4-meta-item"><strong>LIVE</strong>Recorded</div>
+        <div class="s4-meta-item"><strong>2025</strong>Release</div>
+      </div>
+    </div>
+    <div class="s4-right">
+      <button class="s4-stream-pill" onclick="window.open('https://stashbox.com','_blank')">▶ Stream Everywhere</button>
+    </div>
+  </div>
+</section>
+<div class="strip" style="background:#0d0a08"><span class="sn">04/10</span><span class="st">Stadium Rock Full-Bleed Hero</span><span class="sx">Red neon marquee ticker · full photo fill · Barlow giant type · pink/red CTA pill</span></div>
+
+<!-- ══ 05: COBALT BLUE PLAYER ══ -->
+<section id="s5">
+  <div class="s5-orb o1"></div><div class="s5-orb o2"></div>
+  <div class="s5-inner">
+    <div class="s5-vinyl-zone">
+      <div class="s5-glow-ring"></div>
+      <div class="s5-disc">
+        <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="dg" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#1a2060"/>
+              <stop offset="35%" stop-color="#0d1545"/>
+              <stop offset="70%" stop-color="#080e30"/>
+              <stop offset="100%" stop-color="#050818"/>
+            </radialGradient>
+            <radialGradient id="dhl" cx="38%" cy="32%" r="50%">
+              <stop offset="0%" stop-color="#4a9eff" stop-opacity=".2"/>
+              <stop offset="100%" stop-color="#4a9eff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="180" cy="180" r="178" fill="url(#dg)"/>
+          <circle cx="180" cy="180" r="178" fill="url(#dhl)"/>
+          <circle cx="180" cy="180" r="140" fill="none" stroke="rgba(74,158,255,.06)" stroke-width="1"/>
+          <circle cx="180" cy="180" r="105" fill="none" stroke="rgba(74,158,255,.05)" stroke-width="1"/>
+          <circle cx="180" cy="180" r="68" fill="none" stroke="rgba(74,158,255,.04)" stroke-width="1"/>
+          <circle cx="180" cy="180" r="34" fill="none" stroke="rgba(74,158,255,.06)" stroke-width="1"/>
+          <circle cx="180" cy="180" r="15" fill="#0a0f1e" stroke="rgba(74,158,255,.15)" stroke-width="1"/>
+          <circle cx="180" cy="180" r="5" fill="rgba(74,158,255,.7)"/>
+          <text x="180" y="172" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(74,158,255,.2)" letter-spacing="5">STASHBOX</text>
+          <text x="180" y="192" text-anchor="middle" font-family="monospace" font-size="7" fill="rgba(74,158,255,.15)" letter-spacing="3">DOES DYLAN</text>
+        </svg>
+      </div>
+    </div>
+    <div class="s5-player">
+      <div class="s5-now">Now Playing</div>
+      <div class="s5-song-title">Knockin' on<br>Heaven's Door</div>
+      <div class="s5-song-artist">Stashbox · Does Dylan · 2025</div>
+      <div class="s5-waveform" id="waveform"></div>
+      <div class="s5-progress"><div class="s5-prog-fill"></div></div>
+      <div class="s5-time"><span>1:44</span><span>3:30</span></div>
+      <div class="s5-controls">
+        <button class="s5-ctrl-btn">⏮</button>
+        <button class="s5-ctrl-btn">⏪</button>
+        <button class="s5-play-btn"><div class="s5-play-icon"></div></button>
+        <button class="s5-ctrl-btn">⏩</button>
+        <button class="s5-ctrl-btn">⏭</button>
+      </div>
+      <div class="s5-queue">
+        <div class="s5-qi"><span class="s5-qn">01</span><span class="s5-qname">Blowin' in the Wind</span><span class="s5-qdur">3:52</span></div>
+        <div class="s5-qi playing"><span class="s5-qn">05</span><span class="s5-qname">Knockin' on Heaven's Door</span><span class="s5-qdur">3:30</span><div class="s5-eq"><div class="s5-eq-bar"></div><div class="s5-eq-bar"></div><div class="s5-eq-bar"></div></div></div>
+        <div class="s5-qi"><span class="s5-qn">07</span><span class="s5-qname">Hurricane</span><span class="s5-qdur">8:33</span></div>
+        <div class="s5-qi"><span class="s5-qn">08</span><span class="s5-qname">Forever Young</span><span class="s5-qdur">4:05</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="strip" style="background:#0a1535"><span class="sn">05/10</span><span class="st">Cobalt Blue Vinyl Player Interface</span><span class="sx">Animated waveform bars · spinning vinyl with glow ring · simulated player controls · queue</span></div>
+
+<!-- ══ 06: SUNSET ORANGE MERCH HERO ══ -->
+<section id="s6">
+  <div class="s6-grad"></div>
+  <div class="s6-sunburst"></div>
+  <div class="s6-inner">
+    <div class="s6-left">
+      <div class="s6-over">Official Merchandise · stashbox.ai</div>
+      <h1 class="s6-title">STASH<span class="hot">BOX</span><br>GEAR</h1>
+      <p class="s6-sub">Rep the band that does things their way. Tees, mugs, prints and more from the official Stashbox store.</p>
+      <div class="s6-merch-row" id="s6merch"></div>
+      <div class="s6-cta-row">
+        <button class="s6-btn-hot" onclick="window.open('https://stashbox.ai/collections/stashbox','_blank')">Shop Full Collection</button>
+        <button class="s6-btn-ghost" onclick="window.open('https://stashbox.com','_blank')">stashbox.com</button>
+      </div>
+    </div>
+    <div class="s6-right">
+      <img id="s6img" src="" alt="Stashbox">
+      <div class="s6-right-over"></div>
+    </div>
+  </div>
+</section>
+<div class="strip" style="background:#140406"><span class="sn">06/10</span><span class="st">Sunset Orange Merch Takeover</span><span class="sx">Real Shopify products · rotating sunburst · Abril Fatface · orange/red fire palette</span></div>
+
+<!-- ══ 07: YOUTUBE SCROLL BURN ══ -->
+<section id="s7">
+  <div class="s7-yt" id="s7yt"></div>
+  <div class="s7-veil"></div>
+  <button class="s7-mute" id="s7mute" onclick="toggleMute7()">🔇 Unmute</button>
+  <div class="s7-bottom">
+    <div class="s7-scroll-title">
+      <div class="s7-scroll-inner">
+        <span>STASHBOX</span><span class="dim">DOES</span><span>DYLAN</span><span class="dim">OUT NOW</span><span>STASHBOX</span><span class="dim">DOES</span><span>DYLAN</span><span class="dim">STREAM NOW</span>
+        <span>STASHBOX</span><span class="dim">DOES</span><span>DYLAN</span><span class="dim">OUT NOW</span><span>STASHBOX</span><span class="dim">DOES</span><span>DYLAN</span><span class="dim">STREAM NOW</span>
+      </div>
+    </div>
+    <div class="s7-below">
+      <div class="s7-info">
+        <div class="meta">New Album · 2025 · stashbox.com</div>
+        <div class="title">Stashbox<br>Does Dylan</div>
+      </div>
+      <button class="s7-btn-yt" onclick="window.open('https://stashbox.com','_blank')">▶ Stream Now</button>
+    </div>
+  </div>
+</section>
+<div class="strip" style="background:#050505"><span class="sn">07/10</span><span class="st">YouTube BG + Oversized Scrolling Title Burn</span><span class="sx">Full-bleed YT video · 3.5rem italic ticker · bottom-anchored editorial · white CTA</span></div>
+
+<!-- ══ 08: MAGAZINE COVER ══ -->
+<section id="s8">
+  <div class="s8-left">
+    <img id="s8img" src="" alt="Stashbox">
+    <div class="s8-left-over"></div>
+    <div class="s8-vinyl-badge"><div class="vt">Does<br>Dylan<br>2025</div></div>
+  </div>
+  <div class="s8-right">
+    <div class="s8-mag-head">Exclusive Feature · Music Magazine</div>
+    <div class="s8-mag-rule"></div>
+    <h1 class="s8-mag-title">Stashbox<br>Does<br>Dylan</h1>
+    <p class="s8-mag-sub">A Florida rock band walks into a studio with nothing but tape, guitars, and a deep love for the most important songwriter of the 20th century. What comes out is extraordinary.</p>
+    <div class="s8-pull-quote">
+      <p>"We didn't want to cover Dylan. We wanted to live inside these songs until they were ours."</p>
+      <cite>— Stashbox</cite>
+    </div>
+    <div class="s8-mag-btns">
+      <button class="s8-btn-blk" onclick="window.open('https://stashbox.com','_blank')">▶ Stream Now</button>
+      <button class="s8-btn-out" onclick="window.open('https://stashbox.ai/collections/stashbox','_blank')">Shop Merch</button>
+    </div>
+  </div>
+</section>
+<div class="strip" style="background:#dbd4c8"><span class="sn" style="color:rgba(0,0,0,.25)">08/10</span><span class="st" style="color:rgba(0,0,0,.5)">Cream Magazine Cover Layout</span><span class="sx" style="color:rgba(0,0,0,.15)">Pull quote · spinning vinyl badge · Abril Fatface · Cormorant italic deck · light theme</span></div>
+
+<!-- ══ 09: MIDNIGHT INDIGO SETLIST ══ -->
+<section id="s9">
+  <div class="s9-stars" id="starfield"></div>
+  <div class="s9-container">
+    <div class="s9-setlist">
+      <div class="s9-set-head">
+        <div>
+          <div class="s9-set-title">Full Setlist</div>
+          <div class="s9-set-sub">Stashbox Does Dylan · 2025</div>
+        </div>
+      </div>
+      <div class="s9-track active" onclick="setActive(this)"><span class="s9-num">01</span><span class="s9-tname">Blowin' in the Wind</span><span class="s9-tdur">3:52</span><div class="s9-eq"><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div></div></div>
+      <div class="s9-track" onclick="setActive(this)"><span class="s9-num">02</span><span class="s9-tname">Like a Rolling Stone</span><span class="s9-tdur">4:18</span><div class="s9-eq"><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div></div></div>
+      <div class="s9-track" onclick="setActive(this)"><span class="s9-num">03</span><span class="s9-tname">Mr. Tambourine Man</span><span class="s9-tdur">3:44</span><div class="s9-eq"><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div></div></div>
+      <div class="s9-track" onclick="setActive(this)"><span class="s9-num">04</span><span class="s9-tname">The Times They Are A-Changin'</span><span class="s9-tdur">4:01</span><div class="s9-eq"><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div></div></div>
+      <div class="s9-track" onclick="setActive(this)"><span class="s9-num">05</span><span class="s9-tname">Knockin' on Heaven's Door</span><span class="s9-tdur">3:30</span><div class="s9-eq"><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div></div></div>
+      <div class="s9-track" onclick="setActive(this)"><span class="s9-num">06</span><span class="s9-tname">Simple Twist of Fate</span><span class="s9-tdur">3:58</span><div class="s9-eq"><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div></div></div>
+      <div class="s9-track" onclick="setActive(this)"><span class="s9-num">07</span><span class="s9-tname">Hurricane</span><span class="s9-tdur">8:33</span><div class="s9-eq"><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div></div></div>
+      <div class="s9-track" onclick="setActive(this)"><span class="s9-num">08</span><span class="s9-tname">Forever Young</span><span class="s9-tdur">4:05</span><div class="s9-eq"><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div><div class="s9-eq-bar"></div></div></div>
+    </div>
+    <div class="s9-right-panel">
+      <div class="s9-album-card">
+        <img src="https://stashbox.com/wp-content/uploads/2026/02/StashboxDoesDylan-AlbumCover-Stashbox.jpg" alt="Album Art">
+        <div class="s9-album-meta"><div class="tn">Stashbox · 2025</div><div class="tt">Does Dylan</div></div>
+      </div>
+      <div class="s9-stats-card">
+        <div class="s9-stat-row"><span class="sk">Tracks</span><span class="sv">10</span></div>
+        <div class="s9-stat-row"><span class="sk">Runtime</span><span class="sv">38:44</span></div>
+        <div class="s9-stat-row"><span class="sk">Format</span><span class="sv">Live Tape</span></div>
+        <div class="s9-stat-row"><span class="sk">Label</span><span class="sv">Independent</span></div>
+        <div class="s9-stat-row"><span class="sk">Year</span><span class="sv">2025</span></div>
+        <button class="s9-listen-btn" onclick="window.open('https://stashbox.com','_blank')">▶ Listen Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="strip" style="background:#0a0720"><span class="sn">09/10</span><span class="st">Midnight Indigo Interactive Setlist</span><span class="sx">Click-to-activate tracks · EQ animation · star field · album panel + stats card</span></div>
+
+<!-- ══ 10: BOLD RED/WHITE/BLUE ANTHEM ══ -->
+<section id="s10">
+  <div class="s10-bg-img"><img id="s10img" src="" alt=""></div>
+  <div class="s10-usa-lines">
+    <div class="s10-hline red"></div>
+    <div class="s10-hline blue"></div>
+    <div class="s10-hline red"></div>
+    <div class="s10-hline blue"></div>
+  </div>
+  <div class="s10-body">
+    <div class="s10-flag-badge">
+      <div class="s10-fb r"></div>
+      <div class="s10-fb w"></div>
+      <div class="s10-fb b"></div>
+    </div>
+    <div class="s10-super-title">
+      STASH<span class="red">BOX</span><br>
+      <span class="outline">DOES</span><br>
+      DYLAN
+    </div>
+    <p class="s10-desc">Florida rock meets the American songbook. Ten tracks. Live to tape. No overdubs. No apologies. Available on all platforms now.</p>
+    <div class="s10-link-row">
+      <button class="s10-link tw" onclick="window.open('https://twitter.com/stashboxmusic','_blank')">Twitter</button>
+      <button class="s10-link ig" onclick="window.open('https://www.instagram.com/stashboxmusic/','_blank')">Instagram</button>
+      <button class="s10-link yt" onclick="window.open('https://www.youtube.com/@stashboxband','_blank')">YouTube</button>
+      <button class="s10-link" onclick="window.open('https://stashbox.ai/collections/stashbox','_blank')">Merch Shop</button>
+    </div>
+    <button class="s10-main-cta" onclick="window.open('https://stashbox.com','_blank')">▶ Stream Now — It's Free</button>
+  </div>
+</section>
+<div class="strip" style="background:#080d14"><span class="sn">10/10</span><span class="st">American Rock Anthem — Red, White & Blue</span><span class="sx">Barlow Condensed giant type · animated stripe lines · social links · flag badge</span></div>
+
+<script>
+/* ─── ASSET POOLS ─── */
+const IMAGES = [
+  'https://stashbox.com/wp-content/uploads/2026/02/StashboxDoesDylan-AlbumCover-Stashbox.jpg',
+  'https://stashbox.com/wp-content/uploads/2026/02/image-gen-18.jpg',
+  'https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-9e4b024c-7edc-4115-a9aa-2c99fd1ce07d.png',
+  'https://stashbox.com/wp-content/uploads/2026/02/image-gen-21.png',
+  'https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-f291912b-a33f-4126-98d7-e27c85d24aff.png',
+  'https://stashbox.com/wp-content/uploads/2026/02/image-gen-18.png',
+  'https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-2d08b38f-483a-4c60-bba1-4555169fa650.png',
+  'https://stashbox.com/wp-content/uploads/2026/02/image-gen-15.png',
+  'https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-17243ece-03c6-43b1-96c3-eda733d1fd6d.png',
+  'https://stashbox.com/wp-content/uploads/2026/02/image-gen-6.png',
+  'https://stashbox.com/wp-content/uploads/2026/02/envato-graphic-19a88e29-41cb-4955-a112-94b67dc92052.png'
+];
+const YT_IDS = ['N92iE0h6s0M','N92iE0h6s0M','N92iE0h6s0M']; // expand when more videos available
+const MERCH = [
+  { name:'Josh Subscribe T-Shirt', price:'$11.99', url:'https://stashbox.ai/products/stashbox-josh-subscribe-to-youtube-channel-stashboxband-unisex-tshirt-1', img:'https://stashbox.ai/cdn/shop/files/14480528881881777092_v2_2048_custom.jpg?v=1763738267&width=533' },
+  { name:'Psychedelic Art Mug', price:'$9.99', url:'https://stashbox.ai/products/stashbox-psychedelic-art-rocker-girl-ceramic-mug-11oz', img:'https://stashbox.ai/cdn/shop/files/52415828529676264_2048.jpg?v=1763739770&width=533' },
+  { name:'Ocean Waves Tee', price:'$14.99', url:'https://stashbox.ai/collections/stashbox', img:'https://stashbox.ai/cdn/shop/files/8424571792059219128_2048.jpg?v=1763738775&width=533' },
+  { name:'Does Dylan Poster', price:'$19.99', url:'https://stashbox.ai/collections/stashbox', img:'https://stashbox.com/wp-content/uploads/2026/02/StashboxDoesDylan-AlbumCover-Stashbox.jpg' }
+];
+
+function rand(arr){ return arr[Math.floor(Math.random()*arr.length)] }
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a }
+
+/* ─── CURSOR ─── */
+const cr=document.getElementById('cr'),cr2=document.getElementById('cr2');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cr.style.left=mx+'px';cr.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr2.style.left=rx+'px';cr2.style.top=ry+'px';requestAnimationFrame(loop)})();
+
+/* ─── NAV ─── */
+function g(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+const sids=['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10'];
+const nbs=document.querySelectorAll('.nb');
+const nObs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){const i=sids.indexOf(e.target.id);nbs.forEach((b,j)=>b.classList.toggle('on',i===j))}})},{threshold:.3});
+sids.forEach(id=>{const el=document.getElementById(id);if(el)nObs.observe(el)});
+
+/* ─── YT EMBED BUILDER ─── */
+function buildYT(containerId, ytId){
+  const c=document.getElementById(containerId); if(!c) return null;
+  c.innerHTML='';
+  const f=document.createElement('iframe');
+  f.className='yt-frame'; // defined inline below
+  f.style.cssText='position:absolute;top:50%;left:50%;border:none;width:177.78vh;height:100vh;min-width:100vw;min-height:56.25vw;transform:translate(-50%,-50%)';
+  f.allow='autoplay; encrypted-media'; f.allowFullscreen=true;
+  f.src=`https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1`;
+  c.appendChild(f); return f;
+}
+let s7frame=null, s7muted=true;
+function loadYT7(){ s7frame=buildYT('s7yt', rand(YT_IDS)); }
+function toggleMute7(){
+  if(!s7frame) return;
+  s7muted=!s7muted;
+  s7frame.src=s7frame.src.replace(s7muted?'mute=0':'mute=1', s7muted?'mute=1':'mute=0');
+  document.getElementById('s7mute').textContent=s7muted?'🔇 Unmute':'🔊 Mute';
+}
+loadYT7();
+
+/* ─── WAVEFORM ─── */
+(function(){
+  const wf=document.getElementById('waveform'); if(!wf) return;
+  const heights=[14,28,42,56,35,22,48,38,20,44,52,30,18,40,60,45,25,38,50,32,16,44,58,36,24,48,40,20,55,30,42,18,50,35,28,44,56,22,38,48,32,16,44,58,36,24];
+  heights.forEach((h,i)=>{
+    const b=document.createElement('div');
+    b.className='s5-bar'+(i<16?' active':'');
+    b.style.height=h+'px';
+    wf.appendChild(b);
+  });
+  let t=0;
+  setInterval(()=>{
+    t++;
+    wf.querySelectorAll('.s5-bar').forEach((b,i)=>{
+      const base=heights[i];
+      const jitter=Math.sin(t*.18+i*.45)*12;
+      b.style.height=Math.max(4,base+jitter)+'px';
+    });
+  },80);
+})();
+
+/* ─── STAR FIELD ─── */
+(function(){
+  const sf=document.getElementById('starfield'); if(!sf) return;
+  for(let i=0;i<140;i++){
+    const s=document.createElement('div');
+    s.className='s9-star';
+    const sz=Math.random()*2+.5;
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-delay:${Math.random()*4}s;animation-duration:${2+Math.random()*3}s`;
+    sf.appendChild(s);
+  }
+})();
+
+/* ─── SETLIST CLICK ─── */
+function setActive(el){
+  document.querySelectorAll('.s9-track').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* ─── MERCH CARDS (S6) ─── */
+function buildMerch6(){
+  const g=document.getElementById('s6merch'); if(!g) return;
+  g.innerHTML='';
+  const picks=shuffle(MERCH).slice(0,4);
+  picks.forEach(p=>{
+    const d=document.createElement('div');
+    d.className='s6-merch-card';
+    d.onclick=()=>window.open(p.url,'_blank');
+    d.innerHTML=`<img src="${p.img}" alt="${p.name}" loading="lazy"><div class="s6-merch-name">${p.name}</div><div class="s6-merch-price">${p.price}</div>`;
+    g.appendChild(d);
+  });
+}
+
+/* ─── RANDOMIZE IMAGES ─── */
+function randomizeImages(){
+  const pool=shuffle(IMAGES);
+  const p=(i)=>pool[i%pool.length];
+  const setImg=(id,src)=>{ const el=document.getElementById(id); if(el) el.src=src; };
+  setImg('s1img', p(0));
+  setImg('s2img', p(1));
+  setImg('s3img', p(2));
+  setImg('s4img', p(3));
+  setImg('s6img', p(4));
+  setImg('s8img', p(5));
+  setImg('s10img', p(6));
+}
+
+/* ─── RANDOMIZE ALL ─── */
+function randomizeAll(){
+  randomizeImages();
+  loadYT7();
+  buildMerch6();
+  s7muted=true;
+  document.getElementById('s7mute').textContent='🔇 Unmute';
+}
+
+/* ─── INIT ─── */
+randomizeImages();
+buildMerch6();
+</script>
+</body>
+</html>
