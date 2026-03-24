@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#000000",
+              "on-tertiary-fixed": "#180058",
+              "on-primary-container": "#004d57",
+              "inverse-surface": "#faf8ff",
+              "secondary-fixed-dim": "#00ee70",
+              "on-secondary": "#005b26",
+              "outline-variant": "#40485d",
+              "surface-bright": "#1f2b49",
+              "error-container": "#9f0519",
+              "primary-container": "#00e3fd",
+              "surface-container-high": "#141f38",
+              "error": "#ff716c",
+              "on-secondary-fixed-variant": "#00662c",
+              "on-tertiary": "#20006e",
+              "inverse-primary": "#006976",
+              "surface-container-low": "#091328",
+              "surface-container-highest": "#192540",
+              "primary-fixed": "#00e3fd",
+              "on-tertiary-fixed-variant": "#3900b3",
+              "tertiary-container": "#7152f3",
+              "on-primary": "#005762",
+              "on-primary-fixed-variant": "#005762",
+              "on-error-container": "#ffa8a3",
+              "tertiary": "#a18eff",
+              "secondary-container": "#006d2f",
+              "tertiary-fixed-dim": "#a694ff",
+              "secondary-dim": "#00ee70",
+              "on-secondary-fixed": "#00461c",
+              "secondary": "#2efd7c",
+              "on-secondary-container": "#e4ffe2",
+              "primary-fixed-dim": "#00d4ec",
+              "tertiary-fixed": "#b4a5ff",
+              "on-error": "#490006",
+              "surface-container": "#0f1930",
+              "inverse-on-surface": "#4d556b",
+              "on-surface": "#dee5ff",
+              "on-primary-fixed": "#003840",
+              "surface-variant": "#192540",
+              "on-background": "#dee5ff",
+              "error-dim": "#d7383b",
+              "primary-dim": "#00d4ec",
+              "outline": "#6d758c",
+              "surface": "#060e20",
+              "primary": "#81ecff",
+              "background": "#060e20",
+              "on-tertiary-container": "#ffffff",
+              "on-surface-variant": "#a3aac4",
+              "tertiary-dim": "#7658f8",
+              "secondary-fixed": "#2efd7c",
+              "surface-tint": "#81ecff",
+              "surface-dim": "#060e20"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-nav {
+        background: rgba(25, 37, 64, 0.6);
+        backdrop-filter: blur(20px);
+      }
+      .text-glow:hover {
+        text-shadow: 0 0 15px rgba(129, 236, 255, 0.5);
+      }
+      .light-leak {
+        background: radial-gradient(circle, rgba(46, 253, 124, 0.05) 0%, rgba(6, 14, 32, 0) 70%);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface overflow-x-hidden selection:bg-secondary selection:text-on-secondary">
+<!-- Shared Navigation -->
+<header class="fixed top-0 w-full z-50 px-6 py-4 lg:px-20">
+<nav class="glass-nav flex items-center justify-between px-8 py-4 rounded-xl border border-outline-variant/15">
+<div class="flex items-center gap-3">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="font-headline font-bold text-xl tracking-tight text-white">Vantage Point</span>
+</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Services</a>
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Portfolio</a>
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Process</a>
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+<button class="bg-primary px-6 py-2.5 rounded-lg text-on-primary-fixed font-bold text-sm hover:shadow-[0_0_20px_rgba(129,236,255,0.4)] transition-all">
+                    Contact Us
+                </button>
+</div>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-surface/20 via-surface/60 to-surface z-10"></div>
+<div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&amp;w=2070')] bg-cover bg-center opacity-40 mix-blend-overlay" data-alt="Dynamic futuristic digital background with neon light streaks and dark atmospheric technological elements in motion"></div>
+</div>
+<!-- Light Leaks -->
+<div class="absolute top-0 right-0 w-[600px] h-[600px] light-leak rounded-full -translate-y-1/2 translate-x-1/4"></div>
+<div class="absolute bottom-0 left-0 w-[600px] h-[600px] light-leak rounded-full translate-y-1/2 -translate-x-1/4"></div>
+<div class="relative z-20 max-w-7xl mx-auto px-6 text-center lg:text-left grid lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-8">
+<h1 class="font-headline text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter text-white mb-8">
+                        WE <span class="text-primary italic">DESIGN.</span><br/>
+                        WE BRAND.<br/>
+                        WE <span class="text-secondary">PRODUCE.</span>
+</h1>
+<p class="text-on-surface-variant text-lg md:text-xl max-w-2xl mb-10 leading-relaxed font-light">
+                        Vantage Point is a cutting-edge digital production agency. We blend cinematic storytelling with high-performance code to focus your brand's energy.
+                    </p>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<button class="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-primary to-primary-dim text-on-primary-fixed font-bold text-base rounded-lg hover:shadow-[0_0_30px_rgba(129,236,255,0.3)] transition-all flex items-center justify-center gap-2">
+                            Start Your Journey
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="w-full sm:w-auto px-10 py-5 bg-surface-container-highest/60 backdrop-blur-md border border-outline-variant/20 text-on-surface font-bold text-base rounded-lg transition-all hover:bg-surface-container-highest">
+                            View Showreel
+                        </button>
+</div>
+</div>
+<div class="hidden lg:block lg:col-span-4 relative">
+<div class="aspect-[3/4] rounded-2xl bg-surface-container border border-outline-variant/10 p-2 transform rotate-3 hover:rotate-0 transition-transform duration-700 overflow-hidden">
+<div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&amp;w=2070')] bg-cover bg-center rounded-xl" data-alt="Close up of high-end camera lens reflecting vibrant neon studio lights in a dark professional production environment"></div>
+</div>
+<div class="absolute -bottom-10 -left-10 w-48 h-48 glass-nav p-6 rounded-2xl border border-outline-variant/20 flex flex-col justify-between">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="lens_blur">lens_blur</span>
+<div class="font-headline text-sm font-bold text-white uppercase tracking-widest">Focusing Ambition</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Our Services (The Kinetic Aperture) -->
+<section class="py-24 relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
+<div class="max-w-2xl">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-px w-12 bg-secondary"></div>
+<span class="text-secondary font-headline font-bold tracking-widest text-xs uppercase">The Kinetic Aperture</span>
+</div>
+<h2 class="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-none">High-Frequency <br/>Specialization</h2>
+</div>
+<p class="text-on-surface-variant max-w-sm mb-2 text-sm leading-relaxed">
+                        Moving beyond the template. We leverage intentional asymmetry to create digital experiences that pulsate with brand narrative.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Service 1 -->
+<div class="group p-8 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all duration-500 border-b-2 border-transparent hover:border-primary">
+<div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="Monitor">monitor</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-4">Custom Websites</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">High-performance digital experiences built on clean architecture and motion design.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest">
+                            Explore
+                            <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Service 2 -->
+<div class="group p-8 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all duration-500 border-b-2 border-transparent hover:border-secondary">
+<div class="size-14 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="Palette">palette</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-4">Graphic Design</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Bold visual identities that slice through the noise with editorial precision.</p>
+<div class="flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest">
+                            Explore
+                            <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Service 3 -->
+<div class="group p-8 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all duration-500 border-b-2 border-transparent hover:border-tertiary">
+<div class="size-14 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="VideoCamera">videocam</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-4">Video Production</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Cinematic storytelling and high-energy motion graphics for the social age.</p>
+<div class="flex items-center gap-2 text-tertiary font-bold text-xs uppercase tracking-widest">
+                            Explore
+                            <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Service 4 -->
+<div class="group p-8 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all duration-500 border-b-2 border-transparent hover:border-white">
+<div class="size-14 rounded-xl bg-white/10 flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="MusicNote">music_note</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-white mb-4">Music &amp; Audio</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Immersive soundscapes and original scores that elevate the sensory experience.</p>
+<div class="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest">
+                            Explore
+                            <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Portfolio Highlights -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex items-center justify-between mb-16">
+<h2 class="font-headline text-3xl md:text-5xl font-bold text-white">Work Highlights</h2>
+<a class="text-sm font-bold text-primary flex items-center gap-2 hover:gap-4 transition-all" href="#">
+                        Full Portfolio
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+<div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="High-fashion digital graphic design featuring minimalist typography and avant-garde aesthetic with deep shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUgt4ufV76MF_HnAwsO79TSIMTJIMXm1CCH1TkgLjxrquuOhZySFLMuYxCdfsucJTW_eqpBVjCG5Le3CRPqNtDF1TnBMeEDVRHYUVnGxGK0_facUuMVHcE6wfvkq9yX8b6EsvIVWm9UqDvX2oyIO2R85U8N7scF1JBWx9OUwqWk-E84NrteMAoco3SOWDxJQdITo-clidtspBl6usev7A6N2Q2oYzSIu2Y6JIoPBOODT67iNUzdvjqrG00XhsoqaUJzylhhuuCXC0g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
+<span class="text-primary font-bold text-xs mb-2">GRAPHIC DESIGN</span>
+<h4 class="font-headline text-xl font-bold text-white">Luxe Editorial 24</h4>
+</div>
+</div>
+<div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Screenshot of a sleek dark mode software interface with electric blue accents and sophisticated data visualizations" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCI_kBA-hcPzy1qBKlZ4kwfpP4CQpi2y2rOFU_xUqMXS0KvMJqXmFVnOA54X7RbB7BpaUINj8tR7ufTSlCG_8Niyq59lIpNmTPcSOyGejfCL-CkZY8L_KKYesIAD2jAl0R5l8mfLoZv7rn1uhbnF8U8jpOCQ-9nk_ZWdF3hkgcDrvjqUA8UR-YsNTk0Chgu_6aeqizuIAdtWSoHtZPcESU12ORN0TSIG2u8YndefRFnzdj4RYlo9hQjU67p6760JHHzURtKvR5JzNn"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
+<span class="text-secondary font-bold text-xs mb-2">WEB DEVELOPMENT</span>
+<h4 class="font-headline text-xl font-bold text-white">CryptoFlow Dashboard</h4>
+</div>
+</div>
+<div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Cinematic production still of an urban nighttime scene with neon reflections in a wet street, professional lighting and composition" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOGjR__lXi7N6CX0vo6sVqyZHAHLa4k3_h6gbH8FGTk2Q6Z5sB75pFfEllPDaonVxBtfnQYJkN97hPIG4wdN3FHIxv9ZMbZ-HgI-9A95iSxDqe0_vBM0BBAGvMPEjpwAnZb2QY8iHrEZQBV6W02mA6lMoM4qCmzcQc6UXhf41lyl_05KO_Y9g5xfSb2dLw3DvtoGCgo1KQ_la0j0yTW4UlSDpx3GxXNb3mJyl-StPA0ltIA7nmcPZ7APXyVgFdkFVfucw1dJi64-J0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
+<span class="text-tertiary font-bold text-xs mb-2">VIDEO PRODUCTION</span>
+<h4 class="font-headline text-xl font-bold text-white">Midnight Sessions</h4>
+</div>
+</div>
+<div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Behind the scenes photo of a professional photo shoot with advanced lighting equipment and multiple studio screens" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2LtclYTwXFlkMlQaVhjCP2hj2fex76AmIVDw4V6UylS-jliRZNaH4KHvzg7xKgBWuW-4W2KvdCKN3c5oAQeTq33Xun8E3MZyHhpVuntI2kKN9Z_-lfeBrcesvAxT_NqfXj5P0v7tz61mGDZ-7kaxPK9FTHJmj50ayLNVBvZqggqyW8l2_DkWsmv5dGotmo8coVcSuaZFmq9CL9S2F_29XuB9hnaR8EiiDbrM5d-Kg5fJKS0zTcIcZLYj8VY0os328MdInm0Rcj8FL"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
+<span class="text-primary font-bold text-xs mb-2">BRANDING</span>
+<h4 class="font-headline text-xl font-bold text-white">Aperture Visual Identity</h4>
+</div>
+</div>
+<div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" data-alt="Minimalist architectural space with sharp geometric shadows and high contrast professional photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD8crFRY93a7AtbMZCTWYtvPTPWeB7ZLVvlBxSPbMwxY8WCnAewO9wfyB-_SOGCqztFEUCghz0X_TmBm1h-NOGtPEUouy-Kp5_0nk3qtJLmKxstgg08ZHvv4ejV5O2itmDNrQRfRk2-6SWWD1Uh-tsGSpIun_8cG7kPZEsv-thZBCpzOFdG_WPN3V_t4DANZni6WTnrqYlnHTpJjd8cp4_RJ8AWq8jWrMgdNFAxNqF9LvdnZmUL5rOvGIQKue0MMtbRq_pUS1zZBuz"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
+<span class="text-secondary font-bold text-xs mb-2">INTERACTIVE</span>
+<h4 class="font-headline text-xl font-bold text-white">Spatial Portfolio</h4>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Process -->
+<section class="py-24 relative">
+<div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20">
+<div>
+<h2 class="font-headline text-4xl md:text-5xl font-bold text-white mb-8">Concept to <span class="text-primary italic">Creation</span></h2>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-12">Our workflow is a focused linear acceleration from deep research to cinematic delivery.</p>
+<div class="space-y-12">
+<div class="flex gap-8 group">
+<div class="font-headline text-4xl font-bold text-outline-variant/30 group-hover:text-primary transition-colors">01</div>
+<div>
+<h4 class="text-xl font-bold text-white mb-2">Discovery &amp; Strategy</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Mapping your brand's unique energy and identifying the visual targets for high-impact resonance.</p>
+</div>
+</div>
+<div class="flex gap-8 group">
+<div class="font-headline text-4xl font-bold text-outline-variant/30 group-hover:text-secondary transition-colors">02</div>
+<div>
+<h4 class="text-xl font-bold text-white mb-2">Visual Production</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Crafting the core assets—websites, videos, and graphics—with absolute attention to cinematic detail.</p>
+</div>
+</div>
+<div class="flex gap-8 group">
+<div class="font-headline text-4xl font-bold text-outline-variant/30 group-hover:text-tertiary transition-colors">03</div>
+<div>
+<h4 class="text-xl font-bold text-white mb-2">Final Calibration</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Rigorous testing and fine-tuning audio-visual balance before launching into the global marketplace.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-[100px] animate-pulse"></div>
+<div class="relative w-full aspect-square border border-outline-variant/10 rounded-full flex items-center justify-center p-12">
+<div class="w-full h-full border border-outline-variant/20 rounded-full flex items-center justify-center p-12">
+<div class="w-full h-full border-2 border-primary/40 rounded-full flex items-center justify-center relative">
+<span class="material-symbols-outlined text-primary text-6xl animate-bounce" data-icon="rocket_launch">rocket_launch</span>
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-surface px-4 py-1 flex items-center gap-2 rounded-full border border-outline-variant/40">
+<div class="size-2 rounded-full bg-secondary animate-pulse"></div>
+<span class="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant">Live Production</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-24 px-6">
+<div class="max-w-7xl mx-auto rounded-[2rem] bg-surface-container-highest border border-outline-variant/20 overflow-hidden relative">
+<div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&amp;w=2070')] bg-cover bg-center opacity-5 mix-blend-overlay" data-alt="Textured technological background with subtle micro-circuit details and atmospheric depth"></div>
+<div class="relative z-10 px-8 py-20 lg:px-20 lg:py-32 flex flex-col lg:flex-row items-center gap-16">
+<div class="flex-1 text-center lg:text-left">
+<h2 class="font-headline text-5xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-8">
+                            ELEVATE YOUR <br/><span class="text-primary italic">BRAND.</span>
+</h2>
+<p class="text-on-surface-variant text-lg max-w-lg mx-auto lg:mx-0 mb-10">
+                            Ready to focus your vision? Let's build something that doesn't just look better, but works harder.
+                        </p>
+</div>
+<div class="w-full max-w-md bg-surface-container-low p-8 rounded-2xl border border-outline-variant/30">
+<form class="space-y-6">
+<div>
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block mb-2">Project Name</label>
+<input class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-colors py-2 text-on-surface placeholder:text-outline-variant/40" placeholder="Brand Launch 2024" type="text"/>
+</div>
+<div>
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block mb-2">Inquiry Type</label>
+<select class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-colors py-2 text-on-surface appearance-none">
+<option class="bg-surface-container">Full Brand Identity</option>
+<option class="bg-surface-container">Web Production</option>
+<option class="bg-surface-container">Cinematic Video</option>
+</select>
+</div>
+<div>
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block mb-2">Message</label>
+<textarea class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-colors py-2 text-on-surface resize-none h-24" placeholder="Tell us about your ambition..."></textarea>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary-fixed font-black text-sm uppercase tracking-widest rounded-lg hover:shadow-[0_0_20px_rgba(129,236,255,0.4)] transition-all" type="submit">
+                                Send Transmission
+                            </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="py-12 border-t border-outline-variant/10 px-6">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-5 text-white/50">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="font-headline font-bold text-lg tracking-tight text-white/50">Vantage Point</span>
+</div>
+<div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.3em]">
+                © 2024 Vantage Point Digital Production. Built for the kinetic era.
+            </div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-white transition-colors" href="#"><span class="material-symbols-outlined text-xl" data-icon="public">public</span></a>
+<a class="text-on-surface-variant hover:text-white transition-colors" href="#"><span class="material-symbols-outlined text-xl" data-icon="movie">movie</span></a>
+<a class="text-on-surface-variant hover:text-white transition-colors" href="#"><span class="material-symbols-outlined text-xl" data-icon="podcasts">podcasts</span></a>
+</div>
+</div>
+</footer>
+</body></html>
