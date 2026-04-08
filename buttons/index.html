@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CTA Button Gallery</title>
+  <style>
+    :root {
+      --bg: #07051f;
+      --panel: #12103a;
+      --panel-2: #171547;
+      --text: #f6f7ff;
+      --muted: #b9bde7;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(96, 79, 255, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(0, 180, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, #05031b 0%, #0a0830 100%);
+      color: var(--text);
+    }
+
+    .wrap {
+      width: min(1400px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 42px 0 60px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .intro {
+      margin: 0 0 34px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.22);
+      backdrop-filter: blur(8px);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent 40%, transparent 60%, rgba(255,255,255,0.02));
+      pointer-events: none;
+    }
+
+    .card-head {
+      margin-bottom: 16px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9ea5f9;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 19px;
+      letter-spacing: -0.02em;
+    }
+
+    .desc {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 42px;
+    }
+
+    .demo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+      padding: 10px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.1));
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 22px;
+      min-width: 210px;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      color: #fff;
+      transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease, border-color 220ms ease, opacity 220ms ease;
+      overflow: hidden;
+      isolation: isolate;
+      white-space: nowrap;
+    }
+
+    .btn .arrow,
+    .btn .icon,
+    .btn .text,
+    .btn .fill,
+    .btn .ring,
+    .btn .shadow-layer,
+    .btn .pulse,
+    .btn .line {
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px;
+    }
+
+    .btn .arrow { transition: transform 220ms ease, opacity 220ms ease; }
+    .btn .text { transition: transform 220ms ease, letter-spacing 220ms ease; }
+
+    .b1 {
+      background: linear-gradient(135deg, #4b54f5, #3c43d8);
+      box-shadow: 0 10px 24px rgba(56, 62, 198, 0.45);
+    }
+    .b1::before, .b1::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: -10px;
+      height: 100%;
+      border-radius: 14px;
+      z-index: 0;
+      transition: transform 220ms ease, opacity 220ms ease;
+    }
+    .b1::before { top: 8px; background: #d98dc9; }
+    .b1::after { top: 14px; background: #f2b0da; }
+    .b1:hover { transform: translateY(-2px); }
+    .b1:hover::before { transform: translate(4px, 0); }
+    .b1:hover::after { transform: translate(8px, 0); }
+    .b1:hover .arrow { transform: translateX(4px); }
+
+    .b2 {
+      background: linear-gradient(135deg, #4f57ff, #3340cb);
+      box-shadow: 0 14px 30px rgba(56, 62, 198, 0.4);
+    }
+    .b2::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.0) 35%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.0) 65%, transparent 100%);
+      transform: translateX(-140%);
+      transition: transform 760ms ease;
+      z-index: 1;
+    }
+    .b2:hover::before { transform: translateX(140%); }
+    .b2:hover { transform: translateY(-2px); }
+    .b2:hover .arrow { transform: translateX(4px); }
+
+    .b3 {
+      background: linear-gradient(135deg, #13c4d4, #0f7ef3);
+      box-shadow: 0 12px 26px rgba(5, 119, 214, 0.34);
+    }
+    .b3::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 0%;
+      background: rgba(255,255,255,0.12);
+      transition: height 260ms ease;
+      z-index: 1;
+    }
+    .b3:hover::before { height: 100%; }
+    .b3:hover { transform: translateY(-2px) scale(1.01); }
+
+    .b4 {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.24);
+      color: #fff;
+      box-shadow: inset 0 0 0 0 rgba(114, 96, 255, 0.9);
+    }
+    .b4::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #654cff, #9f5cff);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 260ms ease;
+      z-index: 1;
+    }
+    .b4:hover::before { transform: scaleX(1); }
+    .b4:hover { border-color: transparent; }
+    .b4:hover .arrow { transform: translateX(4px); }
+
+    .b5 {
+      background: linear-gradient(135deg, #20224f, #17183a);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.28);
+    }
+    .b5::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #ff8aa8, #ffb88f, #79d7ff, #9f88ff, #ff8aa8);
+      background-size: 300% 100%;
+      opacity: 0;
+      transition: opacity 220ms ease;
+      animation: hue-slide 6s linear infinite;
+      z-index: 0;
+    }
+    .b5::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #20224f, #17183a);
+      z-index: 1;
+    }
+    .b5:hover::before { opacity: 1; }
+    .b5:hover { transform: translateY(-1px); }
+
+    @keyframes hue-slide {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+
+    .b6 {
+      background: linear-gradient(135deg, #ff6f91, #f14a70);
+      box-shadow: 0 10px 24px rgba(221, 67, 118, 0.35);
+    }
+    .b6 .arrow { transform: translateX(0); }
+    .b6:hover .text { transform: translateX(-4px); }
+    .b6:hover .arrow { transform: translateX(7px); }
+    .b6:hover { transform: translateY(-2px); }
+
+    .b7 {
+      background: linear-gradient(135deg, #4f58ff, #3f46d7);
+      box-shadow: 0 16px 34px rgba(48, 56, 210, 0.32);
+    }
+    .b7::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 2px solid rgba(255,255,255,0.18);
+      transform: scale(1);
+      opacity: 0;
+      z-index: 1;
+    }
+    .b7:hover::before {
+      animation: pulse-ring 0.9s ease-out infinite;
+    }
+    .b7:hover { transform: translateY(-2px); }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.55; }
+      100% { transform: scale(1.16); opacity: 0; }
+    }
+
+    .b8 {
+      background: linear-gradient(135deg, #8b5cf6, #5b44eb);
+      box-shadow: 0 12px 24px rgba(91, 68, 235, 0.3);
+    }
+    .b8::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.18), transparent 45%);
+      opacity: 0;
+      transition: opacity 220ms ease;
+      z-index: 1;
+    }
+    .b8:hover::before { opacity: 1; }
+    .b8:hover { transform: perspective(500px) rotateX(7deg) translateY(-2px); }
+
+    .b9 {
+      background: linear-gradient(135deg, #22c55e, #15a34a);
+      box-shadow: 0 10px 24px rgba(21, 163, 74, 0.28);
+    }
+    .b9::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.12);
+      clip-path: circle(0% at 50% 50%);
+      transition: clip-path 300ms ease;
+      z-index: 1;
+    }
+    .b9:hover::before { clip-path: circle(100% at 50% 50%); }
+    .b9:hover .arrow { transform: rotate(45deg); }
+
+    .b10 {
+      background: linear-gradient(135deg, #e879f9, #a855f7);
+      box-shadow: 0 12px 28px rgba(168, 85, 247, 0.28);
+    }
+    .b10::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      transform: translateX(-120%);
+      transition: transform 500ms ease;
+      z-index: 1;
+    }
+    .b10:hover::before { transform: translateX(120%); }
+    .b10:hover { transform: skewX(-4deg) translateY(-2px); }
+    .b10:hover .text, .b10:hover .arrow { transform: skewX(4deg); }
+
+    .b11 {
+      background: #0f122d;
+      border: 1px solid rgba(95, 150, 255, 0.4);
+      color: #dcebff;
+      box-shadow: inset 0 0 0 0 rgba(42, 116, 255, 0.9), 0 10px 20px rgba(0,0,0,0.22);
+    }
+    .b11::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(47,109,255,0.22), rgba(34,197,255,0.12));
+      opacity: 0;
+      transition: opacity 240ms ease;
+      z-index: 1;
+    }
+    .b11:hover::before { opacity: 1; }
+    .b11:hover {
+      box-shadow: inset 0 0 0 1px rgba(95, 150, 255, 0.6), 0 0 18px rgba(70, 136, 255, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .b12 {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+      box-shadow: 0 14px 0 #b45309, 0 20px 28px rgba(180, 83, 9, 0.24);
+      border-radius: 12px;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+    .b12:hover {
+      transform: translateY(4px);
+      box-shadow: 0 10px 0 #b45309, 0 14px 20px rgba(180, 83, 9, 0.24);
+    }
+
+    .b13 {
+      background: #11152f;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.24);
+    }
+    .b13::before, .b13::after {
+      content: "";
+      position: absolute;
+      background: linear-gradient(90deg, #22d3ee, #8b5cf6);
+      transition: transform 260ms ease;
+      z-index: 1;
+    }
+    .b13::before {
+      left: 14px;
+      right: 14px;
+      top: 0;
+      height: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    .b13::after {
+      left: 14px;
+      right: 14px;
+      bottom: 0;
+      height: 2px;
+      transform: scaleX(0);
+      transform-origin: right;
+    }
+    .b13:hover::before, .b13:hover::after { transform: scaleX(1); }
+    .b13:hover { transform: translateY(-2px); }
+
+    .b14 {
+      background: linear-gradient(135deg, #4b54f5, #3c43d8);
+      box-shadow: 0 10px 24px rgba(56, 62, 198, 0.35);
+    }
+    .b14::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.12);
+      clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+      transition: clip-path 280ms ease;
+      z-index: 1;
+    }
+    .b14:hover::before {
+      clip-path: polygon(0 35%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .b15 {
+      background: linear-gradient(135deg, #14b8a6, #0ea5e9);
+      box-shadow: 0 12px 26px rgba(14, 165, 233, 0.26);
+    }
+    .b15 .text,
+    .b15 .arrow {
+      transition: transform 260ms ease, opacity 260ms ease;
+    }
+    .b15::before {
+      content: attr(data-hover);
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(110%);
+      transition: transform 260ms ease, opacity 260ms ease;
+    }
+    .b15:hover .text,
+    .b15:hover .arrow {
+      opacity: 0;
+      transform: translateY(-120%);
+    }
+    .b15:hover::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .b16 {
+      background: linear-gradient(135deg, #2d356f, #1b2150);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.28);
+    }
+    .b16::before, .b16::after {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-color: rgba(255,255,255,0.7);
+      transition: transform 260ms ease, opacity 260ms ease;
+      opacity: 0;
+      z-index: 1;
+    }
+    .b16::before {
+      left: 12px;
+      top: 10px;
+      border-left: 2px solid;
+      border-top: 2px solid;
+      transform: translate(-6px, -6px);
+    }
+    .b16::after {
+      right: 12px;
+      bottom: 10px;
+      border-right: 2px solid;
+      border-bottom: 2px solid;
+      transform: translate(6px, 6px);
+    }
+    .b16:hover::before, .b16:hover::after {
+      transform: translate(0,0);
+      opacity: 1;
+    }
+    .b16:hover { transform: translateY(-2px); }
+
+    .b17 {
+      background: linear-gradient(135deg, #7c3aed, #4338ca);
+      box-shadow: 0 12px 28px rgba(67, 56, 202, 0.34);
+    }
+    .b17::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: conic-gradient(from 180deg, rgba(255,255,255,0.0), rgba(255,255,255,0.55), rgba(255,255,255,0.0));
+      opacity: 0;
+      transition: opacity 260ms ease;
+      animation: spin 1.4s linear infinite;
+      z-index: 0;
+    }
+    .b17::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7c3aed, #4338ca);
+      z-index: 1;
+    }
+    .b17:hover::before { opacity: 1; }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .b18 {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      border: 1px solid rgba(148,163,184,0.22);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+    }
+    .b18 .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #4ade80;
+      box-shadow: 0 0 0 rgba(74,222,128,0.6);
+      transition: box-shadow 260ms ease, transform 260ms ease;
+    }
+    .b18:hover .dot {
+      transform: scale(1.12);
+      animation: live-pulse 1s ease infinite;
+    }
+    @keyframes live-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(74,222,128,0.55); }
+      100% { box-shadow: 0 0 0 10px rgba(74,222,128,0); }
+    }
+
+    .b19 {
+      background: linear-gradient(135deg, #ef4444, #db2777);
+      box-shadow: 0 12px 26px rgba(219,39,119,0.28);
+    }
+    .b19::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(135deg, rgba(255,255,255,0.0) 0 10px, rgba(255,255,255,0.10) 10px 20px);
+      transform: translateX(-20px);
+      transition: transform 300ms ease;
+      z-index: 1;
+    }
+    .b19:hover::before { transform: translateX(0); }
+    .b19:hover { transform: translateY(-2px); }
+
+    .b20 {
+      background: #101433;
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+    }
+    .b20::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #22d3ee, #3b82f6, #8b5cf6);
+      opacity: 0;
+      transition: opacity 220ms ease;
+      z-index: 0;
+    }
+    .b20::after {
+      content: "";
+      position: absolute;
+      inset: 2px;
+      border-radius: 12px;
+      background: #101433;
+      transition: background 220ms ease;
+      z-index: 1;
+    }
+    .b20:hover::before { opacity: 1; }
+    .b20:hover::after { background: rgba(16,20,51,0.72); }
+    .b20:hover { transform: translateY(-2px); }
+
+    .foot {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 24px, 1400px); padding-top: 28px; }
+      .grid { grid-template-columns: 1fr; }
+      .btn { min-width: 100%; font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>CTA Button Gallery</h1>
+    <p class="intro">Twenty modest but clever CTA button animations. Each one has a clear name so you can reference it fast in future prompts. Hover over each button to preview the behavior.</p>
+
+    <div class="grid">
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">01</span>
+          <h2>Triple Shadow Stack</h2>
+          <p class="desc">Clean SaaS button with layered offset shadows that shift on hover.</p>
+        </div>
+        <div class="demo"><a class="btn b1" href="#"><span class="text">Launch your podcast</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">02</span>
+          <h2>Shine Sweep</h2>
+          <p class="desc">Classic premium CTA with a subtle light pass across the surface.</p>
+        </div>
+        <div class="demo"><a class="btn b2" href="#"><span class="text">Start your newsletter</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">03</span>
+          <h2>Fill Rise</h2>
+          <p class="desc">A quiet wash of light rises from the bottom of the button.</p>
+        </div>
+        <div class="demo"><a class="btn b3" href="#"><span class="text">Book a demo</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">04</span>
+          <h2>Outline to Solid</h2>
+          <p class="desc">Starts minimal. Turns into a full-color CTA on hover.</p>
+        </div>
+        <div class="demo"><a class="btn b4" href="#"><span class="text">See pricing</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">05</span>
+          <h2>Rainbow Edge Glow</h2>
+          <p class="desc">Dark interior with a moving color edge that activates on hover.</p>
+        </div>
+        <div class="demo"><a class="btn b5" href="#"><span class="text">Go live today</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">06</span>
+          <h2>Arrow Push</h2>
+          <p class="desc">The copy shifts left while the arrow drives forward harder.</p>
+        </div>
+        <div class="demo"><a class="btn b6" href="#"><span class="text">Claim your spot</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">07</span>
+          <h2>Pulse Ring</h2>
+          <p class="desc">A soft perimeter pulse helps the CTA feel more alive.</p>
+        </div>
+        <div class="demo"><a class="btn b7" href="#"><span class="text">Join the beta</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">08</span>
+          <h2>Tilt Lift</h2>
+          <p class="desc">A slight 3D tilt creates a more tactile hover state.</p>
+        </div>
+        <div class="demo"><a class="btn b8" href="#"><span class="text">Create your account</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">09</span>
+          <h2>Ripple Bloom</h2>
+          <p class="desc">A center bloom expands outward with a clean circle reveal.</p>
+        </div>
+        <div class="demo"><a class="btn b9" href="#"><span class="text">Get instant access</span><span class="arrow">↗</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">10</span>
+          <h2>Skew Glide</h2>
+          <p class="desc">A modern angled hover with a fast, glossy sweep.</p>
+        </div>
+        <div class="demo"><a class="btn b10" href="#"><span class="text">Build your brand</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">11</span>
+          <h2>Glass Glow</h2>
+          <p class="desc">Dark glass base with a restrained neon activation.</p>
+        </div>
+        <div class="demo"><a class="btn b11" href="#"><span class="text">Request proposal</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">12</span>
+          <h2>Press Depth</h2>
+          <p class="desc">A playful physical button effect with top-down movement.</p>
+        </div>
+        <div class="demo"><a class="btn b12" href="#"><span class="text">Download guide</span><span class="arrow">↓</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">13</span>
+          <h2>Top and Bottom Trace</h2>
+          <p class="desc">Animated lines draw across the edges for a refined look.</p>
+        </div>
+        <div class="demo"><a class="btn b13" href="#"><span class="text">Compare plans</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">14</span>
+          <h2>Diagonal Wave</h2>
+          <p class="desc">A slanted highlight rises across the button face.</p>
+        </div>
+        <div class="demo"><a class="btn b14" href="#"><span class="text">Talk to sales</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">15</span>
+          <h2>Text Swap Slide</h2>
+          <p class="desc">The message changes on hover without feeling gimmicky.</p>
+        </div>
+        <div class="demo"><a class="btn b15" data-hover="Start now →" href="#"><span class="text">Free trial</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">16</span>
+          <h2>Corner Brackets</h2>
+          <p class="desc">Hover reveals two corners for a technical product feel.</p>
+        </div>
+        <div class="demo"><a class="btn b16" href="#"><span class="text">Open dashboard</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">17</span>
+          <h2>Orbit Border</h2>
+          <p class="desc">A rotating light edge activates around the frame.</p>
+        </div>
+        <div class="demo"><a class="btn b17" href="#"><span class="text">Launch campaign</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">18</span>
+          <h2>Live Dot Pulse</h2>
+          <p class="desc">A status-style dot pulses to suggest freshness and motion.</p>
+        </div>
+        <div class="demo"><a class="btn b18" href="#"><span class="dot"></span><span class="text">Now recording</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">19</span>
+          <h2>Stripe Drift</h2>
+          <p class="desc">Textured diagonal stripes slide into place on hover.</p>
+        </div>
+        <div class="demo"><a class="btn b19" href="#"><span class="text">Secure checkout</span><span class="arrow">→</span></a></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <span class="eyebrow">20</span>
+          <h2>Aurora Glass</h2>
+          <p class="desc">Dark glass center with a color field glowing behind it.</p>
+        </div>
+        <div class="demo"><a class="btn b20" href="#"><span class="text">Start building</span><span class="arrow">→</span></a></div>
+      </section>
+    </div>
+
+    <p class="foot">Fast naming prompt examples: “Use Triple Shadow Stack for hero CTA.” “Swap footer button to Outline to Solid.” “Make all primary buttons Glass Glow.”</p>
+  </div>
+</body>
+</html>
