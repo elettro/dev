@@ -421,12 +421,27 @@ allowfullscreen>
 </div>
 <!-- WeightLossDavie.com -->
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
-<img class="w-full transition-all duration-700 grayscale-0 group-hover:grayscale" data-alt="A high-quality photo of a woman on a weight loss journey" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjB4iniYxrncUXlzwhKdAPqIXjp3hF9ZV8lbCIzh8At3Y3a0E3iC6bAXpYofeGTdDGMQ8np9N_o_ucKYORNZPyqcsjOluSyPxQB5IywhNrYmCE8BhscCR1ijz_n2_7AcpwNkaxKfrroQoTJKyc4V-JAetgG2lVYKb2j_jrIcOp-Ab7fqr5ceardJJdj18o_PcI2yVbyny8NPjmm_sVIYHqyJURf0rev3txyl7GcRPCL9IUnY9WQoT3pkIN__uv3YuzEZXQF-5Sda8j"/>
+<div class="relative w-full aspect-[9/16] overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700 grayscale-0 group-hover:grayscale">
+<iframe
+id="weightloss-youtube-player"
+class="absolute inset-0 h-full w-full pointer-events-none"
+src="https://www.youtube.com/embed/Uf0iSlZ1jkw?autoplay=1&amp;mute=1&amp;controls=0&amp;loop=1&amp;playlist=Uf0iSlZ1jkw&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;enablejsapi=1"
+title="WeightLossDavie visual"
+loading="lazy"
+allow="autoplay; encrypted-media; picture-in-picture"
+referrerpolicy="strict-origin-when-cross-origin"
+frameborder="0"
+allowfullscreen>
+</iframe>
+</div>
 <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
 <span class="text-primary font-bold text-xs mb-2">BRANDING AND WEBSITE DESIGN</span>
 <h4 class="font-headline text-xl font-bold text-white mb-4">WeightLossDavie.com</h4>
 <a class="text-white text-xs font-bold underline decoration-primary underline-offset-4 hover:text-primary transition-colors" href="https://weightlossdavie.com/report" target="_blank">View Report</a>
 </div>
+<button aria-label="Turn WeightLossDavie video audio on" class="absolute bottom-2 right-2 z-10 h-8 w-8 rounded-full border border-white/30 bg-surface/65 text-white backdrop-blur-sm transition-all hover:border-primary hover:text-primary" id="weightloss-audio-toggle" type="button">
+<span class="material-symbols-outlined text-base leading-none" id="weightloss-audio-icon">volume_off</span>
+</button>
 </div>
 <!-- Other items -->
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
@@ -568,12 +583,16 @@ allowfullscreen>
 <script>
         let player;
         let seascapePlayer;
+        let weightlossPlayer;
         let isPlayerReady = false;
         const muteToggle = document.getElementById('mute-toggle');
         const muteIcon = document.getElementById('mute-icon');
         const seascapeAudioToggle = document.getElementById('seascape-audio-toggle');
         const seascapeAudioIcon = document.getElementById('seascape-audio-icon');
+        const weightlossAudioToggle = document.getElementById('weightloss-audio-toggle');
+        const weightlossAudioIcon = document.getElementById('weightloss-audio-icon');
         let isSeascapePlayerReady = false;
+        let isWeightlossPlayerReady = false;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -599,6 +618,16 @@ allowfullscreen>
                 events: {
                     onReady: (event) => {
                         isSeascapePlayerReady = true;
+                        event.target.mute();
+                        event.target.playVideo();
+                    }
+                }
+            });
+
+            weightlossPlayer = new YT.Player('weightloss-youtube-player', {
+                events: {
+                    onReady: (event) => {
+                        isWeightlossPlayerReady = true;
                         event.target.mute();
                         event.target.playVideo();
                     }
@@ -634,6 +663,20 @@ allowfullscreen>
                 seascapePlayer.mute();
                 seascapeAudioIcon.textContent = 'volume_off';
                 seascapeAudioToggle.setAttribute('aria-label', 'Turn Seascape video audio on');
+            }
+        });
+
+        weightlossAudioToggle?.addEventListener('click', () => {
+            if (!isWeightlossPlayerReady || !weightlossPlayer) return;
+
+            if (weightlossPlayer.isMuted()) {
+                weightlossPlayer.unMute();
+                weightlossAudioIcon.textContent = 'volume_up';
+                weightlossAudioToggle.setAttribute('aria-label', 'Turn WeightLossDavie video audio off');
+            } else {
+                weightlossPlayer.mute();
+                weightlossAudioIcon.textContent = 'volume_off';
+                weightlossAudioToggle.setAttribute('aria-label', 'Turn WeightLossDavie video audio on');
             }
         });
 
