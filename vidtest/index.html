@@ -399,8 +399,9 @@
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
 <div class="relative w-full aspect-[16/10] bg-surface-container-low transition-all duration-700 grayscale-0 group-hover:grayscale">
 <iframe
+id="seascape-youtube-player"
 class="absolute inset-0 h-full w-full pointer-events-none"
-src="https://www.youtube.com/embed/aoaUUkIvdEc?autoplay=1&amp;mute=1&amp;controls=0&amp;loop=1&amp;playlist=aoaUUkIvdEc&amp;modestbranding=1&amp;playsinline=1&amp;rel=0"
+src="https://www.youtube.com/embed/aoaUUkIvdEc?autoplay=1&amp;mute=1&amp;controls=0&amp;loop=1&amp;playlist=aoaUUkIvdEc&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;enablejsapi=1"
 title="Seascape Resort &amp; Marina visual"
 loading="lazy"
 allow="autoplay; encrypted-media; picture-in-picture"
@@ -409,11 +410,14 @@ frameborder="0"
 allowfullscreen>
 </iframe>
 </div>
-<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end pointer-events-none">
 <span class="text-primary font-bold text-xs mb-2">WEBSITE REDESIGN</span>
 <h4 class="font-headline text-xl font-bold text-white mb-4">Seascape Resort &amp; Marina</h4>
-<a class="text-white text-xs font-bold underline decoration-primary underline-offset-4 hover:text-primary transition-colors" href="https://elettro.github.io/seascaperezortmarina/report" target="_blank">View Report</a>
+<a class="text-white text-xs font-bold underline decoration-primary underline-offset-4 hover:text-primary transition-colors pointer-events-auto" href="https://elettro.github.io/seascaperezortmarina/report" target="_blank">View Report</a>
 </div>
+<button aria-label="Turn Seascape video audio on" class="absolute bottom-2 right-2 z-10 h-8 w-8 rounded-full border border-white/30 bg-surface/65 text-white backdrop-blur-sm transition-all hover:border-primary hover:text-primary" id="seascape-audio-toggle" type="button">
+<span class="material-symbols-outlined text-base leading-none" id="seascape-audio-icon">volume_off</span>
+</button>
 </div>
 <!-- WeightLossDavie.com -->
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
@@ -563,9 +567,13 @@ allowfullscreen>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
         let player;
+        let seascapePlayer;
         let isPlayerReady = false;
         const muteToggle = document.getElementById('mute-toggle');
         const muteIcon = document.getElementById('mute-icon');
+        const seascapeAudioToggle = document.getElementById('seascape-audio-toggle');
+        const seascapeAudioIcon = document.getElementById('seascape-audio-icon');
+        let isSeascapePlayerReady = false;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -586,6 +594,16 @@ allowfullscreen>
                     onReady: onPlayerReady
                 }
             });
+
+            seascapePlayer = new YT.Player('seascape-youtube-player', {
+                events: {
+                    onReady: (event) => {
+                        isSeascapePlayerReady = true;
+                        event.target.mute();
+                        event.target.playVideo();
+                    }
+                }
+            });
         }
 
         function onPlayerReady(event) {
@@ -602,6 +620,20 @@ allowfullscreen>
             } else {
                 player.mute();
                 muteIcon.textContent = 'volume_off';
+            }
+        });
+
+        seascapeAudioToggle?.addEventListener('click', () => {
+            if (!isSeascapePlayerReady || !seascapePlayer) return;
+
+            if (seascapePlayer.isMuted()) {
+                seascapePlayer.unMute();
+                seascapeAudioIcon.textContent = 'volume_up';
+                seascapeAudioToggle.setAttribute('aria-label', 'Turn Seascape video audio off');
+            } else {
+                seascapePlayer.mute();
+                seascapeAudioIcon.textContent = 'volume_off';
+                seascapeAudioToggle.setAttribute('aria-label', 'Turn Seascape video audio on');
             }
         });
 
