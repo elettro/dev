@@ -107,9 +107,9 @@
         min-height: 100vh;
         min-width: 177.77vh; /* 16:9 aspect ratio */
         position: absolute;
-        top: 50%;
+        top: 0;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translateX(-50%);
       }
     </style>
 </head>
@@ -142,7 +142,7 @@
 </header>
 <main>
 <!-- Hero Section -->
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-0">
 <!-- Full-screen Video Background -->
 <div class="video-background z-0">
 <div id="player"></div>
@@ -416,23 +416,24 @@
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
         let player;
+        let isPlayerReady = false;
         const muteToggle = document.getElementById('mute-toggle');
         const muteIcon = document.getElementById('mute-icon');
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                videoId: 'fVOn-wX-5-8',
+                videoId: 'Mc6SdHHh2po',
                 playerVars: {
                     'autoplay': 1,
                     'controls': 0,
                     'mute': 1,
                     'loop': 1,
-                    'playlist': 'fVOn-wX-5-8',
-                    'showinfo': 0,
+                    'playlist': 'Mc6SdHHh2po',
                     'rel': 0,
                     'modestbranding': 1,
                     'iv_load_policy': 3,
-                    'disablekb': 1
+                    'disablekb': 1,
+                    'playsinline': 1
                 },
                 events: {
                     'onReady': onPlayerReady
@@ -441,17 +442,20 @@
         }
 
         function onPlayerReady(event) {
+            isPlayerReady = true;
             event.target.playVideo();
-            
-            muteToggle.addEventListener('click', () => {
-                if (player.isMuted()) {
-                    player.unMute();
-                    muteIcon.textContent = 'volume_up';
-                } else {
-                    player.mute();
-                    muteIcon.textContent = 'volume_off';
-                }
-            });
         }
+
+        muteToggle.addEventListener('click', () => {
+            if (!isPlayerReady || !player) return;
+
+            if (player.isMuted()) {
+                player.unMute();
+                muteIcon.textContent = 'volume_up';
+            } else {
+                player.mute();
+                muteIcon.textContent = 'volume_off';
+            }
+        });
     </script>
 </body></html>
