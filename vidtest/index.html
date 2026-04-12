@@ -119,6 +119,10 @@
         transform: rotate(3deg);
         transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 500ms ease, border-color 500ms ease;
         box-shadow: 0 18px 65px rgba(2, 10, 30, 0.52), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
       }
       .floating-video-card:hover,
       .floating-video-card.is-active {
@@ -133,6 +137,21 @@
         border-radius: inherit;
         border: 1px solid rgba(255, 255, 255, 0.08);
         z-index: 5;
+      }
+      .floating-video-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(180deg, rgba(129, 236, 255, 0.07), rgba(2, 9, 25, 0));
+        opacity: 0;
+        transition: opacity 260ms ease;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .floating-video-card:hover::after,
+      .floating-video-card:focus-visible::after {
+        opacity: 1;
       }
       .floating-video-shell {
         position: relative;
@@ -154,6 +173,8 @@
         will-change: opacity, transform;
         transform: scale(1.01);
         background: #040b1d;
+        pointer-events: none;
+        -webkit-user-drag: none;
       }
       .floating-video-shell video.is-visible {
         opacity: 1;
@@ -194,6 +215,34 @@
       .video-audio-indicator.is-live .video-audio-dot {
         background: #2efd7c;
         box-shadow: 0 0 12px rgba(46, 253, 124, 0.75);
+      }
+      .video-audio-mini-toggle {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        z-index: 7;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: rgba(6, 14, 32, 0.52);
+        color: rgba(233, 240, 255, 0.92);
+        backdrop-filter: blur(12px);
+        display: grid;
+        place-items: center;
+        transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease, transform 220ms ease;
+      }
+      .video-audio-mini-toggle:hover {
+        border-color: rgba(129, 236, 255, 0.6);
+        background: rgba(10, 25, 48, 0.75);
+        color: #ffffff;
+        transform: scale(1.04);
+      }
+      .video-audio-mini-toggle .material-symbols-outlined {
+        font-size: 1.05rem;
+      }
+      .hero-float-chip {
+        pointer-events: none;
       }
     </style>
 </head>
@@ -259,13 +308,16 @@
 <div class="floating-video-shell">
 <video id="floating-video-a" playsinline preload="metadata" muted></video>
 <video id="floating-video-b" playsinline preload="metadata" muted></video>
+<button class="video-audio-mini-toggle" id="video-audio-mini-toggle" type="button" aria-label="Toggle sound for floating hero video">
+<span class="material-symbols-outlined" id="video-audio-mini-icon">volume_off</span>
+</button>
 <div class="video-audio-indicator" id="video-audio-indicator" aria-live="polite">
 <span class="video-audio-dot" aria-hidden="true"></span>
 <span id="video-audio-label">Tap for sound</span>
 </div>
 </div>
 </div>
-<div class="absolute -bottom-10 -left-10 w-48 h-48 glass-nav p-6 rounded-2xl border border-outline-variant/20 flex flex-col justify-between">
+<div class="absolute -bottom-10 -left-10 w-48 h-48 glass-nav p-6 rounded-2xl border border-outline-variant/20 flex flex-col justify-between hero-float-chip">
 <span class="material-symbols-outlined text-secondary text-4xl" data-icon="lens_blur">lens_blur</span>
 <div class="font-headline text-sm font-bold text-white uppercase tracking-widest">Focusing Ambition</div>
 </div>
@@ -565,6 +617,8 @@
         const floatingCard = document.getElementById('floating-video-card');
         const indicator = document.getElementById('video-audio-indicator');
         const indicatorLabel = document.getElementById('video-audio-label');
+        const miniToggle = document.getElementById('video-audio-mini-toggle');
+        const miniToggleIcon = document.getElementById('video-audio-mini-icon');
         const layers = [
             document.getElementById('floating-video-a'),
             document.getElementById('floating-video-b')
@@ -578,6 +632,7 @@
         let activeLayerIndex = 0;
         let activeVideoIndex = -1;
         let hasAudioBeenActivated = false;
+        let hasCardInteracted = false;
 
         function pickNextRandomIndex() {
             if (!videoPlaylist.length) return -1;
@@ -590,19 +645,23 @@
             return nextIndex;
         }
 
+        // Card-wide mute/unmute state renderer (shared by card click + mini button click).
         function updateAudioIndicator() {
-            indicatorLabel.textContent = hasAudioBeenActivated ? 'Sound on' : 'Tap for sound';
+            const isMuted = !hasAudioBeenActivated;
+            indicatorLabel.textContent = hasAudioBeenActivated ? 'Sound on' : (hasCardInteracted ? 'Muted' : 'Tap for sound');
             indicator.classList.toggle('is-live', hasAudioBeenActivated);
             floatingCard.classList.toggle('is-active', hasAudioBeenActivated);
+            miniToggleIcon.textContent = isMuted ? 'volume_off' : 'volume_up';
+            floatingCard.setAttribute('aria-label', isMuted ? 'Unmute floating hero video' : 'Mute floating hero video');
         }
 
-        async function activateCardAudio() {
-            if (hasAudioBeenActivated) return;
-            hasAudioBeenActivated = true;
-            updateAudioIndicator();
+        // Card-wide mute/unmute controller: toggles audio without restarting playback.
+        async function toggleCardAudio() {
+            hasCardInteracted = true;
+            hasAudioBeenActivated = !hasAudioBeenActivated;
 
             for (const layer of layers) {
-                layer.muted = false;
+                layer.muted = !hasAudioBeenActivated;
                 layer.volume = 1;
             }
 
@@ -610,9 +669,12 @@
             try {
                 await activeLayer.play();
             } catch (error) {
-                hasAudioBeenActivated = false;
-                updateAudioIndicator();
+                hasAudioBeenActivated = false; // Preserve autoplay compliance if browser blocks unmute play.
+                for (const layer of layers) {
+                    layer.muted = true;
+                }
             }
+            updateAudioIndicator();
         }
 
         async function swapToVideo(index) {
@@ -654,14 +716,22 @@
             layer.addEventListener('error', playNextRandomVideo);
         });
 
-        ['click', 'pointerup', 'mouseenter', 'touchstart'].forEach((eventName) => {
-            floatingCard.addEventListener(eventName, activateCardAudio, { passive: true });
+        floatingCard.addEventListener('click', (event) => {
+            if (event.target.closest('#video-audio-mini-toggle')) return;
+            event.preventDefault();
+            toggleCardAudio();
+        });
+
+        miniToggle.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            toggleCardAudio();
         });
 
         floatingCard.addEventListener('keydown', (event) => {
             if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
-                activateCardAudio();
+                toggleCardAudio();
             }
         });
 
