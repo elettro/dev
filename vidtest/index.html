@@ -241,6 +241,53 @@
       .video-audio-mini-toggle .material-symbols-outlined {
         font-size: 1.05rem;
       }
+      .beehiiv-form-shell {
+        position: relative;
+        width: 100%;
+        max-width: 36rem;
+        border-radius: 1.5rem;
+        border: 1px solid rgba(129, 236, 255, 0.18);
+        background: linear-gradient(155deg, rgba(12, 25, 48, 0.96) 0%, rgba(8, 17, 36, 0.98) 100%);
+        box-shadow: 0 30px 80px rgba(1, 7, 20, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+        padding: clamp(0.75rem, 1vw, 1rem);
+        overflow: hidden;
+      }
+      .beehiiv-form-shell::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border-radius: inherit;
+        background: radial-gradient(circle at top right, rgba(129, 236, 255, 0.16), transparent 55%);
+      }
+      .beehiiv-embed-wrap {
+        position: relative;
+        z-index: 1;
+        border-radius: 1rem;
+        background: rgba(9, 19, 38, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        min-height: 30.5rem;
+        overflow: hidden;
+      }
+      .beehiiv-embed-wrap iframe {
+        display: block;
+        width: 100% !important;
+        min-height: 30.5rem;
+        border: 0;
+        background: transparent;
+      }
+      @media (max-width: 768px) {
+        .beehiiv-form-shell {
+          border-radius: 1.125rem;
+          padding: 0.625rem;
+        }
+        .beehiiv-embed-wrap {
+          min-height: 29rem;
+        }
+        .beehiiv-embed-wrap iframe {
+          min-height: 29rem;
+        }
+      }
     </style>
 </head>
 <body class="bg-surface font-body text-on-surface overflow-x-hidden selection:bg-secondary selection:text-on-secondary">
@@ -581,37 +628,22 @@ allowfullscreen>
 <section class="py-24 px-6">
 <div class="max-w-7xl mx-auto rounded-[2rem] bg-surface-container-highest border border-outline-variant/20 overflow-hidden relative">
 <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&amp;w=2070')] bg-cover bg-center opacity-5 mix-blend-overlay" data-alt="Textured technological background"></div>
-<div class="relative z-10 px-8 py-20 lg:px-20 lg:py-32 flex flex-col lg:flex-row items-center gap-16">
-<div class="flex-1 text-center lg:text-left">
-<h2 class="font-headline text-5xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-8">
-                            ELEVATE YOUR <br/><span class="text-primary italic">BRAND.</span>
+<div class="relative z-10 px-8 py-20 lg:px-20 lg:py-32 grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(340px,560px)] lg:gap-16 items-center">
+<div class="text-center lg:text-left">
+<p class="text-primary font-headline font-bold tracking-[0.3em] text-xs uppercase mb-5">Newsletter</p>
+<h2 class="font-headline text-5xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-7">
+                            Stay Connected<br/><span class="text-primary italic">Elevate Your Brand.</span>
 </h2>
-<p class="text-on-surface-variant text-lg max-w-lg mx-auto lg:mx-0 mb-10">
-                            Ready to focus your vision? Let's build something that doesn't just look better, but works harder.
+<p class="text-on-surface-variant text-lg max-w-xl mx-auto lg:mx-0 mb-10">
+                            Subscribe for Elettro updates, new work, creative drops, and marketing ideas delivered with cinematic clarity.
                         </p>
+<p class="text-on-surface-variant/80 text-sm uppercase tracking-[0.22em] font-bold">Premium insights. No noise.</p>
 </div>
-<div class="w-full max-w-md bg-surface-container-low p-8 rounded-2xl border border-outline-variant/30">
-<form class="space-y-6">
-<div>
-<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block mb-2">Project Name</label>
-<input class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-colors py-2 text-on-surface placeholder:text-outline-variant/40" placeholder="Brand Launch 2024" type="text"/>
+<div class="w-full beehiiv-form-shell">
+<script async="" src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+<div class="beehiiv-embed-wrap">
+<iframe src="https://subscribe-forms.beehiiv.com/2179cf81-b441-4c14-960e-45e6cb87ffd7" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no"></iframe>
 </div>
-<div>
-<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block mb-2">Inquiry Type</label>
-<select class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-colors py-2 text-on-surface appearance-none">
-<option class="bg-surface-container">Full Brand Identity</option>
-<option class="bg-surface-container">Web Production</option>
-<option class="bg-surface-container">Cinematic Video</option>
-</select>
-</div>
-<div>
-<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block mb-2">Message</label>
-<textarea class="w-full bg-transparent border-b border-outline focus:border-primary focus:ring-0 transition-colors py-2 text-on-surface resize-none h-24" placeholder="Tell us about your ambition..."></textarea>
-</div>
-<button class="w-full py-4 bg-primary text-on-primary-fixed font-black text-sm uppercase tracking-widest rounded-lg hover:shadow-[0_0_20px_rgba(129,236,255,0.4)] transition-all" type="submit">
-                                Send Transmission
-                            </button>
-</form>
 </div>
 </div>
 </div>
