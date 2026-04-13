@@ -479,11 +479,21 @@ allowfullscreen>
 </button>
 </div>
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
-<img class="w-full transition-all duration-700 grayscale-0 group-hover:grayscale" data-alt="Behind the scenes of professional photo shoot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2LtclYTwXFlkMlQaVhjCP2hj2fex76AmIVDw4V6UylS-jliRZNaH4KHvzg7xKgBWuW-4W2KvdCKN3c5oAQeTq33Xun8E3MZyHhpVuntI2kKN9Z_-lfeBrcesvAxT_NqfXj5P0v7tz61mGDZ-7kaxPK9FTHJmj50ayLNVBvZqggqyW8l2_DkWsmv5dGotmo8coVcSuaZFmq9CL9S2F_29XuB9hnaR8EiiDbrM5d-Kg5fJKS0zTcIcZLYj8VY0os328MdInm0Rcj8FL"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
-<span class="text-primary font-bold text-xs mb-2">BRANDING AND WEBSITE DESIGN</span>
-<h4 class="font-headline text-xl font-bold text-white">Aperture Visual Identity</h4>
+<div class="relative w-full aspect-square overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700 grayscale-0 group-hover:grayscale">
+<video id="maxi-priest-video-a" class="absolute inset-0 h-full w-full object-cover opacity-100 transition-opacity duration-500 pointer-events-none" autoplay muted loop playsinline preload="auto">
+<source src="videos/Maxi-Priest-ThankYou-Elettro-2.mp4" type="video/mp4"/>
+</video>
+<video id="maxi-priest-video-b" class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 pointer-events-none" autoplay muted loop playsinline preload="auto">
+<source src="videos/Maxi-Priest-ThankYou-Elettro-3.mp4" type="video/mp4"/>
+</video>
 </div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end pointer-events-none">
+<span class="text-primary font-bold text-xs mb-2">Video Production, Website Production, Graphics</span>
+<h4 class="font-headline text-xl font-bold text-white">Maxi Priest</h4>
+</div>
+<button aria-label="Turn Maxi Priest video audio on" class="absolute bottom-2 right-2 z-10 h-8 w-8 rounded-full border border-white/30 bg-surface/65 text-white backdrop-blur-sm transition-all hover:border-primary hover:text-primary pointer-events-auto" id="maxi-priest-audio-toggle" type="button">
+<span class="material-symbols-outlined text-base leading-none" id="maxi-priest-audio-icon">volume_off</span>
+</button>
 </div>
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
 <div class="relative w-full aspect-[9/16] overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700 grayscale-0 group-hover:grayscale">
@@ -640,6 +650,10 @@ allowfullscreen>
         const darceyAudioToggle = document.getElementById('darcey-audio-toggle');
         const darceyAudioIcon = document.getElementById('darcey-audio-icon');
         const darceyPlayerFrame = document.getElementById('darcey-youtube-player');
+        const maxiPriestAudioToggle = document.getElementById('maxi-priest-audio-toggle');
+        const maxiPriestAudioIcon = document.getElementById('maxi-priest-audio-icon');
+        const maxiPriestVideoA = document.getElementById('maxi-priest-video-a');
+        const maxiPriestVideoB = document.getElementById('maxi-priest-video-b');
         let isSeascapePlayerReady = false;
         let isWeightlossPlayerReady = false;
         let isStashboxPlayerReady = false;
@@ -650,6 +664,14 @@ allowfullscreen>
         const darceyVideoIds = ['lh_k2ulBlcQ', 'ZVcIll8Vc9M', 'RAJ7Hko4eWg', '_SdOOWpJlrM', '1au1_EBMVok'];
         let darceyVideoIndex = 0;
         let darceyCycleTimer = null;
+        const maxiPriestVideos = [
+            'videos/Maxi-Priest-ThankYou-Elettro-2.mp4',
+            'videos/Maxi-Priest-ThankYou-Elettro-3.mp4'
+        ];
+        const maxiPriestLayers = [maxiPriestVideoA, maxiPriestVideoB].filter(Boolean);
+        let maxiPriestActiveLayerIndex = 0;
+        let maxiPriestVideoIndex = 0;
+        let maxiPriestCycleTimer = null;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -828,6 +850,59 @@ allowfullscreen>
                 darceyAudioToggle.setAttribute('aria-label', 'Turn Darcey & Stacey Silva video audio on');
             }
         });
+
+        function playMaxiPriestLayer(layer, source) {
+            if (!layer) return;
+            if (layer.querySelector('source')?.getAttribute('src') !== source) {
+                layer.querySelector('source')?.setAttribute('src', source);
+                layer.load();
+            }
+            layer.play().catch(() => {});
+        }
+
+        function cycleMaxiPriestVideo() {
+            if (maxiPriestLayers.length < 2) return;
+            const currentLayer = maxiPriestLayers[maxiPriestActiveLayerIndex];
+            const nextLayerIndex = (maxiPriestActiveLayerIndex + 1) % maxiPriestLayers.length;
+            const nextLayer = maxiPriestLayers[nextLayerIndex];
+
+            maxiPriestVideoIndex = (maxiPriestVideoIndex + 1) % maxiPriestVideos.length;
+            playMaxiPriestLayer(nextLayer, maxiPriestVideos[maxiPriestVideoIndex]);
+            nextLayer.currentTime = 0;
+            nextLayer.classList.remove('opacity-0');
+            nextLayer.classList.add('opacity-100');
+            currentLayer.classList.remove('opacity-100');
+            currentLayer.classList.add('opacity-0');
+            maxiPriestActiveLayerIndex = nextLayerIndex;
+        }
+
+        function startMaxiPriestCycle() {
+            if (maxiPriestLayers.length < 2) return;
+            playMaxiPriestLayer(maxiPriestLayers[0], maxiPriestVideos[0]);
+            maxiPriestLayers[0].classList.add('opacity-100');
+            maxiPriestLayers[0].classList.remove('opacity-0');
+            playMaxiPriestLayer(maxiPriestLayers[1], maxiPriestVideos[1]);
+            maxiPriestLayers[1].classList.remove('opacity-100');
+            maxiPriestLayers[1].classList.add('opacity-0');
+
+            if (maxiPriestCycleTimer) {
+                window.clearInterval(maxiPriestCycleTimer);
+            }
+            maxiPriestCycleTimer = window.setInterval(cycleMaxiPriestVideo, 8000);
+        }
+
+        maxiPriestAudioToggle?.addEventListener('click', () => {
+            if (!maxiPriestLayers.length) return;
+            const shouldUnmute = maxiPriestLayers.every((layer) => layer.muted);
+            maxiPriestLayers.forEach((layer) => {
+                layer.muted = !shouldUnmute;
+                layer.volume = 1;
+            });
+            maxiPriestAudioIcon.textContent = shouldUnmute ? 'volume_up' : 'volume_off';
+            maxiPriestAudioToggle.setAttribute('aria-label', shouldUnmute ? 'Turn Maxi Priest video audio off' : 'Turn Maxi Priest video audio on');
+        });
+
+        startMaxiPriestCycle();
 
         // Manual fallback for static hosting where folder listing is not available.
         // Add/remove files from /vidtest/videos/ here when you update the folder.
