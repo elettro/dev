@@ -270,20 +270,31 @@
         border-radius: inherit;
         background: radial-gradient(circle at top right, rgba(129, 236, 255, 0.16), transparent 55%);
       }
-      .form-shell {
+      .newsletter-form-shell {
         position: relative;
         z-index: 1;
         width: 100%;
         min-height: 100%;
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
-        padding: 40px;
+        padding: 28px;
       }
-      .form-inner {
+      .newsletter-form-card {
         width: 100%;
-        max-width: 600px;
+        min-height: 420px;
+        background: #ffffff;
+        border-radius: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+        box-sizing: border-box;
+      }
+      .newsletter-form-inner {
+        width: 100%;
+        max-width: 460px;
       }
       .beehiiv-embed-wrap {
         --beehiiv-scale: 1;
@@ -298,6 +309,7 @@
         border-radius: 1rem;
         background: #ffffff;
       }
+      .newsletter-form-inner iframe,
       .beehiiv-embed-wrap iframe {
         display: block;
         width: 560px !important;
@@ -367,6 +379,24 @@
 
         .form-shell {
           padding: 14px;
+        .newsletter-form-shell {
+          padding: 20px;
+        }
+        .newsletter-form-card {
+          min-height: 380px;
+          padding: 24px;
+        }
+        .newsletter-form-inner iframe {
+          min-height: 300px;
+        }
+      }
+      @media (max-width: 480px) {
+        .newsletter-form-shell {
+          padding: 14px;
+        }
+        .newsletter-form-card {
+          min-height: 340px;
+          padding: 18px;
         }
 
         .form-inner {
@@ -732,8 +762,9 @@ allowfullscreen>
 <div class="w-full right-form-container">
 <div class="w-full beehiiv-form-shell">
 <script async="" src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-<div class="form-shell">
-<div class="form-inner">
+<div class="newsletter-form-shell">
+<div class="newsletter-form-card">
+<div class="newsletter-form-inner">
 <div class="beehiiv-embed-wrap">
 <iframe src="https://subscribe-forms.beehiiv.com/2179cf81-b441-4c14-960e-45e6cb87ffd7" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no"></iframe>
 </div>
