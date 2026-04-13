@@ -445,11 +445,16 @@ allowfullscreen>
 </div>
 <!-- Other items -->
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
-<img class="w-full transition-all duration-700 grayscale-0 group-hover:grayscale" data-alt="High-fashion digital graphic design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0EwYBgb6uFzYwnHZQGncZdNJnXEyyn8XKnJgOeWGik2fKAPzOfh2igsmepWc-gRT9uaqGk5wnuWYYK3FWE-4OAU8qQt_jWsUjYo5pB8OQfhkK8-mnDkdP3sAA2Tn-sT_4I8w2I-ZLDYzhPrRGdqUiRFF_g2AcvWQSqXkHtMQwP_Zpp2dABikIFL-gJjncM5z7hTOdvd5BXUu6rJ9vxGIThZqekodttf2e57KHNDGuN1hMmpFl71x0VdnBpr9VfIg70_vx3RLkbHGP"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
-<span class="text-primary font-bold text-xs mb-2">BRANDING AND WEBSITE DESIGN</span>
-<h4 class="font-headline text-xl font-bold text-white">Luxe Editorial 24</h4>
+<div class="relative w-full aspect-square overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700 grayscale-0 group-hover:grayscale">
+<video id="west-palm-beach-video" class="absolute inset-0 h-full w-full object-cover opacity-100 transition-opacity duration-300 pointer-events-none" autoplay muted playsinline preload="auto"></video>
 </div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/90 to-transparent opacity-100 transition-opacity p-8 flex flex-col justify-end pointer-events-none">
+<span class="text-primary font-bold text-xs mb-2">Website Development, SEO, &amp; AI Schema</span>
+<h4 class="font-headline text-xl font-bold text-white">City of West Palm Beach, Florida - VisitWPB.org</h4>
+</div>
+<button aria-label="Turn City of West Palm Beach video audio on" class="absolute bottom-2 right-2 z-10 h-8 w-8 rounded-full border border-white/30 bg-surface/65 text-white backdrop-blur-sm transition-all hover:border-primary hover:text-primary pointer-events-auto" id="west-palm-beach-audio-toggle" type="button">
+<span class="material-symbols-outlined text-base leading-none" id="west-palm-beach-audio-icon">volume_off</span>
+</button>
 </div>
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
 <div class="relative w-full aspect-[9/16] overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700 grayscale-0 group-hover:grayscale">
@@ -654,6 +659,9 @@ allowfullscreen>
         const maxiPriestAudioIcon = document.getElementById('maxi-priest-audio-icon');
         const maxiPriestVideoA = document.getElementById('maxi-priest-video-a');
         const maxiPriestVideoB = document.getElementById('maxi-priest-video-b');
+        const westPalmBeachVideo = document.getElementById('west-palm-beach-video');
+        const westPalmBeachAudioToggle = document.getElementById('west-palm-beach-audio-toggle');
+        const westPalmBeachAudioIcon = document.getElementById('west-palm-beach-audio-icon');
         let isSeascapePlayerReady = false;
         let isWeightlossPlayerReady = false;
         let isStashboxPlayerReady = false;
@@ -673,6 +681,11 @@ allowfullscreen>
         let maxiPriestVideoIndex = 0;
         let maxiPriestCycleTimer = null;
         let isMaxiPriestAudioEnabled = false;
+        const westPalmBeachVideos = [
+            'videos/west-palm-beach-thank-you-1.mp4',
+            'videos/west-palm-beach-thank-you-2.mp4'
+        ];
+        let westPalmBeachVideoIndex = 0;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -911,6 +924,43 @@ allowfullscreen>
         });
 
         startMaxiPriestCycle();
+
+        function playWestPalmBeachVideo(index) {
+            if (!westPalmBeachVideo || !westPalmBeachVideos.length) return;
+            westPalmBeachVideo.classList.add('opacity-0');
+            westPalmBeachVideo.src = westPalmBeachVideos[index];
+            westPalmBeachVideo.load();
+            westPalmBeachVideo.play().then(() => {
+                requestAnimationFrame(() => westPalmBeachVideo.classList.remove('opacity-0'));
+            }).catch(() => {
+                westPalmBeachVideo.muted = true;
+                westPalmBeachVideo.play().then(() => {
+                    requestAnimationFrame(() => westPalmBeachVideo.classList.remove('opacity-0'));
+                }).catch(() => {});
+            });
+        }
+
+        westPalmBeachVideo?.addEventListener('ended', () => {
+            westPalmBeachVideoIndex = (westPalmBeachVideoIndex + 1) % westPalmBeachVideos.length;
+            playWestPalmBeachVideo(westPalmBeachVideoIndex);
+        });
+
+        westPalmBeachVideo?.addEventListener('error', () => {
+            westPalmBeachVideoIndex = (westPalmBeachVideoIndex + 1) % westPalmBeachVideos.length;
+            playWestPalmBeachVideo(westPalmBeachVideoIndex);
+        });
+
+        westPalmBeachAudioToggle?.addEventListener('click', () => {
+            if (!westPalmBeachVideo) return;
+            const shouldUnmute = westPalmBeachVideo.muted;
+            westPalmBeachVideo.muted = !shouldUnmute;
+            westPalmBeachVideo.volume = 1;
+            westPalmBeachAudioIcon.textContent = shouldUnmute ? 'volume_up' : 'volume_off';
+            westPalmBeachAudioToggle.setAttribute('aria-label', shouldUnmute ? 'Turn City of West Palm Beach video audio off' : 'Turn City of West Palm Beach video audio on');
+            westPalmBeachVideo.play().catch(() => {});
+        });
+
+        playWestPalmBeachVideo(westPalmBeachVideoIndex);
 
         // Manual fallback for static hosting where folder listing is not available.
         // Add/remove files from /vidtest/videos/ here when you update the folder.
