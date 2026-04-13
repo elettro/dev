@@ -245,6 +245,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
       }
       .beehiiv-form-shell {
         position: relative;
@@ -296,26 +297,88 @@
         max-width: 460px;
       }
       .beehiiv-embed-wrap {
+        --beehiiv-scale: 1;
+        --beehiiv-height: 488px;
         position: relative;
         width: 100%;
-        margin-inline: auto;
-        border-radius: 0.75rem;
-        background: #ffffff;
+        min-height: var(--beehiiv-height);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
         overflow: hidden;
+        border-radius: 1rem;
+        background: #ffffff;
       }
       .newsletter-form-inner iframe,
       .beehiiv-embed-wrap iframe {
         display: block;
-        width: 100% !important;
-        min-height: 320px;
+        width: 560px !important;
+        min-width: 560px;
+        height: 488px;
         border: 0;
+        transform-origin: top center;
+        transform: scale(var(--beehiiv-scale));
         background: transparent;
-        border-radius: 12px;
       }
-      @media (max-width: 768px) {
-        .beehiiv-form-shell {
-          border-radius: 1.125rem;
+      @media (max-width: 1024px) {
+        section.py-24.px-6 > div.max-w-7xl {
+          padding-left: 0;
+          padding-right: 0;
         }
+
+        section.py-24.px-6 .relative.z-10 {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .right-form-container {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .beehiiv-form-shell {
+          max-width: 100%;
+        }
+      }
+
+      @media (max-width: 640px) {
+        section.py-24.px-6 {
+          padding-left: 1rem;
+          padding-right: 1rem;
+          padding-top: 4rem;
+          padding-bottom: 4rem;
+        }
+
+        section.py-24.px-6 .rounded-[2rem] {
+          border-radius: 1.25rem;
+        }
+
+        section.py-24.px-6 .relative.z-10 {
+          gap: 1.5rem;
+        }
+
+        section.py-24.px-6 h2 {
+          font-size: 3.25rem;
+          line-height: 0.95;
+        }
+
+        section.py-24.px-6 p.text-lg {
+          font-size: 1rem;
+          line-height: 1.55;
+          max-width: 34ch;
+          margin-bottom: 1.75rem;
+        }
+
+        .right-form-container {
+          width: 100%;
+        }
+
+        .beehiiv-form-shell {
+          border-radius: 1rem;
+        }
+
+        .form-shell {
+          padding: 14px;
         .newsletter-form-shell {
           padding: 20px;
         }
@@ -335,8 +398,13 @@
           min-height: 340px;
           padding: 18px;
         }
-        .beehiiv-embed-wrap iframe {
-          min-height: 280px;
+
+        .form-inner {
+          max-width: 100%;
+        }
+
+        .beehiiv-embed-wrap {
+          border-radius: 0.875rem;
         }
       }
     </style>
@@ -1050,6 +1118,41 @@ allowfullscreen>
         });
 
         playWestPalmBeachVideo(westPalmBeachVideoIndex);
+
+        function syncBeehiivMobileEmbed() {
+            const wrap = document.querySelector('.beehiiv-embed-wrap');
+            const frame = wrap?.querySelector('iframe');
+            if (!wrap || !frame) return;
+
+            const baseWidth = 560;
+            const baseHeight = 488;
+            const isMobile = window.innerWidth <= 640;
+
+            if (!isMobile) {
+                wrap.style.setProperty('--beehiiv-scale', '1');
+                wrap.style.setProperty('--beehiiv-height', `${baseHeight}px`);
+                frame.style.width = '100%';
+                frame.style.minWidth = '0';
+                frame.style.height = `${baseHeight}px`;
+                frame.style.transform = 'none';
+                return;
+            }
+
+            const availableWidth = wrap.clientWidth;
+            const scale = Math.min(1, availableWidth / baseWidth);
+            const scaledHeight = Math.ceil(baseHeight * scale);
+
+            wrap.style.setProperty('--beehiiv-scale', String(scale));
+            wrap.style.setProperty('--beehiiv-height', `${scaledHeight}px`);
+
+            frame.style.width = `${baseWidth}px`;
+            frame.style.minWidth = `${baseWidth}px`;
+            frame.style.height = `${baseHeight}px`;
+            frame.style.transform = `scale(${scale})`;
+        }
+
+        window.addEventListener('load', syncBeehiivMobileEmbed);
+        window.addEventListener('resize', syncBeehiivMobileEmbed);
 
         // Manual fallback for static hosting where folder listing is not available.
         // Add/remove files from /vidtest/videos/ here when you update the folder.
