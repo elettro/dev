@@ -880,6 +880,8 @@ allowfullscreen>
         const darceyAudioToggle = document.getElementById('darcey-audio-toggle');
         const darceyAudioIcon = document.getElementById('darcey-audio-icon');
         const darceyPlayerFrame = document.getElementById('darcey-youtube-player');
+        const silverbackAudioToggle = document.querySelector("button[onclick*=\"toggleYTVideo('silverback-video'\"]");
+        const silverbackAudioIcon = silverbackAudioToggle?.querySelector('.material-symbols-outlined');
         const maxiPriestAudioToggle = document.getElementById('maxi-priest-audio-toggle');
         const maxiPriestAudioIcon = document.getElementById('maxi-priest-audio-icon');
         const maxiPriestVideoA = document.getElementById('maxi-priest-video-a');
@@ -912,20 +914,89 @@ allowfullscreen>
         ];
         let westPalmBeachVideoIndex = 0;
 
+        const mediaAudioRegistry = [];
+
+        function registerYouTubeAudioSource({ id, playerGetter, button, icon, labels }) {
+            mediaAudioRegistry.push({
+                type: 'youtube',
+                id,
+                playerGetter,
+                button,
+                icon,
+                labels
+            });
+        }
+
+        function registerHtml5AudioSource({ id, element, button, icon, labels, onMute }) {
+            mediaAudioRegistry.push({
+                type: 'html5',
+                id,
+                element,
+                button,
+                icon,
+                labels,
+                onMute
+            });
+        }
+
+        function muteAllOtherMedia(exceptId) {
+            mediaAudioRegistry.forEach((entry) => {
+                if (entry.id === exceptId) return;
+
+                if (entry.type === 'youtube') {
+                    const playerInstance = entry.playerGetter?.();
+                    if (playerInstance?.mute) playerInstance.mute();
+                }
+
+                if (entry.type === 'html5' && entry.element) {
+                    entry.element.muted = true;
+                    entry.element.volume = 1;
+                }
+
+                if (typeof entry.onMute === 'function') {
+                    entry.onMute();
+                }
+
+                if (entry.button?.dataset) {
+                    entry.button.dataset.muted = 'true';
+                }
+
+                if (entry.button) {
+                    entry.button.setAttribute('aria-label', entry.labels?.on ?? 'Turn video audio on');
+                }
+
+                if (entry.icon) {
+                    entry.icon.textContent = 'volume_off';
+                }
+            });
+        }
 
         function toggleYTVideo(id, btn) {
             const iframe = document.getElementById(id);
             if (!iframe?.contentWindow) return;
 
             const isMuted = btn.dataset.muted !== 'false';
+            const icon = btn.querySelector('.material-symbols-outlined');
+            const source = mediaAudioRegistry.find((entry) => entry.id === id);
+            const labels = source?.labels ?? {
+                on: 'Turn video audio on',
+                off: 'Turn video audio off'
+            };
+
+            if (isMuted) {
+                muteAllOtherMedia(id);
+            }
+
             iframe.contentWindow.postMessage(JSON.stringify({
                 event: "command",
                 func: isMuted ? "unMute" : "mute"
             }), "*");
 
             btn.dataset.muted = isMuted ? 'false' : 'true';
-            btn.setAttribute('aria-label', isMuted ? 'Mute video audio' : 'Unmute video audio');
-            btn.innerHTML = `<span class="material-symbols-outlined text-sm">${isMuted ? 'volume_up' : 'volume_off'}</span>`;
+            btn.setAttribute('aria-label', isMuted ? labels.off : labels.on);
+            if (icon) {
+                icon.textContent = isMuted ? 'volume_up' : 'volume_off';
+            }
         }
 
         function onYouTubeIframeAPIReady() {
@@ -1000,11 +1071,16 @@ allowfullscreen>
             if (!isPlayerReady || !player) return;
 
             if (player.isMuted()) {
+                muteAllOtherMedia('hero-background-youtube');
                 player.unMute();
                 muteIcon.textContent = 'volume_up';
+                muteToggle.dataset.muted = 'false';
+                muteToggle.setAttribute('aria-label', 'Turn hero background video audio off');
             } else {
                 player.mute();
                 muteIcon.textContent = 'volume_off';
+                muteToggle.dataset.muted = 'true';
+                muteToggle.setAttribute('aria-label', 'Turn hero background video audio on');
             }
         });
 
@@ -1012,12 +1088,15 @@ allowfullscreen>
             if (!isSeascapePlayerReady || !seascapePlayer) return;
 
             if (seascapePlayer.isMuted()) {
+                muteAllOtherMedia('seascape-youtube');
                 seascapePlayer.unMute();
                 seascapeAudioIcon.textContent = 'volume_up';
+                seascapeAudioToggle.dataset.muted = 'false';
                 seascapeAudioToggle.setAttribute('aria-label', 'Turn Seascape video audio off');
             } else {
                 seascapePlayer.mute();
                 seascapeAudioIcon.textContent = 'volume_off';
+                seascapeAudioToggle.dataset.muted = 'true';
                 seascapeAudioToggle.setAttribute('aria-label', 'Turn Seascape video audio on');
             }
         });
@@ -1026,12 +1105,15 @@ allowfullscreen>
             if (!isWeightlossPlayerReady || !weightlossPlayer) return;
 
             if (weightlossPlayer.isMuted()) {
+                muteAllOtherMedia('weightloss-youtube');
                 weightlossPlayer.unMute();
                 weightlossAudioIcon.textContent = 'volume_up';
+                weightlossAudioToggle.dataset.muted = 'false';
                 weightlossAudioToggle.setAttribute('aria-label', 'Turn WeightLossDavie video audio off');
             } else {
                 weightlossPlayer.mute();
                 weightlossAudioIcon.textContent = 'volume_off';
+                weightlossAudioToggle.dataset.muted = 'true';
                 weightlossAudioToggle.setAttribute('aria-label', 'Turn WeightLossDavie video audio on');
             }
         });
@@ -1061,12 +1143,15 @@ allowfullscreen>
             if (!isStashboxPlayerReady || !stashboxPlayer) return;
 
             if (stashboxPlayer.isMuted()) {
+                muteAllOtherMedia('stashbox-youtube');
                 stashboxPlayer.unMute();
                 stashboxAudioIcon.textContent = 'volume_up';
+                stashboxAudioToggle.dataset.muted = 'false';
                 stashboxAudioToggle.setAttribute('aria-label', 'Turn Stashbox YouTube Growth video audio off');
             } else {
                 stashboxPlayer.mute();
                 stashboxAudioIcon.textContent = 'volume_off';
+                stashboxAudioToggle.dataset.muted = 'true';
                 stashboxAudioToggle.setAttribute('aria-label', 'Turn Stashbox YouTube Growth video audio on');
             }
         });
@@ -1096,12 +1181,15 @@ allowfullscreen>
             if (!isDarceyPlayerReady || !darceyPlayer) return;
 
             if (darceyPlayer.isMuted()) {
+                muteAllOtherMedia('darcey-youtube');
                 darceyPlayer.unMute();
                 darceyAudioIcon.textContent = 'volume_up';
+                darceyAudioToggle.dataset.muted = 'false';
                 darceyAudioToggle.setAttribute('aria-label', 'Turn Darcey & Stacey Silva video audio off');
             } else {
                 darceyPlayer.mute();
                 darceyAudioIcon.textContent = 'volume_off';
+                darceyAudioToggle.dataset.muted = 'true';
                 darceyAudioToggle.setAttribute('aria-label', 'Turn Darcey & Stacey Silva video audio on');
             }
         });
@@ -1158,9 +1246,14 @@ allowfullscreen>
 
         maxiPriestAudioToggle?.addEventListener('click', () => {
             if (!maxiPriestLayers.length) return;
-            isMaxiPriestAudioEnabled = !isMaxiPriestAudioEnabled;
+            const shouldEnableAudio = !isMaxiPriestAudioEnabled;
+            if (shouldEnableAudio) {
+                muteAllOtherMedia('maxi-priest-html5');
+            }
+            isMaxiPriestAudioEnabled = shouldEnableAudio;
             syncMaxiPriestLayerAudio();
             maxiPriestAudioIcon.textContent = isMaxiPriestAudioEnabled ? 'volume_up' : 'volume_off';
+            maxiPriestAudioToggle.dataset.muted = isMaxiPriestAudioEnabled ? 'false' : 'true';
             maxiPriestAudioToggle.setAttribute('aria-label', isMaxiPriestAudioEnabled ? 'Turn Maxi Priest video audio off' : 'Turn Maxi Priest video audio on');
         });
 
@@ -1194,9 +1287,13 @@ allowfullscreen>
         westPalmBeachAudioToggle?.addEventListener('click', () => {
             if (!westPalmBeachVideo) return;
             const shouldUnmute = westPalmBeachVideo.muted;
+            if (shouldUnmute) {
+                muteAllOtherMedia('west-palm-beach-html5');
+            }
             westPalmBeachVideo.muted = !shouldUnmute;
             westPalmBeachVideo.volume = 1;
             westPalmBeachAudioIcon.textContent = shouldUnmute ? 'volume_up' : 'volume_off';
+            westPalmBeachAudioToggle.dataset.muted = shouldUnmute ? 'false' : 'true';
             westPalmBeachAudioToggle.setAttribute('aria-label', shouldUnmute ? 'Turn City of West Palm Beach video audio off' : 'Turn City of West Palm Beach video audio on');
             westPalmBeachVideo.play().catch(() => {});
         });
@@ -1271,6 +1368,129 @@ allowfullscreen>
         let hasAudioBeenActivated = false;
         let hasCardInteracted = false;
 
+        registerYouTubeAudioSource({
+            id: 'hero-background-youtube',
+            playerGetter: () => (isPlayerReady ? player : null),
+            button: muteToggle,
+            icon: muteIcon,
+            labels: {
+                on: 'Turn hero background video audio on',
+                off: 'Turn hero background video audio off'
+            }
+        });
+
+        registerYouTubeAudioSource({
+            id: 'seascape-youtube',
+            playerGetter: () => (isSeascapePlayerReady ? seascapePlayer : null),
+            button: seascapeAudioToggle,
+            icon: seascapeAudioIcon,
+            labels: {
+                on: 'Turn Seascape video audio on',
+                off: 'Turn Seascape video audio off'
+            }
+        });
+
+        registerYouTubeAudioSource({
+            id: 'weightloss-youtube',
+            playerGetter: () => (isWeightlossPlayerReady ? weightlossPlayer : null),
+            button: weightlossAudioToggle,
+            icon: weightlossAudioIcon,
+            labels: {
+                on: 'Turn WeightLossDavie video audio on',
+                off: 'Turn WeightLossDavie video audio off'
+            }
+        });
+
+        registerYouTubeAudioSource({
+            id: 'stashbox-youtube',
+            playerGetter: () => (isStashboxPlayerReady ? stashboxPlayer : null),
+            button: stashboxAudioToggle,
+            icon: stashboxAudioIcon,
+            labels: {
+                on: 'Turn Stashbox YouTube Growth video audio on',
+                off: 'Turn Stashbox YouTube Growth video audio off'
+            }
+        });
+
+        registerYouTubeAudioSource({
+            id: 'darcey-youtube',
+            playerGetter: () => (isDarceyPlayerReady ? darceyPlayer : null),
+            button: darceyAudioToggle,
+            icon: darceyAudioIcon,
+            labels: {
+                on: 'Turn Darcey & Stacey Silva video audio on',
+                off: 'Turn Darcey & Stacey Silva video audio off'
+            }
+        });
+
+        registerYouTubeAudioSource({
+            id: 'silverback-video',
+            playerGetter: null,
+            button: silverbackAudioToggle,
+            icon: silverbackAudioIcon,
+            labels: {
+                on: 'Turn Silverback video audio on',
+                off: 'Turn Silverback video audio off'
+            }
+        });
+
+        registerHtml5AudioSource({
+            id: 'west-palm-beach-html5',
+            element: westPalmBeachVideo,
+            button: westPalmBeachAudioToggle,
+            icon: westPalmBeachAudioIcon,
+            labels: {
+                on: 'Turn City of West Palm Beach video audio on',
+                off: 'Turn City of West Palm Beach video audio off'
+            }
+        });
+
+        registerHtml5AudioSource({
+            id: 'maxi-priest-html5',
+            element: maxiPriestLayers[0] ?? null,
+            button: maxiPriestAudioToggle,
+            icon: maxiPriestAudioIcon,
+            labels: {
+                on: 'Turn Maxi Priest video audio on',
+                off: 'Turn Maxi Priest video audio off'
+            },
+            onMute: () => {
+                isMaxiPriestAudioEnabled = false;
+                syncMaxiPriestLayerAudio();
+            }
+        });
+
+        registerHtml5AudioSource({
+            id: 'floating-hero-card-html5',
+            element: layers[0] ?? null,
+            button: miniToggle,
+            icon: miniToggleIcon,
+            labels: {
+                on: 'Turn floating hero video audio on',
+                off: 'Turn floating hero video audio off'
+            },
+            onMute: () => {
+                hasAudioBeenActivated = false;
+                for (const layer of layers) {
+                    layer.muted = true;
+                    layer.volume = 1;
+                }
+                updateAudioIndicator();
+            }
+        });
+
+        mediaAudioRegistry.forEach((entry) => {
+            if (entry.button?.dataset) {
+                entry.button.dataset.muted = 'true';
+            }
+            if (entry.button) {
+                entry.button.setAttribute('aria-label', entry.labels?.on ?? 'Turn video audio on');
+            }
+            if (entry.icon) {
+                entry.icon.textContent = 'volume_off';
+            }
+        });
+
         function pickNextRandomIndex() {
             if (!videoPlaylist.length) return -1;
             if (videoPlaylist.length === 1) return 0;
@@ -1295,7 +1515,11 @@ allowfullscreen>
         // Card-wide mute/unmute controller: toggles audio without restarting playback.
         async function toggleCardAudio() {
             hasCardInteracted = true;
-            hasAudioBeenActivated = !hasAudioBeenActivated;
+            const shouldEnableAudio = !hasAudioBeenActivated;
+            if (shouldEnableAudio) {
+                muteAllOtherMedia('floating-hero-card-html5');
+            }
+            hasAudioBeenActivated = shouldEnableAudio;
 
             for (const layer of layers) {
                 layer.muted = !hasAudioBeenActivated;
