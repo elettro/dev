@@ -556,7 +556,7 @@
 </div>
 </section>
 <!-- Portfolio Highlights -->
-<section class="py-24 bg-surface-container-low">
+<section class="py-32 bg-surface-container-low">
 <div class="max-w-7xl mx-auto px-6">
 <div class="flex items-center justify-between mb-16">
 <h2 class="font-headline text-3xl md:text-5xl font-bold text-white">Work Highlights</h2>
@@ -654,6 +654,42 @@ allowfullscreen>
 <button aria-label="Turn Stashbox YouTube Growth video audio on" class="absolute bottom-2 right-2 z-10 h-8 w-8 rounded-full border border-white/30 bg-surface/65 text-white backdrop-blur-sm transition-all hover:border-primary hover:text-primary" id="stashbox-audio-toggle" type="button">
 <span class="material-symbols-outlined text-base leading-none" id="stashbox-audio-icon">volume_off</span>
 </button>
+</div>
+<div class="break-inside-avoid group relative rounded-2xl overflow-hidden">
+
+  <!-- Video -->
+  <div class="relative w-full aspect-video bg-black">
+    <iframe
+      id="silverback-video"
+      class="absolute inset-0 w-full h-full object-cover"
+      src="https://www.youtube.com/embed/L_wCyky9fuM?autoplay=1&mute=1&loop=1&playlist=L_wCyky9fuM&controls=0&showinfo=0&modestbranding=1&playsinline=1&enablejsapi=1"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+
+    <!-- Overlay Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+
+    <!-- Text -->
+    <div class="absolute bottom-0 left-0 p-6 z-10">
+      <span class="text-primary text-xs font-bold block mb-2">
+        Video Production, Graphics, Tech Consulting
+      </span>
+      <h4 class="text-white text-xl font-bold">
+        Jon Philips, Owner - Silverback Management
+      </h4>
+    </div>
+
+    <!-- Mute Toggle -->
+    <button
+      aria-label="Toggle video audio"
+      class="absolute bottom-3 right-3 z-20 h-8 w-8 rounded-full border border-white/30 bg-black/60 text-white backdrop-blur-sm flex items-center justify-center"
+      onclick="toggleYTVideo('silverback-video', this)">
+      <span class="material-symbols-outlined text-sm">volume_off</span>
+    </button>
+
+  </div>
 </div>
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
 <div class="relative w-full aspect-square overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700 grayscale-0 group-hover:grayscale">
@@ -875,6 +911,17 @@ allowfullscreen>
             'videos/west-palm-beach-thank-you-3.mp4'
         ];
         let westPalmBeachVideoIndex = 0;
+
+
+        function toggleYTVideo(id, btn) {
+            const iframe = document.getElementById(id);
+            iframe.contentWindow.postMessage(JSON.stringify({
+                event: "command",
+                func: "unMute"
+            }), "*");
+
+            btn.innerHTML = '<span class="material-symbols-outlined text-sm">volume_up</span>';
+        }
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
