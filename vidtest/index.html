@@ -915,12 +915,17 @@ allowfullscreen>
 
         function toggleYTVideo(id, btn) {
             const iframe = document.getElementById(id);
+            if (!iframe?.contentWindow) return;
+
+            const isMuted = btn.dataset.muted !== 'false';
             iframe.contentWindow.postMessage(JSON.stringify({
                 event: "command",
-                func: "unMute"
+                func: isMuted ? "unMute" : "mute"
             }), "*");
 
-            btn.innerHTML = '<span class="material-symbols-outlined text-sm">volume_up</span>';
+            btn.dataset.muted = isMuted ? 'false' : 'true';
+            btn.setAttribute('aria-label', isMuted ? 'Mute video audio' : 'Unmute video audio');
+            btn.innerHTML = `<span class="material-symbols-outlined text-sm">${isMuted ? 'volume_up' : 'volume_off'}</span>`;
         }
 
         function onYouTubeIframeAPIReady() {
