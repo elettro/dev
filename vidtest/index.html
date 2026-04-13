@@ -486,11 +486,32 @@ allowfullscreen>
 </div>
 </div>
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
-<img class="w-full transition-all duration-700 grayscale-0 group-hover:grayscale" data-alt="Minimalist architectural space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD8crFRY93a7AtbMZCTWYtvPTPWeB7ZLVvlBxSPbMwxY8WCnAewO9wfyB-_SOGCqztFEUCghz0X_TmBm1h-NOGtPEUouy-Kp5_0nk3qtJLmKxstgg08ZHvv4ejV5O2itmDNrQRfRk2-6SWWD1Uh-tsGSpIun_8cG7kPZEsv-thZBCpzOFdG_WPN3V_t4DANZni6WTnrqYlnHTpJjd8cp4_RJ8AWq8jWrMgdNFAxNqF9LvdnZmUL5rOvGIQKue0MMtbRq_pUS1zZBuz"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
-<span class="text-secondary font-bold text-xs mb-2">INTERACTIVE</span>
-<h4 class="font-headline text-xl font-bold text-white">Spatial Portfolio</h4>
+<div class="relative w-full aspect-[9/16] overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700 grayscale-0 group-hover:grayscale">
+<iframe
+id="darcey-youtube-player"
+class="absolute inset-0 h-full w-full pointer-events-none opacity-100 transition-opacity duration-500"
+src="https://www.youtube.com/embed/lh_k2ulBlcQ?autoplay=1&amp;mute=1&amp;controls=0&amp;loop=1&amp;playlist=lh_k2ulBlcQ&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;enablejsapi=1"
+title="Darcey &amp; Stacey Silva visual"
+loading="lazy"
+allow="autoplay; encrypted-media; picture-in-picture"
+referrerpolicy="strict-origin-when-cross-origin"
+frameborder="0"
+allowfullscreen>
+</iframe>
 </div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end pointer-events-none">
+<span class="text-secondary font-bold text-xs mb-2">YouTube, Video &amp; Music Production</span>
+<h4 class="font-headline text-xl font-bold text-white">Darcey &amp; Stacey Silva</h4>
+<div class="mt-4 flex flex-wrap gap-2 pointer-events-auto">
+<a class="text-white/95 text-[11px] font-bold uppercase tracking-wide border border-white/30 bg-surface/55 hover:bg-surface/75 hover:border-primary hover:text-primary transition-colors rounded-full px-3 py-1.5 backdrop-blur-sm" href="https://www.youtube.com/@DarceyStaceySilva" target="_blank" rel="noopener noreferrer">YouTube</a>
+<a class="text-white/95 text-[11px] font-bold uppercase tracking-wide border border-white/30 bg-surface/55 hover:bg-surface/75 hover:border-primary hover:text-primary transition-colors rounded-full px-3 py-1.5 backdrop-blur-sm" href="https://open.spotify.com/artist/4xvbBkUM1l0Z8F897TgExb" target="_blank" rel="noopener noreferrer">Spotify</a>
+<a class="text-white/95 text-[11px] font-bold uppercase tracking-wide border border-white/30 bg-surface/55 hover:bg-surface/75 hover:border-primary hover:text-primary transition-colors rounded-full px-3 py-1.5 backdrop-blur-sm" href="https://www.instagram.com/darceysilva/" target="_blank" rel="noopener noreferrer">Darcey IG</a>
+<a class="text-white/95 text-[11px] font-bold uppercase tracking-wide border border-white/30 bg-surface/55 hover:bg-surface/75 hover:border-primary hover:text-primary transition-colors rounded-full px-3 py-1.5 backdrop-blur-sm" href="https://www.instagram.com/staceysilvatv/" target="_blank" rel="noopener noreferrer">Stacey IG</a>
+</div>
+</div>
+<button aria-label="Turn Darcey &amp; Stacey Silva video audio on" class="absolute bottom-2 right-2 z-10 h-8 w-8 rounded-full border border-white/30 bg-surface/65 text-white backdrop-blur-sm transition-all hover:border-primary hover:text-primary" id="darcey-audio-toggle" type="button">
+<span class="material-symbols-outlined text-base leading-none" id="darcey-audio-icon">volume_off</span>
+</button>
 </div>
 </div>
 </div>
@@ -605,6 +626,7 @@ allowfullscreen>
         let seascapePlayer;
         let weightlossPlayer;
         let stashboxPlayer;
+        let darceyPlayer;
         let isPlayerReady = false;
         const muteToggle = document.getElementById('mute-toggle');
         const muteIcon = document.getElementById('mute-icon');
@@ -615,12 +637,19 @@ allowfullscreen>
         const stashboxAudioToggle = document.getElementById('stashbox-audio-toggle');
         const stashboxAudioIcon = document.getElementById('stashbox-audio-icon');
         const stashboxPlayerFrame = document.getElementById('stashbox-youtube-player');
+        const darceyAudioToggle = document.getElementById('darcey-audio-toggle');
+        const darceyAudioIcon = document.getElementById('darcey-audio-icon');
+        const darceyPlayerFrame = document.getElementById('darcey-youtube-player');
         let isSeascapePlayerReady = false;
         let isWeightlossPlayerReady = false;
         let isStashboxPlayerReady = false;
+        let isDarceyPlayerReady = false;
         const stashboxVideoIds = ['ojycs1vu48M', '6DmxgBdUDmA', 'VvBB3fPY0b0', '3hGuST68C2Y', '30EvQVtQoa8', '8Apv0NyGMsE', 'pWiojoLw1KM'];
         let stashboxVideoIndex = 0;
         let stashboxCycleTimer = null;
+        const darceyVideoIds = ['lh_k2ulBlcQ', 'ZVcIll8Vc9M', 'RAJ7Hko4eWg', '_SdOOWpJlrM', '1au1_EBMVok'];
+        let darceyVideoIndex = 0;
+        let darceyCycleTimer = null;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -669,6 +698,17 @@ allowfullscreen>
                         event.target.mute();
                         event.target.playVideo();
                         startStashboxVideoCycle();
+                    }
+                }
+            });
+
+            darceyPlayer = new YT.Player('darcey-youtube-player', {
+                events: {
+                    onReady: (event) => {
+                        isDarceyPlayerReady = true;
+                        event.target.mute();
+                        event.target.playVideo();
+                        startDarceyVideoCycle();
                     }
                 }
             });
@@ -751,6 +791,41 @@ allowfullscreen>
                 stashboxPlayer.mute();
                 stashboxAudioIcon.textContent = 'volume_off';
                 stashboxAudioToggle.setAttribute('aria-label', 'Turn Stashbox YouTube Growth video audio on');
+            }
+        });
+
+        function playNextDarceyVideo() {
+            if (!isDarceyPlayerReady || !darceyPlayer) return;
+            darceyVideoIndex = (darceyVideoIndex + 1) % darceyVideoIds.length;
+            darceyPlayerFrame?.classList.add('opacity-0');
+
+            window.setTimeout(() => {
+                darceyPlayer.loadVideoById({
+                    videoId: darceyVideoIds[darceyVideoIndex],
+                    startSeconds: 0
+                });
+                darceyPlayerFrame?.classList.remove('opacity-0');
+            }, 220);
+        }
+
+        function startDarceyVideoCycle() {
+            if (darceyCycleTimer) {
+                window.clearInterval(darceyCycleTimer);
+            }
+            darceyCycleTimer = window.setInterval(playNextDarceyVideo, 12000);
+        }
+
+        darceyAudioToggle?.addEventListener('click', () => {
+            if (!isDarceyPlayerReady || !darceyPlayer) return;
+
+            if (darceyPlayer.isMuted()) {
+                darceyPlayer.unMute();
+                darceyAudioIcon.textContent = 'volume_up';
+                darceyAudioToggle.setAttribute('aria-label', 'Turn Darcey & Stacey Silva video audio off');
+            } else {
+                darceyPlayer.mute();
+                darceyAudioIcon.textContent = 'volume_off';
+                darceyAudioToggle.setAttribute('aria-label', 'Turn Darcey & Stacey Silva video audio on');
             }
         });
 
