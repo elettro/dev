@@ -452,11 +452,26 @@ allowfullscreen>
 </div>
 </div>
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
-<img class="w-full transition-all duration-700 grayscale-0 group-hover:grayscale" data-alt="Dark mode software interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCI_kBA-hcPzy1qBKlZ4kwfpP4CQpi2y2rOFU_xUqMXS0KvMJqXmFVnOA54X7RbB7BpaUINj8tR7ufTSlCG_8Niyq59lIpNmTPcSOyGejfCL-CkZY8L_KKYesIAD2jAl0R5l8mfLoZv7rn1uhbnF8U8jpOCQ-9nk_ZWdF3hkgcDrvjqUA8UR-YsNTk0Chgu_6aeqizuIAdtWSoHtZPcESU12ORN0TSIG2u8YndefRFnzdj4RYlo9hQjU67p6760JHHzURtKvR5JzNn"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
-<span class="text-secondary font-bold text-xs mb-2">WEB DEVELOPMENT</span>
-<h4 class="font-headline text-xl font-bold text-white">CryptoFlow Dashboard</h4>
+<div class="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-surface-container-low transition-all duration-700 grayscale-0 group-hover:grayscale">
+<iframe
+id="stashbox-youtube-player"
+class="absolute inset-0 h-full w-full pointer-events-none opacity-100 transition-opacity duration-500"
+src="https://www.youtube.com/embed/ojycs1vu48M?autoplay=1&amp;mute=1&amp;controls=0&amp;loop=1&amp;playlist=ojycs1vu48M&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;enablejsapi=1"
+title="Stashbox YouTube Growth visual"
+loading="lazy"
+allow="autoplay; encrypted-media; picture-in-picture"
+referrerpolicy="strict-origin-when-cross-origin"
+frameborder="0"
+allowfullscreen>
+</iframe>
 </div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end pointer-events-none">
+<span class="text-secondary font-bold text-xs mb-2">Branding, Web Dev, Video Production</span>
+<h4 class="font-headline text-xl font-bold text-white">Stashbox YouTube Growth</h4>
+</div>
+<button aria-label="Turn Stashbox YouTube Growth video audio on" class="absolute bottom-2 right-2 z-10 h-8 w-8 rounded-full border border-white/30 bg-surface/65 text-white backdrop-blur-sm transition-all hover:border-primary hover:text-primary" id="stashbox-audio-toggle" type="button">
+<span class="material-symbols-outlined text-base leading-none" id="stashbox-audio-icon">volume_off</span>
+</button>
 </div>
 <div class="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl">
 <img class="w-full transition-all duration-700 grayscale-0 group-hover:grayscale" data-alt="Behind the scenes of professional photo shoot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2LtclYTwXFlkMlQaVhjCP2hj2fex76AmIVDw4V6UylS-jliRZNaH4KHvzg7xKgBWuW-4W2KvdCKN3c5oAQeTq33Xun8E3MZyHhpVuntI2kKN9Z_-lfeBrcesvAxT_NqfXj5P0v7tz61mGDZ-7kaxPK9FTHJmj50ayLNVBvZqggqyW8l2_DkWsmv5dGotmo8coVcSuaZFmq9CL9S2F_29XuB9hnaR8EiiDbrM5d-Kg5fJKS0zTcIcZLYj8VY0os328MdInm0Rcj8FL"/>
@@ -584,6 +599,7 @@ allowfullscreen>
         let player;
         let seascapePlayer;
         let weightlossPlayer;
+        let stashboxPlayer;
         let isPlayerReady = false;
         const muteToggle = document.getElementById('mute-toggle');
         const muteIcon = document.getElementById('mute-icon');
@@ -591,8 +607,15 @@ allowfullscreen>
         const seascapeAudioIcon = document.getElementById('seascape-audio-icon');
         const weightlossAudioToggle = document.getElementById('weightloss-audio-toggle');
         const weightlossAudioIcon = document.getElementById('weightloss-audio-icon');
+        const stashboxAudioToggle = document.getElementById('stashbox-audio-toggle');
+        const stashboxAudioIcon = document.getElementById('stashbox-audio-icon');
+        const stashboxPlayerFrame = document.getElementById('stashbox-youtube-player');
         let isSeascapePlayerReady = false;
         let isWeightlossPlayerReady = false;
+        let isStashboxPlayerReady = false;
+        const stashboxVideoIds = ['ojycs1vu48M', '6DmxgBdUDmA', 'VvBB3fPY0b0', '3hGuST68C2Y', '30EvQVtQoa8', '8Apv0NyGMsE', 'pWiojoLw1KM'];
+        let stashboxVideoIndex = 0;
+        let stashboxCycleTimer = null;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -630,6 +653,17 @@ allowfullscreen>
                         isWeightlossPlayerReady = true;
                         event.target.mute();
                         event.target.playVideo();
+                    }
+                }
+            });
+
+            stashboxPlayer = new YT.Player('stashbox-youtube-player', {
+                events: {
+                    onReady: (event) => {
+                        isStashboxPlayerReady = true;
+                        event.target.mute();
+                        event.target.playVideo();
+                        startStashboxVideoCycle();
                     }
                 }
             });
@@ -677,6 +711,41 @@ allowfullscreen>
                 weightlossPlayer.mute();
                 weightlossAudioIcon.textContent = 'volume_off';
                 weightlossAudioToggle.setAttribute('aria-label', 'Turn WeightLossDavie video audio on');
+            }
+        });
+
+        function playNextStashboxVideo() {
+            if (!isStashboxPlayerReady || !stashboxPlayer) return;
+            stashboxVideoIndex = (stashboxVideoIndex + 1) % stashboxVideoIds.length;
+            stashboxPlayerFrame?.classList.add('opacity-0');
+
+            window.setTimeout(() => {
+                stashboxPlayer.loadVideoById({
+                    videoId: stashboxVideoIds[stashboxVideoIndex],
+                    startSeconds: 0
+                });
+                stashboxPlayerFrame?.classList.remove('opacity-0');
+            }, 220);
+        }
+
+        function startStashboxVideoCycle() {
+            if (stashboxCycleTimer) {
+                window.clearInterval(stashboxCycleTimer);
+            }
+            stashboxCycleTimer = window.setInterval(playNextStashboxVideo, 12000);
+        }
+
+        stashboxAudioToggle?.addEventListener('click', () => {
+            if (!isStashboxPlayerReady || !stashboxPlayer) return;
+
+            if (stashboxPlayer.isMuted()) {
+                stashboxPlayer.unMute();
+                stashboxAudioIcon.textContent = 'volume_up';
+                stashboxAudioToggle.setAttribute('aria-label', 'Turn Stashbox YouTube Growth video audio off');
+            } else {
+                stashboxPlayer.mute();
+                stashboxAudioIcon.textContent = 'volume_off';
+                stashboxAudioToggle.setAttribute('aria-label', 'Turn Stashbox YouTube Growth video audio on');
             }
         });
 
