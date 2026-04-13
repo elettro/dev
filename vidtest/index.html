@@ -672,6 +672,7 @@ allowfullscreen>
         let maxiPriestActiveLayerIndex = 0;
         let maxiPriestVideoIndex = 0;
         let maxiPriestCycleTimer = null;
+        let isMaxiPriestAudioEnabled = false;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -860,6 +861,14 @@ allowfullscreen>
             layer.play().catch(() => {});
         }
 
+        function syncMaxiPriestLayerAudio() {
+            maxiPriestLayers.forEach((layer, index) => {
+                const shouldBeMuted = !isMaxiPriestAudioEnabled || index !== maxiPriestActiveLayerIndex;
+                layer.muted = shouldBeMuted;
+                layer.volume = 1;
+            });
+        }
+
         function cycleMaxiPriestVideo() {
             if (maxiPriestLayers.length < 2) return;
             const currentLayer = maxiPriestLayers[maxiPriestActiveLayerIndex];
@@ -874,6 +883,7 @@ allowfullscreen>
             currentLayer.classList.remove('opacity-100');
             currentLayer.classList.add('opacity-0');
             maxiPriestActiveLayerIndex = nextLayerIndex;
+            syncMaxiPriestLayerAudio();
         }
 
         function startMaxiPriestCycle() {
@@ -884,6 +894,7 @@ allowfullscreen>
             playMaxiPriestLayer(maxiPriestLayers[1], maxiPriestVideos[1]);
             maxiPriestLayers[1].classList.remove('opacity-100');
             maxiPriestLayers[1].classList.add('opacity-0');
+            syncMaxiPriestLayerAudio();
 
             if (maxiPriestCycleTimer) {
                 window.clearInterval(maxiPriestCycleTimer);
@@ -893,13 +904,10 @@ allowfullscreen>
 
         maxiPriestAudioToggle?.addEventListener('click', () => {
             if (!maxiPriestLayers.length) return;
-            const shouldUnmute = maxiPriestLayers.every((layer) => layer.muted);
-            maxiPriestLayers.forEach((layer) => {
-                layer.muted = !shouldUnmute;
-                layer.volume = 1;
-            });
-            maxiPriestAudioIcon.textContent = shouldUnmute ? 'volume_up' : 'volume_off';
-            maxiPriestAudioToggle.setAttribute('aria-label', shouldUnmute ? 'Turn Maxi Priest video audio off' : 'Turn Maxi Priest video audio on');
+            isMaxiPriestAudioEnabled = !isMaxiPriestAudioEnabled;
+            syncMaxiPriestLayerAudio();
+            maxiPriestAudioIcon.textContent = isMaxiPriestAudioEnabled ? 'volume_up' : 'volume_off';
+            maxiPriestAudioToggle.setAttribute('aria-label', isMaxiPriestAudioEnabled ? 'Turn Maxi Priest video audio off' : 'Turn Maxi Priest video audio on');
         });
 
         startMaxiPriestCycle();
