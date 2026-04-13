@@ -241,19 +241,24 @@
       .video-audio-mini-toggle .material-symbols-outlined {
         font-size: 1.05rem;
       }
+      .right-form-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
       .beehiiv-form-shell {
         position: relative;
         width: 100%;
         max-width: 36rem;
         margin-inline: auto;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        align-items: stretch;
+        justify-content: stretch;
         border-radius: 1.5rem;
         border: 1px solid rgba(129, 236, 255, 0.18);
         background: linear-gradient(155deg, rgba(12, 25, 48, 0.96) 0%, rgba(8, 17, 36, 0.98) 100%);
         box-shadow: 0 30px 80px rgba(1, 7, 20, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
-        padding: clamp(0.75rem, 1vw, 1rem);
+        padding: 0;
         overflow: hidden;
       }
       .beehiiv-form-shell::before {
@@ -264,55 +269,56 @@
         border-radius: inherit;
         background: radial-gradient(circle at top right, rgba(129, 236, 255, 0.16), transparent 55%);
       }
-      .beehiiv-embed-wrap {
+      .form-shell {
         position: relative;
         z-index: 1;
-        width: min(100%, 31.5rem);
+        width: 100%;
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 40px;
+      }
+      .form-inner {
+        width: 100%;
+        max-width: 600px;
+      }
+      .beehiiv-embed-wrap {
+        position: relative;
+        width: 100%;
         margin-inline: auto;
         border-radius: 1rem;
         background: rgba(9, 19, 38, 0.82);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        min-height: 30.5rem;
         overflow: hidden;
       }
+      .form-inner iframe,
       .beehiiv-embed-wrap iframe {
         display: block;
         width: 100% !important;
-        min-height: 30.5rem;
+        min-height: 320px;
         border: 0;
         background: transparent;
+        border-radius: 12px;
       }
       @media (max-width: 768px) {
         .beehiiv-form-shell {
           border-radius: 1.125rem;
-          padding: 0.625rem;
         }
-        .beehiiv-embed-wrap {
-          min-height: 29rem;
+        .form-shell {
+          padding: 28px;
         }
-        .beehiiv-embed-wrap iframe {
-          min-height: 29rem;
+        .form-inner iframe {
+          min-height: 300px;
         }
       }
       @media (max-width: 480px) {
-        .beehiiv-form-shell {
-          padding: 0.5rem;
-        }
-        .beehiiv-embed-wrap {
-          --mobile-form-width: 430px;
-          --mobile-form-height: 760px;
-          --mobile-form-scale: min(1, calc((100vw - 3.25rem) / var(--mobile-form-width)));
-          width: 100%;
-          min-height: calc(var(--mobile-form-height) * var(--mobile-form-scale));
-          overflow: hidden;
-          border-radius: 0.875rem;
+        .form-shell {
+          padding: 16px;
         }
         .beehiiv-embed-wrap iframe {
-          width: var(--mobile-form-width) !important;
-          min-width: var(--mobile-form-width);
-          min-height: var(--mobile-form-height);
-          transform: scale(var(--mobile-form-scale));
-          transform-origin: top left;
+          min-height: 280px;
         }
       }
     </style>
@@ -667,10 +673,14 @@ allowfullscreen>
                         </p>
 <p class="text-on-surface-variant/80 text-sm uppercase tracking-[0.22em] font-bold">Premium insights. No noise.</p>
 </div>
+<div class="w-full right-form-container">
 <div class="w-full beehiiv-form-shell">
 <script async="" src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+<div class="form-shell">
+<div class="form-inner">
 <div class="beehiiv-embed-wrap">
 <iframe src="https://subscribe-forms.beehiiv.com/2179cf81-b441-4c14-960e-45e6cb87ffd7" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no"></iframe>
+</div>
 </div>
 </div>
 </div>
