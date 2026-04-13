@@ -294,6 +294,27 @@
           min-height: 29rem;
         }
       }
+      @media (max-width: 480px) {
+        .beehiiv-form-shell {
+          padding: 0.5rem;
+        }
+        .beehiiv-embed-wrap {
+          --mobile-form-width: 430px;
+          --mobile-form-height: 760px;
+          --mobile-form-scale: min(1, calc((100vw - 3.25rem) / var(--mobile-form-width)));
+          width: 100%;
+          min-height: calc(var(--mobile-form-height) * var(--mobile-form-scale));
+          overflow: hidden;
+          border-radius: 0.875rem;
+        }
+        .beehiiv-embed-wrap iframe {
+          width: var(--mobile-form-width) !important;
+          min-width: var(--mobile-form-width);
+          min-height: var(--mobile-form-height);
+          transform: scale(var(--mobile-form-scale));
+          transform-origin: top left;
+        }
+      }
     </style>
 </head>
 <body class="bg-surface font-body text-on-surface overflow-x-hidden selection:bg-secondary selection:text-on-secondary">
@@ -632,10 +653,10 @@ allowfullscreen>
 </div>
 </section>
 <!-- CTA Section -->
-<section class="py-24 px-6">
+<section class="py-24 px-6 max-[480px]:px-4">
 <div class="max-w-7xl mx-auto rounded-[2rem] bg-surface-container-highest border border-outline-variant/20 overflow-hidden relative">
 <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&amp;w=2070')] bg-cover bg-center opacity-5 mix-blend-overlay" data-alt="Textured technological background"></div>
-<div class="relative z-10 px-8 py-20 lg:px-20 lg:py-32 grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(340px,560px)] lg:gap-16 items-center">
+<div class="relative z-10 px-8 py-20 max-[480px]:px-4 max-[480px]:py-12 lg:px-20 lg:py-32 grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(340px,560px)] lg:gap-16 items-center">
 <div class="text-center lg:text-left">
 <p class="text-primary font-headline font-bold tracking-[0.3em] text-xs uppercase mb-5">Newsletter</p>
 <h2 class="font-headline text-5xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-7">
