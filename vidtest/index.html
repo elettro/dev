@@ -76,6 +76,9 @@
       }
     </script>
 <style>
+      html {
+        scroll-behavior: smooth;
+      }
       .material-symbols-outlined {
         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
       }
@@ -431,6 +434,7 @@
 <a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Portfolio</a>
 <a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Process</a>
 <a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#contact">Contact</a>
 <div class="h-6 w-px bg-outline-variant/30 mx-2"></div>
 <button class="group flex items-center justify-center size-10 rounded-full bg-surface-container-highest/40 hover:bg-surface-container-highest transition-all text-on-surface-variant hover:text-white" id="mute-toggle">
 <span class="material-symbols-outlined text-xl" data-icon="volume_off" id="mute-icon">volume_off</span>
@@ -841,6 +845,74 @@ allowfullscreen>
 </div>
 </div>
 </section>
+
+    <!-- Option 1: Clean Corporate Split Layout -->
+    <section id="contact" class="concept">
+      <div class="container concept-shell">
+        <span class="option-label">Option 1</span>
+        <h2>Clean Corporate Split Layout</h2>
+        <p class="best-for"><strong>Best for:</strong> Trust-first leads who want structure and professionalism.</p>
+        <div class="grid-two">
+          <div>
+            <p class="section-support">
+              A polished split layout with clear positioning for Elettro services and a direct path to contact.
+              Ideal when credibility and clarity need to be front-and-center.
+            </p>
+            <div class="contact-info">
+              <h3>Contact Elettro</h3>
+              <ul class="contact-list">
+                <li>Email: <a href="mailto:contact@elettrocom">contact@elettrocom</a></li>
+                <li>Phone: <a href="tel:13104086687">310.408.6687</a></li>
+                <li>Services: Websites, Graphics, Video, Music, Automation, AI Marketing</li>
+              </ul>
+            </div>
+            <div class="review-cta">
+              <p>Already worked with Elettro? Your feedback helps others choose with confidence.</p>
+              <a class="review-link" href="https://maps.app.goo.gl/q5dWaW8WR59F82Up9" target="_blank" rel="noopener noreferrer">Leave a Quick Google Review</a>
+            </div>
+          </div>
+          <div class="form-wrap">
+            <form action="https://formspree.io/f/mpqkzdbw" method="POST">
+              <input type="hidden" name="_subject" value="New Elettro Contact Form Submission" />
+              <div class="row">
+                <div>
+                  <label for="o1-name">Full Name</label>
+                  <input id="o1-name" name="name" type="text" placeholder="Jordan Lee" required />
+                </div>
+                <div>
+                  <label for="o1-email">Business Email</label>
+                  <input id="o1-email" name="email" type="email" placeholder="jordan@company.com" required />
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label for="o1-phone">Phone Number</label>
+                  <input id="o1-phone" name="phone" type="tel" placeholder="(310) 408-6687" />
+                </div>
+                <div>
+                  <label for="o1-service">Primary Service Needed</label>
+                  <select id="o1-service" name="service" required>
+                    <option value="" disabled selected>Select a service</option>
+                    <option>Websites</option>
+                    <option>Graphics</option>
+                    <option>Video</option>
+                    <option>Music</option>
+                    <option>Automation</option>
+                    <option>AI Marketing</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label for="o1-message">Project Overview</label>
+                <textarea id="o1-message" name="message" placeholder="Tell Elettro what you're building and your goals." required></textarea>
+              </div>
+              <button class="btn" type="submit">Send Message</button>
+            </form>
+            <div class="success-note">After submission, your message will be sent securely through Formspree.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 </main>
 <footer class="py-12 border-t border-outline-variant/10 px-6">
 <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
@@ -852,7 +924,7 @@ allowfullscreen>
 </div>
 <span class="font-headline font-extrabold text-xl tracking-tighter text-white/80">Elettro<span class="text-primary/80">.</span></span>
 </div>
-<div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.3em]">© 2024 Elettro Digital Production. Built for the kinetic era.</div>
+<div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.3em]">© 2026 Elettro Digital Production. Built for the kinetic era.</div>
 <div class="flex gap-6">
 <a class="text-on-surface-variant hover:text-white transition-colors" href="#"><span class="material-symbols-outlined text-xl" data-icon="public">public</span></a>
 <a class="text-on-surface-variant hover:text-white transition-colors" href="#"><span class="material-symbols-outlined text-xl" data-icon="movie">movie</span></a>
