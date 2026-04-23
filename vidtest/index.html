@@ -907,6 +907,117 @@
       background: rgba(32, 49, 89, 0.7);
     }
 
+    .availability-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.52rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(158, 175, 210, 0.32);
+      background: linear-gradient(135deg, rgba(13, 20, 38, 0.92), rgba(10, 16, 30, 0.8));
+      color: #f0fbff;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.67rem;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, color 0.28s ease;
+      cursor: pointer;
+    }
+
+    .availability-pill::before {
+      content: "";
+      position: absolute;
+      top: -160%;
+      left: -40%;
+      width: 42%;
+      height: 430%;
+      background: linear-gradient(100deg, transparent 0%, rgba(186, 249, 255, 0.2) 45%, transparent 100%);
+      transform: translateX(-180%) rotate(18deg);
+      transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .availability-pill:hover,
+    .availability-pill:focus-visible {
+      color: #ffffff;
+      border-color: rgba(141, 242, 255, 0.72);
+      transform: translateY(-2px);
+      box-shadow: 0 0 0 1px rgba(99, 255, 216, 0.28), 0 10px 20px rgba(18, 40, 65, 0.5), 0 0 22px rgba(62, 255, 210, 0.25);
+    }
+
+    .availability-pill:hover::before,
+    .availability-pill:focus-visible::before {
+      transform: translateX(300%) rotate(18deg);
+    }
+
+    .availability-pill:active {
+      transform: translateY(-1px) scale(0.992);
+    }
+
+    .availability-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background: radial-gradient(circle at 35% 35%, #cbffe4 10%, #63ffb8 42%, #25d66d 100%);
+      box-shadow: 0 0 0 3px rgba(42, 221, 134, 0.16), 0 0 14px rgba(76, 255, 156, 0.55);
+      flex-shrink: 0;
+    }
+
+    .availability-text {
+      display: inline-block;
+      font-stretch: condensed;
+    }
+
+    .contact-cta {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
+    }
+
+    .contact-cta::after {
+      content: "";
+      position: absolute;
+      inset: -120% auto -120% -35%;
+      width: 38%;
+      background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.33) 52%, transparent 100%);
+      transform: translateX(-220%) rotate(14deg);
+      transition: transform 0.62s cubic-bezier(0.22, 0.61, 0.36, 1);
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .contact-cta:hover,
+    .contact-cta:focus-visible {
+      transform: translateY(-2px);
+      filter: brightness(1.04);
+      box-shadow: 0 0 0 1px rgba(143, 247, 255, 0.4), 0 11px 22px rgba(17, 36, 60, 0.45), 0 0 24px rgba(98, 228, 255, 0.46);
+    }
+
+    .contact-cta:hover::after,
+    .contact-cta:focus-visible::after {
+      transform: translateX(310%) rotate(14deg);
+    }
+
+    .contact-cta:active {
+      transform: translateY(-1px) scale(0.992);
+    }
+
+    @media (max-width: 1140px) {
+      .availability-pill {
+        padding-inline: 0.9rem;
+        font-size: 0.61rem;
+        letter-spacing: 0.11em;
+      }
+    }
+
     /* Hero */
     .hero {
       padding: 4.5rem 0 3rem;
@@ -1267,7 +1378,7 @@
 <!-- Shared Navigation -->
 <header class="fixed top-0 w-full z-50 px-6 py-4 lg:px-20">
 <nav class="glass-nav flex items-center justify-between px-8 py-4 rounded-xl border border-outline-variant/15">
-<div class="flex items-center gap-3 elettro-brand-wrap">
+<div class="flex flex-1 items-center gap-3 elettro-brand-wrap">
 <div class="size-7 text-white">
 <svg class="w-full h-full" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
@@ -1275,7 +1386,13 @@
 </div>
 <img class="brand-logo elettro-nav-logo" src="../images/Elettro-logo-white.png" alt="Elettro" />
 </div>
-<div class="hidden md:flex items-center gap-8">
+<div class="hidden md:flex flex-1 items-center justify-center px-4">
+<a href="#contact" class="availability-pill" aria-label="Available for work">
+<span class="availability-dot"></span>
+<span class="availability-text">AVAILABLE FOR WORK</span>
+</a>
+</div>
+<div class="hidden md:flex flex-1 items-center justify-end gap-8">
 <a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Services</a>
 <a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Portfolio</a>
 <a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Process</a>
@@ -1285,7 +1402,7 @@
 <button class="group flex items-center justify-center size-10 rounded-full bg-surface-container-highest/40 hover:bg-surface-container-highest transition-all text-on-surface-variant hover:text-white" id="mute-toggle">
 <span class="material-symbols-outlined text-xl" data-icon="volume_off" id="mute-icon">volume_off</span>
 </button>
-<button class="bg-primary px-6 py-2.5 rounded-lg text-on-primary-fixed font-bold text-sm hover:shadow-[0_0_20px_rgba(129,236,255,0.4)] transition-all">
+<button class="contact-cta bg-primary px-6 py-2.5 rounded-lg text-on-primary-fixed font-bold text-sm hover:shadow-[0_0_20px_rgba(129,236,255,0.4)] transition-all">
                     Contact Us
                 </button>
 </div>
