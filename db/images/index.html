@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>10 Dropbox Carousel Examples</title>
+  <title>10 Folder-Based Random Carousel Examples</title>
   <style>
     :root {
       --bg: #0b1020;
@@ -13,13 +13,14 @@
       --muted: #aab3d1;
       --line: rgba(255,255,255,0.09);
       --accent: #5aa9ff;
+      --accent-2: #81f0c7;
+      --danger: #ff7b8b;
       --radius: 22px;
       --shadow: 0 20px 50px rgba(0,0,0,0.28);
-      --maxw: 1320px;
+      --maxw: 1360px;
     }
 
     * { box-sizing: border-box; }
-
     html, body {
       margin: 0;
       padding: 0;
@@ -28,51 +29,149 @@
       font-family: Inter, Arial, Helvetica, sans-serif;
     }
 
-    body {
-      padding: 32px 18px 60px;
-    }
-
-    a { color: inherit; }
-
-    .wrap {
-      max-width: var(--maxw);
-      margin: 0 auto;
-    }
+    body { padding: 24px 16px 50px; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; }
 
     .hero {
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
       border: 1px solid var(--line);
       border-radius: 28px;
       padding: 28px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
     }
 
     h1 {
+      margin: 0 0 10px;
       font-size: clamp(30px, 4vw, 54px);
       line-height: 1;
-      margin: 0 0 12px;
       letter-spacing: -0.03em;
     }
 
     .hero p {
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.6;
       margin: 0;
-      max-width: 960px;
+      color: var(--muted);
+      max-width: 1000px;
+      line-height: 1.6;
+      font-size: 16px;
     }
 
-    .note {
-      margin-top: 16px;
-      padding: 16px 18px;
-      background: rgba(90,169,255,0.08);
-      border: 1px solid rgba(90,169,255,0.18);
-      border-radius: 16px;
-      color: #dbe8ff;
+    .picker-panel {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .picker-card, .status-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .picker-card h2, .status-card h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .picker-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(180deg, rgba(90,169,255,0.28), rgba(90,169,255,0.18));
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .action.secondary {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .action.ghost {
+      background: transparent;
+    }
+
+    .action:hover { filter: brightness(1.08); }
+
+    .helper {
+      margin-top: 12px;
+      color: var(--muted);
       font-size: 14px;
       line-height: 1.6;
+    }
+
+    .status-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .status-item {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .status-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .status-item span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .dropzone {
+      margin-top: 14px;
+      border: 2px dashed rgba(129,240,199,0.26);
+      background: rgba(129,240,199,0.05);
+      border-radius: 18px;
+      padding: 22px;
+      text-align: center;
+      color: #ddfff4;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .dropzone.dragover {
+      background: rgba(90,169,255,0.12);
+      border-color: rgba(90,169,255,0.5);
+      transform: scale(1.01);
+    }
+
+    .info-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 22px;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 13px;
     }
 
     .grid {
@@ -84,7 +183,7 @@
     .card {
       background: linear-gradient(180deg, var(--panel), var(--panel-2));
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: 22px;
       box-shadow: var(--shadow);
       overflow: hidden;
       min-width: 0;
@@ -99,11 +198,11 @@
       color: #8ebeff;
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
+      letter-spacing: .18em;
       margin-bottom: 8px;
     }
 
-    h2 {
+    h3 {
       margin: 0;
       font-size: 22px;
       letter-spacing: -0.02em;
@@ -113,14 +212,14 @@
       margin-top: 8px;
       color: var(--muted);
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
     .carousel {
       position: relative;
       aspect-ratio: 16 / 10;
-      background: #05070e;
       overflow: hidden;
+      background: #05070e;
     }
 
     .carousel.tall { aspect-ratio: 9 / 16; }
@@ -130,7 +229,7 @@
     .track {
       display: flex;
       height: 100%;
-      transition: transform 0.55s ease;
+      transition: transform .55s ease;
       will-change: transform;
     }
 
@@ -154,8 +253,8 @@
       left: 16px;
       right: 16px;
       bottom: 16px;
-      background: rgba(8,12,24,0.55);
-      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(8,12,24,.56);
+      border: 1px solid rgba(255,255,255,.12);
       border-radius: 14px;
       padding: 12px 14px;
       backdrop-filter: blur(6px);
@@ -173,19 +272,17 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      border: 0;
-      background: rgba(7,10,18,0.72);
-      color: white;
       width: 42px;
       height: 42px;
       border-radius: 999px;
+      border: 0;
+      background: rgba(7,10,18,.74);
+      color: white;
       cursor: pointer;
       font-size: 18px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
-      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.22);
     }
 
-    .btn:hover { background: rgba(20,28,50,0.92); }
     .btn.prev { left: 12px; }
     .btn.next { right: 12px; }
 
@@ -203,8 +300,8 @@
       width: 10px;
       height: 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.33);
       border: 0;
+      background: rgba(255,255,255,.33);
       cursor: pointer;
       padding: 0;
     }
@@ -216,11 +313,11 @@
       grid-template-columns: repeat(5, 1fr);
       gap: 8px;
       padding: 12px;
-      background: rgba(255,255,255,0.025);
       border-top: 1px solid var(--line);
+      background: rgba(255,255,255,.025);
     }
 
-    .thumbs button {
+    .thumbs button, .filmstrip button {
       appearance: none;
       border: 1px solid var(--line);
       background: transparent;
@@ -228,20 +325,21 @@
       overflow: hidden;
       padding: 0;
       cursor: pointer;
-      aspect-ratio: 1 / 1;
     }
 
-    .thumbs img {
+    .thumbs button { aspect-ratio: 1 / 1; }
+
+    .thumbs img, .filmstrip img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      opacity: 0.72;
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      opacity: .76;
+      transition: opacity .25s ease, transform .25s ease;
     }
 
-    .thumbs button.active img,
-    .thumbs button:hover img {
+    .thumbs button.active img, .filmstrip button.active img,
+    .thumbs button:hover img, .filmstrip button:hover img {
       opacity: 1;
       transform: scale(1.04);
     }
@@ -251,39 +349,18 @@
       gap: 10px;
       overflow-x: auto;
       padding: 14px;
-      scrollbar-width: thin;
       border-top: 1px solid var(--line);
-      background: rgba(255,255,255,0.025);
+      background: rgba(255,255,255,.025);
     }
 
     .filmstrip button {
       flex: 0 0 120px;
       height: 76px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      overflow: hidden;
-      background: transparent;
-      padding: 0;
-      cursor: pointer;
-    }
-
-    .filmstrip img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      opacity: 0.76;
-    }
-
-    .filmstrip button.active img { opacity: 1; }
-
-    .stack-cards .track {
-      height: 100%;
     }
 
     .stack-cards .slide {
       padding: 18px;
-      background: radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+      background: radial-gradient(circle at top, rgba(255,255,255,.06), rgba(255,255,255,.01));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -294,21 +371,13 @@
       height: 88%;
       border-radius: 22px;
       overflow: hidden;
-      box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
       position: relative;
-    }
-
-    .stack-cards .slide-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
     }
 
     .split {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 0;
+      grid-template-columns: 1.15fr .85fr;
     }
 
     .split .text-pane {
@@ -317,11 +386,10 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-height: 100%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
     }
 
-    .split .text-pane h3 {
+    .split .text-pane h4 {
       margin: 0 0 10px;
       font-size: 28px;
       letter-spacing: -0.03em;
@@ -334,10 +402,31 @@
       font-size: 15px;
     }
 
+    .compare-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .mini {
+      aspect-ratio: 4 / 5;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+    }
+
+    .mini img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .marquee-wrap {
       overflow: hidden;
       border-top: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,.03);
     }
 
     .marquee {
@@ -382,126 +471,141 @@
       display: block;
     }
 
-    .compare-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      padding: 12px;
+    .empty {
+      border: 1px solid rgba(255,123,139,.22);
+      background: rgba(255,123,139,.06);
+      color: #ffd8de;
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 10px;
+      line-height: 1.6;
     }
 
-    .compare-strip .mini {
-      aspect-ratio: 4 / 5;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      background: #000;
-    }
-
-    .compare-strip img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .footer-space { height: 10px; }
+    .hidden { display: none !important; }
 
     @media (max-width: 1080px) {
-      .grid { grid-template-columns: 1fr; }
-      .split { grid-template-columns: 1fr; }
+      .picker-panel, .grid, .split { grid-template-columns: 1fr; }
       .split .text-pane { border-left: 0; border-top: 1px solid var(--line); }
     }
 
     @media (max-width: 700px) {
-      body { padding: 16px 12px 40px; }
-      .hero { padding: 20px; }
-      .masonry { columns: 2; }
+      body { padding: 14px 10px 30px; }
+      .hero { padding: 18px; }
+      .picker-grid { grid-template-columns: 1fr; }
       .thumbs { grid-template-columns: repeat(4, 1fr); }
-      .filmstrip button { flex-basis: 96px; height: 64px; }
       .compare-strip { grid-template-columns: 1fr; }
+      .masonry { columns: 2; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <section class="hero">
-      <h1>10 Carousel Examples. One HTML Page.</h1>
+      <h1>10 Carousel Examples. Folder Based.</h1>
       <p>
-        This page includes 10 different carousel and gallery presentation styles. It randomizes image order on load and feeds each section from the same image pool.
+        This version is built to avoid individual links. Load a whole image folder from your computer, Dropbox-synced folder, or drag in a batch of images. The page creates object URLs in the browser, randomizes the full set, and feeds all 10 presentation styles from that pool.
       </p>
-      <div class="note">
-        Important: a plain HTML page cannot reliably read a Dropbox shared folder URL and auto-list every file from the browser alone. Dropbox does not expose a simple client-safe folder listing endpoint for a shared folder page. So the reliable approach is to use direct image URLs in the IMAGE_SOURCES array below, or generate a manifest.json file once and point this page at it.
+
+      <div class="picker-panel">
+        <div class="picker-card">
+          <h2>Load your images</h2>
+          <div class="picker-grid">
+            <label class="action">
+              Choose Folder
+              <input id="folderInput" type="file" webkitdirectory directory multiple accept="image/*" hidden>
+            </label>
+            <label class="action secondary">
+              Choose Files
+              <input id="filesInput" type="file" multiple accept="image/*" hidden>
+            </label>
+            <button class="action ghost" id="shuffleBtn" type="button">Reshuffle All Examples</button>
+            <button class="action ghost" id="clearBtn" type="button">Clear Loaded Images</button>
+          </div>
+          <div class="dropzone" id="dropzone">
+            Drag and drop a folder or a batch of images here.
+          </div>
+          <div class="helper">
+            Best workflow for Dropbox: install Dropbox desktop, sync the folder locally, then click Choose Folder and select that synced folder. That gives you true folder-based loading without needing individual links.
+          </div>
+        </div>
+
+        <div class="status-card">
+          <h2>How this works</h2>
+          <div class="status-list">
+            <div class="status-item">
+              <strong>No individual URLs needed</strong>
+              <span>Select one folder and the page ingests every supported image it finds.</span>
+            </div>
+            <div class="status-item">
+              <strong>Randomized every load</strong>
+              <span>Each carousel pulls from the same image pool but shuffles independently for variety.</span>
+            </div>
+            <div class="status-item">
+              <strong>Pure browser solution</strong>
+              <span>No API keys. No exposed Dropbox token. No server needed.</span>
+            </div>
+            <div class="status-item">
+              <strong>Limitation</strong>
+              <span>A browser still cannot directly crawl a Dropbox shared web folder URL for all files. Folder picker solves that cleanly.</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="grid" id="galleryGrid"></section>
-    <div class="footer-space"></div>
+    <div class="info-bar">
+      <div class="pill" id="countPill">Images loaded: 0</div>
+      <div class="pill" id="namePill">Source: none</div>
+      <div class="pill">Supported: jpg, jpeg, png, webp, gif, avif, bmp, svg</div>
+    </div>
+
+    <div class="empty" id="emptyState">
+      Load a folder to generate the 10 carousel examples. If your Dropbox images are in a synced folder on your computer, choose that folder and this page will treat it like a live image pool.
+    </div>
+
+    <section class="grid hidden" id="galleryGrid"></section>
   </div>
 
   <script>
-    /*
-      HOW TO USE THIS PAGE
+    const state = {
+      items: [],
+      sourceLabel: 'none',
+      objectUrls: [],
+    };
 
-      1) Replace IMAGE_SOURCES below with your direct Dropbox image links.
-      2) Best format is raw image URLs that end with ?raw=1 or dl=1.
-      3) If you only have Dropbox share links, convert them to direct versions.
+    const allowed = new Set(['jpg','jpeg','png','webp','gif','avif','bmp','svg']);
 
-      Example:
-      https://www.dropbox.com/scl/fi/abc123/example.jpg?rlkey=xyz&dl=0
-      becomes
-      https://www.dropbox.com/scl/fi/abc123/example.jpg?rlkey=xyz&raw=1
+    const folderInput = document.getElementById('folderInput');
+    const filesInput = document.getElementById('filesInput');
+    const dropzone = document.getElementById('dropzone');
+    const galleryGrid = document.getElementById('galleryGrid');
+    const emptyState = document.getElementById('emptyState');
+    const countPill = document.getElementById('countPill');
+    const namePill = document.getElementById('namePill');
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    const clearBtn = document.getElementById('clearBtn');
 
-      If you want true auto-folder listing later, use one of these methods:
-      - Generate a manifest.json with all image URLs.
-      - Use Dropbox API with an access token server-side.
-      - Export the folder file list once and paste it into IMAGE_SOURCES.
-    */
+    function cleanupObjectUrls() {
+      state.objectUrls.forEach(url => URL.revokeObjectURL(url));
+      state.objectUrls = [];
+    }
 
-    const DROPBOX_FOLDER_REFERENCE = 'https://www.dropbox.com/scl/fo/os1zxlhxkmpgd35pjf91c/ANdMw7FiJWEaN564D0AkA3s?rlkey=zok2xnicl8r0rzieqd94seqgv&st=zn1xmtpc&dl=0';
+    function getExt(name) {
+      return (name.split('.').pop() || '').toLowerCase();
+    }
 
-    const IMAGE_SOURCES = [
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1493246318656-5bfd4cfb29b5?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1400&q=80',
-      'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1400&q=80'
-    ];
+    function isImageFile(file) {
+      if (file.type && file.type.startsWith('image/')) return true;
+      return allowed.has(getExt(file.name));
+    }
 
-    const variants = [
-      { key: 'standard', title: 'Standard Image Carousel', eyebrow: 'Example 01', desc: 'Classic slider with arrows, dots, autoplay, and captions.', className: '' },
-      { key: 'hero', title: 'Hero Banner Carousel', eyebrow: 'Example 02', desc: 'Wide presentation style for homepage hero use.', className: 'slim' },
-      { key: 'square', title: 'Square Social Carousel', eyebrow: 'Example 03', desc: 'Tight square format for social-style visual browsing.', className: 'square' },
-      { key: 'vertical', title: 'Vertical Story Carousel', eyebrow: 'Example 04', desc: '9:16 presentation for reels, stories, or mobile-first creative.', className: 'tall' },
-      { key: 'thumbs', title: 'Carousel With Thumbnail Navigation', eyebrow: 'Example 05', desc: 'Main image area with clickable thumbnails underneath.', className: '' },
-      { key: 'filmstrip', title: 'Carousel With Filmstrip Selector', eyebrow: 'Example 06', desc: 'Fast browsing layout with horizontal preview strip.', className: '' },
-      { key: 'stack', title: 'Stacked Card Carousel', eyebrow: 'Example 07', desc: 'Premium card presentation with framed visual treatment.', className: 'stack-cards' },
-      { key: 'split', title: 'Split Content Carousel', eyebrow: 'Example 08', desc: 'Visual on one side. Text panel on the other.', className: '' },
-      { key: 'marquee', title: 'Infinite Scrolling Gallery', eyebrow: 'Example 09', desc: 'Not a click slider. Great for continuous logo or moodboard motion.', className: '' },
-      { key: 'masonry', title: 'Masonry Mosaic Gallery', eyebrow: 'Example 10', desc: 'Dense editorial-style image wall using randomized ordering.', className: '' },
-    ];
-
-    function shuffle(array) {
-      const a = [...array];
+    function shuffle(arr) {
+      const a = [...arr];
       for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [a[i], a[j]] = [a[j], a[i]];
       }
       return a;
-    }
-
-    function pickImages(pool, count) {
-      const shuffled = shuffle(pool);
-      const out = [];
-      while (out.length < count) {
-        out.push(...shuffled);
-      }
-      return shuffle(out).slice(0, count);
     }
 
     function esc(str) {
@@ -512,26 +616,60 @@
         .replaceAll('"', '&quot;');
     }
 
+    function pickImages(pool, count) {
+      if (!pool.length) return [];
+      const out = [];
+      while (out.length < count) out.push(...shuffle(pool));
+      return shuffle(out).slice(0, count);
+    }
+
+    async function filesToItems(fileList, sourceLabel) {
+      cleanupObjectUrls();
+      const files = Array.from(fileList).filter(isImageFile);
+      const items = files.map((file, idx) => {
+        const url = URL.createObjectURL(file);
+        state.objectUrls.push(url);
+        return {
+          id: `${Date.now()}-${idx}-${file.name}`,
+          name: file.webkitRelativePath || file.name,
+          file,
+          url,
+        };
+      });
+      state.items = items;
+      state.sourceLabel = sourceLabel;
+      updateStatus();
+      buildPage();
+    }
+
+    function updateStatus() {
+      countPill.textContent = `Images loaded: ${state.items.length}`;
+      namePill.textContent = `Source: ${state.sourceLabel}`;
+      const hasItems = state.items.length > 0;
+      emptyState.classList.toggle('hidden', hasItems);
+      galleryGrid.classList.toggle('hidden', !hasItems);
+    }
+
     function makeSlides(images, withCaption = true, cardStyle = false) {
-      return images.map((src, i) => `
+      return images.map((item, i) => `
         <div class="slide">
-          ${cardStyle ? `<div class="slide-inner"><img src="${esc(src)}" alt="Random image ${i + 1}" loading="lazy" /></div>` : `<img src="${esc(src)}" alt="Random image ${i + 1}" loading="lazy" />`}
-          ${withCaption && !cardStyle ? `<div class="caption">Image ${i + 1}. Randomized from your Dropbox image pool.</div>` : ''}
+          ${cardStyle ? `<div class="slide-inner"><img src="${esc(item.url)}" alt="${esc(item.name)}" loading="lazy"></div>` : `<img src="${esc(item.url)}" alt="${esc(item.name)}" loading="lazy">`}
+          ${withCaption && !cardStyle ? `<div class="caption">${esc(item.name)}</div>` : ''}
         </div>
       `).join('');
     }
 
     function carouselHTML(id, title, eyebrow, desc, images, extra = {}) {
       const aspectClass = extra.aspectClass || '';
-      const withThumbs = extra.thumbs || false;
-      const withFilmstrip = extra.filmstrip || false;
-      const stackCards = extra.stackCards || false;
+      const withThumbs = !!extra.thumbs;
+      const withFilmstrip = !!extra.filmstrip;
+      const stackCards = !!extra.stackCards;
 
       return `
         <article class="card">
           <div class="card-header">
             <div class="eyebrow">${eyebrow}</div>
-            <h2>${title}</h2>
+            <h3>${title}</h3>
             <div class="sub">${desc}</div>
           </div>
           <div class="carousel ${aspectClass} ${stackCards ? 'stack-cards' : ''}" data-carousel="${id}">
@@ -546,12 +684,12 @@
           </div>
           ${withThumbs ? `
             <div class="thumbs">
-              ${images.map((src, i) => `<button data-go="${i}" aria-label="Go to slide ${i + 1}"><img src="${esc(src)}" alt="Thumbnail ${i + 1}" loading="lazy" /></button>`).join('')}
+              ${images.map((item, i) => `<button data-go="${i}" aria-label="Go to slide ${i + 1}"><img src="${esc(item.url)}" alt="${esc(item.name)}" loading="lazy"></button>`).join('')}
             </div>
           ` : ''}
           ${withFilmstrip ? `
             <div class="filmstrip">
-              ${images.map((src, i) => `<button data-go="${i}" aria-label="Go to slide ${i + 1}"><img src="${esc(src)}" alt="Filmstrip ${i + 1}" loading="lazy" /></button>`).join('')}
+              ${images.map((item, i) => `<button data-go="${i}" aria-label="Go to slide ${i + 1}"><img src="${esc(item.url)}" alt="${esc(item.name)}" loading="lazy"></button>`).join('')}
             </div>
           ` : ''}
         </article>
@@ -563,14 +701,12 @@
         <article class="card">
           <div class="card-header">
             <div class="eyebrow">Example 08</div>
-            <h2>Split Content Carousel</h2>
-            <div class="sub">Visual slider with editorial text panel for product, campaign, or presentation storytelling.</div>
+            <h3>Split Content Carousel</h3>
+            <div class="sub">Visual slider paired with an editorial text panel.</div>
           </div>
           <div class="split">
             <div class="carousel" data-carousel="${id}">
-              <div class="track">
-                ${makeSlides(images, false, false)}
-              </div>
+              <div class="track">${makeSlides(images, false, false)}</div>
               <div class="controls">
                 <button class="btn prev" aria-label="Previous slide">&#10094;</button>
                 <button class="btn next" aria-label="Next slide">&#10095;</button>
@@ -578,14 +714,14 @@
               <div class="dots"></div>
             </div>
             <div class="text-pane">
-              <h3>Randomized Dropbox Visual Story</h3>
+              <h4>Folder powered visual storytelling</h4>
               <p>
-                Use this layout when each image supports a headline, sales point, campaign message, or portfolio note. It feels more like a presentation module than a simple gallery.
+                This layout works well when your image folder changes often. Load the folder once and reshuffle any time without editing code.
               </p>
             </div>
           </div>
           <div class="compare-strip">
-            ${images.slice(0, 3).map(src => `<div class="mini"><img src="${esc(src)}" alt="Compare preview" loading="lazy" /></div>`).join('')}
+            ${images.slice(0, 3).map(item => `<div class="mini"><img src="${esc(item.url)}" alt="${esc(item.name)}" loading="lazy"></div>`).join('')}
           </div>
         </article>
       `;
@@ -597,12 +733,12 @@
         <article class="card">
           <div class="card-header">
             <div class="eyebrow">Example 09</div>
-            <h2>Infinite Scrolling Gallery</h2>
-            <div class="sub">Continuous movement for moodboards, showcases, sponsor walls, or ambient visual loops.</div>
+            <h3>Infinite Scrolling Gallery</h3>
+            <div class="sub">Continuous ambient motion from the same randomized image pool.</div>
           </div>
           <div class="marquee-wrap">
             <div class="marquee">
-              ${loop.map(src => `<img src="${esc(src)}" alt="Scrolling gallery image" loading="lazy" />`).join('')}
+              ${loop.map(item => `<img src="${esc(item.url)}" alt="${esc(item.name)}" loading="lazy">`).join('')}
             </div>
           </div>
         </article>
@@ -610,21 +746,18 @@
     }
 
     function masonryHTML(images) {
-      const varied = images.map((src, i) => ({
-        src,
-        h: [220, 280, 340, 260, 300][i % 5]
-      }));
+      const varied = images.map((item, i) => ({ item, h: [220, 280, 340, 260, 300][i % 5] }));
       return `
         <article class="card">
           <div class="card-header">
             <div class="eyebrow">Example 10</div>
-            <h2>Masonry Mosaic Gallery</h2>
-            <div class="sub">An editorial collage layout. Strong when you want density instead of one-at-a-time navigation.</div>
+            <h3>Masonry Mosaic Gallery</h3>
+            <div class="sub">Dense editorial wall built from the same folder load.</div>
           </div>
           <div class="masonry">
-            ${varied.map(item => `
-              <div class="item" style="height:${item.h}px;">
-                <img src="${esc(item.src)}" alt="Masonry image" loading="lazy" style="height:100%; object-fit:cover;" />
+            ${varied.map(({item, h}) => `
+              <div class="item" style="height:${h}px;">
+                <img src="${esc(item.url)}" alt="${esc(item.name)}" loading="lazy" style="height:100%; object-fit:cover;">
               </div>
             `).join('')}
           </div>
@@ -633,23 +766,27 @@
     }
 
     function buildPage() {
-      const root = document.getElementById('galleryGrid');
-      const sharedPool = shuffle(IMAGE_SOURCES);
+      if (!state.items.length) {
+        galleryGrid.innerHTML = '';
+        updateStatus();
+        return;
+      }
 
+      const pool = shuffle(state.items);
       const cards = [];
-      cards.push(carouselHTML('c1', 'Standard Image Carousel', 'Example 01', 'Classic slider with arrows, dots, autoplay, and captions.', pickImages(sharedPool, 6)));
-      cards.push(carouselHTML('c2', 'Hero Banner Carousel', 'Example 02', 'Wide presentation style for homepage hero use.', pickImages(sharedPool, 5), { aspectClass: 'slim' }));
-      cards.push(carouselHTML('c3', 'Square Social Carousel', 'Example 03', 'Tight square format for social-style visual browsing.', pickImages(sharedPool, 5), { aspectClass: 'square' }));
-      cards.push(carouselHTML('c4', 'Vertical Story Carousel', 'Example 04', '9:16 presentation for reels, stories, or mobile-first creative.', pickImages(sharedPool, 5), { aspectClass: 'tall' }));
-      cards.push(carouselHTML('c5', 'Carousel With Thumbnail Navigation', 'Example 05', 'Main image area with clickable thumbnails underneath.', pickImages(sharedPool, 5), { thumbs: true }));
-      cards.push(carouselHTML('c6', 'Carousel With Filmstrip Selector', 'Example 06', 'Fast browsing layout with horizontal preview strip.', pickImages(sharedPool, 7), { filmstrip: true }));
-      cards.push(carouselHTML('c7', 'Stacked Card Carousel', 'Example 07', 'Premium card presentation with framed visual treatment.', pickImages(sharedPool, 5), { stackCards: true }));
-      cards.push(splitCarouselHTML('c8', pickImages(sharedPool, 5)));
-      cards.push(marqueeHTML(pickImages(sharedPool, 10)));
-      cards.push(masonryHTML(pickImages(sharedPool, 12)));
-
-      root.innerHTML = cards.join('');
+      cards.push(carouselHTML('c1', 'Standard Image Carousel', 'Example 01', 'Classic slider with arrows, dots, autoplay, and captions.', pickImages(pool, 6)));
+      cards.push(carouselHTML('c2', 'Hero Banner Carousel', 'Example 02', 'Wide presentation style for homepage hero use.', pickImages(pool, 5), { aspectClass: 'slim' }));
+      cards.push(carouselHTML('c3', 'Square Social Carousel', 'Example 03', 'Tight square format for social-style visual browsing.', pickImages(pool, 5), { aspectClass: 'square' }));
+      cards.push(carouselHTML('c4', 'Vertical Story Carousel', 'Example 04', '9:16 presentation for reels, stories, or mobile-first creative.', pickImages(pool, 5), { aspectClass: 'tall' }));
+      cards.push(carouselHTML('c5', 'Carousel With Thumbnail Navigation', 'Example 05', 'Main image area with clickable thumbnails underneath.', pickImages(pool, 5), { thumbs: true }));
+      cards.push(carouselHTML('c6', 'Carousel With Filmstrip Selector', 'Example 06', 'Fast browsing layout with horizontal preview strip.', pickImages(pool, 7), { filmstrip: true }));
+      cards.push(carouselHTML('c7', 'Stacked Card Carousel', 'Example 07', 'Premium card presentation with framed visual treatment.', pickImages(pool, 5), { stackCards: true }));
+      cards.push(splitCarouselHTML('c8', pickImages(pool, 5)));
+      cards.push(marqueeHTML(pickImages(pool, 10)));
+      cards.push(masonryHTML(pickImages(pool, 12)));
+      galleryGrid.innerHTML = cards.join('');
       initCarousels();
+      updateStatus();
     }
 
     function initCarousels() {
@@ -699,15 +836,10 @@
 
         let sx = 0;
         let dx = 0;
-        carousel.addEventListener('touchstart', e => {
-          sx = e.changedTouches[0].clientX;
-        }, { passive: true });
+        carousel.addEventListener('touchstart', e => { sx = e.changedTouches[0].clientX; }, { passive: true });
         carousel.addEventListener('touchend', e => {
           dx = e.changedTouches[0].clientX - sx;
-          if (Math.abs(dx) > 40) {
-            if (dx < 0) go(current + 1);
-            else go(current - 1);
-          }
+          if (Math.abs(dx) > 40) dx < 0 ? go(current + 1) : go(current - 1);
           start();
         }, { passive: true });
 
@@ -716,7 +848,57 @@
       });
     }
 
-    buildPage();
+    folderInput.addEventListener('change', async (e) => {
+      const files = e.target.files;
+      if (!files?.length) return;
+      const first = Array.from(files)[0];
+      const baseFolder = first.webkitRelativePath ? first.webkitRelativePath.split('/')[0] : 'selected folder';
+      await filesToItems(files, `folder: ${baseFolder}`);
+    });
+
+    filesInput.addEventListener('change', async (e) => {
+      const files = e.target.files;
+      if (!files?.length) return;
+      await filesToItems(files, 'manual file batch');
+    });
+
+    shuffleBtn.addEventListener('click', () => {
+      if (state.items.length) buildPage();
+    });
+
+    clearBtn.addEventListener('click', () => {
+      cleanupObjectUrls();
+      state.items = [];
+      state.sourceLabel = 'none';
+      galleryGrid.innerHTML = '';
+      folderInput.value = '';
+      filesInput.value = '';
+      updateStatus();
+    });
+
+    ['dragenter','dragover'].forEach(type => {
+      dropzone.addEventListener(type, e => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.add('dragover');
+      });
+    });
+
+    ['dragleave','drop'].forEach(type => {
+      dropzone.addEventListener(type, e => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.remove('dragover');
+      });
+    });
+
+    dropzone.addEventListener('drop', async (e) => {
+      const files = Array.from(e.dataTransfer.files || []);
+      if (!files.length) return;
+      await filesToItems(files, 'drag and drop batch');
+    });
+
+    updateStatus();
   </script>
 </body>
 </html>
