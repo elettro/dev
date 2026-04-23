@@ -1206,6 +1206,23 @@
       margin-bottom: 0.85rem;
     }
 
+    .brand-logo,
+    .footer-brand-logo {
+      display: block;
+      height: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .brand-logo {
+      width: clamp(140px, 14vw, 180px);
+    }
+
+    .footer-brand-logo {
+      width: clamp(120px, 12vw, 170px);
+      margin-inline: auto;
+    }
+
     footer {
       padding: 2.4rem 0 2.8rem;
       text-align: center;
@@ -1236,7 +1253,7 @@
 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
 </svg>
 </div>
-<span class="font-headline font-extrabold text-2xl tracking-tighter text-white">Elettro<span class="text-primary">.</span></span>
+<img class="brand-logo" src="images/Elettro-logo-white.png" alt="Elettro" />
 </div>
 <div class="hidden md:flex items-center gap-8">
 <a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors" href="#">Services</a>
@@ -1730,7 +1747,7 @@ allowfullscreen>
 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
 </svg>
 </div>
-<span class="font-headline font-extrabold text-xl tracking-tighter text-white/80">Elettro<span class="text-primary/80">.</span></span>
+<img class="footer-brand-logo" src="images/Elettro-logo-white.png" alt="Elettro" />
 </div>
 <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.3em]">© 2026 Elettro Digital Production. Built for the kinetic era.</div>
 <div class="flex gap-6">
