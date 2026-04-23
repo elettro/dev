@@ -411,7 +411,7 @@
       }
 
 
-      /* Contact section (Option 1) styles from /contacts */
+      /* Contact section styles */
       #contact {
         --contact-border: rgba(145, 170, 220, 0.22);
         --contact-muted: #9aa8c7;
@@ -607,7 +607,7 @@
       }
 
 
-      /* Contact section class-based parity styles (from /contacts Option 1) */
+      /* Contact section class-based parity styles */
       .container {
         width: min(1180px, 92vw);
         margin-inline: auto;
@@ -1655,52 +1655,50 @@ allowfullscreen>
 </div>
 </section>
 
-    <!-- Option 1: Clean Corporate Split Layout -->
-    <section id="contact" class="contact-showcase">
-      <div class="container concept-shell">
-        <span class="option-label">Option 1</span>
-        <h2>Clean Corporate Split Layout</h2>
-        <p class="best-for"><strong>Best for:</strong> Trust-first leads who want structure and professionalism.</p>
-        <div class="grid-two">
-          <div>
-            <p class="section-support">
-              A polished split layout with clear positioning for Elettro services and a direct path to contact.
-              Ideal when credibility and clarity need to be front-and-center.
-            </p>
-            <div class="contact-info">
-              <h3>Contact Elettro</h3>
-              <ul class="contact-list">
-                <li>Email: <a href="mailto:contact@elettrocom">contact@elettrocom</a></li>
-                <li>Phone: <a href="tel:13104086687">310.408.6687</a></li>
-                <li>Services: Websites, Graphics, Video, Music, Automation, AI Marketing</li>
-              </ul>
-            </div>
-            <div class="review-cta">
-              <p>Already worked with Elettro? Your feedback helps others choose with confidence.</p>
-              <a class="review-link" href="https://maps.app.goo.gl/q5dWaW8WR59F82Up9" target="_blank" rel="noopener noreferrer">Leave a Quick Google Review</a>
-            </div>
-          </div>
-          <div class="form-wrap">
-            <form action="https://formspree.io/f/mpqkzdbw" method="POST" class="contact-form">
-              <input type="hidden" name="_subject" value="New Elettro Contact Form Submission" />
-              <div class="row">
-                <div>
-                  <label for="o1-name">Full Name</label>
-                  <input id="o1-name" name="name" type="text" placeholder="Jordan Lee" required />
-                </div>
-                <div>
-                  <label for="o1-email">Business Email</label>
-                  <input id="o1-email" name="email" type="email" placeholder="jordan@company.com" required />
-                </div>
+    <section id="contact" class="contact-showcase py-24 px-6 max-[480px]:px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_30px_90px_rgba(3,10,30,0.55)] overflow-hidden">
+          <div class="pointer-events-none absolute -top-28 -left-24 h-72 w-72 rounded-full bg-primary/15 blur-3xl"></div>
+          <div class="pointer-events-none absolute -bottom-32 -right-20 h-72 w-72 rounded-full bg-secondary/10 blur-3xl"></div>
+          <div class="relative z-10 grid gap-8 p-6 md:p-8 lg:grid-cols-2 lg:gap-10 lg:p-10">
+            <div class="rounded-3xl border border-white/10 bg-surface/45 p-6 shadow-[0_12px_40px_rgba(2,8,24,0.45)] backdrop-blur-xl md:p-8">
+              <h2 class="font-headline text-3xl font-extrabold tracking-tight text-white md:text-4xl">Let’s Start Your Project</h2>
+              <p class="mt-4 text-sm leading-relaxed text-on-surface-variant md:text-base">
+                Elettro delivers high-impact Websites, Graphics, Video, Music, Automation, and AI Marketing tailored for modern brands.
+              </p>
+              <div class="mt-8 space-y-4">
+                <a href="mailto:contact@elettrocom" class="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-on-surface transition hover:border-primary/50 hover:bg-primary/10 hover:text-white">
+                  <span class="material-symbols-outlined text-primary">mail</span>
+                  <span class="font-semibold tracking-wide">contact@elettrocom</span>
+                </a>
+                <a href="tel:13104086687" class="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-on-surface transition hover:border-primary/50 hover:bg-primary/10 hover:text-white">
+                  <span class="material-symbols-outlined text-primary">call</span>
+                  <span class="font-semibold tracking-wide">310.408.6687</span>
+                </a>
               </div>
-              <div class="row">
+              <a href="https://maps.app.goo.gl/q5dWaW8WR59F82Up9" target="_blank" rel="noopener noreferrer" class="mt-8 inline-flex items-center gap-2 rounded-full border border-secondary/40 bg-secondary/15 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] text-secondary transition hover:border-secondary hover:bg-secondary/25 hover:text-white">
+                Leave a Google Review
+                <span class="material-symbols-outlined text-base">north_east</span>
+              </a>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-surface/55 p-6 shadow-[0_12px_40px_rgba(2,8,24,0.55)] backdrop-blur-xl md:p-8">
+              <form action="https://formspree.io/f/mpqkzdbw" method="POST" class="space-y-5">
+                <input type="hidden" name="_subject" value="New Elettro Contact Form Submission" />
                 <div>
-                  <label for="o1-phone">Phone Number</label>
-                  <input id="o1-phone" name="phone" type="tel" placeholder="(310) 408-6687" />
+                  <label for="contact-name" class="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant">Full Name</label>
+                  <input id="contact-name" name="name" type="text" required class="w-full rounded-2xl border border-white/15 bg-surface-container-low/90 px-4 py-3 text-sm text-white placeholder:text-on-surface-variant/70 outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/35" placeholder="Jordan Lee" />
                 </div>
                 <div>
-                  <label for="o1-service">Primary Service Needed</label>
-                  <select id="o1-service" name="service" required>
+                  <label for="contact-email" class="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant">Business Email</label>
+                  <input id="contact-email" name="email" type="email" required class="w-full rounded-2xl border border-white/15 bg-surface-container-low/90 px-4 py-3 text-sm text-white placeholder:text-on-surface-variant/70 outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/35" placeholder="jordan@company.com" />
+                </div>
+                <div>
+                  <label for="contact-phone" class="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant">Phone Number</label>
+                  <input id="contact-phone" name="phone" type="tel" class="w-full rounded-2xl border border-white/15 bg-surface-container-low/90 px-4 py-3 text-sm text-white placeholder:text-on-surface-variant/70 outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/35" placeholder="(310) 408-6687" />
+                </div>
+                <div>
+                  <label for="contact-service" class="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant">Primary Service Needed</label>
+                  <select id="contact-service" name="service" required class="w-full rounded-2xl border border-white/15 bg-surface-container-low/90 px-4 py-3 text-sm text-white outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/35">
                     <option value="" disabled selected>Select a service</option>
                     <option>Websites</option>
                     <option>Graphics</option>
@@ -1710,14 +1708,15 @@ allowfullscreen>
                     <option>AI Marketing</option>
                   </select>
                 </div>
-              </div>
-              <div>
-                <label for="o1-message">Project Overview</label>
-                <textarea id="o1-message" name="message" placeholder="Tell Elettro what you're building and your goals." required></textarea>
-              </div>
-              <button class="btn" type="submit">Send Message</button>
-            </form>
-            <div class="success-note">After submission, your message will be sent securely through Formspree.</div>
+                <div>
+                  <label for="contact-message" class="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant">Project Overview</label>
+                  <textarea id="contact-message" name="message" required rows="5" class="w-full rounded-2xl border border-white/15 bg-surface-container-low/90 px-4 py-3 text-sm text-white placeholder:text-on-surface-variant/70 outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/35" placeholder="Tell us about your goals, timeline, and what success looks like."></textarea>
+                </div>
+                <button type="submit" class="inline-flex w-full items-center justify-center rounded-2xl border border-primary/40 bg-primary/20 px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-primary transition hover:border-primary hover:bg-primary/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/45">
+                  Send Message
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
