@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 Video Presentation Methods from Randomized Dropbox Images</title>
+  <style>
+    :root{
+      --bg:#08111b;
+      --bg2:#0d1826;
+      --card:#122235;
+      --line:rgba(255,255,255,.12);
+      --text:#eef4fb;
+      --muted:#9eb1c8;
+      --accent:#59b0ff;
+      --accent2:#8a6cff;
+      --shadow:0 18px 45px rgba(0,0,0,.35);
+      --radius:22px;
+      --radius-sm:14px;
+      --max:1450px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      background:
+        radial-gradient(circle at top left, rgba(89,176,255,.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(138,108,255,.12), transparent 30%),
+        linear-gradient(180deg, var(--bg), #060c14 100%);
+      color:var(--text);
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{padding:34px 18px 80px}
+    .page{max-width:var(--max);margin:0 auto}
+    h1,h2,h3,p{margin:0}
+    .hero{
+      padding:34px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      margin-bottom:26px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(89,176,255,.12), transparent 18%),
+        radial-gradient(circle at 82% 18%, rgba(138,108,255,.16), transparent 20%),
+        radial-gradient(circle at 45% 70%, rgba(255,255,255,.06), transparent 16%);
+      pointer-events:none;
+    }
+    .hero-inner{position:relative;z-index:1}
+    .eyebrow{
+      color:#9dd0ff;
+      font-size:13px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:12px;
+    }
+    h1{
+      font-size:clamp(34px, 6vw, 64px);
+      line-height:1.02;
+      margin-bottom:14px;
+      max-width:950px;
+    }
+    .sub{
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.55;
+      max-width:900px;
+      margin-bottom:22px;
+    }
+    .toolbar{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    button{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      color:#fff;
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      padding:13px 18px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:700;
+      box-shadow:0 10px 25px rgba(89,176,255,.25);
+    }
+    button.secondary{
+      background:rgba(255,255,255,.08);
+      box-shadow:none;
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+    .tip{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .section{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      min-height:460px;
+      position:relative;
+    }
+
+    .section-head{
+      padding:18px 18px 10px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+    }
+
+    .section-head h2{
+      font-size:24px;
+      margin-bottom:6px;
+    }
+
+    .section-head p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .stage{
+      position:relative;
+      height:350px;
+      overflow:hidden;
+      background:#03070d;
+    }
+
+    .stage img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+
+    .overlay{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding:20px;
+      background:linear-gradient(180deg, transparent, rgba(0,0,0,.78));
+    }
+
+    .overlay h3{
+      font-size:20px;
+      margin-bottom:8px;
+    }
+
+    .overlay p{
+      font-size:14px;
+      line-height:1.5;
+      color:#d9e7f7;
+      max-width:650px;
+    }
+
+    .badge{
+      display:inline-block;
+      margin-bottom:10px;
+      padding:7px 11px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.15);
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#d8e6fa;
+    }
+
+    .thumb-row{
+      position:absolute;
+      left:14px;
+      right:14px;
+      bottom:14px;
+      display:flex;
+      gap:10px;
+      z-index:2;
+    }
+
+    .thumb{
+      width:76px;
+      height:48px;
+      border-radius:10px;
+      overflow:hidden;
+      border:2px solid rgba(255,255,255,.18);
+      cursor:pointer;
+      flex:0 0 auto;
+      background:#111;
+    }
+    .thumb.active{border-color:#fff}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+
+    .filmstrip{
+      display:flex;
+      height:100%;
+      gap:8px;
+      padding:10px;
+      background:#050a11;
+    }
+    .filmstrip .main{
+      flex:1 1 auto;
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+    }
+    .filmstrip .side{
+      width:140px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .filmstrip .side .mini{
+      flex:1 1 auto;
+      border-radius:14px;
+      overflow:hidden;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.09);
+    }
+
+    .stack{
+      position:relative;
+      width:100%;
+      height:100%;
+      display:grid;
+      place-items:center;
+      perspective:1200px;
+      overflow:hidden;
+      background:radial-gradient(circle at center, rgba(255,255,255,.05), transparent 60%);
+    }
+    .stack-card{
+      position:absolute;
+      width:68%;
+      height:72%;
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+      transition:transform .7s ease, opacity .7s ease;
+      border:1px solid rgba(255,255,255,.12);
+      background:#111;
+    }
+
+    .kenburns img{
+      animation:kenburns 12s ease-in-out infinite alternate;
+      transform-origin:center;
+    }
+    @keyframes kenburns{
+      from{transform:scale(1) translate(0,0)}
+      to{transform:scale(1.12) translate(-1%, -1%)}
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      height:100%;
+    }
+    .split .copy{
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      background:linear-gradient(135deg, rgba(8,17,27,.92), rgba(17,32,50,.72));
+      position:absolute;
+      inset:0 0 0 auto;
+      width:42%;
+      z-index:2;
+      backdrop-filter:blur(8px);
+    }
+    .split .copy h3{font-size:28px;margin-bottom:10px}
+    .split .copy p{color:#d8e6f5;line-height:1.55}
+
+    .parallax-layer{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      transform:scale(1.08);
+      transition:transform .12s linear;
+    }
+    .parallax-layer.dim:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.65));
+    }
+
+    .mosaic{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      grid-template-rows:1fr 1fr;
+      gap:8px;
+      padding:8px;
+      height:100%;
+      background:#04090f;
+    }
+    .mosaic .cell{
+      border-radius:16px;
+      overflow:hidden;
+      position:relative;
+      cursor:pointer;
+    }
+    .mosaic .cell.big{
+      grid-row:1 / span 2;
+    }
+
+    .vertical{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+    }
+    .vertical .panel{
+      flex:1 1 auto;
+      position:relative;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .vertical .panel:last-child{border-bottom:none}
+    .vertical .panel .label{
+      position:absolute;
+      left:16px;
+      top:16px;
+      z-index:2;
+      background:rgba(0,0,0,.45);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      border:1px solid rgba(255,255,255,.14);
+    }
+
+    .slideshow img{
+      transition:opacity .8s ease, transform .8s ease;
+    }
+    .slideshow .incoming{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transform:scale(1.06);
+    }
+    .slideshow .incoming.show{
+      opacity:1;
+      transform:scale(1);
+    }
+
+    .caption-bar{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:3;
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:18px;
+      padding:18px;
+      background:linear-gradient(180deg, transparent, rgba(0,0,0,.78));
+    }
+    .caption-bar .left h3{font-size:22px;margin-bottom:7px}
+    .caption-bar .left p{font-size:14px;color:#d7e5f3;line-height:1.45;max-width:600px}
+    .counter{
+      min-width:74px;
+      text-align:right;
+      font-size:14px;
+      color:#c7d7e8;
+      font-weight:700;
+    }
+
+    .floating-ui{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+    .floating-ui .chip{
+      position:absolute;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(7,14,24,.74);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(7px);
+      font-size:12px;
+      color:#e8f2fe;
+      box-shadow:0 10px 25px rgba(0,0,0,.24);
+    }
+
+    .method-nav{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:10px;
+      margin-top:18px;
+    }
+    .method-link{
+      padding:12px;
+      border-radius:14px;
+      text-decoration:none;
+      color:#dceaf8;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+      font-size:13px;
+      text-align:center;
+    }
+
+    .footer-note{
+      margin-top:24px;
+      padding:18px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      line-height:1.55;
+      font-size:14px;
+    }
+
+    @media (max-width: 1100px){
+      .grid{grid-template-columns:1fr}
+      .method-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .split .copy{width:56%}
+    }
+
+    @media (max-width: 760px){
+      body{padding:18px 12px 50px}
+      .hero{padding:22px}
+      .method-nav{grid-template-columns:1fr}
+      .split .copy{
+        position:absolute;
+        inset:auto 0 0 0;
+        width:auto;
+      }
+      .filmstrip .side{width:92px}
+      .thumb{width:60px;height:42px}
+      .section{min-height:420px}
+      .stage{height:320px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">Dropbox Image Presentation Lab</div>
+        <h1>10 different video presentation methods in one page</h1>
+        <p class="sub">
+          This page uses one randomized image pool and presents it in ten different styles that feel like promo videos,
+          motion graphics, reels, trailers, slideshows, feature intros, and cinematic product showcases.
+        </p>
+        <div class="toolbar">
+          <button id="rerollAll">Reroll All Sections</button>
+          <button class="secondary" id="toggleMotion">Pause Motion</button>
+        </div>
+        <div class="tip">
+          Replace the sample URLs inside IMAGE_POOL with your direct Dropbox image links. If you want true auto-pull later,
+          swap IMAGE_POOL for a manifest.json fetch.
+        </div>
+        <div class="method-nav">
+          <a class="method-link" href="#m1">1 Hero Trailer</a>
+          <a class="method-link" href="#m2">2 Cinematic Ken Burns</a>
+          <a class="method-link" href="#m3">3 Filmstrip Sidebar</a>
+          <a class="method-link" href="#m4">4 Layered Card Stack</a>
+          <a class="method-link" href="#m5">5 Split Story Panel</a>
+          <a class="method-link" href="#m6">6 Mosaic Grid Opener</a>
+          <a class="method-link" href="#m7">7 Vertical Reel Sequence</a>
+          <a class="method-link" href="#m8">8 Captioned Slideshow</a>
+          <a class="method-link" href="#m9">9 UI Overlay Showcase</a>
+          <a class="method-link" href="#m10">10 Parallax Poster</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="section" id="m1">
+        <div class="section-head">
+          <h2>1. Hero trailer opener</h2>
+          <p>Big cinematic opener with lower-third copy and clickable thumbnail strip.</p>
+        </div>
+        <div class="stage" data-method="hero"></div>
+      </section>
+
+      <section class="section" id="m2">
+        <div class="section-head">
+          <h2>2. Cinematic Ken Burns frame</h2>
+          <p>Slow zoom motion for a premium documentary or mood-heavy intro.</p>
+        </div>
+        <div class="stage kenburns" data-method="kenburns"></div>
+      </section>
+
+      <section class="section" id="m3">
+        <div class="section-head">
+          <h2>3. Filmstrip sidebar layout</h2>
+          <p>Main frame plus side preview thumbnails for quick scene switching.</p>
+        </div>
+        <div class="stage" data-method="filmstrip"></div>
+      </section>
+
+      <section class="section" id="m4">
+        <div class="section-head">
+          <h2>4. Layered card stack</h2>
+          <p>Rotating stacked frames that feel like animated slides or scene cards.</p>
+        </div>
+        <div class="stage" data-method="stack"></div>
+      </section>
+
+      <section class="section" id="m5">
+        <div class="section-head">
+          <h2>5. Split story panel</h2>
+          <p>Image-driven visual with a right-side copy panel for stronger messaging.</p>
+        </div>
+        <div class="stage" data-method="split"></div>
+      </section>
+
+      <section class="section" id="m6">
+        <div class="section-head">
+          <h2>6. Mosaic grid opener</h2>
+          <p>Multi-image launch panel that feels like a teaser montage.</p>
+        </div>
+        <div class="stage" data-method="mosaic"></div>
+      </section>
+
+      <section class="section" id="m7">
+        <div class="section-head">
+          <h2>7. Vertical reel sequence</h2>
+          <p>Three stacked scene panels. Great for social-style pacing and energy.</p>
+        </div>
+        <div class="stage" data-method="vertical"></div>
+      </section>
+
+      <section class="section" id="m8">
+        <div class="section-head">
+          <h2>8. Captioned slideshow</h2>
+          <p>Auto-advancing frame with numbered scene counter and message bar.</p>
+        </div>
+        <div class="stage slideshow" data-method="slideshow"></div>
+      </section>
+
+      <section class="section" id="m9">
+        <div class="section-head">
+          <h2>9. Floating UI showcase</h2>
+          <p>Presentation layer with floating UI chips for feature callouts.</p>
+        </div>
+        <div class="stage" data-method="ui"></div>
+      </section>
+
+      <section class="section" id="m10">
+        <div class="section-head">
+          <h2>10. Parallax poster scene</h2>
+          <p>Mouse-based depth effect for a modern hero or key-art style section.</p>
+        </div>
+        <div class="stage" data-method="parallax"></div>
+      </section>
+    </div>
+
+    <div class="footer-note">
+      To make this truly pull from Dropbox, the cleanest production setup is:
+      create one small manifest.json file containing your direct Dropbox image URLs,
+      then have this page fetch that JSON and randomize from it.
+      That avoids Dropbox shared-folder scraping problems and gives you control.
+    </div>
+  </div>
+
+  <script>
+    const IMAGE_POOL = [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1511300636408-a63a89df3482?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1482192505345-5655af888cc4?auto=format&fit=crop&w=1400&q=80"
+    ];
+
+    const SCENE_TITLES = [
+      "Opening frame",
+      "Feature highlight",
+      "Scene transition",
+      "Premium reveal",
+      "Mood setup",
+      "Main visual",
+      "Spotlight moment",
+      "Showcase frame",
+      "Sequence card",
+      "Closing shot"
+    ];
+
+    const SCENE_TEXT = [
+      "Use this layout for a polished intro with headline copy and guided pacing.",
+      "Great for product, hospitality, lifestyle, nonprofit, or brand storytelling.",
+      "This style presents still images with motion and structure that feels video-ready.",
+      "Strong option when you want elegant visuals without producing full video footage.",
+      "This method works well for reels, social promos, ads, decks, and web hero sections.",
+      "Clean presentation. Strong image focus. Better information absorption."
+    ];
+
+    let motionEnabled = true;
+    let intervals = [];
+
+    function rand(max){ return Math.floor(Math.random() * max); }
+
+    function shuffle(arr){
+      const copy = [...arr];
+      for(let i = copy.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function pickOne(pool = IMAGE_POOL){
+      return pool[rand(pool.length)];
+    }
+
+    function pickMany(count, unique = true){
+      if(unique){
+        return shuffle(IMAGE_POOL).slice(0, Math.min(count, IMAGE_POOL.length));
+      }
+      return Array.from({length: count}, () => pickOne());
+    }
+
+    function title(){ return SCENE_TITLES[rand(SCENE_TITLES.length)]; }
+    function text(){ return SCENE_TEXT[rand(SCENE_TEXT.length)]; }
+
+    function img(url, alt=""){
+      const el = document.createElement("img");
+      el.src = url;
+      el.alt = alt;
+      el.loading = "lazy";
+      return el;
+    }
+
+    function clearIntervals(){
+      intervals.forEach(id => clearInterval(id));
+      intervals = [];
+    }
+
+    function buildHero(stage){
+      const images = pickMany(5);
+      let active = 0;
+      stage.innerHTML = "";
+
+      const main = img(images[0], "Hero image");
+      stage.appendChild(main);
+
+      const overlay = document.createElement("div");
+      overlay.className = "overlay";
+      overlay.innerHTML = `
+        <span class="badge">Hero Trailer</span>
+        <h3>${title()}</h3>
+        <p>${text()}</p>
+      `;
+      stage.appendChild(overlay);
+
+      const row = document.createElement("div");
+      row.className = "thumb-row";
+      images.forEach((src, i) => {
+        const thumb = document.createElement("div");
+        thumb.className = "thumb" + (i === 0 ? " active" : "");
+        thumb.appendChild(img(src, "Thumbnail " + (i + 1)));
+        thumb.addEventListener("click", () => {
+          active = i;
+          main.src = src;
+          overlay.querySelector("h3").textContent = title();
+          overlay.querySelector("p").textContent = text();
+          [...row.children].forEach(t => t.classList.remove("active"));
+          thumb.classList.add("active");
+        });
+        row.appendChild(thumb);
+      });
+      stage.appendChild(row);
+
+      const id = setInterval(() => {
+        if(!motionEnabled) return;
+        active = (active + 1) % images.length;
+        main.src = images[active];
+        overlay.querySelector("h3").textContent = title();
+        overlay.querySelector("p").textContent = text();
+        [...row.children].forEach(t => t.classList.remove("active"));
+        row.children[active].classList.add("active");
+      }, 3600);
+      intervals.push(id);
+    }
+
+    function buildKenburns(stage){
+      const image = pickOne();
+      stage.innerHTML = "";
+      stage.appendChild(img(image, "Ken burns"));
+      const overlay = document.createElement("div");
+      overlay.className = "overlay";
+      overlay.innerHTML = `
+        <span class="badge">Cinematic Motion</span>
+        <h3>${title()}</h3>
+        <p>${text()}</p>
+      `;
+      stage.appendChild(overlay);
+    }
+
+    function buildFilmstrip(stage){
+      const images = pickMany(5);
+      stage.innerHTML = "";
+
+      const wrap = document.createElement("div");
+      wrap.className = "filmstrip";
+
+      const main = document.createElement("div");
+      main.className = "main";
+      const mainImg = img(images[0], "Main frame");
+      main.appendChild(mainImg);
+      main.innerHTML += `
+        <div class="overlay">
+          <span class="badge">Filmstrip Layout</span>
+          <h3>${title()}</h3>
+          <p>${text()}</p>
+        </div>
+      `;
+
+      const side = document.createElement("div");
+      side.className = "side";
+
+      images.slice(1).forEach(src => {
+        const mini = document.createElement("div");
+        mini.className = "mini";
+        mini.appendChild(img(src, "Side frame"));
+        mini.addEventListener("click", () => {
+          const old = mainImg.src;
+          mainImg.src = src;
+          mini.querySelector("img").src = old;
+          main.querySelector("h3").textContent = title();
+          main.querySelector("p").textContent = text();
+        });
+        side.appendChild(mini);
+      });
+
+      wrap.appendChild(main);
+      wrap.appendChild(side);
+      stage.appendChild(wrap);
+    }
+
+    function buildStack(stage){
+      const images = pickMany(4);
+      stage.innerHTML = "";
+      const stack = document.createElement("div");
+      stack.className = "stack";
+
+      const cards = images.map((src, i) => {
+        const card = document.createElement("div");
+        card.className = "stack-card";
+        card.style.transform = `translateY(${i * 8}px) rotate(${(i - 1.5) * 5}deg) scale(${1 - i * 0.05})`;
+        card.style.zIndex = String(10 - i);
+        card.style.opacity = String(1 - i * 0.15);
+        card.appendChild(img(src, "Stack card"));
+        stack.appendChild(card);
+        return card;
+      });
+
+      const label = document.createElement("div");
+      label.className = "overlay";
+      label.innerHTML = `
+        <span class="badge">Layered Stack</span>
+        <h3>${title()}</h3>
+        <p>${text()}</p>
+      `;
+      stage.appendChild(stack);
+      stage.appendChild(label);
+
+      let tick = 0;
+      const id = setInterval(() => {
+        if(!motionEnabled) return;
+        tick++;
+        const urls = pickMany(4);
+        cards.forEach((card, i) => {
+          card.querySelector("img").src = urls[(i + tick) % urls.length];
+          card.style.transform = `translateY(${i * 10}px) rotate(${((tick + i) % 7 - 3) * 4}deg) scale(${1 - i * 0.05})`;
+        });
+        label.querySelector("h3").textContent = title();
+        label.querySelector("p").textContent = text();
+      }, 4200);
+      intervals.push(id);
+    }
+
+    function buildSplit(stage){
+      const image = pickOne();
+      stage.innerHTML = "";
+      stage.appendChild(img(image, "Split visual"));
+
+      const copy = document.createElement("div");
+      copy.className = "copy";
+      copy.innerHTML = `
+        <span class="badge">Split Story</span>
+        <h3>${title()}</h3>
+        <p>${text()} This is strong when you want the image to carry emotion while the copy carries the pitch.</p>
+      `;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "split";
+      wrapper.appendChild(copy);
+      stage.appendChild(wrapper);
+    }
+
+    function buildMosaic(stage){
+      const images = pickMany(5);
+      stage.innerHTML = "";
+      const grid = document.createElement("div");
+      grid.className = "mosaic";
+
+      images.forEach((src, i) => {
+        const cell = document.createElement("div");
+        cell.className = "cell" + (i === 0 ? " big" : "");
+        cell.appendChild(img(src, "Mosaic cell"));
+        cell.addEventListener("click", () => {
+          const main = grid.querySelector(".big img");
+          const current = main.src;
+          main.src = src;
+          cell.querySelector("img").src = current;
+        });
+        grid.appendChild(cell);
+      });
+
+      stage.appendChild(grid);
+
+      const caption = document.createElement("div");
+      caption.className = "overlay";
+      caption.innerHTML = `
+        <span class="badge">Mosaic Montage</span>
+        <h3>${title()}</h3>
+        <p>${text()}</p>
+      `;
+      stage.appendChild(caption);
+    }
+
+    function buildVertical(stage){
+      const images = pickMany(3);
+      stage.innerHTML = "";
+      const wrap = document.createElement("div");
+      wrap.className = "vertical";
+
+      images.forEach((src, i) => {
+        const panel = document.createElement("div");
+        panel.className = "panel";
+        panel.appendChild(img(src, "Vertical panel"));
+        const label = document.createElement("div");
+        label.className = "label";
+        label.textContent = `Scene ${i + 1}`;
+        panel.appendChild(label);
+        wrap.appendChild(panel);
+      });
+
+      stage.appendChild(wrap);
+    }
+
+    function buildSlideshow(stage){
+      const images = pickMany(6);
+      let index = 0;
+      stage.innerHTML = "";
+
+      const current = img(images[index], "Slideshow current");
+      const incoming = img(images[(index + 1) % images.length], "Slideshow next");
+      incoming.className = "incoming";
+      stage.appendChild(current);
+      stage.appendChild(incoming);
+
+      const bar = document.createElement("div");
+      bar.className = "caption-bar";
+      bar.innerHTML = `
+        <div class="left">
+          <h3>${title()}</h3>
+          <p>${text()}</p>
+        </div>
+        <div class="counter">01 / 06</div>
+      `;
+      stage.appendChild(bar);
+
+      const id = setInterval(() => {
+        if(!motionEnabled) return;
+        incoming.classList.add("show");
+        setTimeout(() => {
+          index = (index + 1) % images.length;
+          current.src = images[index];
+          incoming.src = images[(index + 1) % images.length];
+          incoming.classList.remove("show");
+          bar.querySelector("h3").textContent = title();
+          bar.querySelector("p").textContent = text();
+          bar.querySelector(".counter").textContent =
+            String(index + 1).padStart(2, "0") + " / " + String(images.length).padStart(2, "0");
+        }, 800);
+      }, 3200);
+      intervals.push(id);
+    }
+
+    function buildUI(stage){
+      const image = pickOne();
+      stage.innerHTML = "";
+      stage.appendChild(img(image, "UI showcase"));
+
+      const overlay = document.createElement("div");
+      overlay.className = "overlay";
+      overlay.innerHTML = `
+        <span class="badge">Feature Overlay</span>
+        <h3>${title()}</h3>
+        <p>${text()}</p>
+      `;
+      stage.appendChild(overlay);
+
+      const ui = document.createElement("div");
+      ui.className = "floating-ui";
+      ui.innerHTML = `
+        <div class="chip" style="top:18px;left:18px;">Fast visual comprehension</div>
+        <div class="chip" style="top:22px;right:18px;">Premium presentation</div>
+        <div class="chip" style="left:18px;bottom:92px;">Good for promos</div>
+        <div class="chip" style="right:18px;bottom:96px;">Image-driven storytelling</div>
+      `;
+      stage.appendChild(ui);
+    }
+
+    function buildParallax(stage){
+      const image = pickOne();
+      stage.innerHTML = "";
+
+      const layer = document.createElement("div");
+      layer.className = "parallax-layer dim";
+      layer.style.backgroundImage = `url("${image}")`;
+
+      const overlay = document.createElement("div");
+      overlay.className = "overlay";
+      overlay.innerHTML = `
+        <span class="badge">Parallax Poster</span>
+        <h3>${title()}</h3>
+        <p>${text()}</p>
+      `;
+
+      stage.appendChild(layer);
+      stage.appendChild(overlay);
+
+      stage.addEventListener("mousemove", e => {
+        if(!motionEnabled) return;
+        const rect = stage.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        layer.style.transform = `scale(1.1) translate(${x * 20}px, ${y * 20}px)`;
+      });
+
+      stage.addEventListener("mouseleave", () => {
+        layer.style.transform = `scale(1.08) translate(0px,0px)`;
+      });
+    }
+
+    function renderAll(){
+      clearIntervals();
+
+      document.querySelectorAll(".stage").forEach(stage => {
+        const method = stage.dataset.method;
+        if(method === "hero") buildHero(stage);
+        if(method === "kenburns") buildKenburns(stage);
+        if(method === "filmstrip") buildFilmstrip(stage);
+        if(method === "stack") buildStack(stage);
+        if(method === "split") buildSplit(stage);
+        if(method === "mosaic") buildMosaic(stage);
+        if(method === "vertical") buildVertical(stage);
+        if(method === "slideshow") buildSlideshow(stage);
+        if(method === "ui") buildUI(stage);
+        if(method === "parallax") buildParallax(stage);
+      });
+    }
+
+    document.getElementById("rerollAll").addEventListener("click", renderAll);
+
+    document.getElementById("toggleMotion").addEventListener("click", function(){
+      motionEnabled = !motionEnabled;
+      this.textContent = motionEnabled ? "Pause Motion" : "Resume Motion";
+      document.querySelectorAll(".kenburns img").forEach(el => {
+        el.style.animationPlayState = motionEnabled ? "running" : "paused";
+      });
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
