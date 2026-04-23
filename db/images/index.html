@@ -282,4 +282,441 @@
     }
 
     .stack-cards .slide {
-      padding:
+      padding: 18px;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stack-cards .slide-inner {
+      width: 88%;
+      height: 88%;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+      position: relative;
+    }
+
+    .stack-cards .slide-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 0;
+    }
+
+    .split .text-pane {
+      padding: 22px;
+      border-left: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    }
+
+    .split .text-pane h3 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+    }
+
+    .split .text-pane p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .marquee {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+      padding: 14px;
+      animation: scroll 28s linear infinite;
+    }
+
+    .marquee img {
+      width: 180px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      display: block;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .masonry {
+      columns: 3;
+      column-gap: 12px;
+      padding: 12px;
+    }
+
+    .masonry .item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #0a1020;
+    }
+
+    .masonry .item img {
+      width: 100%;
+      display: block;
+    }
+
+    .compare-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .compare-strip .mini {
+      aspect-ratio: 4 / 5;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+    }
+
+    .compare-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .footer-space { height: 10px; }
+
+    @media (max-width: 1080px) {
+      .grid { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; }
+      .split .text-pane { border-left: 0; border-top: 1px solid var(--line); }
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 16px 12px 40px; }
+      .hero { padding: 20px; }
+      .masonry { columns: 2; }
+      .thumbs { grid-template-columns: repeat(4, 1fr); }
+      .filmstrip button { flex-basis: 96px; height: 64px; }
+      .compare-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>10 Carousel Examples. One HTML Page.</h1>
+      <p>
+        This page includes 10 different carousel and gallery presentation styles. It randomizes image order on load and feeds each section from the same image pool.
+      </p>
+      <div class="note">
+        Important: a plain HTML page cannot reliably read a Dropbox shared folder URL and auto-list every file from the browser alone. Dropbox does not expose a simple client-safe folder listing endpoint for a shared folder page. So the reliable approach is to use direct image URLs in the IMAGE_SOURCES array below, or generate a manifest.json file once and point this page at it.
+      </div>
+    </section>
+
+    <section class="grid" id="galleryGrid"></section>
+    <div class="footer-space"></div>
+  </div>
+
+  <script>
+    /*
+      HOW TO USE THIS PAGE
+
+      1) Replace IMAGE_SOURCES below with your direct Dropbox image links.
+      2) Best format is raw image URLs that end with ?raw=1 or dl=1.
+      3) If you only have Dropbox share links, convert them to direct versions.
+
+      Example:
+      https://www.dropbox.com/scl/fi/abc123/example.jpg?rlkey=xyz&dl=0
+      becomes
+      https://www.dropbox.com/scl/fi/abc123/example.jpg?rlkey=xyz&raw=1
+
+      If you want true auto-folder listing later, use one of these methods:
+      - Generate a manifest.json with all image URLs.
+      - Use Dropbox API with an access token server-side.
+      - Export the folder file list once and paste it into IMAGE_SOURCES.
+    */
+
+    const DROPBOX_FOLDER_REFERENCE = 'https://www.dropbox.com/scl/fo/os1zxlhxkmpgd35pjf91c/ANdMw7FiJWEaN564D0AkA3s?rlkey=zok2xnicl8r0rzieqd94seqgv&st=zn1xmtpc&dl=0';
+
+    const IMAGE_SOURCES = [
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1493246318656-5bfd4cfb29b5?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=1400&q=80'
+    ];
+
+    const variants = [
+      { key: 'standard', title: 'Standard Image Carousel', eyebrow: 'Example 01', desc: 'Classic slider with arrows, dots, autoplay, and captions.', className: '' },
+      { key: 'hero', title: 'Hero Banner Carousel', eyebrow: 'Example 02', desc: 'Wide presentation style for homepage hero use.', className: 'slim' },
+      { key: 'square', title: 'Square Social Carousel', eyebrow: 'Example 03', desc: 'Tight square format for social-style visual browsing.', className: 'square' },
+      { key: 'vertical', title: 'Vertical Story Carousel', eyebrow: 'Example 04', desc: '9:16 presentation for reels, stories, or mobile-first creative.', className: 'tall' },
+      { key: 'thumbs', title: 'Carousel With Thumbnail Navigation', eyebrow: 'Example 05', desc: 'Main image area with clickable thumbnails underneath.', className: '' },
+      { key: 'filmstrip', title: 'Carousel With Filmstrip Selector', eyebrow: 'Example 06', desc: 'Fast browsing layout with horizontal preview strip.', className: '' },
+      { key: 'stack', title: 'Stacked Card Carousel', eyebrow: 'Example 07', desc: 'Premium card presentation with framed visual treatment.', className: 'stack-cards' },
+      { key: 'split', title: 'Split Content Carousel', eyebrow: 'Example 08', desc: 'Visual on one side. Text panel on the other.', className: '' },
+      { key: 'marquee', title: 'Infinite Scrolling Gallery', eyebrow: 'Example 09', desc: 'Not a click slider. Great for continuous logo or moodboard motion.', className: '' },
+      { key: 'masonry', title: 'Masonry Mosaic Gallery', eyebrow: 'Example 10', desc: 'Dense editorial-style image wall using randomized ordering.', className: '' },
+    ];
+
+    function shuffle(array) {
+      const a = [...array];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function pickImages(pool, count) {
+      const shuffled = shuffle(pool);
+      const out = [];
+      while (out.length < count) {
+        out.push(...shuffled);
+      }
+      return shuffle(out).slice(0, count);
+    }
+
+    function esc(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;');
+    }
+
+    function makeSlides(images, withCaption = true, cardStyle = false) {
+      return images.map((src, i) => `
+        <div class="slide">
+          ${cardStyle ? `<div class="slide-inner"><img src="${esc(src)}" alt="Random image ${i + 1}" loading="lazy" /></div>` : `<img src="${esc(src)}" alt="Random image ${i + 1}" loading="lazy" />`}
+          ${withCaption && !cardStyle ? `<div class="caption">Image ${i + 1}. Randomized from your Dropbox image pool.</div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function carouselHTML(id, title, eyebrow, desc, images, extra = {}) {
+      const aspectClass = extra.aspectClass || '';
+      const withThumbs = extra.thumbs || false;
+      const withFilmstrip = extra.filmstrip || false;
+      const stackCards = extra.stackCards || false;
+
+      return `
+        <article class="card">
+          <div class="card-header">
+            <div class="eyebrow">${eyebrow}</div>
+            <h2>${title}</h2>
+            <div class="sub">${desc}</div>
+          </div>
+          <div class="carousel ${aspectClass} ${stackCards ? 'stack-cards' : ''}" data-carousel="${id}">
+            <div class="track">
+              ${makeSlides(images, !stackCards, stackCards)}
+            </div>
+            <div class="controls">
+              <button class="btn prev" aria-label="Previous slide">&#10094;</button>
+              <button class="btn next" aria-label="Next slide">&#10095;</button>
+            </div>
+            <div class="dots"></div>
+          </div>
+          ${withThumbs ? `
+            <div class="thumbs">
+              ${images.map((src, i) => `<button data-go="${i}" aria-label="Go to slide ${i + 1}"><img src="${esc(src)}" alt="Thumbnail ${i + 1}" loading="lazy" /></button>`).join('')}
+            </div>
+          ` : ''}
+          ${withFilmstrip ? `
+            <div class="filmstrip">
+              ${images.map((src, i) => `<button data-go="${i}" aria-label="Go to slide ${i + 1}"><img src="${esc(src)}" alt="Filmstrip ${i + 1}" loading="lazy" /></button>`).join('')}
+            </div>
+          ` : ''}
+        </article>
+      `;
+    }
+
+    function splitCarouselHTML(id, images) {
+      return `
+        <article class="card">
+          <div class="card-header">
+            <div class="eyebrow">Example 08</div>
+            <h2>Split Content Carousel</h2>
+            <div class="sub">Visual slider with editorial text panel for product, campaign, or presentation storytelling.</div>
+          </div>
+          <div class="split">
+            <div class="carousel" data-carousel="${id}">
+              <div class="track">
+                ${makeSlides(images, false, false)}
+              </div>
+              <div class="controls">
+                <button class="btn prev" aria-label="Previous slide">&#10094;</button>
+                <button class="btn next" aria-label="Next slide">&#10095;</button>
+              </div>
+              <div class="dots"></div>
+            </div>
+            <div class="text-pane">
+              <h3>Randomized Dropbox Visual Story</h3>
+              <p>
+                Use this layout when each image supports a headline, sales point, campaign message, or portfolio note. It feels more like a presentation module than a simple gallery.
+              </p>
+            </div>
+          </div>
+          <div class="compare-strip">
+            ${images.slice(0, 3).map(src => `<div class="mini"><img src="${esc(src)}" alt="Compare preview" loading="lazy" /></div>`).join('')}
+          </div>
+        </article>
+      `;
+    }
+
+    function marqueeHTML(images) {
+      const loop = [...images, ...images];
+      return `
+        <article class="card">
+          <div class="card-header">
+            <div class="eyebrow">Example 09</div>
+            <h2>Infinite Scrolling Gallery</h2>
+            <div class="sub">Continuous movement for moodboards, showcases, sponsor walls, or ambient visual loops.</div>
+          </div>
+          <div class="marquee-wrap">
+            <div class="marquee">
+              ${loop.map(src => `<img src="${esc(src)}" alt="Scrolling gallery image" loading="lazy" />`).join('')}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function masonryHTML(images) {
+      const varied = images.map((src, i) => ({
+        src,
+        h: [220, 280, 340, 260, 300][i % 5]
+      }));
+      return `
+        <article class="card">
+          <div class="card-header">
+            <div class="eyebrow">Example 10</div>
+            <h2>Masonry Mosaic Gallery</h2>
+            <div class="sub">An editorial collage layout. Strong when you want density instead of one-at-a-time navigation.</div>
+          </div>
+          <div class="masonry">
+            ${varied.map(item => `
+              <div class="item" style="height:${item.h}px;">
+                <img src="${esc(item.src)}" alt="Masonry image" loading="lazy" style="height:100%; object-fit:cover;" />
+              </div>
+            `).join('')}
+          </div>
+        </article>
+      `;
+    }
+
+    function buildPage() {
+      const root = document.getElementById('galleryGrid');
+      const sharedPool = shuffle(IMAGE_SOURCES);
+
+      const cards = [];
+      cards.push(carouselHTML('c1', 'Standard Image Carousel', 'Example 01', 'Classic slider with arrows, dots, autoplay, and captions.', pickImages(sharedPool, 6)));
+      cards.push(carouselHTML('c2', 'Hero Banner Carousel', 'Example 02', 'Wide presentation style for homepage hero use.', pickImages(sharedPool, 5), { aspectClass: 'slim' }));
+      cards.push(carouselHTML('c3', 'Square Social Carousel', 'Example 03', 'Tight square format for social-style visual browsing.', pickImages(sharedPool, 5), { aspectClass: 'square' }));
+      cards.push(carouselHTML('c4', 'Vertical Story Carousel', 'Example 04', '9:16 presentation for reels, stories, or mobile-first creative.', pickImages(sharedPool, 5), { aspectClass: 'tall' }));
+      cards.push(carouselHTML('c5', 'Carousel With Thumbnail Navigation', 'Example 05', 'Main image area with clickable thumbnails underneath.', pickImages(sharedPool, 5), { thumbs: true }));
+      cards.push(carouselHTML('c6', 'Carousel With Filmstrip Selector', 'Example 06', 'Fast browsing layout with horizontal preview strip.', pickImages(sharedPool, 7), { filmstrip: true }));
+      cards.push(carouselHTML('c7', 'Stacked Card Carousel', 'Example 07', 'Premium card presentation with framed visual treatment.', pickImages(sharedPool, 5), { stackCards: true }));
+      cards.push(splitCarouselHTML('c8', pickImages(sharedPool, 5)));
+      cards.push(marqueeHTML(pickImages(sharedPool, 10)));
+      cards.push(masonryHTML(pickImages(sharedPool, 12)));
+
+      root.innerHTML = cards.join('');
+      initCarousels();
+    }
+
+    function initCarousels() {
+      document.querySelectorAll('[data-carousel]').forEach((carousel, index) => {
+        const track = carousel.querySelector('.track');
+        const slides = Array.from(carousel.querySelectorAll('.slide'));
+        const dotsWrap = carousel.querySelector('.dots');
+        const prev = carousel.querySelector('.prev');
+        const next = carousel.querySelector('.next');
+        const thumbs = carousel.parentElement.querySelectorAll('[data-go]');
+        let current = 0;
+        let timer;
+        const auto = carousel.classList.contains('tall') ? 3400 : 4200;
+
+        dotsWrap.innerHTML = slides.map((_, i) => `<button class="dot ${i === 0 ? 'active' : ''}" data-index="${i}" aria-label="Go to slide ${i + 1}"></button>`).join('');
+        const dots = Array.from(dotsWrap.querySelectorAll('.dot'));
+
+        function render() {
+          track.style.transform = `translateX(-${current * 100}%)`;
+          dots.forEach((d, i) => d.classList.toggle('active', i === current));
+          thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
+        }
+
+        function go(i) {
+          current = (i + slides.length) % slides.length;
+          render();
+        }
+
+        function start() {
+          stop();
+          timer = setInterval(() => go(current + 1), auto + (index * 100));
+        }
+
+        function stop() {
+          if (timer) clearInterval(timer);
+        }
+
+        prev.addEventListener('click', () => { go(current - 1); start(); });
+        next.addEventListener('click', () => { go(current + 1); start(); });
+        dots.forEach(dot => dot.addEventListener('click', () => { go(Number(dot.dataset.index)); start(); }));
+        thumbs.forEach(thumb => thumb.addEventListener('click', () => { go(Number(thumb.dataset.go)); start(); }));
+
+        carousel.addEventListener('mouseenter', stop);
+        carousel.addEventListener('mouseleave', start);
+        carousel.addEventListener('touchstart', stop, { passive: true });
+        carousel.addEventListener('touchend', start, { passive: true });
+
+        let sx = 0;
+        let dx = 0;
+        carousel.addEventListener('touchstart', e => {
+          sx = e.changedTouches[0].clientX;
+        }, { passive: true });
+        carousel.addEventListener('touchend', e => {
+          dx = e.changedTouches[0].clientX - sx;
+          if (Math.abs(dx) > 40) {
+            if (dx < 0) go(current + 1);
+            else go(current - 1);
+          }
+          start();
+        }, { passive: true });
+
+        render();
+        start();
+      });
+    }
+
+    buildPage();
+  </script>
+</body>
+</html>
