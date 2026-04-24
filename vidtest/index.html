@@ -1317,6 +1317,35 @@ allowfullscreen>
             updateAudioIndicator();
         }
 
+        function waitForVideoReady(video) {
+            return new Promise((resolve) => {
+                if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
+                    resolve();
+                    return;
+                }
+
+                const onReady = () => {
+                    cleanup();
+                    resolve();
+                };
+
+                const onTimeout = () => {
+                    cleanup();
+                    resolve();
+                };
+
+                const cleanup = () => {
+                    video.removeEventListener('loadedmetadata', onReady);
+                    video.removeEventListener('canplay', onReady);
+                    clearTimeout(timeoutId);
+                };
+
+                video.addEventListener('loadedmetadata', onReady, { once: true });
+                video.addEventListener('canplay', onReady, { once: true });
+                const timeoutId = window.setTimeout(onTimeout, 1200);
+            });
+        }
+
         async function swapToVideo(index) {
             if (index < 0 || index >= videoPlaylist.length) return;
             const incomingLayerIndex = activeLayerIndex === 0 ? 1 : 0;
@@ -1324,11 +1353,20 @@ allowfullscreen>
             const outgoingLayer = layers[activeLayerIndex];
 
             incomingLayer.pause();
+            incomingLayer.classList.remove('is-visible');
+            incomingLayer.removeAttribute('src');
+            incomingLayer.load();
+
             incomingLayer.src = videoPlaylist[index];
-            incomingLayer.currentTime = 0;
             incomingLayer.muted = !hasAudioBeenActivated;
             incomingLayer.loop = false;
             incomingLayer.playsInline = true;
+            incomingLayer.preload = 'auto';
+            incomingLayer.currentTime = 0;
+            incomingLayer.load();
+
+            await waitForVideoReady(incomingLayer);
+            incomingLayer.classList.add('is-visible');
 
             try {
                 await incomingLayer.play();
@@ -1337,8 +1375,15 @@ allowfullscreen>
                 await incomingLayer.play().catch(() => {});
             }
 
-            incomingLayer.classList.add('is-visible');
             outgoingLayer.classList.remove('is-visible');
+            outgoingLayer.pause();
+            if (outgoingLayer.readyState > 0) {
+                try {
+                    outgoingLayer.currentTime = 0;
+                } catch (error) {
+                    // Ignore currentTime reset failures on partially loaded iOS layers.
+                }
+            }
             outgoingLayer.muted = true;
 
             activeLayerIndex = incomingLayerIndex;
