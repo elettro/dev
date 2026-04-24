@@ -89,6 +89,9 @@
 </div>
 <img class="brand-logo elettro-nav-logo" src="../images/Elettro-logo-white.png" alt="Elettro" />
 </div>
+<button class="mobile-nav-toggle md:hidden inline-flex items-center justify-center" id="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu-panel" aria-label="Toggle navigation menu">
+<span class="material-symbols-outlined text-[20px]" aria-hidden="true">menu</span>
+</button>
 <div class="hidden md:flex flex-1 items-center justify-center px-4">
 <a href="#contact" class="availability-pill" aria-label="Available for work">
 <span class="availability-dot"></span>
@@ -108,6 +111,14 @@
 <button class="contact-cta bg-primary px-6 py-2.5 rounded-lg text-on-primary-fixed font-bold text-sm hover:shadow-[0_0_20px_rgba(129,236,255,0.4)] transition-all">
                     Contact Us
                 </button>
+</div>
+<div class="mobile-menu-panel md:hidden" id="mobile-menu-panel" hidden>
+<a class="mobile-menu-link" href="#services">Services</a>
+<a class="mobile-menu-link" href="#portfolio">Portfolio</a>
+<a class="mobile-menu-link" href="#process">Process</a>
+<a class="mobile-menu-link" href="#about">About</a>
+<a class="mobile-menu-link" href="#contact">Contact</a>
+<a class="mobile-menu-cta" href="#contact">Start Your Project</a>
 </div>
 </nav>
 </header>
@@ -159,7 +170,7 @@
 </div>
 </section>
 <!-- Our Services -->
-<section class="py-24 relative overflow-hidden">
+<section id="services" class="py-24 relative overflow-hidden">
 <div class="max-w-7xl mx-auto px-6">
 <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
 <div class="max-w-2xl">
@@ -226,7 +237,7 @@
 </div>
 </section>
 <!-- Portfolio Highlights -->
-<section class="py-32 bg-surface-container-low">
+<section id="portfolio" class="py-32 bg-surface-container-low">
 <div class="max-w-7xl mx-auto px-6">
 <div class="flex items-center justify-between mb-16">
 <h2 class="font-headline text-3xl md:text-5xl font-bold text-white">Work Highlights</h2>
@@ -410,7 +421,7 @@ allowfullscreen>
 </div>
 </section>
 <!-- AI + Systems Layer -->
-<section class="py-24 px-6 bg-transparent">
+<section id="about" class="py-24 px-6 bg-transparent">
 <div class="max-w-7xl mx-auto">
 <div class="mb-16">
 <h2 class="font-headline text-4xl font-bold text-white mb-4">AI + Systems Layer</h2>
@@ -437,7 +448,7 @@ allowfullscreen>
 </div>
 </section>
 <!-- The Process -->
-<section class="py-24 relative">
+<section id="process" class="py-24 relative">
 <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20">
 <div>
 <h2 class="font-headline text-4xl md:text-5xl font-bold text-white mb-8">Concept to <span class="text-primary italic">Creation</span></h2>
@@ -605,6 +616,9 @@ allowfullscreen>
         let stashboxPlayer;
         let darceyPlayer;
         let isPlayerReady = false;
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+        const mobileMenuLinks = mobileMenuPanel ? Array.from(mobileMenuPanel.querySelectorAll('a')) : [];
         const muteToggle = document.getElementById('mute-toggle');
         const muteIcon = document.getElementById('mute-icon');
         const seascapeAudioToggle = document.getElementById('seascape-audio-toggle');
@@ -652,6 +666,30 @@ allowfullscreen>
         let westPalmBeachVideoIndex = 0;
 
         const mediaAudioRegistry = [];
+
+        function setMobileMenuOpen(isOpen) {
+            if (!mobileMenuToggle || !mobileMenuPanel) return;
+            mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+            mobileMenuPanel.hidden = !isOpen;
+        }
+
+        if (mobileMenuToggle && mobileMenuPanel) {
+            mobileMenuToggle.addEventListener('click', () => {
+                const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+                setMobileMenuOpen(!isExpanded);
+            });
+
+            mobileMenuLinks.forEach((link) => {
+                link.addEventListener('click', () => setMobileMenuOpen(false));
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key !== 'Escape') return;
+                if (mobileMenuToggle.getAttribute('aria-expanded') !== 'true') return;
+                setMobileMenuOpen(false);
+                mobileMenuToggle.focus();
+            });
+        }
 
         function registerYouTubeAudioSource({ id, playerGetter, button, icon, labels }) {
             mediaAudioRegistry.push({
