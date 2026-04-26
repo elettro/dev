@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 Project Directory Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=DM+Serif+Display&family=Bebas+Neue&family=Righteous&family=Work+Sans:wght@300;400;600&family=Playfair+Display:wght@400;700&family=Fragment+Mono&family=Orbitron:wght@400;700&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; min-height: 100vh; }
+
+/* NAVIGATION */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: #0a0a0a;
+  border-bottom: 1px solid #222;
+  padding: 10px 20px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#nav span {
+  color: #555;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  margin-right: 8px;
+}
+.nav-btn {
+  background: transparent;
+  border: 1px solid #333;
+  color: #888;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.nav-btn:hover, .nav-btn.active {
+  background: #ff3c3c;
+  border-color: #ff3c3c;
+  color: #fff;
+}
+
+.concept {
+  display: none;
+  min-height: 100vh;
+  padding-top: 48px;
+}
+.concept.active { display: block; }
+
+/* ============================================================
+   CONCEPT 1 — BRUTALIST GRID
+   ============================================================ */
+#c1 {
+  background: #f0ebe0;
+  font-family: 'Bebas Neue', cursive;
+}
+.c1-header {
+  padding: 40px 40px 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  border-bottom: 4px solid #111;
+}
+.c1-header h1 {
+  font-size: 80px;
+  color: #111;
+  line-height: 1;
+}
+.c1-header p {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.c1-filter {
+  padding: 16px 40px;
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid #111;
+  background: #111;
+}
+.c1-tag {
+  background: transparent;
+  border: 1px solid #555;
+  color: #aaa;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 5px 14px;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  transition: all 0.15s;
+}
+.c1-tag:hover, .c1-tag.on {
+  background: #ff3c3c;
+  border-color: #ff3c3c;
+  color: #fff;
+}
+.c1-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0;
+  padding: 0;
+}
+.c1-card {
+  border-right: 2px solid #111;
+  border-bottom: 2px solid #111;
+  padding: 28px;
+  background: #f0ebe0;
+  cursor: pointer;
+  transition: background 0.1s;
+  position: relative;
+  overflow: hidden;
+}
+.c1-card::before {
+  content: attr(data-num);
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 60px;
+  color: rgba(0,0,0,0.06);
+  font-family: 'Bebas Neue', cursive;
+  line-height: 1;
+}
+.c1-card:hover { background: #111; }
+.c1-card:hover .c1-title, .c1-card:hover .c1-desc, .c1-card:hover .c1-cat { color: #f0ebe0; }
+.c1-cat {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #ff3c3c;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.c1-title { font-size: 28px; color: #111; line-height: 1.1; margin-bottom: 10px; }
+.c1-desc {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+  font-weight: 300;
+}
+.c1-status {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  padding: 3px 8px;
+  border: 1px solid currentColor;
+}
+.c1-live { color: #1a9c2a; }
+.c1-wip { color: #e88000; }
+.c1-concept { color: #8844cc; }
+
+/* ============================================================
+   CONCEPT 2 — TERMINAL / CLI
+   ============================================================ */
+#c2 {
+  background: #0d1117;
+  font-family: 'Fragment Mono', monospace;
+}
+.c2-shell {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 30px;
+}
+.c2-bar {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px 8px 0 0;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.c2-dot { width: 12px; height: 12px; border-radius: 50%; }
+.c2-d1 { background: #ff5f57; }
+.c2-d2 { background: #febc2e; }
+.c2-d3 { background: #28c840; }
+.c2-title-bar {
+  font-size: 12px;
+  color: #8b949e;
+  margin-left: auto;
+  margin-right: auto;
+}
+.c2-body {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 24px;
+  min-height: 500px;
+}
+.c2-line { margin-bottom: 6px; font-size: 13px; line-height: 1.6; }
+.c2-prompt { color: #58a6ff; }
+.c2-cmd { color: #79c0ff; }
+.c2-output { color: #8b949e; }
+.c2-green { color: #56d364; }
+.c2-amber { color: #e3b341; }
+.c2-red { color: #f85149; }
+.c2-magenta { color: #d2a8ff; }
+.c2-white { color: #e6edf3; }
+.c2-project {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 4px 0;
+  cursor: pointer;
+  border-radius: 3px;
+  padding-left: 4px;
+  transition: background 0.1s;
+}
+.c2-project:hover { background: rgba(88,166,255,0.07); }
+.c2-project:hover .c2-pname { color: #58a6ff; text-decoration: underline; }
+.c2-pname { color: #79c0ff; font-size: 13px; min-width: 200px; }
+.c2-pdesc { color: #8b949e; font-size: 12px; }
+.c2-pbadge { font-size: 11px; margin-left: auto; padding: 1px 8px; border-radius: 20px; }
+.c2-live-badge { background: rgba(86,211,100,0.15); color: #56d364; }
+.c2-wip-badge { background: rgba(227,179,65,0.15); color: #e3b341; }
+.c2-archive-badge { background: rgba(139,148,158,0.15); color: #8b949e; }
+.c2-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  border-top: 1px solid #21262d;
+  padding-top: 16px;
+}
+.c2-input {
+  background: transparent;
+  border: none;
+  color: #e6edf3;
+  font-family: 'Fragment Mono', monospace;
+  font-size: 13px;
+  flex: 1;
+  outline: none;
+}
+.c2-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: #58a6ff;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ============================================================
+   CONCEPT 3 — MAGAZINE EDITORIAL
+   ============================================================ */
+#c3 {
+  background: #fafaf8;
+  font-family: 'Playfair Display', serif;
+}
+.c3-masthead {
+  border-bottom: 1px solid #ddd;
+  padding: 24px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.c3-masthead h1 {
+  font-size: 13px;
+  font-family: 'Work Sans', sans-serif;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #111;
+  font-weight: 600;
+}
+.c3-issue {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 11px;
+  color: #999;
+  letter-spacing: 0.1em;
+}
+.c3-big-title {
+  padding: 50px 60px 30px;
+  border-bottom: 4px double #111;
+}
+.c3-big-title h2 {
+  font-size: 90px;
+  line-height: 0.9;
+  color: #111;
+  letter-spacing: -4px;
+}
+.c3-big-title h2 em { font-style: italic; color: #999; }
+.c3-layout {
+  display: grid;
+  grid-template-columns: 2fr 1px 1fr;
+  gap: 0;
+  padding: 0 60px;
+}
+.c3-divider { background: #ddd; }
+.c3-main { padding: 40px 40px 40px 0; }
+.c3-sidebar { padding: 40px 0 40px 40px; }
+.c3-featured {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+.c3-featured:last-child { border-bottom: none; }
+.c3-kicker {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 8px;
+}
+.c3-headline {
+  font-size: 32px;
+  line-height: 1.15;
+  color: #111;
+  margin-bottom: 12px;
+  transition: color 0.2s;
+}
+.c3-featured:hover .c3-headline { color: #cc2200; }
+.c3-byline {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.6;
+}
+.c3-sidebar-item {
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+.c3-sidebar-item:last-child { border-bottom: none; }
+.c3-s-num {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 36px;
+  color: #ddd;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.c3-s-title {
+  font-size: 16px;
+  color: #111;
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+.c3-sidebar-item:hover .c3-s-title { color: #cc2200; }
+.c3-s-cat {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 10px;
+  color: #aaa;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* ============================================================
+   CONCEPT 4 — NEON ARCADE CARDS
+   ============================================================ */
+#c4 {
+  background: #07060d;
+  font-family: 'Orbitron', monospace;
+}
+.c4-header {
+  padding: 40px;
+  text-align: center;
+  position: relative;
+}
+.c4-header h1 {
+  font-size: 48px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #00f5ff, #ff00c8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 6px;
+}
+.c4-header p {
+  color: #444;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  margin-top: 8px;
+}
+.c4-filter {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 40px 30px;
+}
+.c4-ftag {
+  background: transparent;
+  border: 1px solid #222;
+  color: #444;
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  padding: 6px 16px;
+  cursor: pointer;
+  letter-spacing: 0.15em;
+  transition: all 0.2s;
+}
+.c4-ftag:hover, .c4-ftag.on {
+  border-color: #00f5ff;
+  color: #00f5ff;
+  box-shadow: 0 0 12px rgba(0,245,255,0.3);
+}
+.c4-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: #111;
+  margin: 0 40px 60px;
+}
+.c4-card {
+  background: #07060d;
+  padding: 28px;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.c4-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.c4-card:hover { background: #0f0e1a; }
+.c4-card:hover::after { opacity: 1; }
+.c4-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+.c4-type {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.c4-name {
+  font-size: 16px;
+  color: #e0e0e0;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.c4-desc {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.c4-bar {
+  height: 2px;
+  background: #1a1a2e;
+  border-radius: 1px;
+  overflow: hidden;
+}
+.c4-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 1px;
+}
+.c4-prog-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  color: #333;
+  margin-top: 4px;
+}
+
+/* ============================================================
+   CONCEPT 5 — SWISS GRID / MODERNIST
+   ============================================================ */
+#c5 {
+  background: #fff;
+  font-family: 'Syne', sans-serif;
+}
+.c5-header {
+  padding: 48px 48px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  border-bottom: 2px solid #111;
+  padding-bottom: 24px;
+}
+.c5-header h1 {
+  font-size: 72px;
+  font-weight: 800;
+  color: #111;
+  line-height: 0.9;
+  letter-spacing: -3px;
+}
+.c5-header-right {
+  font-size: 11px;
+  color: #aaa;
+  letter-spacing: 0.15em;
+  text-align: right;
+  line-height: 2;
+}
+.c5-categories {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid #eee;
+  padding: 0 48px;
+}
+.c5-cat-tab {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  cursor: pointer;
+  color: #aaa;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.15s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+}
+.c5-cat-tab:hover { color: #111; }
+.c5-cat-tab.on { color: #111; border-bottom-color: #111; }
+.c5-list { padding: 0 48px; }
+.c5-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 200px 140px 100px;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.c5-row:hover { background: #fafafa; margin: 0 -24px; padding: 22px 24px; }
+.c5-row-num { font-size: 11px; color: #ddd; font-weight: 700; }
+.c5-row-info h3 { font-size: 18px; font-weight: 700; color: #111; margin-bottom: 2px; }
+.c5-row-info p { font-size: 12px; color: #999; font-family: 'Work Sans', sans-serif; }
+.c5-row-tag {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  font-weight: 700;
+}
+.c5-row-date { font-size: 11px; color: #bbb; text-align: right; font-family: 'Space Mono', monospace; }
+.c5-pill {
+  display: inline-block;
+  font-size: 9px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.pill-live { background: #dcfce7; color: #166534; }
+.pill-wip { background: #fef9c3; color: #854d0e; }
+.pill-concept { background: #ede9fe; color: #5b21b6; }
+
+/* ============================================================
+   CONCEPT 6 — POLAROID / PHOTO WALL
+   ============================================================ */
+#c6 {
+  background: #1a1a2e;
+  min-height: 100vh;
+  padding: 40px;
+}
+.c6-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px;
+  color: #f0e6d3;
+  text-align: center;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+.c6-wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.c6-polaroid {
+  background: #f5efe0;
+  padding: 12px 12px 40px;
+  cursor: pointer;
+  transform: rotate(var(--rot));
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 3px 3px 15px rgba(0,0,0,0.5);
+  width: 180px;
+}
+.c6-polaroid:hover {
+  transform: rotate(0deg) scale(1.08);
+  box-shadow: 8px 8px 30px rgba(0,0,0,0.7);
+  z-index: 10;
+  position: relative;
+}
+.c6-photo {
+  width: 100%;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+.c6-pname {
+  font-family: 'DM Serif Display', serif;
+  font-size: 15px;
+  color: #333;
+  text-align: center;
+  line-height: 1.3;
+}
+.c6-pcat {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: #999;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* ============================================================
+   CONCEPT 7 — KANBAN / PIPELINE
+   ============================================================ */
+#c7 {
+  background: #f4f3f0;
+  font-family: 'Instrument Sans', sans-serif;
+}
+.c7-header {
+  padding: 36px 36px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.c7-header h1 {
+  font-size: 36px;
+  font-weight: 600;
+  color: #111;
+}
+.c7-header span {
+  font-size: 12px;
+  color: #999;
+}
+.c7-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 0 36px 60px;
+}
+.c7-col-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.c7-col-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.c7-col-name { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #888; }
+.c7-col-count {
+  font-size: 11px;
+  color: #bbb;
+  margin-left: auto;
+}
+.c7-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border: 1px solid #e8e8e8;
+  transition: all 0.2s;
+}
+.c7-card:hover {
+  border-color: #ccc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.c7-card-type {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dot-c);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.c7-card-name { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 6px; line-height: 1.3; }
+.c7-card-desc { font-size: 12px; color: #888; line-height: 1.5; margin-bottom: 10px; }
+.c7-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.c7-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.c7-card-date { font-size: 10px; color: #ccc; }
+
+/* ============================================================
+   CONCEPT 8 — NEWSPAPER TICKER
+   ============================================================ */
+#c8 {
+  background: #fffef5;
+  font-family: 'Playfair Display', serif;
+}
+.c8-flag {
+  background: #111;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.c8-flag h1 { color: #fff; font-size: 36px; letter-spacing: -1px; }
+.c8-flag span {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 0.1em;
+}
+.c8-ticker {
+  background: #cc2200;
+  padding: 8px 0;
+  overflow: hidden;
+}
+.c8-ticker-inner {
+  display: flex;
+  animation: ticker 20s linear infinite;
+  white-space: nowrap;
+}
+.c8-ticker-inner:hover { animation-play-state: paused; }
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.c8-tick-item {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  color: #fff;
+  letter-spacing: 0.1em;
+  padding: 0 30px;
+  font-weight: 600;
+}
+.c8-tick-sep { color: rgba(255,255,255,0.4); }
+.c8-cols {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  gap: 0;
+  padding: 30px 40px;
+}
+.c8-col-div { background: #ddd; }
+.c8-col { padding: 0 30px; }
+.c8-col:first-child { padding-left: 0; }
+.c8-col:last-child { padding-right: 0; }
+.c8-col-head {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #999;
+  border-bottom: 1px solid #111;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+.c8-story {
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #e5e5e5;
+  cursor: pointer;
+}
+.c8-story:last-child { border-bottom: none; }
+.c8-s-hed { font-size: 20px; color: #111; line-height: 1.2; margin-bottom: 8px; }
+.c8-s-hed:hover { color: #cc2200; }
+.c8-s-deck {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+}
+.c8-tag {
+  display: inline-block;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #cc2200;
+  margin-bottom: 6px;
+}
+
+/* ============================================================
+   CONCEPT 9 — DARK MINIMAL CARDS (Apple-ish)
+   ============================================================ */
+#c9 {
+  background: #000;
+  font-family: 'Work Sans', sans-serif;
+}
+.c9-header {
+  padding: 80px 60px 40px;
+  text-align: center;
+}
+.c9-header h1 {
+  font-size: 64px;
+  font-weight: 300;
+  color: #f5f5f7;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.c9-header p {
+  font-size: 19px;
+  color: #86868b;
+  margin-top: 16px;
+  font-weight: 300;
+}
+.c9-filter {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 60px 40px;
+}
+.c9-ftag {
+  background: #1c1c1e;
+  border: none;
+  color: #86868b;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  padding: 7px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.c9-ftag:hover, .c9-ftag.on {
+  background: #2c2c2e;
+  color: #f5f5f7;
+}
+.c9-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  background: #1c1c1e;
+  margin: 0 60px 80px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+.c9-card {
+  background: #000;
+  padding: 36px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.c9-card:hover { background: #0a0a0a; }
+.c9-icon {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.c9-name {
+  font-size: 19px;
+  font-weight: 600;
+  color: #f5f5f7;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+.c9-desc {
+  font-size: 14px;
+  color: #86868b;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.c9-learn {
+  font-size: 14px;
+  color: #2997ff;
+}
+.c9-learn:hover { text-decoration: underline; }
+
+/* ============================================================
+   CONCEPT 10 — GAME MAP / ISLAND
+   ============================================================ */
+#c10 {
+  background: #1b3a2d;
+  font-family: 'Righteous', cursive;
+  min-height: 100vh;
+  padding: 40px;
+}
+.c10-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.c10-header h1 { font-size: 48px; color: #f5d87a; letter-spacing: 3px; }
+.c10-header p {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  color: #8fba98;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.c10-map {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  height: 520px;
+}
+.c10-path-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.c10-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  cursor: pointer;
+}
+.c10-bubble {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin: 0 auto 6px;
+  transition: transform 0.2s;
+  border: 3px solid rgba(255,255,255,0.1);
+}
+.c10-node:hover .c10-bubble { transform: scale(1.15); }
+.c10-node-label {
+  font-size: 11px;
+  color: #c8e6c9;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+.c10-node-sub {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 9px;
+  color: #7aaa82;
+}
+.c10-tooltip {
+  display: none;
+  position: fixed;
+  background: #0d2318;
+  border: 1px solid #2d6a4f;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #c8e6c9;
+  z-index: 1000;
+  max-width: 220px;
+  pointer-events: none;
+}
+.c10-tooltip.show { display: block; }
+.c10-tt-name { font-size: 16px; color: #f5d87a; margin-bottom: 4px; }
+.c10-tt-desc {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  color: #8fba98;
+  line-height: 1.5;
+}
+.c10-legend {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.c10-leg-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 11px;
+  color: #8fba98;
+}
+.c10-leg-dot { width: 12px; height: 12px; border-radius: 50%; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div id="nav">
+  <span>10 CONCEPTS ▸</span>
+  <button class="nav-btn active" onclick="show(1)">1 Brutalist</button>
+  <button class="nav-btn" onclick="show(2)">2 Terminal</button>
+  <button class="nav-btn" onclick="show(3)">3 Editorial</button>
+  <button class="nav-btn" onclick="show(4)">4 Neon Arcade</button>
+  <button class="nav-btn" onclick="show(5)">5 Swiss Grid</button>
+  <button class="nav-btn" onclick="show(6)">6 Polaroid Wall</button>
+  <button class="nav-btn" onclick="show(7)">7 Kanban</button>
+  <button class="nav-btn" onclick="show(8)">8 Newspaper</button>
+  <button class="nav-btn" onclick="show(9)">9 Dark Minimal</button>
+  <button class="nav-btn" onclick="show(10)">10 Game Map</button>
+</div>
+
+<!-- ============================================================
+     CONCEPT 1 — BRUTALIST GRID
+     ============================================================ -->
+<div class="concept active" id="c1">
+  <div class="c1-header">
+    <h1>PROJECTS</h1>
+    <p>12 works &bull; elettro studio &bull; 2024–25</p>
+  </div>
+  <div class="c1-filter">
+    <button class="c1-tag on" onclick="c1Filter(this,'all')">ALL</button>
+    <button class="c1-tag" onclick="c1Filter(this,'web')">WEB</button>
+    <button class="c1-tag" onclick="c1Filter(this,'brand')">BRAND</button>
+    <button class="c1-tag" onclick="c1Filter(this,'music')">MUSIC</button>
+    <button class="c1-tag" onclick="c1Filter(this,'tool')">TOOLS</button>
+  </div>
+  <div class="c1-grid" id="c1grid"></div>
+</div>
+
+<!-- ============================================================
+     CONCEPT 2 — TERMINAL
+     ============================================================ -->
+<div class="concept" id="c2">
+  <div class="c2-shell">
+    <div class="c2-bar">
+      <div class="c2-dot c2-d1"></div>
+      <div class="c2-dot c2-d2"></div>
+      <div class="c2-dot c2-d3"></div>
+      <span class="c2-title-bar">dean@elettro ~ projects</span>
+    </div>
+    <div class="c2-body">
+      <div class="c2-line"><span class="c2-prompt">dean@elettro</span><span class="c2-output">:</span><span class="c2-magenta">~/projects</span><span class="c2-output">$ </span><span class="c2-cmd">ls -la --sort=date</span></div>
+      <div class="c2-line c2-output" style="margin-top:10px;">total 12 projects &nbsp; last updated: <span class="c2-green">2025-04-15</span></div>
+      <div class="c2-line" style="margin: 8px 0 4px;">
+        <span class="c2-output" style="font-size:11px;">PERMISSIONS &nbsp;&nbsp;&nbsp;&nbsp; UPDATED &nbsp;&nbsp;&nbsp;&nbsp; SIZE &nbsp;&nbsp; NAME &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DESC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STATUS</span>
+      </div>
+      <div id="c2-list"></div>
+      <div class="c2-input-row">
+        <span class="c2-prompt">dean@elettro</span><span class="c2-output">:</span><span class="c2-magenta">~/projects</span><span class="c2-output">$ </span>
+        <input class="c2-input" id="c2input" placeholder="filter [web|brand|music|tool] or type project name..." />
+        <div class="c2-cursor"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CONCEPT 3 — EDITORIAL
+     ============================================================ -->
+<div class="concept" id="c3">
+  <div class="c3-masthead">
+    <h1>Elettro Studio</h1>
+    <span class="c3-issue">Vol. IV &mdash; Spring 2025 &mdash; Portfolio</span>
+  </div>
+  <div class="c3-big-title">
+    <h2>Selected<br><em>Works</em> &amp;<br>Projects</h2>
+  </div>
+  <div class="c3-layout">
+    <div class="c3-main" id="c3-main"></div>
+    <div class="c3-divider"></div>
+    <div class="c3-sidebar" id="c3-side"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CONCEPT 4 — NEON ARCADE
+     ============================================================ -->
+<div class="concept" id="c4">
+  <div class="c4-header">
+    <h1>PROJECT VAULT</h1>
+    <p>SELECT YOUR MISSION &bull; ELETTRO STUDIO &bull; 2025</p>
+  </div>
+  <div class="c4-filter">
+    <button class="c4-ftag on" onclick="c4Filter(this,'all')">ALL SECTORS</button>
+    <button class="c4-ftag" onclick="c4Filter(this,'web')">WEB</button>
+    <button class="c4-ftag" onclick="c4Filter(this,'brand')">BRAND</button>
+    <button class="c4-ftag" onclick="c4Filter(this,'music')">MUSIC</button>
+    <button class="c4-ftag" onclick="c4Filter(this,'tool')">TOOLS</button>
+  </div>
+  <div class="c4-grid" id="c4grid"></div>
+</div>
+
+<!-- ============================================================
+     CONCEPT 5 — SWISS GRID
+     ============================================================ -->
+<div class="concept" id="c5">
+  <div class="c5-header">
+    <h1>Work</h1>
+    <div class="c5-header-right">
+      Elettro Studio<br>
+      Plantation, Florida<br>
+      2024 — 2025
+    </div>
+  </div>
+  <div class="c5-categories">
+    <button class="c5-cat-tab on" onclick="c5Filter(this,'all')">All</button>
+    <button class="c5-cat-tab" onclick="c5Filter(this,'web')">Web</button>
+    <button class="c5-cat-tab" onclick="c5Filter(this,'brand')">Brand</button>
+    <button class="c5-cat-tab" onclick="c5Filter(this,'music')">Music</button>
+    <button class="c5-cat-tab" onclick="c5Filter(this,'tool')">Tools</button>
+  </div>
+  <div class="c5-list" id="c5list"></div>
+</div>
+
+<!-- ============================================================
+     CONCEPT 6 — POLAROID WALL
+     ============================================================ -->
+<div class="concept" id="c6">
+  <div class="c6-title">The Studio Wall</div>
+  <div class="c6-wall" id="c6wall"></div>
+</div>
+
+<!-- ============================================================
+     CONCEPT 7 — KANBAN
+     ============================================================ -->
+<div class="concept" id="c7">
+  <div class="c7-header">
+    <h1>Project Pipeline</h1>
+    <span>Elettro Studio &bull; Q2 2025</span>
+  </div>
+  <div class="c7-board" id="c7board"></div>
+</div>
+
+<!-- ============================================================
+     CONCEPT 8 — NEWSPAPER
+     ============================================================ -->
+<div class="concept" id="c8">
+  <div class="c8-flag">
+    <h1>The Elettro Gazette</h1>
+    <span>SPRING EDITION &bull; PLANTATION, FL</span>
+  </div>
+  <div class="c8-ticker">
+    <div class="c8-ticker-inner" id="c8ticker"></div>
+  </div>
+  <div class="c8-cols">
+    <div class="c8-col" id="c8-col1"></div>
+    <div class="c8-col-div"></div>
+    <div class="c8-col" id="c8-col2"></div>
+    <div class="c8-col-div"></div>
+    <div class="c8-col" id="c8-col3"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CONCEPT 9 — DARK MINIMAL
+     ============================================================ -->
+<div class="concept" id="c9">
+  <div class="c9-header">
+    <h1>Studio Work.</h1>
+    <p>Creative production &amp; digital strategy</p>
+  </div>
+  <div class="c9-filter">
+    <button class="c9-ftag on" onclick="c9Filter(this,'all')">All</button>
+    <button class="c9-ftag" onclick="c9Filter(this,'web')">Web</button>
+    <button class="c9-ftag" onclick="c9Filter(this,'brand')">Brand</button>
+    <button class="c9-ftag" onclick="c9Filter(this,'music')">Music</button>
+    <button class="c9-ftag" onclick="c9Filter(this,'tool')">Tools</button>
+  </div>
+  <div class="c9-grid" id="c9grid"></div>
+</div>
+
+<!-- ============================================================
+     CONCEPT 10 — GAME MAP
+     ============================================================ -->
+<div class="concept" id="c10">
+  <div class="c10-header">
+    <h1>PROJECT MAP</h1>
+    <p>Navigate your creative world</p>
+  </div>
+  <div class="c10-map" id="c10map">
+    <svg class="c10-path-svg" id="c10svg"></svg>
+  </div>
+  <div class="c10-legend">
+    <div class="c10-leg-item"><div class="c10-leg-dot" style="background:#2d9cdb"></div>Web</div>
+    <div class="c10-leg-item"><div class="c10-leg-dot" style="background:#e2994a"></div>Brand</div>
+    <div class="c10-leg-item"><div class="c10-leg-dot" style="background:#c651b0"></div>Music</div>
+    <div class="c10-leg-item"><div class="c10-leg-dot" style="background:#45b369"></div>Tool</div>
+  </div>
+  <div class="c10-tooltip" id="c10tip"></div>
+</div>
+
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+const PROJECTS = [
+  { id:1, name:'Weight Loss Davie', cat:'web', desc:'Full rebrand & GitHub Pages migration. Google Ads, SEO, schema markup, landing page.', status:'live', date:'Mar 2025', icon:'🏥', progress:95, size:'4.2MB', perms:'drwxr-xr-x', bg:'#e8f5e9', accentColor:'#00b894' },
+  { id:2, name:'Stashbox Band Site', cat:'music', desc:'Static GitHub Pages site with video-hero booking page, Dylan tribute session, setlists.', status:'live', date:'Apr 2025', icon:'🎸', progress:90, size:'12MB', perms:'drwxr-xr-x', bg:'#fff3e0', accentColor:'#e67e22' },
+  { id:3, name:'Seascape Resort', cat:'brand', desc:'Brand renovation, logo direction, fishing excursion sub-page, 4-part blog series.', status:'live', date:'Feb 2025', icon:'⚓', progress:85, size:'6.8MB', perms:'drwxr-xr-x', bg:'#e3f2fd', accentColor:'#2d9cdb' },
+  { id:4, name:'Elettro Showcase', cat:'brand', desc:'Agency showcase page with electronica design system, Barlow Condensed, neon palette.', status:'wip', date:'Jan 2025', icon:'⚡', progress:60, size:'2.1MB', perms:'drwxr--r--', bg:'#fce4ec', accentColor:'#e91e8c' },
+  { id:5, name:'GLP-1 Calculator', cat:'tool', desc:'Self-contained HTML weight loss projection calculator for Weight Loss Davie.', status:'live', date:'Mar 2025', icon:'📊', progress:100, size:'380KB', perms:'-rw-r--r--', bg:'#f3e5f5', accentColor:'#9b59b6' },
+  { id:6, name:'Joanna Krupa YT', cat:'brand', desc:'Full YouTube channel strategy — content pillars, monetization, animal advocacy integration.', status:'concept', date:'Apr 2025', icon:'🦁', progress:40, size:'1.2MB', perms:'drw-r--r--', bg:'#fff8e1', accentColor:'#f39c12' },
+  { id:7, name:'Vapi Voice Agent', cat:'tool', desc:'AI voice receptionist using Vapi + Claude + ElevenLabs + Make.com for Weight Loss Davie.', status:'wip', date:'Mar 2025', icon:'🎙️', progress:35, size:'800KB', perms:'drwxr--r--', bg:'#e8eaf6', accentColor:'#3f51b5' },
+  { id:8, name:'Stashbox Social Pipeline', cat:'music', desc:'Automated content pipeline: Make.com, Claude API, Creatomate, Publer, Airtable, Dropbox.', status:'concept', date:'Apr 2025', icon:'🔄', progress:15, size:'400KB', perms:'drw-------', bg:'#e0f2f1', accentColor:'#1abc9c' },
+  { id:9, name:'Keys Reel Adventures', cat:'web', desc:'Fishing & diving excursion landing page for Captain Kevin Johnsen, Marathon Keys.', status:'live', date:'Feb 2025', icon:'🎣', progress:100, size:'1.8MB', perms:'-rw-r--r--', bg:'#e1f5fe', accentColor:'#0288d1' },
+  { id:10, name:'Pinnacle AI YT Tool', cat:'tool', desc:'YouTube income stack tool for B2B AI consulting channel. Revenue modeling & projection.', status:'wip', date:'Jan 2025', icon:'🤖', progress:55, size:'700KB', perms:'drwxr--r--', bg:'#f1f8e9', accentColor:'#4caf50' },
+  { id:11, name:'Dylan Tribute Session', cat:'music', desc:'Bob Dylan tribute recording session page — Studio One, Fort Lauderdale, March 18 2026.', status:'live', date:'Mar 2026', icon:'🎵', progress:100, size:'950KB', perms:'-rw-r--r--', bg:'#fbe9e7', accentColor:'#ff5722' },
+  { id:12, name:'Google Ads Playbook', cat:'tool', desc:'Full Google Ads playbook & compliant landing page for medical weight loss client.', status:'live', date:'Feb 2025', icon:'📣', progress:100, size:'2.3MB', perms:'-rw-r--r--', bg:'#e8f5e9', accentColor:'#27ae60' },
+];
+
+/* NAV */
+function show(n) {
+  document.querySelectorAll('.concept').forEach(c => c.classList.remove('active'));
+  document.getElementById('c' + n).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach((b,i) => b.classList.toggle('active', i===n-1));
+}
+
+/* ============================================================
+   CONCEPT 1 — BRUTALIST GRID
+   ============================================================ */
+function buildC1(filter='all') {
+  const list = filter === 'all' ? PROJECTS : PROJECTS.filter(p => p.cat === filter);
+  const grid = document.getElementById('c1grid');
+  grid.innerHTML = list.map((p,i) => `
+    <div class="c1-card" data-cat="${p.cat}" data-num="${String(p.id).padStart(2,'0')}">
+      <div class="c1-cat">${p.cat}</div>
+      <div class="c1-title">${p.name.toUpperCase()}</div>
+      <div class="c1-desc">${p.desc}</div>
+      <span class="c1-status c1-${p.status}">${p.status.toUpperCase()}</span>
+    </div>
+  `).join('');
+}
+buildC1();
+
+function c1Filter(el, f) {
+  document.querySelectorAll('.c1-tag').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  buildC1(f);
+}
+
+/* ============================================================
+   CONCEPT 2 — TERMINAL
+   ============================================================ */
+function buildC2(filter='') {
+  const list = filter ? PROJECTS.filter(p => p.cat === filter || p.name.toLowerCase().includes(filter)) : PROJECTS;
+  const badges = { live: 'c2-live-badge', wip: 'c2-wip-badge', concept: 'c2-archive-badge' };
+  document.getElementById('c2-list').innerHTML = list.map(p => `
+    <div class="c2-project">
+      <span class="c2-output" style="font-size:11px;">${p.perms}</span>
+      <span class="c2-output" style="font-size:11px;min-width:70px;">${p.date}</span>
+      <span class="c2-output" style="font-size:11px;min-width:54px;">${p.size}</span>
+      <span class="c2-pname">${p.icon} ${p.name}/</span>
+      <span class="c2-pdesc">${p.desc.substring(0,52)}...</span>
+      <span class="c2-pbadge ${badges[p.status]}">${p.status}</span>
+    </div>
+  `).join('');
+}
+buildC2();
+document.addEventListener('DOMContentLoaded', () => {
+  const inp = document.getElementById('c2input');
+  if (inp) {
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const v = inp.value.trim().toLowerCase();
+        buildC2(v);
+        inp.value = '';
+      }
+    });
+  }
+});
+setTimeout(() => {
+  const inp = document.getElementById('c2input');
+  if (inp) {
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const v = inp.value.trim().toLowerCase();
+        buildC2(v);
+        inp.value = '';
+      }
+    });
+  }
+}, 100);
+
+/* ============================================================
+   CONCEPT 3 — EDITORIAL
+   ============================================================ */
+(function buildC3() {
+  const main = PROJECTS.slice(0,4);
+  const side = PROJECTS.slice(4,9);
+  document.getElementById('c3-main').innerHTML = main.map(p => `
+    <div class="c3-featured">
+      <div class="c3-kicker">${p.cat} &bull; ${p.date}</div>
+      <div class="c3-headline">${p.icon} ${p.name}</div>
+      <div class="c3-byline">${p.desc}</div>
+    </div>
+  `).join('');
+  document.getElementById('c3-side').innerHTML = `
+    <div class="c3-col-head" style="font-family:'Work Sans';font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#999;border-bottom:1px solid #111;padding-bottom:8px;margin-bottom:16px;">Also in this issue</div>
+    ${side.map((p,i) => `
+      <div class="c3-sidebar-item">
+        <div class="c3-s-num">${String(i+5).padStart(2,'0')}</div>
+        <div class="c3-s-title">${p.icon} ${p.name}</div>
+        <div class="c3-s-cat">${p.cat}</div>
+      </div>
+    `).join('')}
+  `;
+})();
+
+/* ============================================================
+   CONCEPT 4 — NEON ARCADE
+   ============================================================ */
+const C4_ACCENTS = { web:'#00f5ff', brand:'#ff00c8', music:'#ff9500', tool:'#39ff14' };
+function buildC4(filter='all') {
+  const list = filter === 'all' ? PROJECTS : PROJECTS.filter(p => p.cat === filter);
+  document.getElementById('c4grid').innerHTML = list.map(p => `
+    <div class="c4-card" style="--accent:${C4_ACCENTS[p.cat]}">
+      <div class="c4-icon">${p.icon}</div>
+      <div class="c4-type">${p.cat}</div>
+      <div class="c4-name">${p.name}</div>
+      <div class="c4-desc">${p.desc.substring(0,70)}...</div>
+      <div class="c4-bar"><div class="c4-fill" style="width:${p.progress}%"></div></div>
+      <div class="c4-prog-label"><span>COMPLETION</span><span>${p.progress}%</span></div>
+    </div>
+  `).join('');
+}
+buildC4();
+function c4Filter(el, f) {
+  document.querySelectorAll('.c4-ftag').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  buildC4(f);
+}
+
+/* ============================================================
+   CONCEPT 5 — SWISS GRID
+   ============================================================ */
+function buildC5(filter='all') {
+  const list = filter === 'all' ? PROJECTS : PROJECTS.filter(p => p.cat === filter);
+  document.getElementById('c5list').innerHTML = list.map((p,i) => `
+    <div class="c5-row">
+      <div class="c5-row-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="c5-row-info"><h3>${p.icon} ${p.name}</h3><p>${p.desc.substring(0,60)}...</p></div>
+      <div class="c5-row-tag">${p.cat}</div>
+      <div class="c5-row-date">${p.date}</div>
+      <div><span class="c5-pill pill-${p.status}">${p.status}</span></div>
+    </div>
+  `).join('');
+}
+buildC5();
+function c5Filter(el, f) {
+  document.querySelectorAll('.c5-cat-tab').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  buildC5(f);
+}
+
+/* ============================================================
+   CONCEPT 6 — POLAROID WALL
+   ============================================================ */
+(function buildC6() {
+  const BG_COLORS = ['#ffe4e4','#e4f0ff','#e4ffe8','#fff5e4','#f0e4ff','#e4fffd','#ffece4'];
+  document.getElementById('c6wall').innerHTML = PROJECTS.map((p,i) => {
+    const rot = (((i * 7 + 3) % 20) - 10) * 0.8;
+    const bg = BG_COLORS[i % BG_COLORS.length];
+    return `
+      <div class="c6-polaroid" style="--rot:${rot}deg">
+        <div class="c6-photo" style="background:${bg}">${p.icon}</div>
+        <div class="c6-pname">${p.name}</div>
+        <div class="c6-pcat">${p.cat} &bull; ${p.date}</div>
+      </div>
+    `;
+  }).join('');
+})();
+
+/* ============================================================
+   CONCEPT 7 — KANBAN
+   ============================================================ */
+(function buildC7() {
+  const COLS = [
+    { id:'concept', label:'Concept', color:'#8844cc', dot:'#8844cc' },
+    { id:'wip',     label:'In Progress', color:'#e88000', dot:'#e88000' },
+    { id:'live',    label:'Live', color:'#1a9c2a', dot:'#1a9c2a' },
+    { id:'archive', label:'Archive', color:'#888', dot:'#888' },
+  ];
+  const AVCOLORS = ['#3498db','#e74c3c','#2ecc71','#9b59b6','#f39c12','#1abc9c'];
+  const board = document.getElementById('c7board');
+  board.innerHTML = COLS.map(col => {
+    const cards = PROJECTS.filter(p => p.status === col.id || (col.id === 'archive' && !['concept','wip','live'].includes(p.status)));
+    return `
+      <div>
+        <div class="c7-col-header">
+          <div class="c7-col-dot" style="background:${col.dot}"></div>
+          <span class="c7-col-name" style="color:${col.color}">${col.label}</span>
+          <span class="c7-col-count">${cards.length}</span>
+        </div>
+        ${cards.map((p,i) => `
+          <div class="c7-card" style="--dot-c:${col.dot}">
+            <div class="c7-card-type">${p.cat}</div>
+            <div class="c7-card-name">${p.icon} ${p.name}</div>
+            <div class="c7-card-desc">${p.desc.substring(0,60)}...</div>
+            <div class="c7-card-footer">
+              <div class="c7-avatar" style="background:${AVCOLORS[i%AVCOLORS.length]}">${p.name[0]}</div>
+              <div class="c7-card-date">${p.date}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }).join('');
+})();
+
+/* ============================================================
+   CONCEPT 8 — NEWSPAPER
+   ============================================================ */
+(function buildC8() {
+  const items = PROJECTS.map(p => `<span class="c8-tick-item">${p.icon} ${p.name.toUpperCase()} <span class="c8-tick-sep">◆</span></span>`).join('');
+  const t = document.getElementById('c8ticker');
+  t.innerHTML = items + items;
+
+  const mkStory = p => `
+    <div class="c8-story">
+      <div class="c8-tag">${p.cat}</div>
+      <div class="c8-s-hed">${p.icon} ${p.name}</div>
+      <div class="c8-s-deck">${p.desc}</div>
+    </div>
+  `;
+  const c = [
+    [0,1,2,3],
+    [4,5,6,7],
+    [8,9,10,11]
+  ];
+  const heads = ['Digital Works','Brand & Identity','Music & Tools'];
+  ['c8-col1','c8-col2','c8-col3'].forEach((id, ci) => {
+    document.getElementById(id).innerHTML = `
+      <div class="c8-col-head">${heads[ci]}</div>
+      ${c[ci].map(i => PROJECTS[i] ? mkStory(PROJECTS[i]) : '').join('')}
+    `;
+  });
+})();
+
+/* ============================================================
+   CONCEPT 9 — DARK MINIMAL
+   ============================================================ */
+function buildC9(filter='all') {
+  const list = filter === 'all' ? PROJECTS : PROJECTS.filter(p => p.cat === filter);
+  document.getElementById('c9grid').innerHTML = list.map(p => `
+    <div class="c9-card">
+      <div class="c9-icon">${p.icon}</div>
+      <div class="c9-name">${p.name}</div>
+      <div class="c9-desc">${p.desc}</div>
+      <div class="c9-learn">Learn more &rsaquo;</div>
+    </div>
+  `).join('');
+}
+buildC9();
+function c9Filter(el, f) {
+  document.querySelectorAll('.c9-ftag').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  buildC9(f);
+}
+
+/* ============================================================
+   CONCEPT 10 — GAME MAP
+   ============================================================ */
+(function buildC10() {
+  const catColors = { web:'#2d9cdb', brand:'#e2994a', music:'#c651b0', tool:'#45b369' };
+  const positions = [
+    {x:50,y:15},{x:18,y:30},{x:80,y:28},{x:42,y:40},{x:65,y:52},
+    {x:25,y:58},{x:55,y:70},{x:82,y:65},{x:12,y:75},{x:70,y:82},
+    {x:38,y:85},{x:90,y:45}
+  ];
+  const map = document.getElementById('c10map');
+  const svg = document.getElementById('c10svg');
+
+  // draw paths between adjacent nodes
+  const connections = [[0,1],[0,2],[1,3],[2,4],[3,5],[4,6],[5,6],[6,7],[5,8],[7,9],[8,10],[9,11],[3,4],[6,9]];
+  svg.innerHTML = connections.map(([a,b]) => {
+    const pa = positions[a], pb = positions[b];
+    return `<line x1="${pa.x}%" y1="${pa.y}%" x2="${pb.x}%" y2="${pb.y}%"
+      stroke="#2d6a4f" stroke-width="2" stroke-dasharray="4,4" opacity="0.5"/>`;
+  }).join('');
+
+  const tip = document.getElementById('c10tip');
+  map.innerHTML += PROJECTS.map((p, i) => {
+    const pos = positions[i];
+    const col = catColors[p.cat];
+    return `
+      <div class="c10-node" style="left:${pos.x}%;top:${pos.y}%"
+        data-id="${p.id}"
+        onmousemove="showTip(event,${p.id})"
+        onmouseleave="hideTip()">
+        <div class="c10-bubble" style="background:${col}22;border-color:${col}">${p.icon}</div>
+        <div class="c10-node-label">${p.name.split(' ').slice(0,2).join(' ')}</div>
+        <div class="c10-node-sub">${p.cat}</div>
+      </div>
+    `;
+  }).join('');
+})();
+
+function showTip(e, id) {
+  const p = PROJECTS.find(x => x.id === id);
+  const tip = document.getElementById('c10tip');
+  tip.innerHTML = `<div class="c10-tt-name">${p.icon} ${p.name}</div><div class="c10-tt-desc">${p.desc}</div>`;
+  tip.classList.add('show');
+  tip.style.left = (e.clientX + 14) + 'px';
+  tip.style.top = (e.clientY - 10) + 'px';
+}
+function hideTip() {
+  document.getElementById('c10tip').classList.remove('show');
+}
+</script>
+</body>
+</html>
