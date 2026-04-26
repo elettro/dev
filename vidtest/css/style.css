@@ -927,6 +927,37 @@
   fill: currentColor;
 }
 
+
+
+.footer-music-icon,
+.footer-icon-music,
+.music-footer-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-music-icon-svg {
+  width: 34px;
+  height: 34px;
+  display: block;
+  overflow: visible;
+  fill: none;
+}
+
+.footer-music-icon-svg .music-note {
+  fill: #f7f8ff;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.28));
+}
+
+.footer-music-icon-svg .wave {
+  fill: none;
+  stroke: #9aa8ff;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 6px rgba(122, 134, 255, 0.45));
+}
 .footer-social-icon:hover,
 .footer-social-icon:focus-visible {
   color: #ffffff;
