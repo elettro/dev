@@ -6,12 +6,23 @@
       [id].anchor-target {
         scroll-margin-top: 125px;
       }
+      #process,
+      .process-section {
+        scroll-margin-top: 125px;
+      }
+      #process.process-section {
+        padding-top: 72px;
+      }
       @media (max-width: 1024px) {
         html {
           scroll-padding-top: 110px;
         }
         section[id],
         [id].anchor-target {
+          scroll-margin-top: 110px;
+        }
+        #process,
+        .process-section {
           scroll-margin-top: 110px;
         }
       }
@@ -22,6 +33,13 @@
         section[id],
         [id].anchor-target {
           scroll-margin-top: 95px;
+        }
+        #process,
+        .process-section {
+          scroll-margin-top: 95px;
+        }
+        #process.process-section {
+          padding-top: 48px;
         }
       }
 
