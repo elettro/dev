@@ -1,32 +1,9 @@
-      html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 125px;
-      }
-      section[id],
-      [id].anchor-target {
-        scroll-margin-top: 125px;
-      }
-      @media (max-width: 1024px) {
-        html {
-          scroll-padding-top: 110px;
-        }
-        section[id],
-        [id].anchor-target {
-          scroll-margin-top: 110px;
-        }
-      }
-      @media (max-width: 640px) {
-        html {
-          scroll-padding-top: 95px;
-        }
-        section[id],
-        [id].anchor-target {
-          scroll-margin-top: 95px;
-        }
-      }
-
-      #portfolio.portfolio-section {
-        padding-top: 72px;
+      .anchor-point {
+        position: relative;
+        top: -1px;
+        height: 1px;
+        width: 100%;
+        pointer-events: none;
       }
       .material-symbols-outlined {
         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
