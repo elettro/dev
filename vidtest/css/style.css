@@ -841,3 +841,57 @@
     border-radius: 1rem 1rem 0 0;
   }
 }
+
+@media (max-width: 767px) {
+  .mobile-video-card {
+    background: rgba(15, 25, 48, 0.92);
+    border: 1px solid rgba(145, 170, 220, 0.16);
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .mobile-video-card .mobile-video-media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .mobile-video-card .mobile-video-copy {
+    position: static !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    display: block !important;
+    background: rgba(6, 14, 32, 0.96) !important;
+    padding: 1rem !important;
+  }
+
+  .mobile-video-card .mobile-video-copy h4 {
+    color: #ffffff;
+    font-size: 1.08rem;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  .mobile-video-card .mobile-video-copy span {
+    display: block;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    margin-bottom: 0.45rem;
+  }
+
+  .mobile-video-card .mobile-video-copy a {
+    position: relative;
+    z-index: 4;
+  }
+
+  .mobile-video-card .mobile-video-copy .mt-4 {
+    margin-top: 0.75rem;
+  }
+
+  .mobile-video-card > button {
+    position: absolute;
+  }
+}
