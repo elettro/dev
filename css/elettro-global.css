@@ -71,10 +71,18 @@ section {
   padding: var(--section-v) var(--section-h);
 }
 
-/* Tighten desktop anchor landing position for in-page nav links */
+/* Desktop in-page nav anchor landing (keeps content tucked right under the fixed nav) */
 @media (min-width: 961px) {
-  section[id] {
-    scroll-margin-top: -75px;
+  :root {
+    --desktop-anchor-offset: -72px;
+  }
+
+  section[id="services"],
+  section[id="portfolio"],
+  section[id="process"],
+  section[id="about"],
+  section[id="contact"] {
+    scroll-margin-top: var(--desktop-anchor-offset);
   }
 }
 
