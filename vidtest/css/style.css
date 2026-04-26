@@ -239,6 +239,30 @@
         transform: scale(var(--beehiiv-scale));
         background: transparent;
       }
+
+      @media (max-width: 767px) {
+        #floating-video-card {
+          display: block;
+          width: min(86vw, 360px);
+          aspect-ratio: 3 / 4;
+          margin: 1.5rem auto 0;
+          transform: rotate(0.8deg);
+        }
+
+        #floating-video-card:hover,
+        #floating-video-card.is-active {
+          transform: rotate(0deg) scale(1.01);
+        }
+
+        #floating-video-card .video-audio-mini-toggle {
+          top: 0.6rem;
+          right: 0.6rem;
+        }
+
+        #floating-video-card .video-audio-indicator {
+          bottom: 0.7rem;
+        }
+      }
       @media (max-width: 1024px) {
         section.py-24.px-6 > div.max-w-7xl {
           padding-left: 0;
