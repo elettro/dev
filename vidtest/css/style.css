@@ -904,18 +904,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.65rem;
-  height: 2.65rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  min-width: 44px;
+  min-height: 44px;
+  flex-shrink: 0;
   border-radius: 999px;
   border: 1px solid rgba(145, 170, 220, 0.22);
   background: rgba(255, 255, 255, 0.045);
-  color: rgba(222, 229, 255, 0.72);
+  color: rgba(222, 229, 255, 0.76);
   transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease, color 220ms ease, box-shadow 220ms ease;
 }
 
 .footer-social-icon svg {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.22rem;
+  height: 1.22rem;
   display: block;
   fill: currentColor;
 }
