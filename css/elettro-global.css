@@ -71,6 +71,13 @@ section {
   padding: var(--section-v) var(--section-h);
 }
 
+/* Tighten desktop anchor landing position for in-page nav links */
+@media (min-width: 961px) {
+  section[id] {
+    scroll-margin-top: -75px;
+  }
+}
+
 .section-head {
   margin-bottom: 48px;
 }
