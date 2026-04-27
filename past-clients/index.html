@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Past Clients | Elettro</title>
+    <meta
+      name="description"
+      content="Past client directory for Elettro featuring brands across media, entertainment, consumer goods, hospitality, music, legal, healthcare, sports, and technology."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-content shell">
+        <p class="eyebrow">Elettro • Past Client Directory</p>
+        <h1 id="hero-title">Past Clients. Proven Creative Range.</h1>
+        <p class="subtitle">
+          A brand quilt of media, entertainment, consumer goods, hospitality,
+          health, legal, sports, technology, music, and local business work.
+        </p>
+        <nav class="jump-nav" aria-label="Jump to client sections">
+          <a class="hero-btn" href="#quilt">Editorial Quilt</a>
+          <a class="hero-btn" href="#marquee">Motion Marquee</a>
+          <a class="hero-btn" href="#industries">Industries</a>
+          <a class="hero-btn" href="#spotlights">Featured Cards</a>
+          <a class="hero-btn" href="#museum">Logo Museum</a>
+          <a class="hero-btn" href="#directory">Master Directory</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="shell">
+      <section id="quilt" class="section" aria-labelledby="quilt-heading">
+        <div class="section-head">
+          <h2 id="quilt-heading">1. Editorial Brand Quilt</h2>
+          <p>
+            A visual blend of legacy media, global consumer brands, and high
+            profile talent partnerships.
+          </p>
+        </div>
+        <div id="quiltGrid" class="quilt-grid" role="list"></div>
+      </section>
+
+      <section id="marquee" class="section" aria-labelledby="marquee-heading">
+        <div class="section-head">
+          <h2 id="marquee-heading">2. Motion Marquee Wall</h2>
+          <p>
+            Fast-scrolling credibility ribbons highlighting brand variety and
+            campaign velocity.
+          </p>
+        </div>
+        <div class="marquee-stack" aria-label="Scrolling client names">
+          <div class="marquee-track" id="marqueeOne"></div>
+          <div class="marquee-track reverse" id="marqueeTwo"></div>
+          <div class="marquee-track slow" id="marqueeThree"></div>
+        </div>
+      </section>
+
+      <section
+        id="industries"
+        class="section"
+        aria-labelledby="industries-heading"
+      >
+        <div class="section-head">
+          <h2 id="industries-heading">3. Industry Credibility Stacks</h2>
+          <p>Grouped social proof by sector to show cross-vertical depth.</p>
+        </div>
+        <div id="industryGrid" class="industry-grid"></div>
+      </section>
+
+      <section id="spotlights" class="section" aria-labelledby="spotlights-heading">
+        <div class="section-head">
+          <h2 id="spotlights-heading">4. Animated Featured Client Cards</h2>
+          <p>
+            One card per client with moving glow accents, numbered proof marks,
+            and concise credibility statements.
+          </p>
+        </div>
+        <div id="spotlightGrid" class="spotlight-grid"></div>
+      </section>
+
+      <section id="museum" class="section" aria-labelledby="museum-heading">
+        <div class="section-head">
+          <h2 id="museum-heading">5. Clean Logo Museum</h2>
+          <p>A minimal typographic gallery designed for polished readability.</p>
+        </div>
+        <div id="museumGrid" class="museum-grid" role="list"></div>
+      </section>
+
+      <section id="directory" class="section" aria-labelledby="directory-heading">
+        <div class="section-head">
+          <h2 id="directory-heading">6. Searchable Master Directory</h2>
+          <p>
+            Live filtering for quick scanning across all clients and industries.
+          </p>
+        </div>
+
+        <div class="directory-controls">
+          <label for="directorySearch">Search clients</label>
+          <input
+            id="directorySearch"
+            type="search"
+            placeholder="Type a client name or keyword"
+            autocomplete="off"
+          />
+          <p id="directoryCount" aria-live="polite">0 Clients</p>
+        </div>
+
+        <ul id="directoryList" class="directory-list"></ul>
+      </section>
+    </main>
+  </body>
+</html>
