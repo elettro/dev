@@ -19,7 +19,7 @@ const clients = [
   { name: "Broadcom", industry: "Technology", credibility: "Provided clean B2B-oriented visuals for enterprise technology communication." },
   { name: "Sony RCA Jive Records", industry: "Music", credibility: "Developed music-industry creative across iconic label entities." },
   { name: "Stashbox.com", industry: "Retail", credibility: "Created digital-first brand materials for online commerce positioning." },
-  { name: "NeurologyScottsdale.com", industry: "Healthcare", credibility: "Delivered trustworthy visual communication for a neurological practice." },
+  { name: "Neurology Scottsdale", industry: "Healthcare", credibility: "Delivered trustworthy visual communication for a neurological practice." },
   { name: "Ohle & Ohle, P.A.", industry: "Legal", credibility: "Produced legal brand assets emphasizing authority and clarity." },
   { name: "Uniforms4Class.net", industry: "Education", credibility: "Built practical conversion-focused creative for school uniform commerce." },
   { name: "Toots and the Maytals", industry: "Music", credibility: "Supported legendary artist branding with respectful, genre-aware visuals." },
