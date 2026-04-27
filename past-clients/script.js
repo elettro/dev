@@ -33,8 +33,41 @@ const clients = [
   { name: "Rosenberg Injury Law", industry: "Legal", credibility: "Created direct-response legal creative for injury law marketing." },
   { name: "Weight Loss Davie", industry: "Health", credibility: "Built wellness campaign creative with clarity and trust cues." },
   { name: "The Ras Box", industry: "Local Business", credibility: "Designed brand-forward assets for local consumer visibility." },
-  { name: "Florida On TV", industry: "Media", credibility: "Developed regional media creative supporting audience growth." }
+  { name: "Florida On TV", industry: "Media", credibility: "Developed regional media creative supporting audience growth." },
+  {
+    name: "Don Pablo Coffee",
+    industry: "Private Label Coffee Partnerships",
+    credibility: "Private label coffee partnership development connected to premium coffee, cause marketing, and branded product presentation."
+  },
+  {
+    name: "Never Thirst Coffee",
+    industry: "Private Label Coffee Partnerships",
+    credibility: "Private label coffee brand presentation with partnership development and custom packaging direction."
+  },
+  {
+    name: "Navy SEAL Foundation Coffee",
+    industry: "Private Label Coffee Partnerships",
+    credibility: "Cause-based private label coffee concept with branded packaging and partnership positioning."
+  },
+  {
+    name: "Blue Card Coffee",
+    industry: "Private Label Coffee Partnerships",
+    credibility: "Nonprofit-focused private label coffee concept with packaging presentation and cause-driven brand alignment."
+  },
+  {
+    name: "Stephen Speaks Coffee",
+    industry: "Private Label Coffee Partnerships",
+    credibility: "Artist-connected private label coffee concept with branded packaging and partnership presentation."
+  }
 ];
+
+const spotlightDescriptions = {
+  "Don Pablo Coffee": "Private label coffee partnership development connected to premium coffee, cause marketing, and branded product presentation.",
+  "Never Thirst Coffee": "Private label coffee brand presentation with partnership development and custom packaging direction.",
+  "Navy SEAL Foundation Coffee": "Cause-based private label coffee concept with branded packaging and partnership positioning.",
+  "Blue Card Coffee": "Nonprofit-focused private label coffee concept with packaging presentation and cause-driven brand alignment.",
+  "Stephen Speaks Coffee": "Artist-connected private label coffee concept with branded packaging and partnership presentation."
+};
 
 const sectionTargets = {
   quiltGrid: document.getElementById("quiltGrid"),
@@ -97,7 +130,7 @@ function renderSpotlights() {
         <span class="mini-label">Past Client</span>
         <span class="badge">#${String(idx + 1).padStart(2, "0")}</span>
         <h3>${client.name}</h3>
-        <p>${client.credibility}</p>
+        <p>${spotlightDescriptions[client.name] || client.credibility}</p>
         <span class="proof-pill">Brand Proof</span>
       </article>
     `
