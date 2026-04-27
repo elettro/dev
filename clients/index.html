@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Past Clients Brand Quilt Directory</title>
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg2: #0b1024;
+      --card: rgba(255,255,255,0.075);
+      --card2: rgba(255,255,255,0.12);
+      --line: rgba(255,255,255,0.16);
+      --text: #f5f7ff;
+      --muted: #aeb8d9;
+      --white: #ffffff;
+      --blue: #6ee7ff;
+      --gold: #f5c76b;
+      --pink: #ff7ad9;
+      --green: #7cffb2;
+      --purple: #a78bfa;
+      --radius: 26px;
+      --shadow: 0 24px 80px rgba(0,0,0,0.35);
+      --max: 1240px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(110,231,255,0.18), transparent 32%),
+        radial-gradient(circle at 70% 10%, rgba(255,122,217,0.16), transparent 28%),
+        radial-gradient(circle at 20% 80%, rgba(245,199,107,0.13), transparent 30%),
+        linear-gradient(135deg, #050816, #0b1024 52%, #03040c);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-shell {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      align-items: center;
+      padding: 90px 0 64px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 38px;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      color: var(--blue);
+      border: 1px solid rgba(110,231,255,0.28);
+      background: rgba(110,231,255,0.08);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .eyebrow span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--blue);
+      box-shadow: 0 0 20px rgba(110,231,255,0.9);
+    }
+
+    h1 {
+      font-size: clamp(48px, 8vw, 108px);
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+      margin: 26px 0 18px;
+      max-width: 980px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .hero-btn {
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-weight: 900;
+      transition: 0.25s ease;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-2px);
+      background: white;
+      color: #060914;
+    }
+
+    .section {
+      padding: 78px 0;
+      position: relative;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 62px);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+      margin: 0;
+      max-width: 850px;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 430px;
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255,255,255,0.105), rgba(255,255,255,0.045));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.07);
+      border-radius: 18px;
+      color: white;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      transition: 0.25s ease;
+    }
+
+    .brand:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.16);
+      border-color: rgba(255,255,255,0.34);
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 900;
+    }
+
+    /* 1. Brand Quilt */
+    .quilt {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .quilt .brand {
+      min-height: 96px;
+      padding: 18px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quilt .brand::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: radial-gradient(circle at top right, rgba(110,231,255,0.22), transparent 50%);
+      opacity: 0;
+      transition: 0.25s ease;
+    }
+
+    .quilt .brand:hover::before {
+      opacity: 1;
+    }
+
+    .quilt .brand span {
+      position: relative;
+      z-index: 2;
+    }
+
+    .quilt .brand:nth-child(8n+1) { grid-column: span 4; min-height: 160px; color: var(--blue); }
+    .quilt .brand:nth-child(8n+2) { grid-column: span 3; min-height: 122px; color: var(--gold); }
+    .quilt .brand:nth-child(8n+3) { grid-column: span 5; color: var(--pink); }
+    .quilt .brand:nth-child(8n+4) { grid-column: span 3; }
+    .quilt .brand:nth-child(8n+5) { grid-column: span 4; color: var(--green); }
+    .quilt .brand:nth-child(8n+6) { grid-column: span 2; }
+    .quilt .brand:nth-child(8n+7) { grid-column: span 3; color: var(--purple); }
+    .quilt .brand:nth-child(8n+8) { grid-column: span 6; }
+
+    /* 2. Marquee Wall */
+    .marquee-wrap {
+      padding: 28px 0;
+    }
+
+    .marquee-row {
+      display: flex;
+      width: max-content;
+      animation: marquee 42s linear infinite;
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    .marquee-row.reverse {
+      animation-direction: reverse;
+      animation-duration: 48s;
+    }
+
+    .marquee-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 190px;
+      padding: 18px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.075);
+      font-size: 18px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* 3. Industry Stacks */
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 18px;
+    }
+
+    .industry-card {
+      min-height: 320px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.065);
+      border: 1px solid rgba(255,255,255,0.13);
+      padding: 20px;
+    }
+
+    .industry-card h3 {
+      margin: 0 0 16px;
+      font-size: 23px;
+      letter-spacing: -0.04em;
+    }
+
+    .industry-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .industry-card li {
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 1.35;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 9px;
+    }
+
+    /* 4. Spotlight Cards */
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 18px;
+    }
+
+    .spot-card {
+      min-height: 250px;
+      padding: 22px;
+      border-radius: 26px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+        radial-gradient(circle at 75% 15%, rgba(255,122,217,0.18), transparent 42%);
+      border: 1px solid rgba(255,255,255,0.14);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .spot-card h3 {
+      font-size: clamp(26px, 4vw, 46px);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      margin: 0;
+    }
+
+    .spot-card p {
+      color: var(--muted);
+      line-height: 1.5;
+      margin: 14px 0 0;
+    }
+
+    /* 5. Timeline */
+    .timeline {
+      padding: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .timeline-year {
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      padding: 18px;
+      font-weight: 1000;
+      color: var(--gold);
+    }
+
+    .timeline-brands {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.045);
+      padding: 14px;
+    }
+
+    .timeline-brands span {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    /* 6. Logo Museum */
+    .museum-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid rgba(255,255,255,0.12);
+      border-left: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .museum-cell {
+      min-height: 160px;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.035);
+      font-size: 21px;
+      font-weight: 1000;
+      letter-spacing: -0.04em;
+      transition: 0.25s ease;
+    }
+
+    .museum-cell:hover {
+      background: white;
+      color: #060914;
+      transform: scale(1.015);
+      z-index: 2;
+    }
+
+    /* 7. Floating Orbit */
+    .orbit-panel {
+      min-height: 760px;
+      position: relative;
+      padding: 30px;
+    }
+
+    .orbit-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 280px;
+      height: 280px;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background:
+        radial-gradient(circle, rgba(110,231,255,0.18), rgba(255,255,255,0.07));
+      box-shadow: 0 0 90px rgba(110,231,255,0.12);
+      font-size: 34px;
+      font-weight: 1000;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+    }
+
+    .orbit-brand {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.15);
+      white-space: nowrap;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    /* 8. Dark Luxury Index */
+    .lux-index {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 0;
+    }
+
+    .lux-feature {
+      padding: 38px;
+      background:
+        linear-gradient(160deg, rgba(245,199,107,0.18), transparent),
+        rgba(255,255,255,0.05);
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .lux-feature h3 {
+      font-size: clamp(38px, 5vw, 74px);
+      line-height: 0.88;
+      letter-spacing: -0.07em;
+      margin: 12px 0;
+    }
+
+    .lux-list {
+      padding: 14px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .lux-list div {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.095);
+      font-weight: 850;
+    }
+
+    /* 9. Bento Proof Wall */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .bento-card {
+      min-height: 150px;
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.065);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bento-card strong {
+      font-size: 26px;
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+    }
+
+    .bento-card span {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 900;
+    }
+
+    .bento-card:nth-child(6n+1) { grid-column: span 3; min-height: 250px; }
+    .bento-card:nth-child(6n+2) { grid-column: span 2; }
+    .bento-card:nth-child(6n+3) { grid-column: span 1; }
+    .bento-card:nth-child(6n+4) { grid-column: span 2; }
+    .bento-card:nth-child(6n+5) { grid-column: span 2; }
+    .bento-card:nth-child(6n+6) { grid-column: span 2; }
+
+    /* 10. Search Directory */
+    .directory-tools {
+      display: flex;
+      gap: 12px;
+      padding: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      flex: 1 1 320px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.075);
+      color: white;
+      border-radius: 999px;
+      padding: 16px 18px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .search-input::placeholder {
+      color: rgba(255,255,255,0.55);
+    }
+
+    .count-pill {
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.075);
+      border-radius: 999px;
+      padding: 16px 18px;
+      color: var(--gold);
+      font-weight: 1000;
+      white-space: nowrap;
+    }
+
+    .directory-list {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .directory-list button {
+      text-align: left;
+      cursor: pointer;
+      color: white;
+      padding: 15px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.11);
+      background: rgba(255,255,255,0.055);
+      font-weight: 800;
+      transition: 0.22s ease;
+    }
+
+    .directory-list button:hover {
+      background: white;
+      color: #050816;
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      padding: 70px 0 90px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .footer strong {
+      color: white;
+    }
+
+    @media (max-width: 1020px) {
+      .section-head {
+        display: grid;
+      }
+
+      .industry-grid,
+      .spotlight-grid,
+      .directory-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .museum-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .lux-index {
+        grid-template-columns: 1fr;
+      }
+
+      .lux-feature {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.12);
+      }
+
+      .quilt .brand {
+        grid-column: span 6 !important;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page-shell {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 70px 0 46px;
+      }
+
+      .hero::before {
+        inset: 8px;
+        border-radius: 26px;
+      }
+
+      .section {
+        padding: 54px 0;
+      }
+
+      .quilt {
+        grid-template-columns: 1fr;
+      }
+
+      .quilt .brand {
+        grid-column: span 1 !important;
+        min-height: 96px !important;
+      }
+
+      .industry-grid,
+      .spotlight-grid,
+      .directory-list,
+      .lux-list {
+        grid-template-columns: 1fr;
+      }
+
+      .museum-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .bento {
+        grid-template-columns: 1fr;
+      }
+
+      .bento-card {
+        grid-column: span 1 !important;
+        min-height: 140px !important;
+      }
+
+      .orbit-panel {
+        min-height: auto;
+        display: grid;
+        gap: 10px;
+      }
+
+      .orbit-core {
+        position: static;
+        transform: none;
+        width: 100%;
+        height: auto;
+        border-radius: 26px;
+        min-height: 180px;
+      }
+
+      .orbit-brand {
+        position: static;
+        transform: none;
+        display: inline-flex;
+        width: fit-content;
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+
+    <header class="hero">
+      <div class="page-shell">
+        <div class="eyebrow"><span></span> Past Client Directory</div>
+        <h1>Brand quilt of trusted work, culture, entertainment, commerce, media, law, health, hospitality, and technology.</h1>
+        <p>
+          A master HTML showcase with ten different ways to present past clients.
+          Use one version as the final section, or keep the full directory as an interactive proof-of-work page.
+        </p>
+
+        <div class="hero-actions">
+          <a class="hero-btn" href="#quilt">Brand Quilt</a>
+          <a class="hero-btn" href="#directory">Search Directory</a>
+          <a class="hero-btn" href="#industries">Industry View</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 1 -->
+    <section class="section" id="quilt">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Option 01</div>
+            <h2 class="section-title">Editorial Brand Quilt</h2>
+          </div>
+          <p class="section-copy">
+            Best for a homepage proof section. It feels visual, premium, and fast to scan.
+          </p>
+        </div>
+
+        <div class="panel quilt" id="quiltGrid"></div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="section">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Option 02</div>
+            <h2 class="section-title">Motion Marquee Wall</h2>
+          </div>
+          <p class="section-copy">
+            Best for high-energy creative sites. The constant motion communicates momentum and depth.
+          </p>
+        </div>
+
+        <div class="panel marquee-wrap">
+          <div class="marquee-row" id="marqueeOne"></div>
+          <div class="marquee-row reverse" id="marqueeTwo"></div>
+          <div class="marquee-row" id="marqueeThree"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="section" id="industries">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Option 03</div>
+            <h2 class="section-title">Industry Credibility Stacks</h2>
+          </div>
+          <p class="section-copy">
+            Best when selling capability across industries instead of showing one long logo list.
+          </p>
+        </div>
+
+        <div class="panel industry-grid" id="industryGrid"></div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="section">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Option 04</div>
+            <h2 class="section-title">Featured Client Spotlights</h2>
+          </div>
+          <p class="section-copy">
+            Best for turning a client list into a stronger sales story with editorial impact.
+          </p>
+        </div>
+
+        <div class="panel spotlight-grid" id="spotlightGrid"></div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="section">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Option 05</div>
+            <h2 class="section-title">Era Timeline</h2>
+          </div>
+          <p class="section-copy">
+            Best for showing depth over time. It positions the work as long-running and proven.
+          </p>
+        </div>
+
+        <div class="panel timeline" id="timelineGrid"></div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="section">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Option 06</div>
+            <h2 class="section-title">Clean Logo Museum</h2>
+          </div>
+          <p class="section-copy">
+            Best for a corporate page where the presentation needs to feel minimal, calm, and polished.
+          </p>
+        </div>
+
+        <div class="panel museum-grid" id="museumGrid"></div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="section">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Option 07</div>
+            <h2 class="section-title">Creative Orbit Map</h2>
+          </div>
+          <p class="section-copy">
+            Best for a high-impact visual section. The brands surround the core capability statement.
+          </p>
+        </div>
+
+        <div class="panel orbit-panel" id="orbitPanel">
+          <div class="orbit-core">Creative Work Across Markets</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="section">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Option 08</div>
+            <h2 class="section-title">Luxury Index Split</h2>
+          </div>
+          <p class="section-copy">
+            Best for premium positioning. One side sells the trust signal. The other side lists the names.
+          </p>
+        </div>
+
+        <div class="panel lux-index">
+          <div class="lux-feature">
+            <div class="tiny">Past Clients</div>
+            <h3>From global names to focused local leaders.</h3>
+            <p class="section-copy">
+              Media, entertainment, consumer goods, music, hospitality, legal, medical, sports, commerce, and tech.
+            </p>
+          </div>
+          <div class="lux-list" id="luxList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="section">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Option 09</div>
+            <h2 class="section-title">Bento Proof Wall</h2>
+          </div>
+          <p class="section-copy">
+            Best for a modern portfolio page. Strong variety without looking chaotic.
+          </p>
+        </div>
+
+        <div class="panel bento" id="bentoGrid"></div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="section" id="directory">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Option 10</div>
+            <h2 class="section-title">Searchable Master Directory</h2>
+          </div>
+          <p class="section-copy">
+            Best for a full proof page. Visitors search the client list directly.
+          </p>
+        </div>
+
+        <div class="panel">
+          <div class="directory-tools">
+            <input id="clientSearch" class="search-input" type="search" placeholder="Search past clients..." />
+            <div class="count-pill" id="clientCount"></div>
+          </div>
+          <div class="directory-list" id="directoryList"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="page-shell">
+        <strong>Past Client Directory</strong><br />
+        One master HTML system. Ten presentation styles. One editable brand list.
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    const brands = [
+      "WEtv",
+      "IFC",
+      "AMC Networks",
+      "Unilever",
+      "Shiseido USA & Spain",
+      "Nexxus",
+      "St. Ives",
+      "Forbes Riley",
+      "Maxi Priest",
+      "Nelly",
+      "Ian Ziering",
+      "Donna D’Ericco",
+      "Sona Pillow",
+      "Room Mate Hotels USA, Spain, NYC & Miami",
+      "Samsung",
+      "PetSmart",
+      "Morgans Hotel Group",
+      "Broadcom",
+      "Sony RCA Jive Records",
+      "Stashbox.com",
+      "NeurologyScottsdale.com",
+      "Ohle & Ohle, P.A.",
+      "Uniforms4Class.net",
+      "Toots and the Maytals",
+      "Katchafire",
+      "Silverback Management",
+      "Slightly Stoopid",
+      "AtlanticBayResort.com",
+      "Seascape Marina and Resort",
+      "Real Sociedad OC Soccer Team",
+      "Technology Resource Center",
+      "Rosenberg Injury Law",
+      "Weight Loss Davie",
+      "The Ras Box",
+      "Florida On TV"
+    ];
+
+    const industries = [
+      {
+        title: "Media & Networks",
+        items: ["WEtv", "IFC", "AMC Networks", "Florida On TV"]
+      },
+      {
+        title: "Consumer Brands",
+        items: ["Unilever", "Shiseido USA & Spain", "Nexxus", "St. Ives", "Samsung", "PetSmart"]
+      },
+      {
+        title: "Music & Entertainment",
+        items: ["Maxi Priest", "Nelly", "Ian Ziering", "Donna D’Ericco", "Sony RCA Jive Records", "Toots and the Maytals", "Katchafire", "Slightly Stoopid", "Stashbox.com", "The Ras Box"]
+      },
+      {
+        title: "Business, Health & Hospitality",
+        items: ["Room Mate Hotels", "Morgans Hotel Group", "AtlanticBayResort.com", "Seascape Marina and Resort", "NeurologyScottsdale.com", "Ohle & Ohle, P.A.", "Rosenberg Injury Law", "Weight Loss Davie", "Broadcom", "Technology Resource Center"]
+      }
+    ];
+
+    const spotlights = [
+      {
+        name: "AMC Networks",
+        copy: "National media credibility with entertainment industry reach."
+      },
+      {
+        name: "Unilever",
+        copy: "Global consumer brand experience across beauty, lifestyle, and retail awareness."
+      },
+      {
+        name: "Maxi Priest",
+        copy: "Music, artist, and entertainment work with recognizable cultural reach."
+      },
+      {
+        name: "Samsung",
+        copy: "Technology-facing brand experience with mass-market recognition."
+      },
+      {
+        name: "Seascape Marina and Resort",
+        copy: "Hospitality, website, direct booking, content, and destination marketing."
+      },
+      {
+        name: "Rosenberg Injury Law",
+        copy: "Professional services marketing with local SEO and conversion-focused content."
+      }
+    ];
+
+    const timeline = [
+      {
+        era: "Media",
+        items: ["WEtv", "IFC", "AMC Networks", "Florida On TV"]
+      },
+      {
+        era: "CPG",
+        items: ["Unilever", "Shiseido USA & Spain", "Nexxus", "St. Ives", "Samsung", "PetSmart"]
+      },
+      {
+        era: "Music",
+        items: ["Maxi Priest", "Nelly", "Toots and the Maytals", "Katchafire", "Slightly Stoopid", "Sony RCA Jive Records"]
+      },
+      {
+        era: "Hospitality",
+        items: ["Room Mate Hotels", "Morgans Hotel Group", "AtlanticBayResort.com", "Seascape Marina and Resort"]
+      },
+      {
+        era: "Growth",
+        items: ["Rosenberg Injury Law", "Weight Loss Davie", "NeurologyScottsdale.com", "Ohle & Ohle, P.A.", "Technology Resource Center"]
+      }
+    ];
+
+    function renderQuilt() {
+      const el = document.getElementById("quiltGrid");
+      el.innerHTML = brands.map(brand => `
+        <div class="brand"><span>${brand}</span></div>
+      `).join("");
+    }
+
+    function renderMarquee() {
+      const rows = [
+        document.getElementById("marqueeOne"),
+        document.getElementById("marqueeTwo"),
+        document.getElementById("marqueeThree")
+      ];
+
+      const sets = [
+        brands.slice(0, 14),
+        brands.slice(10, 25),
+        brands.slice(21)
+      ];
+
+      rows.forEach((row, index) => {
+        const doubled = [...sets[index], ...sets[index], ...sets[index]];
+        row.innerHTML = doubled.map(brand => `<div class="marquee-chip">${brand}</div>`).join("");
+      });
+    }
+
+    function renderIndustries() {
+      const el = document.getElementById("industryGrid");
+      el.innerHTML = industries.map(group => `
+        <article class="industry-card">
+          <h3>${group.title}</h3>
+          <ul>
+            ${group.items.map(item => `<li>${item}</li>`).join("")}
+          </ul>
+        </article>
+      `).join("");
+    }
+
+    function renderSpotlights() {
+      const el = document.getElementById("spotlightGrid");
+      el.innerHTML = spotlights.map(item => `
+        <article class="spot-card">
+          <div>
+            <div class="tiny">Featured Client</div>
+            <h3>${item.name}</h3>
+          </div>
+          <p>${item.copy}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderTimeline() {
+      const el = document.getElementById("timelineGrid");
+      el.innerHTML = timeline.map(row => `
+        <div class="timeline-item">
+          <div class="timeline-year">${row.era}</div>
+          <div class="timeline-brands">
+            ${row.items.map(item => `<span>${item}</span>`).join("")}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderMuseum() {
+      const el = document.getElementById("museumGrid");
+      el.innerHTML = brands.map(brand => `
+        <div class="museum-cell">${brand}</div>
+      `).join("");
+    }
+
+    function renderOrbit() {
+      const el = document.getElementById("orbitPanel");
+      const orbitBrands = brands.slice(0, 28);
+
+      orbitBrands.forEach((brand, index) => {
+        const angle = (index / orbitBrands.length) * Math.PI * 2;
+        const ring = index % 3;
+        const radius = ring === 0 ? 235 : ring === 1 ? 300 : 350;
+        const x = 50 + Math.cos(angle) * radius / 7.6;
+        const y = 50 + Math.sin(angle) * radius / 7.6;
+
+        const chip = document.createElement("div");
+        chip.className = "orbit-brand";
+        chip.style.left = x + "%";
+        chip.style.top = y + "%";
+        chip.textContent = brand;
+        el.appendChild(chip);
+      });
+    }
+
+    function renderLuxList() {
+      const el = document.getElementById("luxList");
+      el.innerHTML = brands.map(brand => `<div>${brand}</div>`).join("");
+    }
+
+    function renderBento() {
+      const el = document.getElementById("bentoGrid");
+      el.innerHTML = brands.map((brand, index) => `
+        <article class="bento-card">
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          <strong>${brand}</strong>
+        </article>
+      `).join("");
+    }
+
+    function renderDirectory(list = brands) {
+      const el = document.getElementById("directoryList");
+      const count = document.getElementById("clientCount");
+
+      count.textContent = `${list.length} Clients`;
+      el.innerHTML = list.map(brand => `<button type="button">${brand}</button>`).join("");
+    }
+
+    function setupSearch() {
+      const input = document.getElementById("clientSearch");
+
+      input.addEventListener("input", () => {
+        const term = input.value.toLowerCase().trim();
+        const filtered = brands.filter(brand => brand.toLowerCase().includes(term));
+        renderDirectory(filtered);
+      });
+    }
+
+    renderQuilt();
+    renderMarquee();
+    renderIndustries();
+    renderSpotlights();
+    renderTimeline();
+    renderMuseum();
+    renderOrbit();
+    renderLuxList();
+    renderBento();
+    renderDirectory();
+    setupSearch();
+  </script>
+
+</body>
+</html>
