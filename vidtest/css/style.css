@@ -286,32 +286,80 @@
       }
 
       
-.project-text-link {
+.project-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.project-pill-link {
   display: inline-flex;
   align-items: center;
-  width: fit-content;
-  margin-top: 12px;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 22px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  background: rgba(6, 12, 28, 0.18);
   color: #ffffff;
+  font-size: 0.88rem;
   font-weight: 800;
-  font-size: 0.95rem;
   line-height: 1;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-  text-decoration-thickness: 2px;
-  transition: color 180ms ease, opacity 180ms ease, transform 180ms ease;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.project-text-link:hover,
-.project-text-link:focus-visible {
-  color: #7eeeff;
-  opacity: 1;
+.project-pill-link:hover,
+.project-pill-link:focus-visible {
   transform: translateY(-1px);
+  border-color: rgba(126, 238, 255, 0.85);
+  background: rgba(126, 238, 255, 0.12);
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(126, 238, 255, 0.18);
 }
 
-.project-text-link:focus-visible {
-  outline: 2px solid rgba(126, 238, 255, 0.75);
+.project-pill-link:focus-visible {
+  outline: 2px solid rgba(126, 238, 255, 0.7);
   outline-offset: 4px;
-  border-radius: 4px;
+}
+
+.project-pill-link-wide {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 0.76rem;
+  letter-spacing: 0.035em;
+}
+
+@media (max-width: 640px) {
+  .project-link-row {
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .project-pill-link {
+    min-height: 38px;
+    padding: 0 18px;
+    font-size: 0.78rem;
+  }
+
+  .project-pill-link-wide {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.2;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 @media (max-width: 767px) {
