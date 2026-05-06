@@ -915,3 +915,40 @@ footer {
 @media (min-width: 769px) {
   .hide-desktop { display: none !important; }
 }
+
+
+/* ── WHAT MAKES US DIFFERENT ───────────────────────── */
+.ew-section {
+  background: #0a0a0a;
+  padding: 120px 40px 96px;
+  font-family: 'Barlow', sans-serif;
+}
+.ew-inner { max-width: 1180px; margin: 0 auto; }
+.ew-kicker {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.18em; color: #00e5ff;
+  text-transform: uppercase; text-align: center; margin: 0 0 10px;
+}
+.ew-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(42px, 6vw, 78px); font-weight: 800; color: #ffffff;
+  text-transform: uppercase; text-align: center; line-height: 0.95; margin: 0;
+}
+.ew-intro { max-width: 760px; margin: 22px auto 46px; color: #a7a7a7; font-size: 17px; line-height: 1.6; text-align: center; }
+.ew-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; max-width: 1100px; margin: 0 auto; background: #1a1a1a; }
+.ew-card { background: #0d0d0d; display: flex; align-items: flex-start; gap: 28px; padding: 44px 36px; position: relative; overflow: hidden; transition: background 0.3s ease; }
+.ew-card:hover { background: #111; }
+.ew-card::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0; background: #00e5ff; transition: height 0.4s ease; }
+.ew-card:hover::before { height: 100%; }
+.ew-graphic { flex-shrink: 0; width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; }
+.ew-text { flex: 1; }
+.ew-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; color: #00e5ff; text-transform: uppercase; margin: 0 0 10px; display: block; }
+.ew-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: 0.01em; margin: 0 0 12px; line-height: 1.15; text-transform: uppercase; }
+.ew-body { font-size: 13.5px; font-weight: 300; color: #888; line-height: 1.7; margin: 0; }
+@media (max-width: 700px) {
+  .ew-section { padding: 64px 20px; }
+  .ew-intro { font-size: 16px; margin-bottom: 34px; }
+  .ew-grid { grid-template-columns: 1fr; }
+  .ew-card { padding: 32px 24px; gap: 20px; }
+  .ew-graphic { width: 60px; height: 60px; }
+}
