@@ -178,7 +178,9 @@
 </div>
 </section>
 <!-- Our Services -->
-<section class="py-24 relative overflow-hidden">
+<section id="services-section" class="py-24 relative overflow-hidden" style="background: radial-gradient(120% 140% at 20% 20%, #112750 0%, #08142d 45%, #040b1c 100%);">
+<canvas aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></canvas>
+<div style="position: relative; z-index: 1;">
 <div class="max-w-7xl mx-auto px-6">
 <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
 <div class="max-w-2xl">
@@ -240,6 +242,7 @@
 <div class="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest">
                             Explore
                             <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
 </div>
 </div>
 </div>
@@ -1568,4 +1571,41 @@ anchorLinks.forEach((link) => {
 
     </script>
 
+<script>
+const servicesCanvas = document.querySelector('#services-section canvas');
+if (servicesCanvas) {
+  const ctx = servicesCanvas.getContext('2d');
+  const section = servicesCanvas.parentElement;
+  function resize() { servicesCanvas.width = section.offsetWidth; servicesCanvas.height = section.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const nodes = Array.from({length: 55}, () => ({ x: Math.random()*servicesCanvas.width, y: Math.random()*servicesCanvas.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5, r: 1.5+Math.random()*1.5 }));
+  function draw() {
+    ctx.clearRect(0,0,servicesCanvas.width,servicesCanvas.height);
+    nodes.forEach((n,i) => {
+      n.x+=n.vx; n.y+=n.vy;
+      if(n.x<0||n.x>servicesCanvas.width) n.vx*=-1;
+      if(n.y<0||n.y>servicesCanvas.height) n.vy*=-1;
+      nodes.forEach((m,j) => {
+        if(j<=i) return;
+        const d=Math.hypot(n.x-m.x,n.y-m.y);
+        if(d<110){
+          ctx.beginPath();
+          ctx.strokeStyle=`rgba(127,119,221,${(1-d/110)*0.35})`;
+          ctx.lineWidth=0.5;
+          ctx.moveTo(n.x,n.y);
+          ctx.lineTo(m.x,m.y);
+          ctx.stroke();
+        }
+      });
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(127,119,221,0.7)';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+</script>
 </body></html>
