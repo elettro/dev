@@ -1578,6 +1578,12 @@ if (servicesCanvas) {
   const section = servicesCanvas.parentElement;
   function resize() { servicesCanvas.width = section.offsetWidth; servicesCanvas.height = section.offsetHeight; }
   resize();
+  let mouse = { x: -9999, y: -9999 };
+  section.addEventListener('mousemove', e => {
+    const r = servicesCanvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+  });
   window.addEventListener('resize', resize);
   const nodes = Array.from({length: 55}, () => ({ x: Math.random()*servicesCanvas.width, y: Math.random()*servicesCanvas.height, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5, r: 1.5+Math.random()*1.5 }));
   function draw() {
@@ -1586,6 +1592,11 @@ if (servicesCanvas) {
       n.x+=n.vx; n.y+=n.vy;
       if(n.x<0||n.x>servicesCanvas.width) n.vx*=-1;
       if(n.y<0||n.y>servicesCanvas.height) n.vy*=-1;
+      const dm = Math.hypot(n.x - mouse.x, n.y - mouse.y);
+      if (dm < 80) {
+        n.x += (n.x - mouse.x) * 0.02;
+        n.y += (n.y - mouse.y) * 0.02;
+      }
       nodes.forEach((m,j) => {
         if(j<=i) return;
         const d=Math.hypot(n.x-m.x,n.y-m.y);
