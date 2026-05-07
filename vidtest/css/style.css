@@ -1248,14 +1248,19 @@
 }
 
 @media (min-width: 1025px) {
-  .jon-phillips-card {
+  .video-card-16x9 {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    border-radius: 28px;
+    background: #071329;
   }
 
-  .jon-phillips-card .portfolio-card-media,
-  .jon-phillips-card .mobile-video-media {
+  .video-card-16x9 .mobile-video-media,
+  .video-card-16x9 .video-frame,
+  .video-card-16x9 .portfolio-card-media,
+  .video-card-16x9 .video-media,
+  .video-card-16x9 .media-wrap {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -1263,47 +1268,81 @@
     border-radius: 28px 28px 0 0;
   }
 
-  .jon-phillips-card iframe,
-  .jon-phillips-card video,
-  .jon-phillips-card img {
+  .video-card-16x9 iframe,
+  .video-card-16x9 video,
+  .video-card-16x9 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .jon-phillips-card .jon-phillips-copy {
+  .video-card-16x9 .mobile-video-copy,
+  .video-card-16x9 .video-overlay,
+  .video-card-16x9 .portfolio-card-copy,
+  .video-card-16x9 .video-copy,
+  .video-card-16x9 .card-copy,
+  .video-card-16x9 .jon-phillips-copy {
     position: static !important;
     inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
     transform: none !important;
     width: 100%;
     max-width: none;
     padding: 28px 34px 34px;
     background: #071329;
-    text-align: left;
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto;
+    text-align: left;
     z-index: 2;
   }
 
-  .jon-phillips-card .jon-phillips-gradient {
-    display: none !important;
-  }
-
-  .jon-phillips-card .jon-phillips-copy span {
+  .video-card-16x9 .mobile-video-copy span,
+  .video-card-16x9 .portfolio-card-copy span,
+  .video-card-16x9 .video-kicker,
+  .video-card-16x9 .card-kicker {
     display: block;
     margin: 0 0 10px;
     color: #7cecff;
+    font-weight: 700;
   }
 
-  .jon-phillips-card .jon-phillips-copy h4 {
-    margin: 0 0 24px;
-    max-width: none;
+  .video-card-16x9 .mobile-video-copy h4,
+  .video-card-16x9 .portfolio-card-copy h4,
+  .video-card-16x9 .video-title,
+  .video-card-16x9 .card-title {
+    margin: 0 0 22px;
+    color: #ffffff;
     line-height: 1.12;
+    max-width: 760px;
   }
 
-  .jon-phillips-card .jon-phillips-cta-row {
+  .video-card-16x9 .project-link-row,
+  .video-card-16x9 .jon-phillips-cta-row,
+  .video-card-16x9 .video-cta,
+  .video-card-16x9 .card-cta {
     margin-top: 0;
     pointer-events: auto;
+  }
+
+  .video-card-16x9::before,
+  .video-card-16x9 .video-overlay-bg,
+  .video-card-16x9 .video-text-overlay-bg,
+  .video-card-16x9 .mobile-video-overlay-bg,
+  .video-card-16x9 .gradient-overlay,
+  .video-card-16x9 .jon-phillips-gradient {
+    display: none !important;
+  }
+
+  .video-card-16x9 .video-mute,
+  .video-card-16x9 .mute-toggle,
+  .video-card-16x9 .sound-toggle {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 5;
   }
 }
