@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The One Hit Wonderers – The Set List</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Permanent+Marker&family=Cutive+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5ead6;
+    --brown: #2a1a0e;
+    --red: #c0392b;
+    --gold: #d4a017;
+    --tan: #e8d5b0;
+    --ink: #1a0f07;
+    --fade: #9e8060;
+  }
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Special Elite', cursive;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+ 
+  /* Aged paper texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(160,120,60,0.07) 28px, rgba(160,120,60,0.07) 29px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(160,120,60,0.03) 60px, rgba(160,120,60,0.03) 61px);
+    pointer-events: none;
+    z-index: 0;
+  }
+ 
+  /* Vignette */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(30,15,5,0.35) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+ 
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+ 
+  /* HEADER */
+  .header {
+    text-align: center;
+    border: 4px double var(--brown);
+    padding: 28px 20px 22px;
+    margin-bottom: 36px;
+    position: relative;
+    background: rgba(240,220,180,0.4);
+    box-shadow: inset 0 0 40px rgba(160,100,20,0.15), 4px 4px 0 var(--brown);
+  }
+ 
+  .header::before, .header::after {
+    content: '✦ ✦ ✦';
+    display: block;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 8px;
+    margin-bottom: 6px;
+  }
+  .header::after { margin-bottom: 0; margin-top: 6px; }
+ 
+  .band-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 10vw, 92px);
+    color: var(--brown);
+    letter-spacing: 4px;
+    line-height: 0.9;
+    text-shadow: 3px 3px 0 var(--gold), 5px 5px 0 rgba(0,0,0,0.12);
+  }
+ 
+  .tagline {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 17px;
+    color: var(--red);
+    margin-top: 10px;
+    letter-spacing: 2px;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+ 
+  .setlist-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 10px;
+    color: var(--fade);
+    margin-top: 8px;
+    border-top: 1px solid var(--fade);
+    padding-top: 8px;
+  }
+ 
+  /* DECADE SECTIONS */
+  .decade-section {
+    margin-bottom: 40px;
+  }
+ 
+  .decade-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+ 
+  .decade-header::before,
+  .decade-header::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--brown) 0, var(--brown) 6px, transparent 6px, transparent 12px);
+  }
+ 
+  .decade-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--brown);
+    letter-spacing: 6px;
+    white-space: nowrap;
+    text-shadow: 2px 2px 0 var(--gold);
+  }
+ 
+  /* SONG CARDS */
+  .song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+ 
+  .song-card {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 0 14px;
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px dashed rgba(100,70,30,0.3);
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+  }
+ 
+  .song-card:hover {
+    background: rgba(212,160,23,0.08);
+  }
+ 
+  .song-card:hover .song-bio {
+    max-height: 80px;
+    opacity: 1;
+    margin-top: 6px;
+  }
+ 
+  .song-number {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 13px;
+    color: var(--fade);
+    padding-top: 3px;
+    text-align: right;
+    user-select: none;
+  }
+ 
+  .song-info {}
+ 
+  .song-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--brown);
+    letter-spacing: 2px;
+    line-height: 1.1;
+  }
+ 
+  .song-artist-year {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+ 
+  .song-bio {
+    font-family: 'Special Elite', cursive;
+    font-size: 13px;
+    color: var(--fade);
+    line-height: 1.55;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s;
+  }
+ 
+  .song-card.open .song-bio {
+    max-height: 80px;
+    opacity: 1;
+    margin-top: 6px;
+  }
+ 
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 3px double var(--brown);
+  }
+ 
+  .footer-text {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 12px;
+    color: var(--fade);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+ 
+  .footer-stars {
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 12px;
+    margin-top: 8px;
+  }
+ 
+  /* Stamp decoration */
+  .stamp {
+    position: absolute;
+    top: -14px;
+    right: 20px;
+    background: var(--red);
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 4px 10px;
+    transform: rotate(3deg);
+  }
+ 
+  @media (max-width: 500px) {
+    .band-name { font-size: 42px; letter-spacing: 2px; }
+    .song-title { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+ 
+  <div class="header">
+    <div class="band-name">The One Hit Wonderers</div>
+    <div class="tagline">I Love That Song!</div>
+    <div class="setlist-label">★ &nbsp; The Set List &nbsp; ★</div>
+    <div class="stamp">Live &amp; Loud</div>
+  </div>
+ 
+  <p style="text-align:center; font-family:'Special Elite',cursive; font-size:14px; color:var(--fade); margin-bottom:30px; letter-spacing:1px;">
+    Tap any song to read the story behind the hit ↓
+  </p>
+ 
+  <!-- 1960s -->
+  <div class="decade-section">
+    <div class="decade-header">
+      <span class="decade-label">The Sixties</span>
+    </div>
+    <div class="song-list">
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">01</div>
+        <div class="song-info">
+          <div class="song-title">96 Tears</div>
+          <div class="song-artist-year">Question Mark (?) & the Mysterians · 1966</div>
+          <div class="song-bio">Recorded in a church basement in Michigan for under $100, this raw garage classic shot to #1 on the Billboard Hot 100. Its cheap Vox organ riff became one of the most instantly recognizable sounds of the decade.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">02</div>
+        <div class="song-info">
+          <div class="song-title">Hey, 98.6</div>
+          <div class="song-artist-year">The Tokens · 1966</div>
+          <div class="song-bio">Best known for "The Lion Sleeps Tonight," The Tokens reinvented themselves with this breezy bubblegum-pop hit about a feverish lover. It peaked at #3 and became one of the forgotten gems of '66 radio.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">03</div>
+        <div class="song-info">
+          <div class="song-title">Bend Me, Shape Me</div>
+          <div class="song-artist-year">The American Breed · 1967</div>
+          <div class="song-bio">This Chicago outfit turned a somewhat obscure British song into a US Top 5 smash with their brassy, punchy arrangement. The track's irresistible hook made it a staple of late-'60s AM radio playlists.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">04</div>
+        <div class="song-info">
+          <div class="song-title">Black Is Black</div>
+          <div class="song-artist-year">Los Bravos · 1966</div>
+          <div class="song-bio">Spain's Los Bravos became the first Spanish rock group to score a major English-language hit, reaching #4 in the US and #2 in the UK. The song's tortured longing and fuzz guitar made it a transatlantic sensation.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">05</div>
+        <div class="song-info">
+          <div class="song-title">Get Together</div>
+          <div class="song-artist-year">The Youngbloods · 1967</div>
+          <div class="song-bio">Written by Dino Valenti, this anthem of peace and unity initially stalled on the charts but was re-released in 1969 and became the anthem of the counterculture movement. Its simple message resonates just as loudly today.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">06</div>
+        <div class="song-info">
+          <div class="song-title">Hang On Sloopy</div>
+          <div class="song-artist-year">The McCoys · 1965</div>
+          <div class="song-bio">Recorded in one take by a band of teenagers from Indiana, this garage-rock anthem topped the charts for four weeks. It later became the official rock song of Ohio — one of the few rock songs to achieve official state status.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">07</div>
+        <div class="song-info">
+          <div class="song-title">I Love You More Today Than Yesterday</div>
+          <div class="song-artist-year">Spiral Staircase · 1969</div>
+          <div class="song-bio">This Sacramento band's joyful brass-drenched pop song became an unlikely Top 10 hit and remains a perennial feel-good classic. The band only charted this once but it secured their place in radio immortality.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">08</div>
+        <div class="song-info">
+          <div class="song-title">Judy In Disguise</div>
+          <div class="song-artist-year">John Fred & His Playboy Band · 1967</div>
+          <div class="song-bio">A comedic send-up of "Lucy in the Sky with Diamonds," this quirky Louisiana band's novelty rocker knocked the Beatles off the #1 spot. Its nonsense lyrics and driving groove made it irresistibly fun.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">09</div>
+        <div class="song-info">
+          <div class="song-title">Smile A Little Smile For Me</div>
+          <div class="song-artist-year">Flying Machine · 1969</div>
+          <div class="song-bio">This British soft-pop group scored a surprise US Top 5 hit with this breezy, feel-good tune before quietly fading from the scene. Its warm harmonies and optimistic spirit made it a perfect pop moment in time.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">10</div>
+        <div class="song-info">
+          <div class="song-title">Sugar Sugar</div>
+          <div class="song-artist-year">The Archies · 1969</div>
+          <div class="song-bio">Written by Jeff Barry and Andy Kim, this bubblegum classic was performed by fictional cartoon characters yet became the best-selling single of 1969 — outselling every Beatles release that year. Pure saccharine gold.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">11</div>
+        <div class="song-info">
+          <div class="song-title">Time Won't Let Me</div>
+          <div class="song-artist-year">The Outsiders · 1966</div>
+          <div class="song-bio">Cleveland's The Outsiders — not to be confused with other bands of the name — delivered this urgent, tense garage-pop gem that hit #5 nationally. The pounding rhythm and desperate vocal made it a standout of the era.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">12</div>
+        <div class="song-info">
+          <div class="song-title">Venus</div>
+          <div class="song-artist-year">Shocking Blue · 1969</div>
+          <div class="song-bio">This Dutch rock band created one of the most enduring riffs in pop history with this #1 hit, later famously covered by Bananarama. The hypnotic groove and Mariska Veres's powerhouse vocal made it a timeless classic.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">13</div>
+        <div class="song-info">
+          <div class="song-title">Walk Away Renée</div>
+          <div class="song-artist-year">The Left Banke · 1966</div>
+          <div class="song-bio">Baroque pop before anyone had a name for it, this New York band's string-laden heartbreaker reached #5 and redefined what a rock group could sound like. Michael Brown wrote it as a teenager pining for his bandmate's girlfriend.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">14</div>
+        <div class="song-info">
+          <div class="song-title">Winchester Cathedral</div>
+          <div class="song-artist-year">The New Vaudeville Band · 1966</div>
+          <div class="song-bio">A deliberate pastiche of 1920s dance-hall music recorded with kazoos and a megaphone voice effect, this novelty hit somehow climbed to #1 in the US. It remains one of the strangest chart-toppers of the rock era.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">15</div>
+        <div class="song-info">
+          <div class="song-title">You Keep Me Hangin' On</div>
+          <div class="song-artist-year">Vanilla Fudge · 1967</div>
+          <div class="song-bio">Taking the Supremes' Motown hit and burying it under layers of heavy, psychedelic sludge, Vanilla Fudge invented a template for countless future cover reinventions. Their slow, crushing version reached #6 and stunned everyone.</div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+ 
+  <!-- 1970s -->
+  <div class="decade-section">
+    <div class="decade-header">
+      <span class="decade-label">The Seventies</span>
+    </div>
+    <div class="song-list">
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">16</div>
+        <div class="song-info">
+          <div class="song-title">All Right Now</div>
+          <div class="song-artist-year">Free · 1970</div>
+          <div class="song-bio">Written in 15 minutes backstage after a flat crowd response, this British hard rock anthem became one of the most played rock songs in radio history. Paul Rodgers' powerhouse vocal and Paul Kossoff's iconic riff made it eternal.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">17</div>
+        <div class="song-info">
+          <div class="song-title">Brandy (You're A Fine Girl)</div>
+          <div class="song-artist-year">Looking Glass · 1972</div>
+          <div class="song-bio">A New Jersey bar band's ode to a harbor barmaid who loves a sailor became one of 1972's biggest hits, reaching #1 for a week. The song's wistful storytelling and singalong chorus made it a working-class classic.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">18</div>
+        <div class="song-info">
+          <div class="song-title">The City Of New Orleans</div>
+          <div class="song-artist-year">Arlo Guthrie · 1972</div>
+          <div class="song-bio">Steve Goodman wrote this elegiac tribute to train travel in America and Arlo Guthrie turned it into a Top 20 hit that outlived them both. It's since been recognized as one of the greatest American songs ever written.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">19</div>
+        <div class="song-info">
+          <div class="song-title">Dueling Banjos</div>
+          <div class="song-artist-year">Eric Weissberg & Steve Mandell · 1972</div>
+          <div class="song-bio">Lifted from the Deliverance film soundtrack, this instrumental bluegrass showcase became an unlikely pop hit reaching #2. The back-and-forth banjo conversation between Weissberg and Mandell became one of the most recognizable musical moments of the decade.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">20</div>
+        <div class="song-info">
+          <div class="song-title">Fly Robin, Fly</div>
+          <div class="song-artist-year">Silver Convention · 1975</div>
+          <div class="song-bio">A German disco act recorded this six-word, six-minute groove and somehow landed at #1 in the US for three weeks. Its pulsing, hypnotic simplicity made it one of the earliest disco anthems to cross over to mainstream radio.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">21</div>
+        <div class="song-info">
+          <div class="song-title">Fooled Around And Fell In Love</div>
+          <div class="song-artist-year">Elvin Bishop · 1975</div>
+          <div class="song-bio">Blues guitarist Elvin Bishop handed the mic to his unknown drummer Mickey Thomas for this smooth soul-rock ballad — and Thomas's vocal was so good it launched his own career. The song reached #3 and remains Bishop's signature hit.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">22</div>
+        <div class="song-info">
+          <div class="song-title">Go All The Way</div>
+          <div class="song-artist-year">The Raspberries · 1972</div>
+          <div class="song-bio">Eric Carmen's power pop masterpiece packed Beatlesque harmonies, a crunching guitar riff, and an undeniably catchy hook into three perfect minutes. It hit #5 and became the blueprint for the entire power pop movement that followed.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">23</div>
+        <div class="song-info">
+          <div class="song-title">Green Eyed Lady</div>
+          <div class="song-artist-year">Sugarloaf · 1970</div>
+          <div class="song-bio">A Denver rock band's sprawling organ-driven workout became a Top 3 hit and FM radio staple, stretching nearly eight minutes in its album form. Jerry Corbetta's swirling Hammond organ defined the sound of early '70s album-oriented rock.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">24</div>
+        <div class="song-info">
+          <div class="song-title">Hold Your Head Up</div>
+          <div class="song-artist-year">Argent · 1972</div>
+          <div class="song-bio">Rod Argent and Russ Ballard crafted this uplifting anthem that became one of the great prog-rock crossover hits, reaching #5 in the US. Its anthemic organ riff and rousing chorus made it a staple of stadium rock before stadiums were even a thing.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">25</div>
+        <div class="song-info">
+          <div class="song-title">How Long Has This Been Goin' On</div>
+          <div class="song-artist-year">Ace · 1974</div>
+          <div class="song-bio">Paul Carrack's silky lead vocal on this understated British pop gem made it a #3 US hit and launched one of the great journeyman careers in rock. The song's warm, laid-back groove feels as timeless as anything from the era.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">26</div>
+        <div class="song-info">
+          <div class="song-title">Hooked On A Feeling</div>
+          <div class="song-artist-year">Blue Swede · 1974</div>
+          <div class="song-bio">Swedish group Blue Swede took BJ Thomas's original and added the insane "ooga chaka" intro that made it iconic — and later made it the most memorable song in the Guardians of the Galaxy franchise. It hit #1 in the US in 1974.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">27</div>
+        <div class="song-info">
+          <div class="song-title">I Can See Clearly Now</div>
+          <div class="song-artist-year">Johnny Nash · 1972</div>
+          <div class="song-bio">Recorded in Jamaica with local session musicians, this reggae-influenced pop song spent four weeks at #1 and introduced American audiences to a new rhythmic vocabulary. Its optimistic message has made it a perennial anthem for brighter days.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">28</div>
+        <div class="song-info">
+          <div class="song-title">I Hear You Knockin'</div>
+          <div class="song-artist-year">Dave Edmunds · 1970</div>
+          <div class="song-bio">Welsh rocker Dave Edmunds recorded this rollicking rockabilly revival at Rockfield Studio using vintage techniques and hit #1 in the UK. His obsessive pursuit of authentic early rock and roll production made this a genre landmark.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">29</div>
+        <div class="song-info">
+          <div class="song-title">I'm Not In Love</div>
+          <div class="song-artist-year">10cc · 1975</div>
+          <div class="song-bio">Built from hundreds of overdubbed vocal parts recorded one note at a time, this studio masterpiece reached #2 in the US and #1 in the UK. Its lush, shimmering wall of voices was a technical achievement that changed what pop music could sound like.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">30</div>
+        <div class="song-info">
+          <div class="song-title">In The Summertime</div>
+          <div class="song-artist-year">Mungo Jerry · 1970</div>
+          <div class="song-bio">Ray Dorset wrote this jug-band skiffle shuffle in one sitting and it became one of the fastest-selling singles in history, moving six million copies in its first two weeks. It's the quintessential good-time summer anthem.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">31</div>
+        <div class="song-info">
+          <div class="song-title">It Never Rains In Southern California</div>
+          <div class="song-artist-year">Albert Hammond · 1972</div>
+          <div class="song-bio">Spanish-born, British-raised Albert Hammond's bittersweet tale of a failed Hollywood dreamer hit #5 in the US and painted the dark side of the California dream. Hammond went on to co-write dozens of massive hits for other artists.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">32</div>
+        <div class="song-info">
+          <div class="song-title">It's So Nice To Be With You</div>
+          <div class="song-artist-year">Gallery · 1972</div>
+          <div class="song-bio">Michigan's Gallery delivered this impossibly warm soft-rock gem that reached #4 and embodied the gentle, acoustic-leaning sound of early '70s AM radio. Jim Gold's easy vocal style made it one of the most comforting records of its era.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">33</div>
+        <div class="song-info">
+          <div class="song-title">Let Your Love Flow</div>
+          <div class="song-artist-year">The Bellamy Brothers · 1976</div>
+          <div class="song-bio">Florida brothers Howard and David Bellamy recorded this country-crossover hit that reached #1 on the pop charts before either of them had a formal record deal fully in place. It launched one of country music's longest-running careers.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">34</div>
+        <div class="song-info">
+          <div class="song-title">Love Grows (Where My Rosemary Goes)</div>
+          <div class="song-artist-year">Edison Lighthouse · 1970</div>
+          <div class="song-bio">A studio creation by producer Tony Macaulay, this orchestrated pop confection hit #1 in the UK and #5 in the US without the "band" ever having played together before. Session players were hurriedly assembled to tour in support of the hit.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">35</div>
+        <div class="song-info">
+          <div class="song-title">Oh Oh Oh It's Magic</div>
+          <div class="song-artist-year">Pilot · 1974</div>
+          <div class="song-bio">Scottish pop band Pilot recorded this irresistibly catchy hook-fest that became a Top 5 US hit with its "Magic!" refrain lodging permanently in the brain. Alan Parsons engineered the record, foreshadowing his own legendary career.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">36</div>
+        <div class="song-info">
+          <div class="song-title">One Toke Over The Line</div>
+          <div class="song-artist-year">Brewer & Shipley · 1971</div>
+          <div class="song-bio">This countercultural folk-rock song about chemical excess somehow got played on the Lawrence Welk show after Welk misidentified it as a "modern spiritual." It reached #10 despite being banned by several radio stations.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">37</div>
+        <div class="song-info">
+          <div class="song-title">Ride Captain, Ride</div>
+          <div class="song-artist-year">Blues Image · 1970</div>
+          <div class="song-bio">This Tampa-based band's psychedelic rock odyssey about 73 men sailing away reached #4 and became one of the great one-hit mysteries of the early '70s. The origin and meaning of its mystical imagery has been debated by fans for decades.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">38</div>
+        <div class="song-info">
+          <div class="song-title">Smoke From A Distant Fire</div>
+          <div class="song-artist-year">Sanford-Townsend Band · 1977</div>
+          <div class="song-bio">Two Alabama session musicians wrote and recorded this blue-eyed soul classic and hit #9 on the pop charts with their very first release. Its simmering groove and smoky atmosphere made it one of the late '70s' most underrated gems.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">39</div>
+        <div class="song-info">
+          <div class="song-title">Spirit In The Sky</div>
+          <div class="song-artist-year">Norman Greenbaum · 1970</div>
+          <div class="song-bio">Norman Greenbaum wrote this fuzz-guitar gospel-rock hybrid in 15 minutes inspired by watching a country gospel TV show — and it sold two million copies. It remains one of the most distinctive guitar tones in all of rock history.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">40</div>
+        <div class="song-info">
+          <div class="song-title">Stuck In The Middle With You</div>
+          <div class="song-artist-year">Stealers Wheel · 1972</div>
+          <div class="song-bio">Written by Gerry Rafferty and Joe Egan as a satirical take on the music business, this Dylan-esque pop gem hit #6 and gained immortality through its appearance in Quentin Tarantino's Reservoir Dogs. Ironically, the song's subject matter proved prophetic.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">41</div>
+        <div class="song-info">
+          <div class="song-title">Sunshine</div>
+          <div class="song-artist-year">Jonathan Edwards · 1971</div>
+          <div class="song-bio">Connecticut singer-songwriter Jonathan Edwards recorded this warm acoustic gem in a single day and watched it climb to #4 as a countercultural anthem about rejecting materialism and authority. Its easy, rambling charm made it feel like a conversation with a friend.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">42</div>
+        <div class="song-info">
+          <div class="song-title">The Lion Sleeps Tonight</div>
+          <div class="song-artist-year">The Tokens (1961) / Robert John (1972)</div>
+          <div class="song-bio">Based on Solomon Linda's 1939 South African original "Mbube," this became a #1 pop hit twice in a decade. Robert John's 1972 revival introduced it to a new generation while the complicated story of Linda's unpaid royalties became a landmark case in music copyright history.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">43</div>
+        <div class="song-info">
+          <div class="song-title">Vehicle</div>
+          <div class="song-artist-year">Ides Of March · 1970</div>
+          <div class="song-bio">Chicago's Ides of March had been grinding away for six years when this brass-drenched hard rock monster exploded to #2. Jim Peterik's raspy vocal demand — "I'm the friendly stranger in the black sedan" — is one of rock's great opening lines.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">44</div>
+        <div class="song-info">
+          <div class="song-title">We Just Disagree</div>
+          <div class="song-artist-year">Dave Mason · 1977</div>
+          <div class="song-bio">Traffic co-founder Dave Mason's solo masterpiece offered one of rock's most mature and civilized breakup songs, reaching #12 without a shred of bitterness. Jim Krueger's song in Mason's hands became a model of grown-up emotional restraint.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">45</div>
+        <div class="song-info">
+          <div class="song-title">Wildfire</div>
+          <div class="song-artist-year">Michael Murphey · 1975</div>
+          <div class="song-bio">Michael Murphey's haunting country-pop ballad about a ghost horse and its rider reached #3 and remains one of the most cinematic songs of the decade. The song was inspired by a true story from Murphey's Colorado childhood.</div>
+        </div>
+      </div>
+ 
+      <div class="song-card" onclick="toggle(this)">
+        <div class="song-number">46</div>
+        <div class="song-info">
+          <div class="song-title">Your Mama Don't Dance</div>
+          <div class="song-artist-year">Loggins & Messina · 1971</div>
+          <div class="song-bio">Kenny Loggins and Jim Messina's rockabilly-flavored party track reached #4 and became the unlikely calling card for one of soft rock's most beloved duos. Its live-wire energy stood in sharp contrast to most of their catalog.</div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+ 
+  <div class="footer">
+    <div class="footer-stars">★ ★ ★</div>
+    <div class="footer-text">The One Hit Wonderers · One-hit classics from the 60s, 70s, and 80s</div>
+    <div class="footer-text" style="margin-top:6px;">The songs you know. The memories you love. The show that makes you say, I Love That Song!</div>
+  </div>
+ 
+</div>
+ 
+<script>
+  function toggle(card) {
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
