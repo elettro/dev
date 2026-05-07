@@ -1096,3 +1096,39 @@
   transform: translateY(-2px);
   outline: none;
 }
+
+
+@media (min-width: 1025px) {
+  .mobile-video-card .mobile-video-copy,
+  .portfolio-horizontal-card .portfolio-card-copy {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+  }
+
+  .mobile-video-card:hover .mobile-video-copy,
+  .portfolio-horizontal-card:hover .portfolio-card-copy,
+  .mobile-video-card:focus-within .mobile-video-copy,
+  .portfolio-horizontal-card:focus-within .portfolio-card-copy {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobile-video-card .video-text-overlay-bg,
+  .portfolio-horizontal-card .video-text-overlay-bg {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  .mobile-video-card:hover .video-text-overlay-bg,
+  .portfolio-horizontal-card:hover .video-text-overlay-bg,
+  .mobile-video-card:focus-within .video-text-overlay-bg,
+  .portfolio-horizontal-card:focus-within .video-text-overlay-bg {
+    opacity: 1;
+  }
+}
