@@ -1408,19 +1408,20 @@
     const psyPoster = document.getElementById('psyPoster');
     if (psyPoster) {
       const layers = psyPoster.querySelectorAll('.poster-layer');
+      const baseTransforms = Array.from(layers, layer => getComputedStyle(layer).transform === 'none' ? '' : getComputedStyle(layer).transform);
       psyPoster.addEventListener('mousemove', (e) => {
         const rect = psyPoster.getBoundingClientRect();
         const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
         const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
         layers.forEach((layer, i) => {
           const depth = (i + 1) * 8;
-          layer.style.transform += ` translate(${x * depth}px, ${y * depth}px)`;
+          layer.style.transform = `${baseTransforms[i]} translate(${x * depth}px, ${y * depth}px)`;
         });
       });
       psyPoster.addEventListener('mouseleave', () => {
-        layers[0].style.transform = 'rotate(-5deg)';
-        layers[1].style.transform = 'rotate(4deg)';
-        layers[2].style.transform = '';
+        layers.forEach((layer, i) => {
+          layer.style.transform = baseTransforms[i];
+        });
       });
     }
 
