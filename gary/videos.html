@@ -38,6 +38,14 @@
   const sectionEl = document.getElementById('videos-section');
   const statusEl = document.getElementById('videos-status');
   const gridEl = document.getElementById('videos-grid');
+  const CTA_BUTTON_VARIANTS = [
+    'cta-triple-shadow-stack',
+    'cta-shine-sweep',
+    'cta-outline-to-solid',
+    'cta-arrow-push',
+    'cta-live-dot-pulse',
+    'cta-radar-pulse'
+  ];
 
   function parseCsv(text) {
     const rows = [];
@@ -150,6 +158,8 @@
       const sourceLink = document.createElement('p');
       sourceLink.className = 'show-address';
       const anchor = document.createElement('a');
+      const variant = CTA_BUTTON_VARIANTS[Math.floor(Math.random() * CTA_BUTTON_VARIANTS.length)];
+      anchor.className = `youtube-cta ${variant}`;
       anchor.href = video.url;
       anchor.target = '_blank';
       anchor.rel = 'noopener noreferrer';
