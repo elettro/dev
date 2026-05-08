@@ -152,6 +152,22 @@
 
       card.append(heading, venue, address, location);
 
+      if (event.notes) {
+        const notesWrap = document.createElement('div');
+        notesWrap.className = 'show-notes';
+
+        const notesLabel = document.createElement('div');
+        notesLabel.className = 'show-notes-label';
+        notesLabel.textContent = 'Notes';
+
+        const notesText = document.createElement('p');
+        notesText.className = 'show-notes-text';
+        notesText.textContent = event.notes;
+
+        notesWrap.append(notesLabel, notesText);
+        card.appendChild(notesWrap);
+      }
+
       if (event.ticketLink) {
         const ticketLink = document.createElement('a');
         ticketLink.className = 'ticket-button';
@@ -180,17 +196,25 @@
       const dataRows = rows.slice(1);
 
       const events = dataRows.map((row) => {
-        const get = (name) => row[headers.indexOf(name)] || '';
-        const date = parseEventDate(get('date'));
+        const get = (...names) => {
+          for (const name of names) {
+            const index = headers.indexOf(name);
+            if (index !== -1 && row[index]) return row[index];
+          }
+          return '';
+        };
+
+        const date = parseEventDate(get('date', 'showdate'));
+
         return {
           date,
-          day: get('day'),
           venue: get('venue'),
           address: get('address'),
           city: get('city'),
           state: get('state'),
           zip: get('zip'),
-          ticketLink: get('ticketlink')
+          ticketLink: get('ticketlink', 'ticketurl', 'tickets'),
+          notes: get('notes')
         };
       })
       .filter((event) => event.date && eventIsUpcoming(event.date))
