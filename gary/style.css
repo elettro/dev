@@ -298,6 +298,27 @@
   margin-top: 4px;
 }
 
+
+.show-notes {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px dashed currentColor;
+  border-radius: 10px;
+}
+
+.show-notes-label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+}
+
+.show-notes-text {
+  margin: 0;
+  line-height: 1.5;
+}
+
 .ticket-button {
   display: inline-block;
   margin-top: 12px;
