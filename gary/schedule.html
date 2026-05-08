@@ -113,6 +113,22 @@
     return eventEnd >= new Date();
   }
 
+  function normalizeImageUrl(url) {
+    if (!url) return '';
+
+    let value = String(url).trim();
+
+    if (value.includes('dropbox.com')) {
+      value = value.replace('www.dropbox.com', 'dl.dropboxusercontent.com');
+      value = value.replace('?dl=0', '');
+      value = value.replace('&dl=0', '');
+      value = value.replace('?dl=1', '');
+      value = value.replace('&dl=1', '');
+    }
+
+    return value;
+  }
+
   // Map CSV rows to show cards, filter, sort, and render upcoming events.
   function renderSchedule(events) {
     sectionEl.setAttribute('aria-busy', 'false');
@@ -149,6 +165,20 @@
       const location = document.createElement('p');
       location.className = 'show-location';
       location.textContent = cityStateZip || 'Location TBA';
+
+      if (event.photo) {
+        const photoWrap = document.createElement('div');
+        photoWrap.className = 'show-photo-wrap';
+
+        const photo = document.createElement('img');
+        photo.className = 'show-photo';
+        photo.src = event.photo;
+        photo.alt = event.venue ? `${event.venue} show photo` : 'Show photo';
+        photo.loading = 'lazy';
+
+        photoWrap.appendChild(photo);
+        card.appendChild(photoWrap);
+      }
 
       card.append(heading, venue, address, location);
 
@@ -205,6 +235,7 @@
         };
 
         const date = parseEventDate(get('date', 'showdate'));
+        const photo = normalizeImageUrl(get('photo', 'image', 'imageurl', 'photourl', 'flyer', 'flyerimage'));
 
         return {
           date,
@@ -214,7 +245,8 @@
           state: get('state'),
           zip: get('zip'),
           ticketLink: get('ticketlink', 'ticketurl', 'tickets'),
-          notes: get('notes')
+          notes: get('notes'),
+          photo
         };
       })
       .filter((event) => event.date && eventIsUpcoming(event.date))
