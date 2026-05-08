@@ -275,6 +275,22 @@
   padding: 16px;
 }
 
+
+.show-photo-wrap {
+  width: 100%;
+  margin-bottom: 18px;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 2px solid currentColor;
+}
+
+.show-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
 .show-date {
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 1px;
