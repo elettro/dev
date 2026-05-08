@@ -137,6 +137,20 @@
     return `${dateObj.getFullYear()}-${dateObj.getMonth()}`;
   }
 
+
+  function normalizeImageUrl(rawUrl) {
+    if (!rawUrl) return '';
+    const url = rawUrl.trim();
+    if (!url) return '';
+
+    const driveMatch = url.match(/(?:id=|\/d\/)([a-zA-Z0-9_-]{10,})/);
+    if (driveMatch) {
+      return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1200`;
+    }
+
+    return url;
+  }
+
   function openImageModal(src, alt) {
     if (!imageModal || !imageModalImg || !src) return;
     imageModalImg.src = src;
@@ -204,12 +218,15 @@
 
           const thumb = document.createElement('img');
           thumb.className = 'calendar-image-thumb';
-          thumb.src = event.photo || event.image;
+          thumb.src = normalizeImageUrl(event.photo || event.image);
           thumb.alt = event.venue ? `${event.venue} show image` : 'Show image';
           thumb.loading = 'lazy';
+          thumb.addEventListener('error', () => {
+            thumbButton.remove();
+          });
 
           thumbButton.appendChild(thumb);
-          thumbButton.addEventListener('click', () => openImageModal(event.photo || event.image, thumb.alt));
+          thumbButton.addEventListener('click', () => openImageModal(thumb.src, thumb.alt));
 
           eventWrap.appendChild(thumbButton);
         }
@@ -289,8 +306,8 @@
           zip: get('zip'),
           ticketLink: get('ticketlink', 'ticketurl', 'tickets'),
           notes: get('notes'),
-          photo: get('photo', 'photourl'),
-          image: get('image', 'imageurl', 'photo', 'photourl', 'flyer', 'flyerimage')
+          photo: normalizeImageUrl(get('photo', 'photourl')),
+          image: normalizeImageUrl(get('image', 'imageurl', 'photo', 'photourl', 'flyer', 'flyerimage'))
         };
       })
       .filter((event) => event.date && eventIsUpcoming(event.date))
