@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The One Hit Wonderers – Show Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Permanent+Marker&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="band-name">The One Hit Wonderers</div>
+    <div class="tagline">I Love That Song!</div>
+    <div class="setlist-label">★ &nbsp; Show Calendar &nbsp; ★</div>
+    <div class="stamp">Live &amp; Loud</div>
+  </div>
+
+  <section class="schedule-hero" aria-labelledby="show-calendar-title">
+    <h1 id="show-calendar-title" class="decade-label">Show Calendar</h1>
+    <p class="schedule-intro">See upcoming shows by month.</p>
+  </section>
+
+  <section aria-live="polite" aria-busy="true" id="calendar-section">
+    <p id="calendar-status" class="schedule-status">Loading upcoming shows…</p>
+    <div id="calendar-content" hidden>
+      <div class="calendar-toolbar">
+        <button type="button" id="prev-month" class="ticket-button calendar-nav-button">Previous Month</button>
+        <h2 id="calendar-month-title" class="calendar-month-title" aria-live="polite"></h2>
+        <button type="button" id="next-month" class="ticket-button calendar-nav-button">Next Month</button>
+      </div>
+      <div id="calendar-grid" class="calendar-grid" role="grid" aria-label="Show calendar"></div>
+    </div>
+  </section>
+
+  <div id="calendar-modal" class="calendar-modal" hidden>
+    <div class="calendar-modal-content" role="dialog" aria-modal="true" aria-labelledby="calendar-modal-title">
+      <button type="button" class="calendar-modal-close" id="calendar-modal-close" aria-label="Close show details">×</button>
+      <div id="calendar-modal-body"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">The One Hit Wonderers • Established 2025</div>
+    <div class="footer-stars">✦ ✦ ✦</div>
+  </div>
+</div>
+
+<script>
+  const SCHEDULE_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTpsJn08XO2oL78IGKF2W_uxc3T6k4d5DLUVcDwovlmVYZOxuleBNIghBUF6m-v_rA6tZKb47mZcbe2/pub?gid=0&single=true&output=csv';
+
+  const sectionEl = document.getElementById('calendar-section');
+  const statusEl = document.getElementById('calendar-status');
+  const contentEl = document.getElementById('calendar-content');
+  const gridEl = document.getElementById('calendar-grid');
+  const monthTitleEl = document.getElementById('calendar-month-title');
+  const prevBtn = document.getElementById('prev-month');
+  const nextBtn = document.getElementById('next-month');
+  const modalEl = document.getElementById('calendar-modal');
+  const modalCloseEl = document.getElementById('calendar-modal-close');
+  const modalBodyEl = document.getElementById('calendar-modal-body');
+
+  let upcomingEvents = [];
+  let currentCalendarMonth = null;
+  let firstUpcomingMonth = null;
+  let lastFocusedElement = null;
+
+  function parseCsv(text) {
+    const rows = [];
+    let row = [];
+    let field = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const next = text[i + 1];
+
+      if (char === '"') {
+        if (inQuotes && next === '"') {
+          field += '"';
+          i++;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === ',' && !inQuotes) {
+        row.push(field.trim());
+        field = '';
+      } else if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (char === '\r' && next === '\n') i++;
+        row.push(field.trim());
+        if (row.some(Boolean)) rows.push(row);
+        row = [];
+        field = '';
+      } else {
+        field += char;
+      }
+    }
+
+    if (field.length || row.length) {
+      row.push(field.trim());
+      if (row.some(Boolean)) rows.push(row);
+    }
+
+    return rows;
+  }
+
+  function normalizeHeader(value) {
+    return value.toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+
+  function parseEventDate(rawDate) {
+    if (!rawDate) return null;
+    const date = new Date(rawDate);
+    if (!Number.isNaN(date.getTime())) return date;
+
+    const parts = rawDate.split(/[\/\-]/).map((p) => parseInt(p, 10));
+    if (parts.length === 3 && parts.every((n) => !Number.isNaN(n))) {
+      const [a, b, c] = parts;
+      const normalized = c < 100 ? c + 2000 : c;
+      return new Date(normalized, a - 1, b);
+    }
+    return null;
+  }
+
+  function eventIsUpcoming(dateObj) {
+    const eventEnd = new Date(dateObj);
+    eventEnd.setHours(23, 59, 59, 999);
+    return eventEnd >= new Date();
+  }
+
+  function formatLongDate(dateObj) {
+    return dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', weekday: 'long' });
+  }
+
+  function monthKey(dateObj) {
+    return `${dateObj.getFullYear()}-${dateObj.getMonth()}`;
+  }
+
+  function openModal(event, triggerEl) {
+    lastFocusedElement = triggerEl || document.activeElement;
+    modalBodyEl.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.id = 'calendar-modal-title';
+    title.className = 'show-date';
+    title.textContent = formatLongDate(event.date);
+
+    const venue = document.createElement('p');
+    venue.className = 'show-venue';
+    venue.textContent = event.venue || 'Venue TBA';
+
+    const address = document.createElement('p');
+    address.className = 'show-address';
+    address.textContent = event.address || 'Address TBA';
+
+    const location = document.createElement('p');
+    location.className = 'show-location';
+    location.textContent = [event.city, event.state, event.zip].filter(Boolean).join(', ') || 'Location TBA';
+
+    modalBodyEl.append(title, venue, address, location);
+
+    if (event.notes) {
+      const notes = document.createElement('p');
+      notes.className = 'show-notes-text';
+      notes.textContent = event.notes;
+      modalBodyEl.appendChild(notes);
+    }
+
+    if (event.image) {
+      const image = document.createElement('img');
+      image.className = 'calendar-event-image';
+      image.src = event.image;
+      image.alt = `Show image for ${event.venue || 'upcoming show'}`;
+      modalBodyEl.appendChild(image);
+    }
+
+    if (event.ticketLink) {
+      const ticket = document.createElement('a');
+      ticket.className = 'ticket-button';
+      ticket.href = event.ticketLink;
+      ticket.target = '_blank';
+      ticket.rel = 'noopener noreferrer';
+      ticket.textContent = 'Tickets';
+      modalBodyEl.appendChild(ticket);
+    }
+
+    modalEl.hidden = false;
+    document.body.classList.add('calendar-modal-open');
+    modalCloseEl.focus();
+  }
+
+  function closeModal() {
+    modalEl.hidden = true;
+    document.body.classList.remove('calendar-modal-open');
+    if (lastFocusedElement) lastFocusedElement.focus();
+  }
+
+  function renderCalendar() {
+    gridEl.innerHTML = '';
+
+    const year = currentCalendarMonth.getFullYear();
+    const month = currentCalendarMonth.getMonth();
+    monthTitleEl.textContent = currentCalendarMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    weekdays.forEach((day) => {
+      const header = document.createElement('div');
+      header.className = 'calendar-weekday';
+      header.textContent = day;
+      gridEl.appendChild(header);
+    });
+
+    const firstDay = new Date(year, month, 1);
+    const firstDayIndex = firstDay.getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < firstDayIndex; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'calendar-day calendar-day-empty';
+      gridEl.appendChild(empty);
+    }
+
+    for (let dayNum = 1; dayNum <= daysInMonth; dayNum++) {
+      const dayCell = document.createElement('div');
+      dayCell.className = 'calendar-day';
+
+      const dayDate = new Date(year, month, dayNum);
+      const dayNumber = document.createElement('div');
+      dayNumber.className = 'calendar-day-number';
+      dayNumber.textContent = dayNum;
+      dayCell.appendChild(dayNumber);
+
+      const dayEvents = upcomingEvents.filter((event) => (
+        event.date.getFullYear() === year && event.date.getMonth() === month && event.date.getDate() === dayNum
+      ));
+
+      dayEvents.forEach((event) => {
+        const eventWrap = document.createElement('article');
+        eventWrap.className = 'calendar-event';
+
+        if (event.image) {
+          const img = document.createElement('img');
+          img.className = 'calendar-event-image';
+          img.src = event.image;
+          img.alt = `Show image for ${event.venue || 'upcoming show'}`;
+          eventWrap.appendChild(img);
+        }
+
+        const title = document.createElement('div');
+        title.className = 'calendar-event-title';
+        title.textContent = event.venue || 'Venue TBA';
+
+        const location = document.createElement('div');
+        location.className = 'calendar-event-location';
+        location.textContent = [event.city, event.state].filter(Boolean).join(', ') || 'Location TBA';
+
+        const detailsBtn = document.createElement('button');
+        detailsBtn.type = 'button';
+        detailsBtn.className = 'calendar-event-button';
+        detailsBtn.textContent = 'Details';
+        detailsBtn.addEventListener('click', () => openModal(event, detailsBtn));
+
+        eventWrap.append(title, location);
+
+        if (event.notes) {
+          const notes = document.createElement('p');
+          notes.className = 'show-notes-text';
+          notes.textContent = event.notes.length > 80 ? `${event.notes.slice(0, 80)}…` : event.notes;
+          eventWrap.appendChild(notes);
+        }
+
+        if (event.ticketLink) {
+          const ticket = document.createElement('a');
+          ticket.className = 'calendar-event-button';
+          ticket.href = event.ticketLink;
+          ticket.target = '_blank';
+          ticket.rel = 'noopener noreferrer';
+          ticket.textContent = 'Tickets';
+          eventWrap.appendChild(ticket);
+        }
+
+        eventWrap.appendChild(detailsBtn);
+        dayCell.appendChild(eventWrap);
+      });
+
+      gridEl.appendChild(dayCell);
+    }
+
+    const cellsUsed = firstDayIndex + daysInMonth;
+    const trailing = (7 - (cellsUsed % 7)) % 7;
+    for (let i = 0; i < trailing; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'calendar-day calendar-day-empty';
+      gridEl.appendChild(empty);
+    }
+
+    prevBtn.disabled = monthKey(currentCalendarMonth) === monthKey(firstUpcomingMonth);
+  }
+
+  async function loadScheduleCalendar() {
+    try {
+      const response = await fetch(SCHEDULE_CSV_URL, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const rows = parseCsv(await response.text());
+      if (!rows.length) throw new Error('CSV is empty');
+
+      const headers = rows[0].map(normalizeHeader);
+      const dataRows = rows.slice(1);
+
+      const events = dataRows.map((row) => {
+        const get = (...names) => {
+          for (const name of names) {
+            const index = headers.indexOf(name);
+            if (index !== -1 && row[index]) return row[index];
+          }
+          return '';
+        };
+
+        const date = parseEventDate(get('date', 'showdate'));
+
+        return {
+          date,
+          venue: get('venue'),
+          address: get('address'),
+          city: get('city'),
+          state: get('state'),
+          zip: get('zip'),
+          ticketLink: get('ticketlink', 'ticketurl', 'tickets'),
+          notes: get('notes'),
+          image: get('image', 'imageurl', 'photo', 'photourl', 'flyer', 'flyerimage')
+        };
+      })
+      .filter((event) => event.date && eventIsUpcoming(event.date))
+      .sort((a, b) => a.date - b.date);
+
+      sectionEl.setAttribute('aria-busy', 'false');
+
+      if (!events.length) {
+        statusEl.textContent = 'No upcoming shows are currently listed. Check back soon.';
+        contentEl.hidden = true;
+        return;
+      }
+
+      upcomingEvents = events;
+      firstUpcomingMonth = new Date(events[0].date.getFullYear(), events[0].date.getMonth(), 1);
+      currentCalendarMonth = new Date(firstUpcomingMonth);
+
+      statusEl.hidden = true;
+      contentEl.hidden = false;
+      renderCalendar();
+    } catch (error) {
+      sectionEl.setAttribute('aria-busy', 'false');
+      statusEl.textContent = 'Unable to load the schedule right now. Please check back soon.';
+      console.error('Schedule calendar load error:', error);
+    }
+  }
+
+  prevBtn.addEventListener('click', () => {
+    const candidate = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() - 1, 1);
+    if (candidate >= firstUpcomingMonth) {
+      currentCalendarMonth = candidate;
+      renderCalendar();
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentCalendarMonth = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() + 1, 1);
+    renderCalendar();
+  });
+
+  modalCloseEl.addEventListener('click', closeModal);
+  modalEl.addEventListener('click', (event) => {
+    if (event.target === modalEl) closeModal();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !modalEl.hidden) closeModal();
+  });
+
+  loadScheduleCalendar();
+</script>
+</body>
+</html>
