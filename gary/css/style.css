@@ -683,3 +683,99 @@
     text-align: center;
   }
 }
+
+
+.calendar-image-thumb-button {
+  display: block;
+  width: 100%;
+  max-width: 84px;
+  margin: 4px 0 6px;
+  padding: 0;
+  border: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.calendar-image-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.calendar-image-thumb-button:hover,
+.calendar-image-thumb-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.image-modal[hidden] {
+  display: none !important;
+}
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.image-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.image-modal-content {
+  position: relative;
+  z-index: 1;
+  max-width: min(960px, 92vw);
+  max-height: 88vh;
+  padding: 12px;
+  background: #f7ecd6;
+  border: 3px solid currentColor;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.image-modal-close {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 42px;
+  height: 42px;
+  border: 3px solid currentColor;
+  background: #c7372f;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.image-modal-img {
+  display: block;
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+}
+
+body.image-modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 720px) {
+  .calendar-image-thumb-button {
+    max-width: 120px;
+  }
+
+  .image-modal-content {
+    max-width: 94vw;
+  }
+
+  .image-modal-close {
+    top: 8px;
+    right: 8px;
+  }
+}
