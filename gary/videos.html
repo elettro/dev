@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The One Hit Wonderers – Videos</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Permanent+Marker&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="band-name">The One Hit Wonderers</div>
+    <div class="tagline">I Love That Song!</div>
+    <div class="setlist-label">★ &nbsp; Videos &nbsp; ★</div>
+    <div class="stamp">Live &amp; Loud</div>
+  </div>
+
+  <section class="schedule-hero" aria-labelledby="videos-title">
+    <h1 id="videos-title" class="decade-label">Videos</h1>
+    <p class="schedule-intro">Watch live clips, highlights, and favorite performances.</p>
+  </section>
+
+  <section aria-live="polite" aria-busy="true" id="videos-section">
+    <p id="videos-status" class="schedule-status">Loading videos…</p>
+    <div id="videos-grid" class="video-grid" hidden></div>
+  </section>
+
+  <div class="footer">
+    <div class="footer-text">The One Hit Wonderers • Established 2025</div>
+    <div class="footer-stars">✦ ✦ ✦</div>
+  </div>
+</div>
+
+<script>
+  const VIDEOS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTpsJn08XO2oL78IGKF2W_uxc3T6k4d5DLUVcDwovlmVYZOxuleBNIghBUF6m-v_rA6tZKb47mZcbe2/pub?gid=1859458060&single=true&output=csv';
+
+  const sectionEl = document.getElementById('videos-section');
+  const statusEl = document.getElementById('videos-status');
+  const gridEl = document.getElementById('videos-grid');
+
+  function parseCsv(text) {
+    const rows = [];
+    let row = [];
+    let field = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const next = text[i + 1];
+
+      if (char === '"') {
+        if (inQuotes && next === '"') {
+          field += '"';
+          i++;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === ',' && !inQuotes) {
+        row.push(field.trim());
+        field = '';
+      } else if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (char === '\r' && next === '\n') i++;
+        row.push(field.trim());
+        if (row.some(Boolean)) rows.push(row);
+        row = [];
+        field = '';
+      } else {
+        field += char;
+      }
+    }
+
+    if (field.length || row.length) {
+      row.push(field.trim());
+      if (row.some(Boolean)) rows.push(row);
+    }
+
+    return rows;
+  }
+
+  function normalizeHeader(value) {
+    return String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+
+  function getYouTubeId(url) {
+    if (!url) return '';
+
+    const value = String(url).trim();
+
+    const patterns = [
+      /youtube\.com\/watch\?v=([^&]+)/,
+      /youtu\.be\/([^?&]+)/,
+      /youtube\.com\/embed\/([^?&]+)/,
+      /youtube\.com\/shorts\/([^?&]+)/
+    ];
+
+    for (const pattern of patterns) {
+      const match = value.match(pattern);
+      if (match && match[1]) return match[1];
+    }
+
+    return '';
+  }
+
+  function renderVideos(videos) {
+    sectionEl.setAttribute('aria-busy', 'false');
+    gridEl.innerHTML = '';
+
+    if (!videos.length) {
+      statusEl.textContent = 'No videos are currently listed. Check back soon.';
+      statusEl.hidden = false;
+      gridEl.hidden = true;
+      return;
+    }
+
+    statusEl.hidden = true;
+    gridEl.hidden = false;
+
+    videos.forEach((video) => {
+      const card = document.createElement('article');
+      card.className = 'video-card show-card';
+
+      const embedWrap = document.createElement('div');
+      embedWrap.className = 'video-embed-wrap';
+
+      const frame = document.createElement('iframe');
+      frame.loading = 'lazy';
+      frame.src = `https://www.youtube.com/embed/${video.id}`;
+      frame.title = video.title || 'YouTube video';
+      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      frame.allowFullscreen = true;
+
+      embedWrap.appendChild(frame);
+      card.appendChild(embedWrap);
+
+      if (video.title) {
+        const title = document.createElement('h2');
+        title.className = 'video-title show-venue';
+        title.textContent = video.title;
+        card.appendChild(title);
+      }
+
+      if (video.notes) {
+        const notes = document.createElement('p');
+        notes.className = 'video-notes';
+        notes.textContent = video.notes;
+        card.appendChild(notes);
+      }
+
+      const sourceLink = document.createElement('p');
+      sourceLink.className = 'show-address';
+      const anchor = document.createElement('a');
+      anchor.href = video.url;
+      anchor.target = '_blank';
+      anchor.rel = 'noopener noreferrer';
+      anchor.textContent = 'Open on YouTube';
+      sourceLink.appendChild(anchor);
+      card.appendChild(sourceLink);
+
+      gridEl.appendChild(card);
+    });
+  }
+
+  async function loadVideos() {
+    try {
+      const response = await fetch(VIDEOS_CSV_URL, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const csvText = await response.text();
+      const rows = parseCsv(csvText);
+      if (!rows.length) {
+        renderVideos([]);
+        return;
+      }
+
+      const headers = rows[0].map(normalizeHeader);
+      const dataRows = rows.slice(1);
+
+      const videos = dataRows
+        .map((row) => {
+          const get = (...names) => {
+            for (const name of names) {
+              const index = headers.indexOf(name);
+              if (index !== -1 && row[index]) return row[index];
+            }
+            return '';
+          };
+
+          return {
+            title: get('title', 'videotitle', 'name'),
+            url: get('youtubelink', 'youtubeurl', 'videolink', 'url', 'video'),
+            notes: get('notes', 'description', 'details')
+          };
+        })
+        .map((video) => ({ ...video, id: getYouTubeId(video.url) }))
+        .filter((video) => video.id);
+
+      renderVideos(videos);
+    } catch (error) {
+      sectionEl.setAttribute('aria-busy', 'false');
+      statusEl.textContent = 'Unable to load videos right now. Please check back soon.';
+      statusEl.hidden = false;
+      gridEl.hidden = true;
+      console.error('Video load error:', error);
+    }
+  }
+
+  loadVideos();
+</script>
+</body>
+</html>
