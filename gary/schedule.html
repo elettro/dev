@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The One Hit Wonderers – Upcoming Shows</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Permanent+Marker&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="band-name">The One Hit Wonderers</div>
+    <div class="tagline">I Love That Song!</div>
+    <div class="setlist-label">★ &nbsp; Upcoming Shows &nbsp; ★</div>
+    <div class="stamp">Live &amp; Loud</div>
+  </div>
+
+  <section class="schedule-hero" aria-labelledby="upcoming-shows-title">
+    <h1 id="upcoming-shows-title" class="decade-label">Upcoming Shows</h1>
+    <p class="schedule-intro">See where the band is playing next.</p>
+  </section>
+
+  <section aria-live="polite" aria-busy="true" id="schedule-section">
+    <p id="schedule-status" class="schedule-status">Loading upcoming shows…</p>
+    <div id="schedule-list" class="schedule-list" hidden></div>
+  </section>
+
+  <div class="footer">
+    <div class="footer-text">The One Hit Wonderers • Established 2025</div>
+    <div class="footer-stars">✦ ✦ ✦</div>
+  </div>
+</div>
+
+<script>
+  // Published Google Sheet CSV URL. The client only updates this sheet.
+  const SCHEDULE_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTpsJn08XO2oL78IGKF2W_uxc3T6k4d5DLUVcDwovlmVYZOxuleBNIghBUF6m-v_rA6tZKb47mZcbe2/pub?gid=0&single=true&output=csv';
+
+  const statusEl = document.getElementById('schedule-status');
+  const listEl = document.getElementById('schedule-list');
+  const sectionEl = document.getElementById('schedule-section');
+
+  // Minimal CSV parser that safely handles quoted commas and escaped quotes.
+  function parseCsv(text) {
+    const rows = [];
+    let row = [];
+    let field = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const next = text[i + 1];
+
+      if (char === '"') {
+        if (inQuotes && next === '"') {
+          field += '"';
+          i++;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === ',' && !inQuotes) {
+        row.push(field.trim());
+        field = '';
+      } else if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (char === '\r' && next === '\n') i++;
+        row.push(field.trim());
+        if (row.some(Boolean)) rows.push(row);
+        row = [];
+        field = '';
+      } else {
+        field += char;
+      }
+    }
+
+    if (field.length || row.length) {
+      row.push(field.trim());
+      if (row.some(Boolean)) rows.push(row);
+    }
+
+    return rows;
+  }
+
+  function normalizeHeader(value) {
+    return value.toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+
+  function parseEventDate(rawDate) {
+    if (!rawDate) return null;
+    const date = new Date(rawDate);
+    if (!Number.isNaN(date.getTime())) return date;
+
+    const parts = rawDate.split(/[\/\-]/).map((p) => parseInt(p, 10));
+    if (parts.length === 3 && parts.every((n) => !Number.isNaN(n))) {
+      const [a, b, c] = parts;
+      const normalized = c < 100 ? c + 2000 : c;
+      return new Date(normalized, a - 1, b);
+    }
+    return null;
+  }
+
+  function formatDateWithDay(dateObj) {
+    return dateObj.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+      weekday: 'long'
+    });
+  }
+
+  function eventIsUpcoming(dateObj) {
+    const eventEnd = new Date(dateObj);
+    eventEnd.setHours(23, 59, 59, 999);
+    return eventEnd >= new Date();
+  }
+
+  // Map CSV rows to show cards, filter, sort, and render upcoming events.
+  function renderSchedule(events) {
+    sectionEl.setAttribute('aria-busy', 'false');
+    listEl.innerHTML = '';
+
+    if (!events.length) {
+      statusEl.textContent = 'No upcoming shows are currently listed. Check back soon.';
+      listEl.hidden = true;
+      return;
+    }
+
+    statusEl.hidden = true;
+    listEl.hidden = false;
+
+    events.forEach((event) => {
+      const card = document.createElement('article');
+      card.className = 'show-card';
+
+      const heading = document.createElement('h2');
+      heading.className = 'show-date';
+      heading.textContent = formatDateWithDay(event.date);
+
+      const venue = document.createElement('p');
+      venue.className = 'show-venue';
+      venue.textContent = event.venue || 'Venue TBA';
+
+      const addressLine = [event.address].filter(Boolean).join(' ');
+      const cityStateZip = [event.city, event.state, event.zip].filter(Boolean).join(', ').replace(', ,', ',');
+
+      const address = document.createElement('p');
+      address.className = 'show-address';
+      address.textContent = addressLine || 'Address TBA';
+
+      const location = document.createElement('p');
+      location.className = 'show-location';
+      location.textContent = cityStateZip || 'Location TBA';
+
+      card.append(heading, venue, address, location);
+
+      if (event.ticketLink) {
+        const ticketLink = document.createElement('a');
+        ticketLink.className = 'ticket-button';
+        ticketLink.href = event.ticketLink;
+        ticketLink.target = '_blank';
+        ticketLink.rel = 'noopener noreferrer';
+        ticketLink.textContent = 'Tickets';
+        ticketLink.setAttribute('aria-label', `Tickets for ${event.venue || 'upcoming show'} on ${formatDateWithDay(event.date)}`);
+        card.appendChild(ticketLink);
+      }
+
+      listEl.appendChild(card);
+    });
+  }
+
+  async function loadSchedule() {
+    try {
+      const response = await fetch(SCHEDULE_CSV_URL, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const csvText = await response.text();
+      const rows = parseCsv(csvText);
+      if (!rows.length) throw new Error('CSV is empty');
+
+      const headers = rows[0].map(normalizeHeader);
+      const dataRows = rows.slice(1);
+
+      const events = dataRows.map((row) => {
+        const get = (name) => row[headers.indexOf(name)] || '';
+        const date = parseEventDate(get('date'));
+        return {
+          date,
+          day: get('day'),
+          venue: get('venue'),
+          address: get('address'),
+          city: get('city'),
+          state: get('state'),
+          zip: get('zip'),
+          ticketLink: get('ticketlink')
+        };
+      })
+      .filter((event) => event.date && eventIsUpcoming(event.date))
+      .sort((a, b) => a.date - b.date);
+
+      renderSchedule(events);
+    } catch (error) {
+      sectionEl.setAttribute('aria-busy', 'false');
+      statusEl.textContent = 'Unable to load the schedule right now. Please check back soon.';
+      console.error('Schedule load error:', error);
+    }
+  }
+
+  loadSchedule();
+</script>
+</body>
+</html>
