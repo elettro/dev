@@ -298,6 +298,122 @@
   margin-top: 4px;
 }
 
+.youtube-cta {
+  --cta-accent: var(--red);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  margin-top: 6px;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1.2px;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  color: #fff;
+  background: var(--cta-accent);
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.youtube-cta::after {
+  content: '↗';
+  font-size: 12px;
+}
+
+.youtube-cta:hover {
+  transform: translateY(-1px);
+}
+
+.cta-triple-shadow-stack {
+  --cta-accent: #cb3f30;
+  box-shadow: 2px 2px 0 #7b1f15, 4px 4px 0 #3f0d0a;
+}
+
+.cta-shine-sweep {
+  --cta-accent: #8f2a20;
+  overflow: hidden;
+}
+
+.cta-shine-sweep::before {
+  content: '';
+  position: absolute;
+  inset: -30% auto -30% -40%;
+  width: 38%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
+  transform: translateX(-120%) rotate(12deg);
+  transition: transform 0.45s ease;
+}
+
+.cta-shine-sweep:hover::before {
+  transform: translateX(290%) rotate(12deg);
+}
+
+.cta-outline-to-solid {
+  background: transparent;
+  color: var(--brown);
+  border-color: var(--brown);
+}
+
+.cta-outline-to-solid:hover {
+  color: #fff;
+  background: var(--brown);
+}
+
+.cta-arrow-push {
+  --cta-accent: #b4382a;
+}
+
+.cta-arrow-push:hover::after {
+  transform: translateX(4px);
+}
+
+.cta-live-dot-pulse {
+  --cta-accent: #83261d;
+}
+
+.cta-live-dot-pulse::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffdccf;
+  box-shadow: 0 0 0 0 rgba(255,220,207,0.7);
+  animation: ctaPulse 1.6s infinite;
+}
+
+.cta-radar-pulse {
+  --cta-accent: #5f170f;
+  overflow: hidden;
+}
+
+.cta-radar-pulse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.24) 0, rgba(255,255,255,0) 62%);
+  transform: scale(0.2);
+  opacity: 0;
+}
+
+.cta-radar-pulse:hover::before {
+  animation: ctaRadar 0.55s ease-out;
+}
+
+@keyframes ctaPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,220,207,0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(255,220,207,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,220,207,0); }
+}
+
+@keyframes ctaRadar {
+  0% { transform: scale(0.2); opacity: 0.6; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
 
 .show-notes {
   margin-top: 14px;
