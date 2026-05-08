@@ -185,11 +185,13 @@
     }
 
     modalEl.hidden = false;
+    modalEl.classList.add('is-open');
     document.body.classList.add('calendar-modal-open');
     modalCloseEl.focus();
   }
 
   function closeModal() {
+    modalEl.classList.remove('is-open');
     modalEl.hidden = true;
     document.body.classList.remove('calendar-modal-open');
     if (lastFocusedElement) lastFocusedElement.focus();
