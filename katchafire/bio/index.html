@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katchafire — Bio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bone: #F2EBD9;
+    --smoke: #E8DFC8;
+    --earth: #7A5C3A;
+    --ember: #C44B1A;
+    --lava: #8B1A00;
+    --forest: #1E3A28;
+    --deep: #0D1F15;
+    --jade: #2E6B4A;
+    --ash: #3C3830;
+    --gold: #C89B3C;
+    --cream: #FAF5EB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--deep);
+    color: var(--bone);
+    font-family: 'Space Mono', monospace;
+    overflow-x: hidden;
+  }
+
+  /* KORU PATTERN SVG BG */
+  .site-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='50' fill='none' stroke='%23F2EBD9' stroke-width='1.5'/%3E%3Ccircle cx='60' cy='60' r='35' fill='none' stroke='%23F2EBD9' stroke-width='1'/%3E%3Ccircle cx='60' cy='60' r='20' fill='none' stroke='%23F2EBD9' stroke-width='0.8'/%3E%3Cline x1='0' y1='60' x2='120' y2='60' stroke='%23F2EBD9' stroke-width='0.5'/%3E%3Cline x1='60' y1='0' x2='60' y2='120' stroke='%23F2EBD9' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 120px 120px;
+  }
+
+  /* TĀNGATA / KOWHAIWHAI BORDER ELEMENT */
+  .kowhaiwhai {
+    width: 100%;
+    height: 12px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--ember) 0px, var(--ember) 20px,
+      var(--gold) 20px, var(--gold) 40px,
+      var(--jade) 40px, var(--jade) 60px,
+      var(--ember) 60px
+    );
+    opacity: 0.85;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 0 80px 0;
+    overflow: hidden;
+  }
+
+  .hero-bg-art {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px;
+  }
+
+  .origin-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .origin-tag::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 180px);
+    line-height: 0.88;
+    letter-spacing: 0.04em;
+    color: var(--bone);
+    text-shadow: 4px 4px 0px var(--lava);
+    margin-bottom: 16px;
+  }
+
+  .hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(16px, 2.2vw, 24px);
+    color: var(--smoke);
+    max-width: 480px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    border-left: 3px solid var(--ember);
+    padding-left: 20px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--ember);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* MAIN CONTENT */
+  .main {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 120px;
+  }
+
+  /* ORIGIN SECTION */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 80px 0 40px;
+  }
+
+  .section-koru {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--ember), transparent);
+  }
+
+  /* WHAKAPAPA — ORIGIN STORY */
+  .origin-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .origin-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    line-height: 1.65;
+    color: var(--smoke);
+    font-weight: 400;
+  }
+
+  .origin-text em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .origin-side {
+    padding-top: 12px;
+  }
+
+  .big-quote {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    color: var(--ember);
+    opacity: 0.25;
+    line-height: 0.8;
+    margin-bottom: -20px;
+  }
+
+  .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--bone);
+    padding: 24px;
+    border: 1px solid rgba(196, 75, 26, 0.4);
+    background: rgba(196, 75, 26, 0.05);
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .pull-quote-source {
+    display: block;
+    margin-top: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ember);
+    font-style: normal;
+  }
+
+  /* SOUND */
+  .sound-block {
+    margin-top: 20px;
+  }
+
+  .sound-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    transform: translateY(-2px);
+  }
+
+  .tag-reggae { border-color: var(--jade); color: var(--jade); }
+  .tag-reggae:hover { background: var(--jade); color: var(--bone); }
+
+  .tag-roots { border-color: var(--earth); color: var(--earth); }
+  .tag-roots:hover { background: var(--earth); color: var(--bone); }
+
+  .tag-rnb { border-color: var(--gold); color: var(--gold); }
+  .tag-rnb:hover { background: var(--gold); color: var(--deep); }
+
+  .tag-dancehall { border-color: var(--ember); color: var(--ember); }
+  .tag-dancehall:hover { background: var(--ember); color: var(--bone); }
+
+  .tag-maori { border-color: var(--bone); color: var(--bone); }
+  .tag-maori:hover { background: var(--bone); color: var(--deep); }
+
+  /* DISCOGRAPHY */
+  .disco-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 8px;
+  }
+
+  .album-card {
+    background: var(--ash);
+    padding: 28px 24px;
+    border-top: 3px solid transparent;
+    transition: border-color 0.2s;
+    position: relative;
+  }
+
+  .album-card:hover { border-top-color: var(--ember); }
+  .album-card:nth-child(2):hover { border-top-color: var(--gold); }
+  .album-card:nth-child(3):hover { border-top-color: var(--jade); }
+
+  .album-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: rgba(242, 235, 217, 0.15);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .album-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--bone);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .album-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  /* STAGES */
+  .stages-intro {
+    font-size: 13px;
+    color: var(--smoke);
+    line-height: 1.8;
+    max-width: 600px;
+    margin-bottom: 32px;
+  }
+
+  .stages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(242, 235, 217, 0.08);
+  }
+
+  .stage-item {
+    background: var(--deep);
+    padding: 16px 20px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    border-left: 2px solid transparent;
+    transition: all 0.2s;
+    opacity: 0.75;
+  }
+
+  .stage-item:hover {
+    border-left-color: var(--ember);
+    background: rgba(196, 75, 26, 0.06);
+    opacity: 1;
+    color: var(--bone);
+  }
+
+  .stage-country {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-top: 4px;
+  }
+
+  /* PRESS */
+  .press-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .press-card {
+    padding: 28px;
+    background: rgba(242, 235, 217, 0.03);
+    border: 1px solid rgba(242, 235, 217, 0.1);
+    position: relative;
+  }
+
+  .press-card::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    color: var(--ember);
+    opacity: 0.2;
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    line-height: 1;
+  }
+
+  .press-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--smoke);
+    padding-top: 16px;
+  }
+
+  .press-outlet {
+    margin-top: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ember);
+  }
+
+  /* AWARDS */
+  .awards-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .award-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(242, 235, 217, 0.08);
+  }
+
+  .award-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--ember);
+  }
+
+  .award-name {
+    font-size: 13px;
+    color: var(--smoke);
+    line-height: 1.4;
+  }
+
+  .award-body {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: right;
+  }
+
+  .award-winner {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .award-winner .award-name { color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 60px 40px;
+    text-align: center;
+    border-top: 1px solid rgba(242, 235, 217, 0.1);
+  }
+
+  .footer-flame {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    color: var(--ember);
+    opacity: 0.2;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .footer-tagline {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .footer-origin {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: rgba(242, 235, 217, 0.4);
+    font-size: 14px;
+  }
+
+  /* DIVIDER KORU */
+  .koru-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin: 60px 0 0;
+    opacity: 0.35;
+  }
+
+  .koru-divider span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ember);
+    display: block;
+  }
+
+  .koru-divider::before, .koru-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ember), transparent);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-content { padding: 0 24px; }
+    .main { padding: 0 24px 80px; }
+    .origin-block { grid-template-columns: 1fr; gap: 40px; }
+    .disco-grid { grid-template-columns: 1fr 1fr; }
+    .press-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 28px; }
+    .award-item { grid-template-columns: 60px 1fr; }
+    .award-body { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .disco-grid { grid-template-columns: 1fr; }
+    .hero-name { font-size: 72px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-bg"></div>
+<div class="kowhaiwhai"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-art">
+    <svg width="100%" height="100%" viewBox="0 0 1200 900" preserveAspectRatio="xMaxYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Abstract koru / volcanic shapes -->
+      <defs>
+        <radialGradient id="hg1" cx="80%" cy="70%">
+          <stop offset="0%" stop-color="#8B1A00" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#0D1F15" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="hg2" cx="10%" cy="20%">
+          <stop offset="0%" stop-color="#1E3A28" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#0D1F15" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1200" height="900" fill="url(#hg1)"/>
+      <rect width="1200" height="900" fill="url(#hg2)"/>
+
+      <!-- Large koru spiral -->
+      <g opacity="0.08" fill="none" stroke="#C44B1A" stroke-width="1">
+        <circle cx="1000" cy="200" r="320"/>
+        <circle cx="1000" cy="200" r="250"/>
+        <circle cx="1000" cy="200" r="180"/>
+        <circle cx="1000" cy="200" r="110"/>
+        <circle cx="1000" cy="200" r="55"/>
+      </g>
+      <!-- Diagonal lines — woven texture -->
+      <g opacity="0.04" stroke="#F2EBD9" stroke-width="0.8">
+        <line x1="0" y1="900" x2="900" y2="0"/>
+        <line x1="100" y1="900" x2="1000" y2="0"/>
+        <line x1="200" y1="900" x2="1100" y2="0"/>
+        <line x1="300" y1="900" x2="1200" y2="0"/>
+        <line x1="0" y1="700" x2="700" y2="0"/>
+        <line x1="0" y1="500" x2="500" y2="0"/>
+      </g>
+      <!-- Triangular kōwhaiwhai motifs -->
+      <g opacity="0.1" fill="#C89B3C">
+        <polygon points="600,40 640,110 560,110"/>
+        <polygon points="660,40 700,110 620,110"/>
+        <polygon points="720,40 760,110 680,110"/>
+        <polygon points="780,40 820,110 740,110"/>
+        <polygon points="840,40 880,110 800,110"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="origin-tag">Kirikiriroa · Aotearoa · Est. 1997</div>
+
+    <div class="hero-name">
+      KATCHAFIRE
+    </div>
+
+    <p class="hero-tagline">
+      Pure roots reggae from the heart of Aotearoa.<br>
+      A family born of fire. A sound that cannot be stopped.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">25+</span>
+        <span class="stat-label">Years Burning</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">6</span>
+        <span class="stat-label">Studio Albums</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">8</span>
+        <span class="stat-label">Piece Collective</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">30+</span>
+        <span class="stat-label">Countries Toured</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="kowhaiwhai"></div>
+
+<main class="main">
+
+  <!-- WHAKAPAPA — ORIGIN -->
+  <div class="section-header">
+    <svg class="section-koru" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="15" stroke="#C89B3C" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="9" stroke="#C44B1A" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="4" fill="#C44B1A"/>
+    </svg>
+    <span class="section-title">Whakapapa · Origin</span>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="origin-block">
+    <div>
+      <p class="origin-text">
+        It started with a father and his two teenage sons moving into an apartment in Hamilton — a place where the music could run <em>all night long.</em> Lead guitarist Grenville Bell, his son Logan on vocals, and Jordan behind the drums laid the foundation of what would become a global reggae phenomenon.
+      </p>
+      <div class="sound-block">
+        <p style="font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; margin-top:28px;">Their Sound</p>
+        <div class="sound-tags">
+          <span class="tag tag-reggae">Classic Roots</span>
+          <span class="tag tag-roots">Earth & Bass</span>
+          <span class="tag tag-rnb">R&amp;B Rub</span>
+          <span class="tag tag-dancehall">Dancehall</span>
+          <span class="tag tag-maori">Te Reo</span>
+          <span class="tag tag-rnb">Slinky Pop</span>
+          <span class="tag tag-roots">Uplifting Vibes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="origin-side">
+      <div class="big-quote">"</div>
+      <div class="pull-quote">
+        "They transformed the place into a freedom-founded club where the only rule was to enjoy the music. No external force could stop the fire!"
+        <span class="pull-quote-source">— KDHX 88.1, USA</span>
+      </div>
+
+      <div class="pull-quote">
+        "The band has matured into one of the most cherished, original live reggae bands in the world."
+        <span class="pull-quote-source">— The Brag, Australia</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCOGRAPHY -->
+  <div class="section-header">
+    <svg class="section-koru" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="15" stroke="#C89B3C" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="9" stroke="#C44B1A" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="4" fill="#C44B1A"/>
+    </svg>
+    <span class="section-title">Discography · Ngā Kōrero</span>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="disco-grid">
+    <div class="album-card">
+      <div class="album-year">2018</div>
+      <div class="album-title">Legacy</div>
+      <div class="album-label">Universal Music NZ / Zojak Worldwide</div>
+    </div>
+    <div class="album-card">
+      <div class="album-year">2013</div>
+      <div class="album-title">Best So Far</div>
+      <div class="album-label">VP / Greensleeves · Compilation</div>
+    </div>
+    <div class="album-card">
+      <div class="album-year">2010</div>
+      <div class="album-title">On the Road Again</div>
+      <div class="album-label">EMI / Lion House Records</div>
+    </div>
+    <div class="album-card">
+      <div class="album-year">2007</div>
+      <div class="album-title">Say What You're Thinking</div>
+      <div class="album-label">EMI</div>
+    </div>
+    <div class="album-card">
+      <div class="album-year">2005</div>
+      <div class="album-title">Slow Burning</div>
+      <div class="album-label">Mai / Shock</div>
+    </div>
+    <div class="album-card">
+      <div class="album-year">2003</div>
+      <div class="album-title">Revival</div>
+      <div class="album-label">Shock / BMG · NZ Highest Selling Single</div>
+    </div>
+  </div>
+
+  <!-- STAGES -->
+  <div class="section-header">
+    <svg class="section-koru" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="15" stroke="#C89B3C" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="9" stroke="#C44B1A" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="4" fill="#C44B1A"/>
+    </svg>
+    <span class="section-title">Major Stages · Ko Wai Mātou</span>
+    <div class="section-rule"></div>
+  </div>
+
+  <p class="stages-intro">From Glastonbury to Guam, from the Sierra Nevada to Summerjam — eighteen years of unbroken touring before the world paused. The fire crosses every border.</p>
+
+  <div class="stages-grid">
+    <div class="stage-item">Glastonbury Festival<div class="stage-country">United Kingdom</div></div>
+    <div class="stage-item">Byron Bay Bluesfest<div class="stage-country">Australia</div></div>
+    <div class="stage-item">California Roots Festival<div class="stage-country">Monterey, USA</div></div>
+    <div class="stage-item">Summerjam Festival<div class="stage-country">Germany</div></div>
+    <div class="stage-item">Reggae Sun Ska<div class="stage-country">France</div></div>
+    <div class="stage-item">Ostroda Reggae Festival<div class="stage-country">Poland</div></div>
+    <div class="stage-item">Bay Dreams<div class="stage-country">New Zealand</div></div>
+    <div class="stage-item">One Love Cali Reggae Fest<div class="stage-country">Long Beach, USA</div></div>
+    <div class="stage-item">MayJah RayJah Festival<div class="stage-country">Hawaii, USA</div></div>
+    <div class="stage-item">Lake Tahoe Reggae Festival<div class="stage-country">Nevada, USA</div></div>
+    <div class="stage-item">Austin Reggae Festival<div class="stage-country">Texas, USA</div></div>
+    <div class="stage-item">Soundsplash Festival<div class="stage-country">New Zealand</div></div>
+    <div class="stage-item">Sierra Nevada World Music<div class="stage-country">Santa Cruz, USA</div></div>
+    <div class="stage-item">No Logo Festival<div class="stage-country">France</div></div>
+    <div class="stage-item">Victoria Ska Festival<div class="stage-country">Canada</div></div>
+    <div class="stage-item">Trench Fest<div class="stage-country">Guam</div></div>
+  </div>
+
+  <!-- PRESS -->
+  <div class="section-header">
+    <svg class="section-koru" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="15" stroke="#C89B3C" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="9" stroke="#C44B1A" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="4" fill="#C44B1A"/>
+    </svg>
+    <span class="section-title">Press · Ngā Kupu</span>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="press-grid">
+    <div class="press-card">
+      <p class="press-text">"Their songwriting ability over the years has become second-to-none and time has allowed them to develop older songs to a point of perfection."</p>
+      <div class="press-outlet">Artshub — Australia</div>
+    </div>
+    <div class="press-card">
+      <p class="press-text">"The band's energy was consistently through the roof, making it impossible not to get lost in the music."</p>
+      <div class="press-outlet">Top Shelf Reggae — USA</div>
+    </div>
+    <div class="press-card">
+      <p class="press-text">"The crowd reaction indicated that almost every song played was a crowd favourite in itself."</p>
+      <div class="press-outlet">Fasterlouder — Australia</div>
+    </div>
+    <div class="press-card">
+      <p class="press-text">"They were smiling and dancing on stage in such purity that you couldn't help but move your body. Everywhere I looked people were dancing."</p>
+      <div class="press-outlet">Showsigoto.com — USA</div>
+    </div>
+  </div>
+
+  <!-- AWARDS -->
+  <div class="section-header">
+    <svg class="section-koru" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="15" stroke="#C89B3C" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="9" stroke="#C44B1A" stroke-width="1" fill="none"/>
+      <circle cx="18" cy="18" r="4" fill="#C44B1A"/>
+    </svg>
+    <span class="section-title">Recognition · Ngā Tohu</span>
+    <div class="section-rule"></div>
+  </div>
+
+  <ul class="awards-list">
+    <li class="award-item award-winner">
+      <span class="award-year">2003</span>
+      <span class="award-name">Highest Selling Single ✦ Winner</span>
+      <span class="award-body">NZ Music Awards</span>
+    </li>
+    <li class="award-item">
+      <span class="award-year">2018</span>
+      <span class="award-name">Group of the Year — Nominee</span>
+      <span class="award-body">Island Music Awards, Hawaii</span>
+    </li>
+    <li class="award-item">
+      <span class="award-year">2018</span>
+      <span class="award-name">Best Roots Artist — Nominee</span>
+      <span class="award-body">NZ Music Awards</span>
+    </li>
+    <li class="award-item">
+      <span class="award-year">2018</span>
+      <span class="award-name">Best Māori Artist — Nominee</span>
+      <span class="award-body">NZ Music Awards</span>
+    </li>
+    <li class="award-item">
+      <span class="award-year">2012</span>
+      <span class="award-name">Best International Band — Nominee</span>
+      <span class="award-body">British Reggae Music Awards</span>
+    </li>
+  </ul>
+
+  <div class="koru-divider">
+    <span></span><span></span><span></span>
+  </div>
+
+</main>
+
+<div class="kowhaiwhai"></div>
+
+<footer>
+  <div class="footer-flame">KA MUTU TE AHI</div>
+  <p class="footer-tagline">There is no stopping the 'Fire</p>
+  <p class="footer-origin">Kirikiriroa · Aotearoa New Zealand · Since 1997</p>
+</footer>
+
+</body>
+</html>
