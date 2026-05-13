@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 Project Directory Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=DM+Serif+Display&family=Bebas+Neue&family=Righteous&family=Work+Sans:wght@300;400;600&family=Playfair+Display:wght@400;700&family=Fragment+Mono&family=Orbitron:wght@400;700&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; min-height: 100vh; }
+
+/* NAVIGATION */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9999;
+  background: #0a0a0a;
+  border-bottom: 1px solid #222;
+  padding: 8px 16px;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#nav span {
+  color: #555;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  margin-right: 6px;
+}
+.nav-btn {
+  background: transparent;
+  border: 1px solid #333;
+  color: #888;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.nav-btn:hover, .nav-btn.active { background: #ff3c3c; border-color: #ff3c3c; color: #fff; }
+.nav-btn.psychedelic:hover, .nav-btn.psychedelic.active { background: #7700cc; border-color: #cc00ff; color: #fff; }
+.nav-btn.pro:hover, .nav-btn.pro.active { background: #0a4a8a; border-color: #1a7acc; color: #fff; }
+
+.concept { display: none; min-height: 100vh; padding-top: 52px; }
+.concept.active { display: block; }
+
+/* ============================================================ CONCEPT 1 — BRUTALIST GRID ============================================================ */
+#c1 { background: #f0ebe0; font-family: 'Bebas Neue', cursive; }
+.c1-header { padding: 40px 40px 20px; display: flex; align-items: baseline; gap: 20px; border-bottom: 4px solid #111; }
+.c1-header h1 { font-size: 80px; color: #111; line-height: 1; }
+.c1-header p { font-family: 'Space Mono', monospace; font-size: 11px; color: #666; letter-spacing: 0.15em; text-transform: uppercase; }
+.c1-filter { padding: 16px 40px; display: flex; gap: 4px; border-bottom: 2px solid #111; background: #111; }
+.c1-tag { background: transparent; border: 1px solid #555; color: #aaa; font-family: 'Space Mono', monospace; font-size: 10px; padding: 5px 14px; cursor: pointer; letter-spacing: 0.1em; transition: all 0.15s; }
+.c1-tag:hover, .c1-tag.on { background: #ff3c3c; border-color: #ff3c3c; color: #fff; }
+.c1-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0; }
+.c1-card { border-right: 2px solid #111; border-bottom: 2px solid #111; padding: 28px; background: #f0ebe0; cursor: pointer; transition: background 0.1s; position: relative; overflow: hidden; }
+.c1-card::before { content: attr(data-num); position: absolute; top: 10px; right: 14px; font-size: 60px; color: rgba(0,0,0,0.06); font-family: 'Bebas Neue', cursive; line-height: 1; }
+.c1-card:hover { background: #111; }
+.c1-card:hover .c1-title, .c1-card:hover .c1-desc, .c1-card:hover .c1-cat { color: #f0ebe0; }
+.c1-media { width: 100%; height: 130px; border-bottom: 2px solid #111; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+.c1-cat { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: #ff3c3c; text-transform: uppercase; margin-bottom: 8px; }
+.c1-title { font-size: 28px; color: #111; line-height: 1.1; margin-bottom: 10px; }
+.c1-desc { font-family: 'Work Sans', sans-serif; font-size: 13px; color: #555; line-height: 1.5; font-weight: 300; }
+.c1-status { display: inline-block; margin-top: 16px; font-family: 'Space Mono', monospace; font-size: 9px; padding: 3px 8px; border: 1px solid currentColor; }
+.c1-live { color: #1a9c2a; } .c1-wip { color: #e88000; } .c1-concept { color: #8844cc; }
+
+/* ============================================================ CONCEPT 2 — TERMINAL ============================================================ */
+#c2 { background: #0d1117; font-family: 'Fragment Mono', monospace; }
+.c2-shell { max-width: 900px; margin: 0 auto; padding: 40px 30px; }
+.c2-bar { background: #161b22; border: 1px solid #30363d; border-radius: 8px 8px 0 0; padding: 12px 16px; display: flex; align-items: center; gap: 8px; }
+.c2-dot { width: 12px; height: 12px; border-radius: 50%; }
+.c2-d1 { background: #ff5f57; } .c2-d2 { background: #febc2e; } .c2-d3 { background: #28c840; }
+.c2-title-bar { font-size: 12px; color: #8b949e; margin-left: auto; margin-right: auto; }
+.c2-body { background: #0d1117; border: 1px solid #30363d; border-top: none; border-radius: 0 0 8px 8px; padding: 24px; min-height: 500px; }
+.c2-line { margin-bottom: 6px; font-size: 13px; line-height: 1.6; }
+.c2-prompt { color: #58a6ff; } .c2-cmd { color: #79c0ff; } .c2-output { color: #8b949e; }
+.c2-green { color: #56d364; } .c2-amber { color: #e3b341; } .c2-magenta { color: #d2a8ff; } .c2-white { color: #e6edf3; }
+.c2-project { display: flex; align-items: center; gap: 12px; padding: 6px 4px; cursor: pointer; border-radius: 3px; transition: background 0.1s; }
+.c2-project:hover { background: rgba(88,166,255,0.07); }
+.c2-thumb { width: 180px; height: 90px; border-radius: 4px; overflow: hidden; border: 1px solid #30363d; flex-shrink: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+.c2-info { flex: 1; }
+.c2-pname { color: #79c0ff; font-size: 13px; margin-bottom: 4px; }
+.c2-pdesc { color: #8b949e; font-size: 12px; line-height: 1.5; margin-bottom: 6px; }
+.c2-pbadge { font-size: 11px; padding: 1px 8px; border-radius: 20px; display: inline-block; }
+.c2-live-badge { background: rgba(86,211,100,0.15); color: #56d364; }
+.c2-wip-badge { background: rgba(227,179,65,0.15); color: #e3b341; }
+.c2-archive-badge { background: rgba(139,148,158,0.15); color: #8b949e; }
+.c2-input-row { display: flex; align-items: center; gap: 8px; margin-top: 20px; border-top: 1px solid #21262d; padding-top: 16px; }
+.c2-input { background: transparent; border: none; color: #e6edf3; font-family: 'Fragment Mono', monospace; font-size: 13px; flex: 1; outline: none; }
+.c2-cursor { display: inline-block; width: 8px; height: 14px; background: #58a6ff; animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ============================================================ CONCEPT 3 — EDITORIAL ============================================================ */
+#c3 { background: #fafaf8; font-family: 'Playfair Display', serif; }
+.c3-masthead { border-bottom: 1px solid #ddd; padding: 24px 60px; display: flex; justify-content: space-between; align-items: baseline; }
+.c3-masthead h1 { font-size: 13px; font-family: 'Work Sans', sans-serif; letter-spacing: 0.3em; text-transform: uppercase; color: #111; font-weight: 600; }
+.c3-issue { font-family: 'Work Sans', sans-serif; font-size: 11px; color: #999; letter-spacing: 0.1em; }
+.c3-big-title { padding: 50px 60px 30px; border-bottom: 4px double #111; }
+.c3-big-title h2 { font-size: 90px; line-height: 0.9; color: #111; letter-spacing: -4px; }
+.c3-big-title h2 em { font-style: italic; color: #999; }
+.c3-layout { display: grid; grid-template-columns: 2fr 1px 1fr; gap: 0; padding: 0 60px; }
+.c3-divider { background: #ddd; }
+.c3-main { padding: 40px 40px 40px 0; }
+.c3-sidebar { padding: 40px 0 40px 40px; }
+.c3-featured { border-bottom: 1px solid #ddd; padding-bottom: 30px; margin-bottom: 30px; cursor: pointer; }
+.c3-featured:last-child { border-bottom: none; }
+.c3-feat-media { height: 140px; border-radius: 2px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+.c3-kicker { font-family: 'Work Sans', sans-serif; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: #999; margin-bottom: 8px; }
+.c3-headline { font-size: 32px; line-height: 1.15; color: #111; margin-bottom: 12px; transition: color 0.2s; }
+.c3-featured:hover .c3-headline { color: #cc2200; }
+.c3-byline { font-family: 'Work Sans', sans-serif; font-size: 12px; color: #666; line-height: 1.6; }
+.c3-sidebar-item { padding: 16px 0; border-bottom: 1px solid #ddd; cursor: pointer; display: grid; grid-template-columns: 70px 1fr; gap: 10px; align-items: center; }
+.c3-sidebar-item:last-child { border-bottom: none; }
+.c3-s-thumb { height: 56px; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.c3-s-num { font-family: 'Bebas Neue', cursive; font-size: 36px; color: #ddd; line-height: 1; margin-bottom: 4px; }
+.c3-s-title { font-size: 16px; color: #111; line-height: 1.3; transition: color 0.2s; }
+.c3-sidebar-item:hover .c3-s-title { color: #cc2200; }
+.c3-s-cat { font-family: 'Work Sans', sans-serif; font-size: 10px; color: #aaa; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 6px; }
+
+/* ============================================================ CONCEPT 4 — NEON ARCADE ============================================================ */
+#c4 { background: #07060d; font-family: 'Orbitron', monospace; }
+.c4-header { padding: 40px; text-align: center; }
+.c4-header h1 { font-size: 48px; font-weight: 700; background: linear-gradient(90deg, #00f5ff, #ff00c8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 6px; }
+.c4-header p { color: #444; font-size: 10px; letter-spacing: 0.3em; margin-top: 8px; }
+.c4-filter { display: flex; justify-content: center; gap: 8px; padding: 0 40px 30px; }
+.c4-ftag { background: transparent; border: 1px solid #222; color: #444; font-family: 'Orbitron', monospace; font-size: 9px; padding: 6px 16px; cursor: pointer; letter-spacing: 0.15em; transition: all 0.2s; }
+.c4-ftag:hover, .c4-ftag.on { border-color: #00f5ff; color: #00f5ff; box-shadow: 0 0 12px rgba(0,245,255,0.3); }
+.c4-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: #111; margin: 0 40px 60px; }
+.c4-card { background: #07060d; padding: 0; cursor: pointer; transition: background 0.2s; position: relative; overflow: hidden; border-top: 2px solid var(--accent); }
+.c4-card:hover { background: #0f0e1a; }
+.c4-card-media { height: 110px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+.c4-card-body { padding: 16px; }
+.c4-icon { font-size: 28px; margin-bottom: 14px; }
+.c4-type { font-size: 8px; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; }
+.c4-name { font-size: 16px; color: #e0e0e0; margin-bottom: 10px; line-height: 1.3; }
+.c4-desc { font-family: 'Work Sans', sans-serif; font-size: 12px; color: #555; line-height: 1.6; margin-bottom: 16px; }
+.c4-bar { height: 2px; background: #1a1a2e; border-radius: 1px; overflow: hidden; }
+.c4-fill { height: 100%; background: var(--accent); border-radius: 1px; }
+.c4-prog-label { display: flex; justify-content: space-between; font-size: 8px; color: #333; margin-top: 4px; }
+
+/* ============================================================ CONCEPT 5 — SWISS GRID ============================================================ */
+#c5 { background: #fff; font-family: 'Syne', sans-serif; }
+.c5-header { padding: 48px 48px 0; display: grid; grid-template-columns: 1fr auto; align-items: end; border-bottom: 2px solid #111; padding-bottom: 24px; }
+.c5-header h1 { font-size: 72px; font-weight: 800; color: #111; line-height: 0.9; letter-spacing: -3px; }
+.c5-header-right { font-size: 11px; color: #aaa; letter-spacing: 0.15em; text-align: right; line-height: 2; }
+.c5-categories { display: flex; gap: 0; border-bottom: 1px solid #eee; padding: 0 48px; }
+.c5-cat-tab { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; padding: 14px 20px; cursor: pointer; color: #aaa; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; background: none; border-top: none; border-left: none; border-right: none; font-family: 'Syne', sans-serif; font-weight: 700; }
+.c5-cat-tab:hover { color: #111; }
+.c5-cat-tab.on { color: #111; border-bottom-color: #111; }
+.c5-list { padding: 0 48px; }
+.c5-row { display: grid; grid-template-columns: 56px 110px 1fr 140px 100px; align-items: center; gap: 20px; padding: 18px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.1s; }
+.c5-row:hover { background: #fafafa; }
+.c5-row-num { font-size: 11px; color: #ddd; font-weight: 700; }
+.c5-thumb { height: 70px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.c5-row-info h3 { font-size: 18px; font-weight: 700; color: #111; margin-bottom: 2px; }
+.c5-row-info p { font-size: 12px; color: #999; font-family: 'Work Sans', sans-serif; }
+.c5-row-tag { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #888; font-weight: 700; }
+.c5-row-date { font-size: 11px; color: #bbb; text-align: right; font-family: 'Space Mono', monospace; }
+.c5-pill { display: inline-block; font-size: 9px; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+.pill-live { background: #dcfce7; color: #166534; }
+.pill-wip { background: #fef9c3; color: #854d0e; }
+.pill-concept { background: #ede9fe; color: #5b21b6; }
+
+/* ============================================================ CONCEPT 6 — POLAROID WALL ============================================================ */
+#c6 { background: #1a1a2e; min-height: 100vh; padding: 40px; }
+.c6-title { font-family: 'DM Serif Display', serif; font-size: 48px; color: #f0e6d3; text-align: center; margin-bottom: 40px; font-style: italic; }
+.c6-wall { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.c6-polaroid { background: #f5efe0; padding: 12px 12px 40px; cursor: pointer; transform: rotate(var(--rot)); transition: transform 0.3s, box-shadow 0.3s; box-shadow: 3px 3px 15px rgba(0,0,0,0.5); width: 180px; }
+.c6-polaroid:hover { transform: rotate(0deg) scale(1.08); box-shadow: 8px 8px 30px rgba(0,0,0,0.7); z-index: 10; position: relative; }
+.c6-photo { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+.c6-pname { font-family: 'DM Serif Display', serif; font-size: 15px; color: #333; text-align: center; line-height: 1.3; }
+.c6-pcat { font-family: 'Space Mono', monospace; font-size: 9px; color: #999; text-align: center; margin-top: 4px; }
+
+/* ============================================================ CONCEPT 7 — KANBAN ============================================================ */
+#c7 { background: #f4f3f0; font-family: 'Instrument Sans', sans-serif; }
+.c7-header { padding: 36px 36px 24px; display: flex; justify-content: space-between; align-items: baseline; }
+.c7-header h1 { font-size: 36px; font-weight: 600; color: #111; }
+.c7-header span { font-size: 12px; color: #999; }
+.c7-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 0 36px 60px; }
+.c7-col-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.c7-col-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.c7-col-name { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #888; }
+.c7-col-count { font-size: 11px; color: #bbb; margin-left: auto; }
+.c7-card { background: #fff; border-radius: 8px; overflow: hidden; margin-bottom: 8px; cursor: pointer; border: 1px solid #e8e8e8; transition: all 0.2s; }
+.c7-card:hover { border-color: #ccc; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.c7-card-img { height: 80px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 3px; }
+.c7-card-body { padding: 10px; }
+.c7-card-type { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dot-c); font-weight: 600; margin-bottom: 4px; }
+.c7-card-name { font-size: 14px; font-weight: 600; color: #111; margin-bottom: 6px; line-height: 1.3; }
+.c7-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+.c7-avatar { width: 22px; height: 22px; border-radius: 50%; font-size: 9px; font-weight: 600; display: flex; align-items: center; justify-content: center; color: #fff; }
+.c7-card-date { font-size: 10px; color: #ccc; }
+
+/* ============================================================ CONCEPT 8 — NEWSPAPER ============================================================ */
+#c8 { background: #fffef5; font-family: 'Playfair Display', serif; }
+.c8-flag { background: #111; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+.c8-flag h1 { color: #fff; font-size: 36px; letter-spacing: -1px; }
+.c8-flag span { font-family: 'Space Mono', monospace; font-size: 10px; color: #666; letter-spacing: 0.1em; }
+.c8-ticker { background: #cc2200; padding: 8px 0; overflow: hidden; }
+.c8-ticker-inner { display: flex; animation: ticker 20s linear infinite; white-space: nowrap; }
+.c8-ticker-inner:hover { animation-play-state: paused; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.c8-tick-item { font-family: 'Work Sans', sans-serif; font-size: 12px; color: #fff; letter-spacing: 0.1em; padding: 0 30px; font-weight: 600; }
+.c8-cols { display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; gap: 0; padding: 30px 40px; }
+.c8-col-div { background: #ddd; }
+.c8-col { padding: 0 30px; }
+.c8-col:first-child { padding-left: 0; }
+.c8-col:last-child { padding-right: 0; }
+.c8-col-head { font-family: 'Work Sans', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #999; border-bottom: 1px solid #111; padding-bottom: 8px; margin-bottom: 16px; }
+.c8-story { padding-bottom: 18px; margin-bottom: 18px; border-bottom: 1px solid #e5e5e5; cursor: pointer; }
+.c8-story:last-child { border-bottom: none; }
+.c8-story-img { height: 90px; border-radius: 2px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+.c8-s-hed { font-size: 20px; color: #111; line-height: 1.2; margin-bottom: 8px; }
+.c8-s-hed:hover { color: #cc2200; }
+.c8-s-deck { font-family: 'Work Sans', sans-serif; font-size: 12px; color: #666; line-height: 1.5; }
+.c8-tag { display: inline-block; font-family: 'Work Sans', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #cc2200; margin-bottom: 6px; }
+
+/* ============================================================ CONCEPT 9 — DARK MINIMAL ============================================================ */
+#c9 { background: #000; font-family: 'Work Sans', sans-serif; }
+.c9-header { padding: 80px 60px 40px; text-align: center; }
+.c9-header h1 { font-size: 64px; font-weight: 300; color: #f5f5f7; letter-spacing: -2px; line-height: 1; }
+.c9-header p { font-size: 19px; color: #86868b; margin-top: 16px; font-weight: 300; }
+.c9-filter { display: flex; justify-content: center; gap: 6px; padding: 0 60px 40px; }
+.c9-ftag { background: #1c1c1e; border: none; color: #86868b; font-family: 'Work Sans', sans-serif; font-size: 13px; padding: 7px 20px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
+.c9-ftag:hover, .c9-ftag.on { background: #2c2c2e; color: #f5f5f7; }
+.c9-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: #1c1c1e; margin: 0 60px 80px; border-radius: 18px; overflow: hidden; }
+.c9-card { background: #000; padding: 0; cursor: pointer; transition: background 0.2s; overflow: hidden; }
+.c9-card:hover { background: #0a0a0a; }
+.c9-card-img { height: 130px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 5px; border-bottom: 1px solid #1c1c1e; }
+.c9-card-body { padding: 24px; }
+.c9-icon { font-size: 32px; margin-bottom: 20px; }
+.c9-name { font-size: 19px; font-weight: 600; color: #f5f5f7; margin-bottom: 8px; letter-spacing: -0.3px; }
+.c9-desc { font-size: 14px; color: #86868b; line-height: 1.6; margin-bottom: 20px; }
+.c9-learn { font-size: 14px; color: #2997ff; }
+
+/* ============================================================ CONCEPT 10 — GAME MAP ============================================================ */
+#c10 { background: #1b3a2d; font-family: 'Righteous', cursive; min-height: 100vh; padding: 40px; }
+.c10-header { text-align: center; margin-bottom: 30px; }
+.c10-header h1 { font-size: 48px; color: #f5d87a; letter-spacing: 3px; }
+.c10-header p { font-family: 'Work Sans', sans-serif; font-size: 12px; color: #8fba98; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 4px; }
+.c10-map { position: relative; width: 100%; max-width: 900px; margin: 0 auto; height: 520px; }
+.c10-path-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.c10-node { position: absolute; transform: translate(-50%, -50%); text-align: center; cursor: pointer; }
+.c10-bubble { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; margin: 0 auto 6px; transition: transform 0.2s; border: 3px solid rgba(255,255,255,0.1); }
+.c10-node:hover .c10-bubble { transform: scale(1.15); }
+.c10-node-label { font-size: 11px; color: #c8e6c9; white-space: nowrap; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+.c10-node-sub { font-family: 'Work Sans', sans-serif; font-size: 9px; color: #7aaa82; }
+.c10-tooltip { display: none; position: fixed; background: #0d2318; border: 1px solid #2d6a4f; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #c8e6c9; z-index: 1000; max-width: 220px; pointer-events: none; }
+.c10-tooltip.show { display: block; }
+.c10-tt-name { font-size: 16px; color: #f5d87a; margin-bottom: 4px; }
+.c10-tt-desc { font-family: 'Work Sans', sans-serif; font-size: 12px; color: #8fba98; line-height: 1.5; }
+.c10-legend { display: flex; gap: 20px; justify-content: center; margin-top: 20px; }
+.c10-leg-item { display: flex; align-items: center; gap: 6px; font-family: 'Work Sans', sans-serif; font-size: 11px; color: #8fba98; }
+.c10-leg-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+/* ============================================================ CONCEPT 11 — LAVA LAMP ============================================================ */
+#c11 { background: #0d0020; min-height: 700px; padding: 0; }
+.c11-header { text-align: center; padding: 36px 20px 16px; position: relative; z-index: 2; }
+.c11-header h1 { font-size: 52px; font-weight: 900; letter-spacing: -1px; background: linear-gradient(90deg,#ff6ec7,#a855f7,#06b6d4,#ff6ec7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 300% 100%; animation: hshift 4s linear infinite; font-family: 'Syne', sans-serif; }
+@keyframes hshift { 0% { background-position: 0%; } 100% { background-position: 300%; } }
+.c11-sub { font-size: 10px; color: #6633aa; letter-spacing: 0.25em; text-transform: uppercase; font-family: monospace; margin-top: 4px; }
+.c11-blob-field { position: relative; width: 100%; min-height: 600px; }
+.c11-blob-wrap { position: absolute; cursor: pointer; transform: translate(-50%, -50%); }
+.c11-blob-wrap:hover .c11-blob { animation-play-state: paused; filter: brightness(1.3); }
+.c11-blob { border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: blobmove var(--dur) ease-in-out infinite alternate; position: relative; border: 2px solid rgba(255,255,255,0.1); }
+@keyframes blobmove { 0% { transform: translateY(0) scale(1); border-radius: 60% 40% 55% 45%/50% 60% 40% 55%; } 50% { transform: translateY(var(--dy)) scale(1.04); border-radius: 45% 55% 40% 60%/60% 40% 55% 45%; } 100% { transform: translateY(calc(var(--dy)*-1)) scale(.97); border-radius: 55% 45% 60% 40%/40% 55% 45% 60%; } }
+.c11-blob-icon { font-size: 28px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%); }
+.c11-blob-name { position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 10px; font-family: monospace; letter-spacing: 0.1em; text-align: center; }
+.c11-blob-status { position: absolute; top: -10px; right: -6px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #0d0020; }
+.c11-card-popup { display: none; position: absolute; background: #1a0030; border: 1px solid #cc00ff; border-radius: 10px; padding: 14px 16px; font-size: 11px; color: #cc88ff; z-index: 20; width: 210px; pointer-events: none; line-height: 1.6; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); }
+.c11-blob-wrap:hover .c11-card-popup { display: block; }
+.c11-popup-name { font-size: 13px; color: #ff6ec7; font-weight: 700; margin-bottom: 4px; }
+
+/* ============================================================ CONCEPT 12 — TAROT CARDS ============================================================ */
+#c12 { background: #0c0a18; padding: 28px 20px 60px; min-height: 700px; }
+.c12-header { text-align: center; margin-bottom: 28px; }
+.c12-header h1 { font-size: 40px; color: #d4a017; font-family: 'DM Serif Display', serif; font-style: italic; letter-spacing: 2px; }
+.c12-header p { font-size: 10px; color: #5a4a6a; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 6px; font-family: monospace; }
+.c12-spread { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.c12-card { width: 115px; cursor: pointer; transition: transform 0.3s; flex-shrink: 0; }
+.c12-card:hover { transform: translateY(-14px) scale(1.05); }
+.c12-card-inner { border-radius: 8px; overflow: hidden; border: 1px solid #4a2060; }
+.c12-card-back { height: 165px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.c12-card-deco { position: absolute; inset: 0; }
+.c12-card-media { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; position: relative; z-index: 1; }
+.c12-card-media-icon { font-size: 34px; }
+.c12-card-media-label { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; font-family: monospace; opacity: 0.5; }
+.c12-card-foot { padding: 8px 10px 10px; text-align: center; background: #0a0818; }
+.c12-card-num { font-size: 9px; color: #5a4a6a; font-family: monospace; letter-spacing: 0.15em; margin-bottom: 3px; }
+.c12-card-name { font-size: 11px; font-family: 'DM Serif Display', serif; color: #d4a017; line-height: 1.3; }
+.c12-card-arc { font-size: 8px; color: #6a4a8a; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; font-family: monospace; }
+
+/* ============================================================ CONCEPT 13 — MYCELIUM ============================================================ */
+#c13 { background: #060d08; padding: 28px 16px 60px; min-height: 700px; }
+.c13-header { text-align: center; margin-bottom: 16px; }
+.c13-header h1 { font-size: 40px; color: #4dff91; font-family: monospace; font-weight: 400; letter-spacing: 3px; }
+.c13-header p { font-size: 9px; color: #1a4a22; letter-spacing: 0.3em; text-transform: uppercase; font-family: monospace; margin-top: 4px; }
+.c13-canvas-wrap { position: relative; width: 100%; height: 560px; }
+.c13-canvas-wrap canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.c13-node { position: absolute; cursor: pointer; transform: translate(-50%, -50%); z-index: 2; }
+.c13-node-bubble { border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(77,255,145,0.3); transition: all 0.2s; flex-direction: column; gap: 2px; }
+.c13-node:hover .c13-node-bubble { border-color: #4dff91; background: rgba(77,255,145,0.15); }
+.c13-node-icon { font-size: 18px; line-height: 1; }
+.c13-node-label { font-size: 9px; font-family: monospace; text-align: center; white-space: nowrap; position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); letter-spacing: 0.05em; }
+.c13-node-status { position: absolute; top: -3px; right: -3px; width: 9px; height: 9px; border-radius: 50%; }
+.c13-legend { display: flex; justify-content: center; gap: 20px; margin-top: 16px; flex-wrap: wrap; }
+.c13-leg { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #2a5a30; font-family: monospace; }
+.c13-leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ============================================================ CONCEPT 14 — VINYL CRATES ============================================================ */
+#c14 { background: #1a0a00; padding: 28px 20px 60px; min-height: 700px; }
+.c14-header { text-align: center; margin-bottom: 24px; }
+.c14-header h1 { font-size: 40px; color: #ff9900; font-family: monospace; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; }
+.c14-header p { font-size: 9px; color: #5a3300; letter-spacing: 0.3em; text-transform: uppercase; font-family: monospace; margin-top: 4px; }
+.c14-crates { display: flex; flex-direction: column; gap: 4px; }
+.c14-crate-label { font-size: 10px; font-family: monospace; letter-spacing: 0.2em; text-transform: uppercase; padding: 8px 16px; background: #250d00; border-top: 1px solid #4a2000; }
+.c14-records { display: flex; padding: 12px 16px 20px; gap: 10px; flex-wrap: wrap; }
+.c14-record { width: 105px; cursor: pointer; flex-shrink: 0; transition: transform 0.2s; }
+.c14-record:hover { transform: translateY(-8px) rotate(-3deg); }
+.c14-sleeve { border-radius: 4px; overflow: hidden; width: 105px; height: 105px; position: relative; border: 2px solid #3a1800; }
+.c14-sleeve-media { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 3px; position: relative; }
+.c14-sleeve-icon { font-size: 26px; opacity: 0.85; position: relative; z-index: 1; }
+.c14-sleeve-text { font-size: 7px; letter-spacing: 0.15em; text-transform: uppercase; font-family: monospace; opacity: 0.4; position: relative; z-index: 1; }
+.c14-record-label-area { margin-top: 5px; padding: 0 2px; }
+.c14-record-title { font-size: 9px; font-family: monospace; line-height: 1.3; font-weight: 700; }
+.c14-record-artist { font-size: 8px; color: #5a3300; font-family: monospace; }
+.c14-record-badge { display: inline-block; font-size: 7px; padding: 1px 5px; border-radius: 2px; margin-top: 3px; font-family: monospace; letter-spacing: 0.1em; }
+.b-live { background: #1a4400; color: #66ff33; }
+.b-wip { background: #3a2200; color: #ff9900; }
+.b-concept { background: #1a0033; color: #cc66ff; }
+
+/* ============================================================ CONCEPT 15 — STAINED GLASS ============================================================ */
+#c15 { background: #0a0810; padding: 28px 16px 60px; min-height: 700px; }
+.c15-header { text-align: center; margin-bottom: 20px; }
+.c15-header h1 { font-size: 40px; color: #ffe4a0; font-family: 'DM Serif Display', serif; font-style: italic; letter-spacing: 3px; }
+.c15-header p { font-size: 9px; color: #3a2a5a; letter-spacing: 0.3em; text-transform: uppercase; font-family: monospace; margin-top: 4px; }
+.c15-window-wrap { max-width: 660px; margin: 0 auto; position: relative; border: 4px solid #1a1220; background: #050308; }
+.c15-panel { position: absolute; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; transition: opacity 0.2s; overflow: hidden; border: 3px solid #1a1220; }
+.c15-panel:hover { opacity: 0.82; z-index: 10; }
+.c15-panel::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.05); pointer-events: none; }
+.c15-pane-icon { font-size: 24px; z-index: 1; position: relative; }
+.c15-pane-name { font-size: 9px; font-family: 'DM Serif Display', serif; text-align: center; line-height: 1.3; z-index: 1; position: relative; font-style: italic; padding: 0 4px; }
+.c15-cat-badge { font-size: 7px; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; z-index: 1; position: relative; opacity: 0.7; }
+
+/* ============================================================ CONCEPT 16 — VC PITCH DECK ============================================================ */
+#c16 { background: #f7f8fc; font-family: 'Instrument Sans', sans-serif; }
+.c16-topbar { background: #fff; border-bottom: 1px solid #e8eaf0; padding: 18px 48px; display: flex; justify-content: space-between; align-items: center; }
+.c16-logo { font-size: 18px; font-weight: 700; color: #0f1117; letter-spacing: -0.5px; }
+.c16-logo span { color: #2563eb; }
+.c16-meta { font-size: 11px; color: #9ca3af; letter-spacing: 0.05em; }
+.c16-hero { background: #0f1117; padding: 60px 48px 50px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.c16-hero-left h2 { font-size: 52px; font-weight: 700; color: #fff; line-height: 1.05; letter-spacing: -2px; }
+.c16-hero-left h2 span { color: #2563eb; }
+.c16-hero-left p { font-size: 15px; color: #6b7280; margin-top: 16px; line-height: 1.7; max-width: 420px; }
+.c16-hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #1f2937; border-radius: 12px; overflow: hidden; }
+.c16-stat { background: #111827; padding: 20px; }
+.c16-stat-num { font-size: 28px; font-weight: 700; color: #fff; letter-spacing: -1px; }
+.c16-stat-label { font-size: 11px; color: #4b5563; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+.c16-section { padding: 40px 48px; }
+.c16-section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; }
+.c16-section-title { font-size: 13px; font-weight: 600; color: #9ca3af; letter-spacing: 0.12em; text-transform: uppercase; }
+.c16-section-count { font-size: 12px; color: #d1d5db; }
+.c16-deck { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.c16-slide { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e8eaf0; cursor: pointer; transition: all 0.2s; }
+.c16-slide:hover { border-color: #2563eb; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,99,235,0.1); }
+.c16-slide-media { height: 140px; position: relative; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
+.c16-slide-num { position: absolute; top: 10px; left: 12px; font-size: 10px; font-weight: 600; color: #9ca3af; letter-spacing: 0.1em; }
+.c16-slide-status-dot { position: absolute; top: 12px; right: 12px; width: 8px; height: 8px; border-radius: 50%; }
+.c16-slide-icon { font-size: 32px; }
+.c16-slide-media-label { font-size: 9px; color: #d1d5db; letter-spacing: 0.15em; text-transform: uppercase; font-family: monospace; }
+.c16-slide-body { padding: 16px 18px 18px; border-top: 1px solid #f3f4f6; }
+.c16-slide-cat { font-size: 10px; font-weight: 600; color: #2563eb; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+.c16-slide-name { font-size: 15px; font-weight: 600; color: #0f1117; margin-bottom: 6px; line-height: 1.3; }
+.c16-slide-desc { font-size: 12px; color: #6b7280; line-height: 1.5; }
+.c16-slide-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f3f4f6; }
+.c16-pill { font-size: 10px; padding: 3px 10px; border-radius: 20px; font-weight: 600; letter-spacing: 0.05em; }
+.c16-live { background: #dcfce7; color: #166534; }
+.c16-wip { background: #fef9c3; color: #854d0e; }
+.c16-concept { background: #ede9fe; color: #5b21b6; }
+.c16-progress-bar { height: 3px; background: #f3f4f6; border-radius: 2px; overflow: hidden; flex: 1; margin-left: 12px; }
+.c16-progress-fill { height: 100%; border-radius: 2px; background: #2563eb; }
+
+/* ============================================================ CONCEPT 17 — BLOOMBERG TERMINAL ============================================================ */
+#c17 { background: #000; font-family: 'Fragment Mono', monospace; color: #ff6600; }
+.c17-header { background: #000; border-bottom: 1px solid #ff6600; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; }
+.c17-header-title { font-size: 14px; font-weight: 700; letter-spacing: 0.2em; color: #ff6600; }
+.c17-header-right { font-size: 10px; color: #666; letter-spacing: 0.1em; }
+.c17-ticker-bar { background: #ff6600; padding: 4px 0; overflow: hidden; white-space: nowrap; }
+.c17-ticker-scroll { display: inline-flex; animation: btick 25s linear infinite; }
+.c17-tick { font-size: 11px; color: #000; font-weight: 700; padding: 0 24px; letter-spacing: 0.1em; }
+@keyframes btick { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.c17-grid { display: grid; grid-template-columns: 1fr 340px; gap: 1px; background: #1a0a00; min-height: calc(100vh - 90px); }
+.c17-main { padding: 16px; }
+.c17-panel-head { font-size: 10px; color: #ff6600; letter-spacing: 0.2em; border-bottom: 1px solid #ff6600; padding-bottom: 6px; margin-bottom: 12px; display: flex; justify-content: space-between; }
+.c17-table { width: 100%; border-collapse: collapse; }
+.c17-table th { font-size: 9px; color: #664400; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 8px; text-align: left; border-bottom: 1px solid #1a0a00; }
+.c17-table td { font-size: 11px; padding: 6px 8px; border-bottom: 1px solid #0d0500; vertical-align: middle; }
+.c17-table tr:hover td { background: #0d0500; }
+.c17-td-name { color: #ffaa44; font-weight: 700; }
+.c17-td-cat { color: #664400; font-size: 10px; letter-spacing: 0.1em; }
+.c17-td-status-live { color: #00ff44; }
+.c17-td-status-wip { color: #ff6600; }
+.c17-td-status-concept { color: #cc44ff; }
+.c17-td-prog { color: #fff; }
+.c17-td-date { color: #664400; font-size: 10px; }
+.c17-bar-mini { height: 6px; background: #1a0a00; border: 1px solid #331500; border-radius: 1px; overflow: hidden; width: 80px; display: inline-block; vertical-align: middle; }
+.c17-bar-fill { height: 100%; background: #ff6600; }
+.c17-sidebar { padding: 16px; border-left: 1px solid #1a0a00; }
+.c17-sidebar-panel { border: 1px solid #1a0a00; padding: 12px; margin-bottom: 12px; }
+.c17-sp-title { font-size: 9px; color: #ff6600; letter-spacing: 0.2em; margin-bottom: 10px; border-bottom: 1px solid #1a0a00; padding-bottom: 6px; }
+.c17-sp-stat { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid #0d0500; }
+.c17-sp-key { font-size: 10px; color: #664400; }
+.c17-sp-val { font-size: 10px; color: #ff9944; }
+.c17-media-cell { width: 60px; height: 40px; background: #0d0500; border: 1px solid #331500; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; vertical-align: middle; }
+
+/* ============================================================ CONCEPT 18 — CASE STUDY LONG-FORM ============================================================ */
+#c18 { background: #fafaf9; font-family: 'Work Sans', sans-serif; }
+.c18-nav { background: #fff; border-bottom: 1px solid #e7e5e4; padding: 0 60px; display: flex; gap: 0; }
+.c18-nav-item { font-size: 12px; font-weight: 600; color: #a8a29e; padding: 16px 20px; border-bottom: 2px solid transparent; cursor: pointer; letter-spacing: 0.05em; text-transform: uppercase; transition: all 0.15s; background: none; border-top: none; border-left: none; border-right: none; font-family: inherit; }
+.c18-nav-item:hover { color: #1c1917; }
+.c18-nav-item.on { color: #1c1917; border-bottom-color: #1c1917; }
+.c18-hero { background: #1c1917; padding: 56px 60px; }
+.c18-hero-eyebrow { font-size: 11px; font-weight: 600; color: #a8a29e; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
+.c18-hero-title { font-size: 56px; font-weight: 700; color: #fff; line-height: 1.05; letter-spacing: -2px; max-width: 700px; }
+.c18-hero-sub { font-size: 16px; color: #78716c; margin-top: 16px; max-width: 560px; line-height: 1.7; }
+.c18-body { display: grid; grid-template-columns: 1fr 320px; gap: 0; padding: 0 60px; }
+.c18-main { padding: 48px 60px 60px 0; border-right: 1px solid #e7e5e4; }
+.c18-aside { padding: 48px 0 60px 48px; }
+.c18-case { margin-bottom: 52px; padding-bottom: 52px; border-bottom: 1px solid #e7e5e4; }
+.c18-case:last-child { border-bottom: none; }
+.c18-case-media { height: 200px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; overflow: hidden; position: relative; }
+.c18-case-label { position: absolute; top: 12px; left: 14px; font-size: 10px; font-weight: 600; color: #fff; background: rgba(0,0,0,0.5); padding: 3px 8px; border-radius: 4px; letter-spacing: 0.08em; text-transform: uppercase; }
+.c18-case-cat { font-size: 11px; font-weight: 600; color: #a8a29e; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+.c18-case-title { font-size: 26px; font-weight: 700; color: #1c1917; letter-spacing: -0.5px; margin-bottom: 10px; line-height: 1.2; }
+.c18-case-body { font-size: 14px; color: #78716c; line-height: 1.75; }
+.c18-case-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 16px; }
+.c18-tag { font-size: 11px; padding: 4px 12px; border-radius: 20px; background: #f5f5f4; color: #57534e; font-weight: 500; }
+.c18-aside-module { margin-bottom: 32px; }
+.c18-aside-title { font-size: 11px; font-weight: 600; color: #a8a29e; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 14px; }
+.c18-aside-item { display: grid; grid-template-columns: 48px 1fr; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid #f5f5f4; cursor: pointer; }
+.c18-aside-item:last-child { border-bottom: none; }
+.c18-aside-thumb { height: 48px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.c18-aside-name { font-size: 13px; font-weight: 600; color: #1c1917; margin-bottom: 2px; }
+.c18-aside-cat { font-size: 11px; color: #a8a29e; }
+.c18-pill-live { background: #dcfce7; color: #166534; font-size: 10px; padding: 2px 8px; border-radius: 12px; font-weight: 600; }
+.c18-pill-wip { background: #fef9c3; color: #854d0e; font-size: 10px; padding: 2px 8px; border-radius: 12px; font-weight: 600; }
+.c18-pill-concept { background: #ede9fe; color: #5b21b6; font-size: 10px; padding: 2px 8px; border-radius: 12px; font-weight: 600; }
+
+/* ============================================================ CONCEPT 19 — AGENCY TALENT ROSTER ============================================================ */
+#c19 { background: #0d0d0d; font-family: 'Syne', sans-serif; }
+.c19-header { padding: 48px 48px 32px; border-bottom: 1px solid #1a1a1a; display: flex; justify-content: space-between; align-items: flex-end; }
+.c19-header h1 { font-size: 64px; font-weight: 800; color: #fff; letter-spacing: -3px; line-height: 0.9; }
+.c19-header-right { text-align: right; }
+.c19-header-right p { font-size: 11px; color: #444; letter-spacing: 0.15em; text-transform: uppercase; line-height: 2; }
+.c19-filters { padding: 16px 48px; display: flex; gap: 6px; border-bottom: 1px solid #1a1a1a; background: #0d0d0d; position: sticky; top: 52px; z-index: 10; }
+.c19-ftag { background: transparent; border: 1px solid #222; color: #444; font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; padding: 6px 16px; cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; }
+.c19-ftag:hover, .c19-ftag.on { background: #fff; border-color: #fff; color: #000; }
+.c19-roster { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #1a1a1a; }
+.c19-card { background: #0d0d0d; padding: 0; cursor: pointer; overflow: hidden; transition: background 0.2s; }
+.c19-card:hover { background: #111; }
+.c19-card-media { height: 180px; position: relative; display: flex; align-items: flex-end; overflow: hidden; }
+.c19-card-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 20px 20px 14px; }
+.c19-card-icon-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
+.c19-card-icon { font-size: 48px; opacity: 0.6; }
+.c19-card-img-label { font-size: 9px; color: #333; letter-spacing: 0.2em; text-transform: uppercase; font-family: monospace; }
+.c19-card-number { font-size: 11px; color: #444; letter-spacing: 0.15em; font-family: monospace; }
+.c19-card-overlay-name { font-size: 18px; font-weight: 800; color: #fff; line-height: 1.1; letter-spacing: -0.5px; }
+.c19-card-body { padding: 18px 20px 22px; border-top: 1px solid #1a1a1a; }
+.c19-card-cat { font-size: 9px; font-weight: 700; color: var(--cc); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 6px; }
+.c19-card-desc { font-size: 12px; color: #555; line-height: 1.6; font-family: 'Work Sans', sans-serif; margin-bottom: 12px; }
+.c19-card-footer { display: flex; justify-content: space-between; align-items: center; }
+.c19-status-badge { font-size: 9px; padding: 3px 9px; border: 1px solid currentColor; letter-spacing: 0.1em; font-family: monospace; }
+.c19-live-b { color: #22c55e; }
+.c19-wip-b { color: #f59e0b; }
+.c19-concept-b { color: #a855f7; }
+.c19-date-text { font-size: 10px; color: #333; font-family: monospace; }
+
+/* ============================================================ CONCEPT 20 — ANNUAL REPORT ============================================================ */
+#c20 { background: #fff; font-family: 'Playfair Display', serif; }
+.c20-cover { background: #111; padding: 64px 64px 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; min-height: 300px; }
+.c20-cover-left { }
+.c20-cover-eyebrow { font-family: 'Work Sans', sans-serif; font-size: 10px; letter-spacing: 0.3em; color: #666; text-transform: uppercase; margin-bottom: 20px; }
+.c20-cover-title { font-size: 64px; color: #fff; line-height: 0.95; letter-spacing: -2px; }
+.c20-cover-title em { color: #c9a84c; font-style: italic; }
+.c20-cover-sub { font-family: 'Work Sans', sans-serif; font-size: 14px; color: #555; margin-top: 20px; line-height: 1.6; }
+.c20-cover-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #222; }
+.c20-cstat { background: #1a1a1a; padding: 24px; }
+.c20-cstat-num { font-size: 36px; color: #c9a84c; letter-spacing: -1px; }
+.c20-cstat-label { font-family: 'Work Sans', sans-serif; font-size: 10px; color: #555; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 6px; }
+.c20-divider-line { height: 4px; background: #c9a84c; }
+.c20-toc { padding: 40px 64px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: baseline; }
+.c20-toc-label { font-family: 'Work Sans', sans-serif; font-size: 10px; color: #9ca3af; letter-spacing: 0.25em; text-transform: uppercase; }
+.c20-toc-items { display: flex; gap: 28px; }
+.c20-toc-item { font-family: 'Work Sans', sans-serif; font-size: 12px; color: #6b7280; cursor: pointer; transition: color 0.15s; }
+.c20-toc-item:hover { color: #111; }
+.c20-section-title { font-family: 'Work Sans', sans-serif; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #9ca3af; padding: 32px 64px 16px; border-bottom: 1px solid #f3f4f6; }
+.c20-featured-row { display: grid; grid-template-columns: 1.4fr 1px 1fr 1px 1fr; gap: 0; border-bottom: 1px solid #e5e7eb; }
+.c20-feat-div { background: #e5e7eb; }
+.c20-feat-main { padding: 32px 40px 36px; cursor: pointer; }
+.c20-feat-main:hover .c20-feat-title { color: #c9a84c; }
+.c20-feat-col { padding: 32px 32px 36px; cursor: pointer; border-left: none; }
+.c20-feat-col:hover .c20-feat-title { color: #c9a84c; }
+.c20-feat-media { border-radius: 4px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; overflow: hidden; position: relative; }
+.c20-feat-eyebrow { font-family: 'Work Sans', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #9ca3af; margin-bottom: 8px; }
+.c20-feat-title { font-size: 22px; color: #111; line-height: 1.2; margin-bottom: 8px; transition: color 0.2s; }
+.c20-feat-body { font-family: 'Work Sans', sans-serif; font-size: 12px; color: #6b7280; line-height: 1.6; }
+.c20-feat-date { font-family: 'Work Sans', sans-serif; font-size: 10px; color: #d1d5db; margin-top: 10px; }
+.c20-grid-section { padding: 32px 64px 48px; }
+.c20-small-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.c20-small-item { cursor: pointer; }
+.c20-small-item:hover .c20-small-title { color: #c9a84c; }
+.c20-small-media { height: 90px; border-radius: 3px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+.c20-small-eyebrow { font-family: 'Work Sans', sans-serif; font-size: 9px; color: #9ca3af; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 4px; }
+.c20-small-title { font-size: 14px; color: #111; line-height: 1.3; transition: color 0.2s; }
+.c20-gold-rule { height: 1px; background: #c9a84c; margin: 0 64px 32px; opacity: 0.3; }
+</style>
+</head>
+<body>
+
+<div id="nav">
+  <span>15 CONCEPTS ▸</span>
+  <button class="nav-btn active" onclick="show(1)">1 Brutalist</button>
+  <button class="nav-btn" onclick="show(2)">2 Terminal</button>
+  <button class="nav-btn" onclick="show(3)">3 Editorial</button>
+  <button class="nav-btn" onclick="show(4)">4 Neon Arcade</button>
+  <button class="nav-btn" onclick="show(5)">5 Swiss Grid</button>
+  <button class="nav-btn" onclick="show(6)">6 Polaroid</button>
+  <button class="nav-btn" onclick="show(7)">7 Kanban</button>
+  <button class="nav-btn" onclick="show(8)">8 Newspaper</button>
+  <button class="nav-btn" onclick="show(9)">9 Dark Minimal</button>
+  <button class="nav-btn" onclick="show(10)">10 Game Map</button>
+  <button class="nav-btn psychedelic" onclick="show(11)">11 Lava Lamp</button>
+  <button class="nav-btn psychedelic" onclick="show(12)">12 Tarot</button>
+  <button class="nav-btn psychedelic" onclick="show(13)">13 Mycelium</button>
+  <button class="nav-btn psychedelic" onclick="show(14)">14 Vinyl Crates</button>
+  <button class="nav-btn psychedelic" onclick="show(15)">15 Stained Glass</button>
+  <button class="nav-btn pro" onclick="show(16)">16 VC Deck</button>
+  <button class="nav-btn pro" onclick="show(17)">17 Bloomberg</button>
+  <button class="nav-btn pro" onclick="show(18)">18 Case Study</button>
+  <button class="nav-btn pro" onclick="show(19)">19 Agency Roster</button>
+  <button class="nav-btn pro" onclick="show(20)">20 Annual Report</button>
+</div>
+
+<!-- CONCEPT 1 -->
+<div class="concept active" id="c1">
+  <div class="c1-header"><h1>PROJECTS</h1><p>12 works &bull; elettro studio &bull; 2024–25</p></div>
+  <div class="c1-filter">
+    <button class="c1-tag on" onclick="c1Filter(this,'all')">ALL</button>
+    <button class="c1-tag" onclick="c1Filter(this,'web')">WEB</button>
+    <button class="c1-tag" onclick="c1Filter(this,'brand')">BRAND</button>
+    <button class="c1-tag" onclick="c1Filter(this,'music')">MUSIC</button>
+    <button class="c1-tag" onclick="c1Filter(this,'tool')">TOOLS</button>
+  </div>
+  <div class="c1-grid" id="c1grid"></div>
+</div>
+
+<!-- CONCEPT 2 -->
+<div class="concept" id="c2">
+  <div class="c2-shell">
+    <div class="c2-bar">
+      <div class="c2-dot c2-d1"></div><div class="c2-dot c2-d2"></div><div class="c2-dot c2-d3"></div>
+      <span class="c2-title-bar">dean@elettro ~ projects</span>
+    </div>
+    <div class="c2-body">
+      <div class="c2-line"><span class="c2-prompt">dean@elettro</span><span class="c2-output">:</span><span class="c2-magenta">~/projects</span><span class="c2-output">$ </span><span class="c2-cmd">ls -la --with-preview</span></div>
+      <div id="c2-list"></div>
+      <div class="c2-input-row">
+        <span class="c2-prompt">dean@elettro</span><span class="c2-output">:</span><span class="c2-magenta">~/projects</span><span class="c2-output">$ </span>
+        <input class="c2-input" id="c2input" placeholder="filter by category or project name..." />
+        <div class="c2-cursor"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONCEPT 3 -->
+<div class="concept" id="c3">
+  <div class="c3-masthead"><h1>Elettro Studio</h1><span class="c3-issue">Vol. IV &mdash; Spring 2025 &mdash; Portfolio</span></div>
+  <div class="c3-big-title"><h2>Selected<br><em>Works</em> &amp;<br>Projects</h2></div>
+  <div class="c3-layout">
+    <div class="c3-main" id="c3-main"></div>
+    <div class="c3-divider"></div>
+    <div class="c3-sidebar" id="c3-side"></div>
+  </div>
+</div>
+
+<!-- CONCEPT 4 -->
+<div class="concept" id="c4">
+  <div class="c4-header"><h1>PROJECT VAULT</h1><p>SELECT YOUR MISSION &bull; ELETTRO STUDIO &bull; 2025</p></div>
+  <div class="c4-filter">
+    <button class="c4-ftag on" onclick="c4Filter(this,'all')">ALL SECTORS</button>
+    <button class="c4-ftag" onclick="c4Filter(this,'web')">WEB</button>
+    <button class="c4-ftag" onclick="c4Filter(this,'brand')">BRAND</button>
+    <button class="c4-ftag" onclick="c4Filter(this,'music')">MUSIC</button>
+    <button class="c4-ftag" onclick="c4Filter(this,'tool')">TOOLS</button>
+  </div>
+  <div class="c4-grid" id="c4grid"></div>
+</div>
+
+<!-- CONCEPT 5 -->
+<div class="concept" id="c5">
+  <div class="c5-header"><h1>Work</h1><div class="c5-header-right">Elettro Studio<br>Plantation, Florida<br>2024 — 2025</div></div>
+  <div class="c5-categories">
+    <button class="c5-cat-tab on" onclick="c5Filter(this,'all')">All</button>
+    <button class="c5-cat-tab" onclick="c5Filter(this,'web')">Web</button>
+    <button class="c5-cat-tab" onclick="c5Filter(this,'brand')">Brand</button>
+    <button class="c5-cat-tab" onclick="c5Filter(this,'music')">Music</button>
+    <button class="c5-cat-tab" onclick="c5Filter(this,'tool')">Tools</button>
+  </div>
+  <div class="c5-list" id="c5list"></div>
+</div>
+
+<!-- CONCEPT 6 -->
+<div class="concept" id="c6">
+  <div class="c6-title">The Studio Wall</div>
+  <div class="c6-wall" id="c6wall"></div>
+</div>
+
+<!-- CONCEPT 7 -->
+<div class="concept" id="c7">
+  <div class="c7-header"><h1>Project Pipeline</h1><span>Elettro Studio &bull; Q2 2025</span></div>
+  <div class="c7-board" id="c7board"></div>
+</div>
+
+<!-- CONCEPT 8 -->
+<div class="concept" id="c8">
+  <div class="c8-flag"><h1>The Elettro Gazette</h1><span>SPRING EDITION &bull; PLANTATION, FL</span></div>
+  <div class="c8-ticker"><div class="c8-ticker-inner" id="c8ticker"></div></div>
+  <div class="c8-cols">
+    <div class="c8-col" id="c8-col1"></div>
+    <div class="c8-col-div"></div>
+    <div class="c8-col" id="c8-col2"></div>
+    <div class="c8-col-div"></div>
+    <div class="c8-col" id="c8-col3"></div>
+  </div>
+</div>
+
+<!-- CONCEPT 9 -->
+<div class="concept" id="c9">
+  <div class="c9-header"><h1>Studio Work.</h1><p>Creative production &amp; digital strategy</p></div>
+  <div class="c9-filter">
+    <button class="c9-ftag on" onclick="c9Filter(this,'all')">All</button>
+    <button class="c9-ftag" onclick="c9Filter(this,'web')">Web</button>
+    <button class="c9-ftag" onclick="c9Filter(this,'brand')">Brand</button>
+    <button class="c9-ftag" onclick="c9Filter(this,'music')">Music</button>
+    <button class="c9-ftag" onclick="c9Filter(this,'tool')">Tools</button>
+  </div>
+  <div class="c9-grid" id="c9grid"></div>
+</div>
+
+<!-- CONCEPT 10 -->
+<div class="concept" id="c10">
+  <div class="c10-header"><h1>PROJECT MAP</h1><p>Navigate your creative world</p></div>
+  <div class="c10-map" id="c10map"><svg class="c10-path-svg" id="c10svg"></svg></div>
+  <div class="c10-legend">
+    <div class="c10-leg-item"><div class="c10-leg-dot" style="background:#2d9cdb"></div>Web</div>
+    <div class="c10-leg-item"><div class="c10-leg-dot" style="background:#e2994a"></div>Brand</div>
+    <div class="c10-leg-item"><div class="c10-leg-dot" style="background:#c651b0"></div>Music</div>
+    <div class="c10-leg-item"><div class="c10-leg-dot" style="background:#45b369"></div>Tool</div>
+  </div>
+  <div class="c10-tooltip" id="c10tip"></div>
+</div>
+
+<!-- CONCEPT 11 -->
+<div class="concept" id="c11">
+  <div class="c11-header"><h1>The Blob Vault</h1><div class="c11-sub">hover to explore &bull; elettro studio &bull; 2025</div></div>
+  <div class="c11-blob-field" id="c11field"></div>
+</div>
+
+<!-- CONCEPT 12 -->
+<div class="concept" id="c12">
+  <div class="c12-header"><h1>The Tarot of Works</h1><p>a reading of all projects &bull; pull your card</p></div>
+  <div class="c12-spread" id="c12spread"></div>
+</div>
+
+<!-- CONCEPT 13 -->
+<div class="concept" id="c13">
+  <div class="c13-header"><h1>Mycelium</h1><p>the underground network of works</p></div>
+  <div class="c13-canvas-wrap" id="c13wrap"><canvas id="c13canvas"></canvas></div>
+  <div class="c13-legend">
+    <div class="c13-leg"><div class="c13-leg-dot" style="background:#22c55e"></div>live</div>
+    <div class="c13-leg"><div class="c13-leg-dot" style="background:#f59e0b"></div>in progress</div>
+    <div class="c13-leg"><div class="c13-leg-dot" style="background:#a855f7"></div>concept</div>
+  </div>
+  <div id="c13nodes"></div>
+</div>
+
+<!-- CONCEPT 14 -->
+<div class="concept" id="c14">
+  <div class="c14-header"><h1>The Crates</h1><p>dig through the archive &bull; elettro studio</p></div>
+  <div class="c14-crates" id="c14crates"></div>
+</div>
+
+<!-- CONCEPT 15 -->
+<div class="concept" id="c15">
+  <div class="c15-header"><h1>The Cathedral Window</h1><p>each pane a project &bull; hover to illuminate</p></div>
+  <div class="c15-window-wrap" id="c15wrap" style="height:530px"></div>
+</div>
+
+<!-- CONCEPT 16 — VC PITCH DECK -->
+<div class="concept" id="c16">
+  <div class="c16-topbar">
+    <div class="c16-logo">elettro<span>.</span>studio</div>
+    <div class="c16-meta">Investor Portfolio Review &bull; Q2 2025 &bull; Plantation, FL</div>
+  </div>
+  <div class="c16-hero">
+    <div class="c16-hero-left">
+      <h2>Building the<br><span>Future</span> of<br>Digital.</h2>
+      <p>A portfolio of 12 live digital products across web, brand, music, and AI tooling — each shipped with measurable outcomes.</p>
+    </div>
+    <div class="c16-hero-stats" id="c16stats"></div>
+  </div>
+  <div class="c16-section">
+    <div class="c16-section-head">
+      <div class="c16-section-title">Portfolio Companies</div>
+      <div class="c16-section-count">12 projects</div>
+    </div>
+    <div class="c16-deck" id="c16deck"></div>
+  </div>
+</div>
+
+<!-- CONCEPT 17 — BLOOMBERG TERMINAL -->
+<div class="concept" id="c17">
+  <div class="c17-header">
+    <div class="c17-header-title">ELETTRO&lt;GO&gt; PROJECT TERMINAL</div>
+    <div class="c17-header-right" id="c17clock">LOADING...</div>
+  </div>
+  <div class="c17-ticker-bar"><div class="c17-ticker-scroll" id="c17ticker"></div></div>
+  <div class="c17-grid">
+    <div class="c17-main">
+      <div class="c17-panel-head"><span>PORTFOLIO MONITOR — ALL POSITIONS</span><span id="c17date">2025-05-11</span></div>
+      <table class="c17-table">
+        <thead><tr>
+          <th>PREVIEW</th><th>PROJECT</th><th>CAT</th><th>STATUS</th><th>PROGRESS</th><th>COMP%</th><th>DATE</th>
+        </tr></thead>
+        <tbody id="c17body"></tbody>
+      </table>
+    </div>
+    <div class="c17-sidebar" id="c17sidebar"></div>
+  </div>
+</div>
+
+<!-- CONCEPT 18 — CASE STUDY LONG-FORM -->
+<div class="concept" id="c18">
+  <div class="c18-nav" id="c18nav"></div>
+  <div class="c18-hero">
+    <div class="c18-hero-eyebrow">Elettro Studio &bull; Selected Work &bull; 2024–2025</div>
+    <div class="c18-hero-title">Work that moves<br>the needle.</div>
+    <div class="c18-hero-sub">Every project below was shipped, measured, and iterated. No spec docs gathering dust.</div>
+  </div>
+  <div class="c18-body">
+    <div class="c18-main" id="c18main"></div>
+    <div class="c18-aside" id="c18aside"></div>
+  </div>
+</div>
+
+<!-- CONCEPT 19 — AGENCY TALENT ROSTER -->
+<div class="concept" id="c19">
+  <div class="c19-header">
+    <h1>The<br>Roster.</h1>
+    <div class="c19-header-right">
+      <p>Elettro Studio<br>Plantation, Florida<br>2024 — 2025<br>12 active projects</p>
+    </div>
+  </div>
+  <div class="c19-filters">
+    <button class="c19-ftag on" onclick="c19Filter(this,'all')">All</button>
+    <button class="c19-ftag" onclick="c19Filter(this,'web')">Web</button>
+    <button class="c19-ftag" onclick="c19Filter(this,'music')">Music</button>
+    <button class="c19-ftag" onclick="c19Filter(this,'tool')">Tools</button>
+    <button class="c19-ftag" onclick="c19Filter(this,'video')">Video</button>
+  </div>
+  <div class="c19-roster" id="c19roster"></div>
+</div>
+
+<!-- CONCEPT 20 — ANNUAL REPORT -->
+<div class="concept" id="c20">
+  <div class="c20-cover">
+    <div class="c20-cover-left">
+      <div class="c20-cover-eyebrow">Elettro Studio &bull; Annual Portfolio Review</div>
+      <div class="c20-cover-title">Annual<br><em>Report</em><br>2025</div>
+      <div class="c20-cover-sub">Twelve projects. Four disciplines. One studio building digital infrastructure from Plantation, Florida.</div>
+    </div>
+    <div class="c20-cover-stats" id="c20coverstats"></div>
+  </div>
+  <div class="c20-divider-line"></div>
+  <div class="c20-toc">
+    <div class="c20-toc-label">Contents</div>
+    <div class="c20-toc-items">
+      <span class="c20-toc-item">Featured Work</span>
+      <span class="c20-toc-item">Web</span>
+      <span class="c20-toc-item">Brand</span>
+      <span class="c20-toc-item">Music</span>
+      <span class="c20-toc-item">Tools</span>
+    </div>
+  </div>
+  <div class="c20-section-title">Featured Work</div>
+  <div class="c20-featured-row" id="c20featured"></div>
+  <div class="c20-gold-rule"></div>
+  <div class="c20-section-title">All Projects</div>
+  <div class="c20-grid-section"><div class="c20-small-grid" id="c20grid"></div></div>
+</div>
+
+<script>
+/* ============================================================ DATA ============================================================ */
+const PROJECTS = [
+  { id:1,  name:'Weight Loss Davie',    cat:'web',   desc:'Medical weight loss clinic — GLP-1 / semaglutide / tirzepatide. Provider-led care in Davie, FL serving all of Broward County.', status:'live',    date:'Mar 2025', icon:'🏥', progress:95,  size:'4.2MB', perms:'drwxr-xr-x', bg:'#e8f5e9', ac:'#06b6d4', dbg:'#0e2a30', url:'https://WeightLossDavie.com', img:'https://weightlossdavie.com/images/weight-loss-davie-logo.png', imgfit:'contain', imgbg:'#eaf7f0' },
+  { id:2,  name:'Stashbox Band Site',   cat:'music', desc:'South Florida live band — Rock, Reggae, Blues, Funk. Full tribute shows: Bob Dylan, Sublime, Classic Reggae. Booking, setlists, video hero.', status:'live', date:'Apr 2025', icon:'🎸', progress:90, size:'12MB', perms:'drwxr-xr-x', bg:'#fff3e0', ac:'#f59e0b', dbg:'#2a1a00', url:'https://elettro.github.io/stashbox/', img:'https://elettro.github.io/stashbox/images/branding/Stashbox-Logo-Transparent-RastaColors.png', imgfit:'contain', imgbg:'#1a0e00' },
+  { id:3,  name:'Seascape Resort & Marina', cat:'web', desc:'Waterfront resort in Marathon, Florida Keys. 5 acres, 12 rooms, private dock. GitHub Pages migration, SEO, blog series, booking flow.', status:'live', date:'Feb 2025', icon:'⚓', progress:100, size:'6.8MB', perms:'drwxr-xr-x', bg:'#e3f2fd', ac:'#3b82f6', dbg:'#0a1a30', url:'https://elettro.github.io/seascaperesortmarina', img:'https://www.seascaperesortandmarina.com/images/Seascape-Resort-Marina-Ted-Phone-93-1500x996-1-property-night.jpg', imgfit:'cover', imgbg:'#0a1a30' },
+  { id:4,  name:'Visit West Palm Beach', cat:'web',  desc:'City of West Palm Beach tourism portal — VisitWPB.org. Events, attractions, hotel listings, and visitor information for Palm Beach County.', status:'live', date:'Jan 2025', icon:'🌴', progress:85, size:'8MB', perms:'drwxr-xr-x', bg:'#fce4ec', ac:'#ec4899', dbg:'#280a20', url:'https://VisitWPB.org', img:'', imgfit:'cover', imgbg:'#e8f0f8' },
+  { id:5,  name:'AIO Authority',        cat:'web',   desc:'AI Optimization agency site. Schema markup, voice agents, AI search visibility. Full-stack builds powered by Elettro\'s production studio.', status:'live', date:'Feb 2025', icon:'🤖', progress:100, size:'3MB', perms:'drwxr-xr-x', bg:'#e8eaf6', ac:'#6366f1', dbg:'#0a0a30', url:'https://aioauthority.com/', img:'', imgfit:'cover', imgbg:'#0d0d1f' },
+  { id:6,  name:'MBE Initiative',       cat:'web',   desc:'California Bar Exam prep — MBE strategy, study sequencing, Performance Test workshop. Expert-led guidance by John Holtz with video hero.', status:'live', date:'Mar 2025', icon:'⚖️', progress:100, size:'2.4MB', perms:'drwxr-xr-x', bg:'#fff8e1', ac:'#f59e0b', dbg:'#1a1000', url:'https://elettro.github.io/mbeinitiative', img:'https://elettro.github.io/mbeinitiative/images/johnholtz1.jpg', imgfit:'cover', imgbg:'#1a1000' },
+  { id:7,  name:'Manhattan Services',   cat:'web',   desc:'NYC service directory for apartment help, pet care, city issue guidance, and business marketing support across Manhattan neighborhoods.', status:'live', date:'Jan 2025', icon:'🗽', progress:90, size:'2.1MB', perms:'drwxr-xr-x', bg:'#e3f2fd', ac:'#1565c0', dbg:'#040d1a', url:'https://elettro.github.io/manhattanservices', img:'', imgfit:'cover', imgbg:'#060e1a' },
+  { id:8,  name:'LongPole 4 Life',      cat:'web',   desc:'Non-profit helping lacrosse players afford required safety equipment — chest protectors, helmets. Donations, merch, Logan Weiss mission.', status:'live', date:'Dec 2024', icon:'🥍', progress:100, size:'1.5MB', perms:'drwxr-xr-x', bg:'#e8f5e9', ac:'#43a047', dbg:'#001a08', url:'https://LongPole4Life.com', img:'https://LongPole4Life.com/images/Longpole-4-Life-logo-sm.png.webp', imgfit:'contain', imgbg:'#e8f5e9' },
+  { id:9,  name:'Nadja Atwal',          cat:'brand', desc:'Cinematic one-page site for media strategist & podcast host Nadja Atwal — Perceived Reality podcast. Top-tier PR, interviews, Apple Podcasts.', status:'live', date:'Apr 2025', icon:'🎙️', progress:100, size:'3.2MB', perms:'drwxr-xr-x', bg:'#f3e5f5', ac:'#9c27b0', dbg:'#1a0a28', url:'https://NadjaAtwal.net', img:'https://nadjaatwal.net/images/nadja-wallstreet.jpg', imgfit:'cover', imgbg:'#1a0a28' },
+  { id:10, name:'The Ras Box',          cat:'music', desc:'Bold weed rap, reggae, rock, country, and comedy music artist — blending satire, groove, and uncensored creativity. Full site with videos, merch.', status:'live', date:'Mar 2025', icon:'🎵', progress:95, size:'5MB', perms:'drwxr-xr-x', bg:'#fff3e0', ac:'#e65100', dbg:'#1a0800', url:'https://TheRasBox.com', img:'https://therasbox.com/images/1-TheRasBoxLogo-1.png', imgfit:'contain', imgbg:'#1a0800' },
+  { id:11, name:'Piano Music Soothing', cat:'music', desc:'Peaceful piano music project — calming compositions, soothing AI artwork by Stashbox. Designed for relaxation, focus, sleep, and creativity.', status:'live', date:'Feb 2025', icon:'🎹', progress:100, size:'2MB', perms:'drwxr-xr-x', bg:'#e8eaf6', ac:'#5c6bc0', dbg:'#0a0a20', url:'https://PianoMusicSoothing.com', img:'', imgfit:'cover', imgbg:'#0a0a20' },
+  { id:12, name:'Akme Glass Company',   cat:'web',   desc:'Premium custom glass fencing, balcony enclosures, deck railings. Southern California since 1989. CA Licensed Contractor #639052. 100% defect guarantee.', status:'live', date:'Nov 2024', icon:'🪟', progress:100, size:'2.8MB', perms:'drwxr-xr-x', bg:'#e1f5fe', ac:'#0288d1', dbg:'#001828', url:'https://elettro.github.io/akmeglasscompany', img:'http://akmeglasscompany.com/images/upscaled-4x-akmeglass007_jpg (2).jpg', imgfit:'cover', imgbg:'#001828' },
+  { id:13, name:'The Blue Card',        cat:'web',   desc:'Non-profit charity providing financial assistance to destitute Holocaust survivors in the United States. Donations, events, awareness.', status:'live', date:'Jan 2025', icon:'💙', progress:100, size:'4MB', perms:'drwxr-xr-x', bg:'#e3f2fd', ac:'#1976d2', dbg:'#040d1a', url:'https://bluecardfund.org', img:'https://bluecardfund.org/wp-content/uploads/2025/02/cropped-BCfavicon-270x270.png', imgfit:'contain', imgbg:'#e3f2fd' },
+  { id:14, name:'IttyTwit Poll App',    cat:'tool',  desc:'Live multi-select polling app — browse polls, cast votes, see real-time results. Custom-built GitHub Pages progressive web app.', status:'live', date:'Apr 2025', icon:'📊', progress:100, size:'1.1MB', perms:'-rw-r--r--', bg:'#f3e5f5', ac:'#ab47bc', dbg:'#1a0a30', url:'https://elettro.github.io/ittytwit', img:'', imgfit:'cover', imgbg:'#1a0a30' },
+  { id:15, name:'The Man In Me',        cat:'music', desc:'Audio visualizer — Stashbox Does Dylan tribute. Bob Dylan cover with animated visualizer, album artwork, YouTube integration. Studio One FL.', status:'live', date:'Mar 2026', icon:'🎼', progress:100, size:'950KB', perms:'-rw-r--r--', bg:'#fbe9e7', ac:'#f43f5e', dbg:'#200008', url:'https://elettro.github.io/stashbox/themaninme', img:'https://elettro.github.io/stashbox/images/releases/Album-Artwork-StashboxDoesDylan-v2-1.jpg', imgfit:'cover', imgbg:'#200008' },
+  { id:16, name:'Nebula Visualizer',    cat:'tool',  desc:'Browser-based audio visualizer — reactive nebula particle system driven by microphone or audio input. Built with Canvas API.', status:'live', date:'Apr 2025', icon:'🌌', progress:100, size:'400KB', perms:'-rw-r--r--', bg:'#1a0030', ac:'#a855f7', dbg:'#0a0018', url:'https://elettro.github.io/dev/nebula/', img:'', imgfit:'cover', imgbg:'#0a0018' },
+  { id:17, name:'Jon Phillips Testimonial', cat:'video', desc:'Client testimonial video for Jon Phillips — produced for credibility building, Google Ads campaigns, and landing page conversion.', status:'live', date:'Feb 2025', icon:'🎬', progress:100, size:'—', perms:'-rw-r--r--', bg:'#fff8e1', ac:'#f59e0b', dbg:'#1a1000', url:'https://www.youtube.com/watch?v=L_wCyky9fuM', img:'https://img.youtube.com/vi/L_wCyky9fuM/hqdefault.jpg', imgfit:'cover', imgbg:'#1a1000' },
+  { id:18, name:'Slightly Stoopid LED', cat:'video', desc:'Giant LED video production for Slightly Stoopid concert. Large-format stage visuals. Motion design, color grading, crowd-scale delivery.', status:'live', date:'Jan 2025', icon:'💡', progress:100, size:'—', perms:'-rw-r--r--', bg:'#fff3e0', ac:'#ff6f00', dbg:'#1a0800', url:'https://youtu.be/twa-yI5loAQ', img:'https://img.youtube.com/vi/twa-yI5loAQ/hqdefault.jpg', imgfit:'cover', imgbg:'#1a0800' },
+  { id:19, name:'Pink Palm Puff',       cat:'video', desc:'Ecommerce promo video produced from product photography for Pink Palm Puff — lifestyle brand. Social-first format, motion ads pipeline.', status:'live', date:'Dec 2024', icon:'🌸', progress:100, size:'—', perms:'-rw-r--r--', bg:'#fce4ec', ac:'#e91e8c', dbg:'#280a20', url:'https://youtu.be/ATbfh4fptQI', img:'https://img.youtube.com/vi/ATbfh4fptQI/hqdefault.jpg', imgfit:'cover', imgbg:'#280a20' },
+  { id:20, name:'Duck Racing Promo',    cat:'video', desc:'Plastic duck ecommerce promo video — playful brand storytelling, animated product reveal, social-ready format. Produced end-to-end.', status:'live', date:'Nov 2024', icon:'🦆', progress:100, size:'—', perms:'-rw-r--r--', bg:'#fff9c4', ac:'#f9a825', dbg:'#1a1400', url:'https://youtu.be/aQc1acrf8_Y', img:'https://img.youtube.com/vi/aQc1acrf8_Y/hqdefault.jpg', imgfit:'cover', imgbg:'#1a1400' },
+];
+
+const STATUS_COLORS = { live:'#22c55e', wip:'#f59e0b', concept:'#a855f7' };
+
+/* NAV */
+function show(n) {
+  document.querySelectorAll('.concept').forEach(c => c.classList.remove('active'));
+  document.getElementById('c' + n).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach((b,i) => b.classList.toggle('active', i === n-1));
+  if (n === 13) drawMycelium();
+}
+
+/* media helper — uses real image if available, else textured placeholder */
+function mPlaceholder(ac, icon, bg, h='130px', dark=false, p=null) {
+  const imgUrl = p && p.img ? p.img : '';
+  const fit = p && p.imgfit ? p.imgfit : 'cover';
+  const ibg = p && p.imgbg ? p.imgbg : (dark ? '#0a0a0a' : bg);
+  if (imgUrl) {
+    return `<div style="width:100%;height:${h};background:${ibg};position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center">
+      <img src="${imgUrl}" alt="${p?p.name:''}" onerror="this.style.display='none';this.nextSibling.style.display='flex'" style="width:100%;height:100%;object-fit:${fit};object-position:center;display:block">
+      <div style="display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:${ibg}">
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(-30deg,${ac}08 0,${ac}08 1px,transparent 0,transparent 10px)"></div>
+        <div style="font-size:${parseInt(h)>100?'28px':'20px'};position:relative;z-index:1">${icon}</div>
+      </div>
+    </div>`;
+  }
+  const txtColor = dark ? ac : '#888';
+  const bgColor = ibg;
+  return `<div style="width:100%;height:${h};background:${bgColor};display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(-30deg,${ac}08 0,${ac}08 1px,transparent 0,transparent 10px)"></div>
+    <div style="font-size:${parseInt(h)>100?'28px':'20px'};position:relative;z-index:1">${icon}</div>
+    <div style="font-size:8px;letter-spacing:.18em;text-transform:uppercase;font-family:monospace;color:${txtColor};opacity:.5;position:relative;z-index:1">img · video</div>
+  </div>`;
+}
+/* YouTube embed helper */
+function ytEmbed(url, h='130px') {
+  const match = url && url.match(/(?:youtu\.be\/|v=)([a-zA-Z0-9_-]{11})/);
+  if (!match) return '';
+  const vid = match[1];
+  return `<div style="width:100%;height:${h};position:relative;overflow:hidden;background:#000">
+    <iframe src="https://www.youtube.com/embed/${vid}?autoplay=0&mute=1&controls=0&modestbranding=1&rel=0" style="width:100%;height:100%;border:none;display:block" loading="lazy" title="video" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+  </div>`;
+}
+/* smart media — YouTube video for video cat, else image */
+function smartMedia(p, h='130px', dark=false) {
+  if (p.cat === 'video' && p.url && p.url.includes('youtube')) {
+    return ytEmbed(p.url, h);
+  }
+  return mPlaceholder(p.ac, p.icon, p.bg, h, dark, p);
+}
+
+/* ============================================================ C1 BRUTALIST ============================================================ */
+function buildC1(filter='all') {
+  const list = filter === 'all' ? PROJECTS : PROJECTS.filter(p => p.cat === filter);
+  document.getElementById('c1grid').innerHTML = list.map((p,i) => `
+    <div class="c1-card" data-cat="${p.cat}" data-num="${String(p.id).padStart(2,'0')}">
+      <div class="c1-media" style="background:${p.bg};border-bottom:2px solid #111">${smartMedia(p,'130px',false)}</div>
+      <div style="padding:18px 20px 20px">
+        <div class="c1-cat">${p.cat}</div>
+        <div class="c1-title">${p.name.toUpperCase()}</div>
+        <div class="c1-desc">${p.desc}</div>
+        <span class="c1-status c1-${p.status}">${p.status.toUpperCase()}</span>
+      </div>
+    </div>`).join('');
+}
+buildC1();
+function c1Filter(el, f) { document.querySelectorAll('.c1-tag').forEach(t=>t.classList.remove('on')); el.classList.add('on'); buildC1(f); }
+
+/* ============================================================ C2 TERMINAL ============================================================ */
+function buildC2(filter='') {
+  const list = filter ? PROJECTS.filter(p => p.cat===filter || p.name.toLowerCase().includes(filter)) : PROJECTS;
+  const badges = { live:'c2-live-badge', wip:'c2-wip-badge', concept:'c2-archive-badge' };
+  document.getElementById('c2-list').innerHTML = list.map(p => `
+    <div class="c2-project">
+      <div class="c2-thumb" style="background:#111">${smartMedia(p,'90px',true)}</div>
+      <div class="c2-info">
+        <div class="c2-pname">${p.icon} ${p.name}/</div>
+        <div class="c2-pdesc">${p.desc.substring(0,65)}...</div>
+        <span class="c2-pbadge ${badges[p.status]}">${p.status}</span>
+        <span style="font-size:10px;color:#444;font-family:monospace;margin-left:8px">${p.date} · ${p.size}</span>
+      </div>
+    </div>`).join('');
+}
+buildC2();
+document.addEventListener('DOMContentLoaded', () => {
+  const inp = document.getElementById('c2input');
+  if (inp) inp.addEventListener('keydown', e => { if(e.key==='Enter'){ buildC2(inp.value.trim().toLowerCase()); inp.value=''; }});
+});
+
+/* ============================================================ C3 EDITORIAL ============================================================ */
+(function() {
+  document.getElementById('c3-main').innerHTML = PROJECTS.slice(0,3).map(p => `
+    <div class="c3-featured">
+      <div class="c3-feat-media" style="background:${p.bg}">${smartMedia(p,'140px',false)}</div>
+      <div class="c3-kicker">${p.cat} &bull; ${p.date}</div>
+      <div class="c3-headline">${p.icon} ${p.name}</div>
+      <div class="c3-byline">${p.desc}</div>
+    </div>`).join('');
+  document.getElementById('c3-side').innerHTML = `
+    <div style="font-family:'Work Sans',sans-serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#999;border-bottom:1px solid #111;padding-bottom:8px;margin-bottom:16px">Also in this issue</div>
+    ${PROJECTS.slice(3,9).map((p,i) => `
+      <div class="c3-sidebar-item">
+        <div class="c3-s-thumb" style="background:${p.bg}">${p.icon}</div>
+        <div><div class="c3-s-num">${String(i+4).padStart(2,'0')}</div><div class="c3-s-title">${p.name}</div><div class="c3-s-cat">${p.cat}</div></div>
+      </div>`).join('')}`;
+})();
+
+/* ============================================================ C4 NEON ARCADE ============================================================ */
+const C4_ACCENTS = { web:'#00f5ff', brand:'#ff00c8', music:'#ff9500', tool:'#39ff14' };
+function buildC4(filter='all') {
+  const list = filter === 'all' ? PROJECTS : PROJECTS.filter(p => p.cat===filter);
+  document.getElementById('c4grid').innerHTML = list.map(p => `
+    <div class="c4-card" style="--accent:${C4_ACCENTS[p.cat]}">
+      <div class="c4-card-media" style="overflow:hidden">${smartMedia(p,'110px',true)}</div>
+      <div class="c4-card-body">
+        <div class="c4-type">${p.cat}</div>
+        <div class="c4-name">${p.name}</div>
+        <div class="c4-desc">${p.desc.substring(0,65)}...</div>
+        <div class="c4-bar"><div class="c4-fill" style="width:${p.progress}%"></div></div>
+        <div class="c4-prog-label"><span>COMPLETION</span><span>${p.progress}%</span></div>
+      </div>
+    </div>`).join('');
+}
+buildC4();
+function c4Filter(el, f) { document.querySelectorAll('.c4-ftag').forEach(t=>t.classList.remove('on')); el.classList.add('on'); buildC4(f); }
+
+/* ============================================================ C5 SWISS ============================================================ */
+function buildC5(filter='all') {
+  const list = filter==='all' ? PROJECTS : PROJECTS.filter(p=>p.cat===filter);
+  document.getElementById('c5list').innerHTML = list.map((p,i) => `
+    <div class="c5-row">
+      <div class="c5-row-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="c5-thumb" style="background:${p.imgbg||p.bg};width:110px;overflow:hidden">${p.img ? `<img src="${p.img}" style="width:100%;height:100%;object-fit:${p.imgfit||'cover'}" onerror="this.style.display='none'">` : `<span style="font-size:24px">${p.icon}</span>`}</div>
+      <div class="c5-row-info"><h3>${p.icon} ${p.name}</h3><p>${p.desc.substring(0,60)}...</p></div>
+      <div class="c5-row-tag">${p.cat}</div>
+      <div class="c5-row-date">${p.date}</div>
+      <div><span class="c5-pill pill-${p.status}">${p.status}</span></div>
+    </div>`).join('');
+}
+buildC5();
+function c5Filter(el,f){document.querySelectorAll('.c5-cat-tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');buildC5(f);}
+
+/* ============================================================ C6 POLAROID ============================================================ */
+(function() {
+  const BG = ['#ffe4e4','#e4f0ff','#e4ffe8','#fff5e4','#f0e4ff','#e4fffd','#ffece4'];
+  document.getElementById('c6wall').innerHTML = PROJECTS.map((p,i) => {
+    const rot = (((i*7+3)%20)-10)*0.8;
+    const photoContent = p.img
+      ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:${p.imgfit||'cover'};display:block" onerror="this.style.display='none'">`
+      : `<div style="font-size:36px">${p.icon}</div><div style="font-size:7px;color:#bbb;letter-spacing:.1em;font-family:monospace">img · vid</div>`;
+    return `<div class="c6-polaroid" style="--rot:${rot}deg">
+      <div class="c6-photo" style="background:${p.imgbg||p.bg};overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column">${photoContent}</div>
+      <div class="c6-pname">${p.name}</div>
+      <div class="c6-pcat">${p.cat} &bull; ${p.date}</div>
+    </div>`;
+  }).join('');
+})();
+
+/* ============================================================ C7 KANBAN ============================================================ */
+(function() {
+  const COLS = [
+    {id:'concept',label:'Concept',color:'#8844cc'},{id:'wip',label:'In Progress',color:'#e88000'},
+    {id:'live',label:'Live',color:'#1a9c2a'},{id:'archive',label:'Archive',color:'#888'}
+  ];
+  const AVC = ['#3498db','#e74c3c','#2ecc71','#9b59b6','#f39c12','#1abc9c'];
+  document.getElementById('c7board').innerHTML = COLS.map(col => {
+    const cards = PROJECTS.filter(p => p.status===col.id || (col.id==='archive' && !['concept','wip','live'].includes(p.status)));
+    return `<div>
+      <div class="c7-col-header">
+        <div class="c7-col-dot" style="background:${col.color}"></div>
+        <span class="c7-col-name" style="color:${col.color}">${col.label}</span>
+        <span class="c7-col-count">${cards.length}</span>
+      </div>
+      ${cards.map((p,i) => `<div class="c7-card" style="--dot-c:${col.color}">
+        <div class="c7-card-img" style="overflow:hidden">${smartMedia(p,'80px',false)}</div>
+        <div class="c7-card-body">
+          <div class="c7-card-type">${p.cat}</div>
+          <div class="c7-card-name">${p.name}</div>
+          <div class="c7-card-footer">
+            <div class="c7-avatar" style="background:${AVC[i%AVC.length]}">${p.name[0]}</div>
+            <div class="c7-card-date">${p.date}</div>
+          </div>
+        </div>
+      </div>`).join('')}
+    </div>`;
+  }).join('');
+})();
+
+/* ============================================================ C8 NEWSPAPER ============================================================ */
+(function() {
+  const items = PROJECTS.map(p=>`<span class="c8-tick-item">${p.icon} ${p.name.toUpperCase()} <span style="color:rgba(255,255,255,.4)">◆</span></span>`).join('');
+  document.getElementById('c8ticker').innerHTML = items + items;
+  const heads = ['Digital Works','Brand & Identity','Music & Tools'];
+  [[0,1,2,3],[4,5,6,7],[8,9,10,11]].forEach((idxs, ci) => {
+    document.getElementById('c8-col'+(ci+1)).innerHTML = `
+      <div class="c8-col-head">${heads[ci]}</div>
+      ${idxs.map(i => PROJECTS[i] ? `
+        <div class="c8-story">
+          <div class="c8-story-img" style="overflow:hidden">${smartMedia(PROJECTS[i],'90px',false)}</div>
+          <span class="c8-tag">${PROJECTS[i].cat}</span>
+          <div class="c8-s-hed">${PROJECTS[i].icon} ${PROJECTS[i].name}</div>
+          <div class="c8-s-deck">${PROJECTS[i].desc.substring(0,70)}...</div>
+        </div>` : '').join('')}`;
+  });
+})();
+
+/* ============================================================ C9 DARK MINIMAL ============================================================ */
+function buildC9(filter='all') {
+  const list = filter==='all' ? PROJECTS : PROJECTS.filter(p=>p.cat===filter);
+  document.getElementById('c9grid').innerHTML = list.map(p => `
+    <div class="c9-card">
+      <div class="c9-card-img" style="overflow:hidden">${smartMedia(p,'130px',true)}</div>
+      <div class="c9-card-body">
+        <div class="c9-name">${p.name}</div>
+        <div class="c9-desc">${p.desc}</div>
+        <div class="c9-learn"><a href="${p.url||'#'}" target="_blank" style="color:#2997ff;text-decoration:none">View project &rsaquo;</a></div>
+      </div>
+    </div>`).join('');
+}
+buildC9();
+function c9Filter(el,f){document.querySelectorAll('.c9-ftag').forEach(t=>t.classList.remove('on'));el.classList.add('on');buildC9(f);}
+
+/* ============================================================ C10 GAME MAP ============================================================ */
+(function() {
+  const catColors = { web:'#2d9cdb', brand:'#e2994a', music:'#c651b0', tool:'#45b369' };
+  const positions = [
+    {x:50,y:15},{x:18,y:30},{x:80,y:28},{x:42,y:40},{x:65,y:52},
+    {x:25,y:58},{x:55,y:70},{x:82,y:65},{x:12,y:75},{x:70,y:82},
+    {x:38,y:85},{x:90,y:45}
+  ];
+  const map = document.getElementById('c10map');
+  const svg = document.getElementById('c10svg');
+  const conns = [[0,1],[0,2],[1,3],[2,4],[3,5],[4,6],[5,6],[6,7],[5,8],[7,9],[8,10],[9,11],[3,4],[6,9]];
+  svg.innerHTML = conns.map(([a,b]) => {
+    const pa=positions[a], pb=positions[b];
+    return `<line x1="${pa.x}%" y1="${pa.y}%" x2="${pb.x}%" y2="${pb.y}%" stroke="#2d6a4f" stroke-width="2" stroke-dasharray="4,4" opacity="0.5"/>`;
+  }).join('');
+  const tip = document.getElementById('c10tip');
+  map.innerHTML += PROJECTS.map((p,i) => {
+    const pos=positions[i], col=catColors[p.cat];
+    return `<div class="c10-node" style="left:${pos.x}%;top:${pos.y}%" onmousemove="showTip(event,${p.id})" onmouseleave="hideTip()">
+      <div class="c10-bubble" style="background:${col}22;border-color:${col}">${p.icon}</div>
+      <div class="c10-node-label">${p.name.split(' ').slice(0,2).join(' ')}</div>
+      <div class="c10-node-sub">${p.cat}</div>
+    </div>`;
+  }).join('');
+})();
+function showTip(e,id){const p=PROJECTS.find(x=>x.id===id),t=document.getElementById('c10tip');t.innerHTML=`<div class="c10-tt-name">${p.icon} ${p.name}</div><div class="c10-tt-desc">${p.desc}</div>`;t.classList.add('show');t.style.left=(e.clientX+14)+'px';t.style.top=(e.clientY-10)+'px';}
+function hideTip(){document.getElementById('c10tip').classList.remove('show');}
+
+/* ============================================================ C11 LAVA LAMP ============================================================ */
+(function() {
+  const positions = [
+    {x:16,y:14},{x:50,y:10},{x:82,y:16},{x:10,y:36},{x:38,y:32},
+    {x:66,y:28},{x:88,y:40},{x:20,y:58},{x:52,y:56},{x:78,y:60},
+    {x:14,y:80},{x:50,y:78}
+  ];
+  const sizes = [110,128,108,118,134,120,106,124,114,128,110,120];
+  const durs  = ['5.2s','6.8s','4.9s','7.3s','5.7s','6.1s','4.6s','7.8s','5.4s','6.5s','5.0s','6.3s'];
+  const dys   = ['-14px','-18px','-12px','-16px','-20px','-14px','-10px','-18px','-15px','-17px','-12px','-19px'];
+  document.getElementById('c11field').innerHTML = PROJECTS.map((p,i) => `
+    <div class="c11-blob-wrap" style="left:${positions[i].x}%;top:${positions[i].y+8}%">
+      <div class="c11-blob" style="width:${sizes[i]}px;height:${sizes[i]}px;background:${p.ac}18;border-color:${p.ac}55;--dur:${durs[i]};--dy:${dys[i]}">
+        <div class="c11-blob-icon">${p.icon}</div>
+        <div class="c11-blob-status" style="background:${STATUS_COLORS[p.status]}"></div>
+      </div>
+      <div class="c11-blob-name" style="color:${p.ac}">${p.name.split(' ').slice(0,2).join(' ')}</div>
+      <div class="c11-card-popup">
+        <div class="c11-popup-name">${p.name}</div>
+        <div style="font-size:10px;color:#9966cc;margin-bottom:4px;letter-spacing:.1em;text-transform:uppercase">${p.cat} &bull; ${p.date}</div>
+        <div>${p.desc}</div>
+        <div style="margin-top:6px;font-size:9px;color:${STATUS_COLORS[p.status]};letter-spacing:.15em;text-transform:uppercase">${p.status}</div>
+      </div>
+    </div>`).join('');
+})();
+
+/* ============================================================ C12 TAROT ============================================================ */
+(function() {
+  const palettes = [
+    ['#1a0030','#6600cc'],['#001a10','#00cc66'],['#1a0a00','#cc6600'],
+    ['#001030','#0066cc'],['#1a001a','#cc00cc'],['#0a1a00','#66cc00'],
+    ['#1a1000','#cc9900'],['#001a1a','#00cccc'],['#0a0020','#9900cc'],
+    ['#1a0010','#cc0066'],['#001a08','#00cc44'],['#100a1a','#7700cc']
+  ];
+  const arcana = ['The High Priestess','The Magician','The Star','The Moon','The Sun',
+    'Wheel of Fortune','The World','The Tower','The Empress','The Hermit','Judgement','The Fool'];
+  document.getElementById('c12spread').innerHTML = PROJECTS.map((p,i) => {
+    const [bg,tx]=palettes[i];
+    return `<div class="c12-card">
+      <div class="c12-card-inner">
+        <div class="c12-card-back" style="background:${bg}">
+          <div class="c12-card-deco" style="background:repeating-linear-gradient(45deg,${tx}22 0,${tx}22 1px,transparent 0,transparent 50%);background-size:12px 12px"></div>
+          <div class="c12-card-media">
+            <div class="c12-card-media-icon">${p.icon}</div>
+            <div class="c12-card-media-label" style="color:${tx}">img · video</div>
+          </div>
+          <div style="position:absolute;top:5px;left:0;right:0;text-align:center;font-size:8px;font-family:Georgia,serif;color:${tx}88;letter-spacing:.3em">✦ ✦ ✦</div>
+          <div style="position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:8px;font-family:Georgia,serif;color:${tx}88;letter-spacing:.3em">✦ ✦ ✦</div>
+        </div>
+        <div class="c12-card-foot">
+          <div class="c12-card-num" style="color:${tx}66">${String(i).padStart(2,'0')} &bull; ${p.cat.toUpperCase()}</div>
+          <div class="c12-card-name">${p.name}</div>
+          <div class="c12-card-arc">${arcana[i]}</div>
+          <div style="margin-top:5px;width:7px;height:7px;border-radius:50%;background:${STATUS_COLORS[p.status]};margin-left:auto;margin-right:auto"></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+})();
+
+/* ============================================================ C13 MYCELIUM ============================================================ */
+const MYCEL_POS = [
+  {x:.15,y:.12},{x:.50,y:.08},{x:.82,y:.14},
+  {x:.08,y:.38},{x:.38,y:.32},{x:.65,y:.28},{x:.90,y:.36},
+  {x:.20,y:.58},{x:.50,y:.55},{x:.76,y:.60},
+  {x:.12,y:.80},{x:.50,y:.78}
+];
+const MYCEL_CONN = [[0,1],[1,2],[0,3],[1,4],[2,5],[2,6],[3,4],[4,5],[5,6],[3,7],[4,8],[5,8],[6,9],[7,8],[8,9],[7,10],[8,10],[9,11],[10,11],[1,8]];
+
+function drawMycelium() {
+  const wrap = document.getElementById('c13wrap');
+  const canvas = document.getElementById('c13canvas');
+  if (!wrap || !canvas) return;
+  const W = wrap.offsetWidth || 720;
+  const H = 560;
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+  MYCEL_CONN.forEach(([a,b]) => {
+    const pa=MYCEL_POS[a], pb=MYCEL_POS[b];
+    const x1=pa.x*W, y1=pa.y*H, x2=pb.x*W, y2=pb.y*H;
+    const mx=(x1+x2)/2+(Math.random()-.5)*60, my=(y1+y2)/2+(Math.random()-.5)*60;
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    ctx.quadraticCurveTo(mx,my,x2,y2);
+    const grad=ctx.createLinearGradient(x1,y1,x2,y2);
+    grad.addColorStop(0,'rgba(77,255,145,.1)');
+    grad.addColorStop(.5,'rgba(77,255,145,.4)');
+    grad.addColorStop(1,'rgba(77,255,145,.1)');
+    ctx.strokeStyle=grad; ctx.lineWidth=.9; ctx.stroke();
+  });
+  /* render nodes on top of canvas via positioned divs */
+  const existing = document.getElementById('c13nodesinner');
+  if (!existing) {
+    const container = document.createElement('div');
+    container.id = 'c13nodesinner';
+    container.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none';
+    PROJECTS.forEach((p,i) => {
+      const pos=MYCEL_POS[i], sz=i%3===0?60:i%3===1?52:44;
+      const node=document.createElement('div');
+      node.className='c13-node';
+      node.style.cssText=`left:${pos.x*100}%;top:${pos.y*100}%;pointer-events:auto`;
+      node.innerHTML=`<div class="c13-node-bubble" style="width:${sz}px;height:${sz}px;background:${p.ac}14">
+        <div class="c13-node-icon">${p.icon}</div>
+        <div style="font-size:7px;color:#1a5a22;font-family:monospace;text-transform:uppercase;letter-spacing:.1em">${p.status}</div>
+      </div>
+      <div class="c13-node-status" style="background:${STATUS_COLORS[p.status]}"></div>
+      <div class="c13-node-label" style="color:${p.ac}">${p.name.split(' ').slice(0,2).join(' ')}</div>`;
+      container.appendChild(node);
+    });
+    wrap.appendChild(container);
+  }
+}
+
+/* ============================================================ C14 VINYL CRATES ============================================================ */
+(function() {
+  const cats = { web:[], brand:[], music:[], tool:[] };
+  PROJECTS.forEach(p => cats[p.cat].push(p));
+  const catColors = { web:'#0ea5e9', brand:'#f97316', music:'#a855f7', tool:'#22c55e' };
+  const sleeveBgs = { web:'#001830', brand:'#200a00', music:'#12002a', tool:'#001808' };
+  document.getElementById('c14crates').innerHTML = Object.entries(cats).map(([cat,items]) => `
+    <div>
+      <div class="c14-crate-label" style="color:${catColors[cat]};border-top-color:${catColors[cat]}44">
+        ▶ ${cat.toUpperCase()} SECTION — ${items.length} records
+      </div>
+      <div class="c14-records">
+        ${items.map(p => `<div class="c14-record">
+          <div class="c14-sleeve" style="background:${sleeveBgs[p.cat]}">
+            <div class="c14-sleeve-media" style="background:${p.ac}18">
+              <div style="position:absolute;inset:0;background:repeating-linear-gradient(-30deg,${p.ac}08 0,${p.ac}08 2px,transparent 0,transparent 8px)"></div>
+              <div class="c14-sleeve-icon">${p.icon}</div>
+              <div class="c14-sleeve-text" style="color:${p.ac}">img · vid</div>
+            </div>
+          </div>
+          <div class="c14-record-label-area">
+            <div class="c14-record-title" style="color:${p.ac}">${p.name.split(' ').slice(0,2).join(' ')}</div>
+            <div class="c14-record-artist">${p.date}</div>
+            <span class="c14-record-badge b-${p.status}">${p.status}</span>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+})();
+
+/* ============================================================ C15 STAINED GLASS ============================================================ */
+(function() {
+  const panels = [
+    {x:0,y:0,w:220,h:180,i:0},{x:220,y:0,w:220,h:180,i:1},{x:440,y:0,w:220,h:180,i:2},
+    {x:0,y:180,w:150,h:190,i:3},{x:150,y:180,w:290,h:90,i:4},{x:440,y:180,w:220,h:95,i:5},
+    {x:150,y:270,w:145,h:100,i:6},{x:295,y:270,w:145,h:100,i:7},{x:440,y:275,w:220,h:95,i:8},
+    {x:0,y:370,w:220,h:160,i:9},{x:220,y:370,w:220,h:160,i:10},{x:440,y:370,w:220,h:160,i:11},
+  ];
+  const palettes = [
+    ['#1a0a30','#cc88ff'],['#001a10','#44ffaa'],['#1a0800','#ff8844'],
+    ['#001428','#4488ff'],['#1a0018','#ff44cc'],['#081a00','#88ff44'],
+    ['#1a1400','#ffcc44'],['#001a1a','#44ffff'],['#0a0018','#aa44ff'],
+    ['#200008','#ff4466'],['#001a06','#44ff88'],['#100018','#8844ff']
+  ];
+  const wrap = document.getElementById('c15wrap');
+  wrap.innerHTML = panels.map((pn,i) => {
+    const p=PROJECTS[pn.i], [bg,tx]=palettes[i];
+    return `<div class="c15-panel" style="left:${pn.x}px;top:${pn.y}px;width:${pn.w-3}px;height:${pn.h-3}px;background:${bg}">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(60deg,${tx}06 0,${tx}06 1px,transparent 0,transparent 14px)"></div>
+      <div class="c15-pane-icon" style="font-size:${pn.h>130?26:18}px">${p.icon}</div>
+      <div class="c15-pane-name" style="color:${tx};font-size:${pn.w>160?10:8}px">${p.name}</div>
+      <div class="c15-cat-badge" style="color:${tx}">${p.cat}</div>
+      <div style="position:absolute;top:5px;right:6px;width:7px;height:7px;border-radius:50%;background:${STATUS_COLORS[p.status]}"></div>
+      <div style="position:absolute;top:5px;left:6px;font-size:7px;font-family:monospace;color:${tx}55;letter-spacing:.1em">img</div>
+    </div>`;
+  }).join('');
+})();
+
+/* ============================================================ C16 VC PITCH DECK ============================================================ */
+(function() {
+  const live = PROJECTS.filter(p=>p.status==='live').length;
+  const wip  = PROJECTS.filter(p=>p.status==='wip').length;
+  document.getElementById('c16stats').innerHTML = [
+    {n: live,              l:'Live Products'},
+    {n: wip,               l:'In Progress'},
+    {n:'5',                l:'Disciplines'},
+    {n: PROJECTS.length,   l:'Total Projects'},
+  ].map(s=>`<div class="c16-stat"><div class="c16-stat-num">${s.n}</div><div class="c16-stat-label">${s.l}</div></div>`).join('');
+
+  document.getElementById('c16deck').innerHTML = PROJECTS.map((p,i)=>`
+    <div class="c16-slide">
+      <div style="position:relative;overflow:hidden;height:140px">${smartMedia(p,'140px',false)}
+        <div style="position:absolute;top:8px;left:10px;font-size:10px;font-weight:600;background:rgba(255,255,255,.85);color:#6b7280;padding:2px 7px;border-radius:3px;font-family:monospace">${String(i+1).padStart(2,'0')}</div>
+        <div style="position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%;background:${STATUS_COLORS[p.status]};box-shadow:0 0 0 2px #fff"></div>
+      </div>
+      <div class="c16-slide-body">
+        <div class="c16-slide-cat">${p.cat}</div>
+        <div class="c16-slide-name">${p.name}</div>
+        <div class="c16-slide-desc">${p.desc.substring(0,72)}...</div>
+        <div class="c16-slide-footer">
+          <span class="c16-pill c16-${p.status}">${p.status}</span>
+          <div class="c16-progress-bar"><div class="c16-progress-fill" style="width:${p.progress}%"></div></div>
+        </div>
+      </div>
+    </div>`).join('');
+})();
+
+/* ============================================================ C17 BLOOMBERG TERMINAL ============================================================ */
+(function() {
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  const tick = () => { const d=new Date(); document.getElementById('c17clock').textContent=`${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} EST  ${d.toISOString().slice(0,10)}`; };
+  tick(); setInterval(tick, 1000);
+
+  const tItems = PROJECTS.map(p=>`<span class="c17-tick">${p.name.toUpperCase()} ${p.progress}% ▲</span>`).join('');
+  document.getElementById('c17ticker').innerHTML = tItems + tItems;
+
+  const statusClass = {live:'c17-td-status-live',wip:'c17-td-status-wip',concept:'c17-td-status-concept'};
+  document.getElementById('c17body').innerHTML = PROJECTS.map(p=>`
+    <tr>
+      <td><div class="c17-media-cell" style="overflow:hidden;background:${p.dbg}">${p.img ? `<img src="${p.img}" style="width:60px;height:40px;object-fit:${p.imgfit||'cover'}" onerror="this.textContent='${p.icon}'">` : p.icon}</div></td>
+      <td class="c17-td-name">${p.name}</td>
+      <td class="c17-td-cat">${p.cat.toUpperCase()}</td>
+      <td class="${statusClass[p.status]}">${p.status.toUpperCase()}</td>
+      <td><div class="c17-bar-mini"><div class="c17-bar-fill" style="width:${p.progress}%"></div></div></td>
+      <td class="c17-td-prog">${p.progress}%</td>
+      <td class="c17-td-date">${p.date}</td>
+    </tr>`).join('');
+
+  const byStatus = s => PROJECTS.filter(p=>p.status===s).length;
+  document.getElementById('c17sidebar').innerHTML = `
+    <div class="c17-sidebar-panel">
+      <div class="c17-sp-title">PORTFOLIO SUMMARY</div>
+      ${[
+        ['TOTAL PROJECTS','12'],
+        ['LIVE',''+byStatus('live')],
+        ['IN PROGRESS',''+byStatus('wip')],
+        ['CONCEPT',''+byStatus('concept')],
+        ['AVG COMPLETION', Math.round(PROJECTS.reduce((a,p)=>a+p.progress,0)/PROJECTS.length)+'%'],
+      ].map(([k,v])=>`<div class="c17-sp-stat"><span class="c17-sp-key">${k}</span><span class="c17-sp-val">${v}</span></div>`).join('')}
+    </div>
+    <div class="c17-sidebar-panel">
+      <div class="c17-sp-title">BY CATEGORY</div>
+      ${['web','brand','music','tool'].map(c=>{
+        const items=PROJECTS.filter(p=>p.cat===c);
+        const avg=Math.round(items.reduce((a,p)=>a+p.progress,0)/items.length);
+        return`<div class="c17-sp-stat"><span class="c17-sp-key">${c.toUpperCase()}</span><span class="c17-sp-val">${items.length} proj · ${avg}% avg</span></div>`;
+      }).join('')}
+    </div>
+    <div class="c17-sidebar-panel">
+      <div class="c17-sp-title">LATEST UPDATES</div>
+      ${PROJECTS.slice(0,5).map(p=>`<div class="c17-sp-stat"><span class="c17-sp-key" style="color:#ffaa44">${p.icon} ${p.name.split(' ')[0]}</span><span class="c17-sp-val">${p.date}</span></div>`).join('')}
+    </div>`;
+})();
+
+/* ============================================================ C18 CASE STUDY ============================================================ */
+(function() {
+  const cats = ['All','Web','Brand','Music','Tools'];
+  document.getElementById('c18nav').innerHTML = cats.map((c,i)=>`<button class="c18-nav-item${i===0?' on':''}" onclick="c18Filter(this,'${c.toLowerCase()}')">${c}</button>`).join('');
+
+  function renderC18(filter) {
+    const list = filter==='all' ? PROJECTS : PROJECTS.filter(p=>p.cat===(filter==='tools'?'tool':filter));
+    document.getElementById('c18main').innerHTML = list.slice(0,4).map(p=>`
+      <div class="c18-case">
+        <div class="c18-case-media" style="overflow:hidden">${smartMedia(p,'200px',false)}
+          <div style="position:absolute;top:12px;left:14px;font-size:10px;font-weight:600;color:#fff;background:rgba(0,0,0,0.5);padding:3px 8px;border-radius:4px;letter-spacing:.08em;text-transform:uppercase">${p.cat} · ${p.date}</div>
+        </div>
+        <div class="c18-case-cat">${p.cat}</div>
+        <div class="c18-case-title">${p.name}</div>
+        <div class="c18-case-body">${p.desc}</div>
+        <div class="c18-case-tags">
+          <span class="c18-tag">${p.status}</span>
+          <span class="c18-tag">${p.date}</span>
+          <span class="c18-tag">${p.progress}% complete</span>
+        </div>
+      </div>`).join('');
+  }
+  renderC18('all');
+  window.c18Filter = function(el, f) {
+    document.querySelectorAll('.c18-nav-item').forEach(b=>b.classList.remove('on'));
+    el.classList.add('on');
+    renderC18(f);
+  };
+
+  document.getElementById('c18aside').innerHTML = `
+    <div class="c18-aside-module">
+      <div class="c18-aside-title">Quick Access</div>
+      ${PROJECTS.slice(4,12).map(p=>`
+        <div class="c18-aside-item">
+          <div class="c18-aside-thumb" style="background:${p.bg}">${p.icon}</div>
+          <div>
+            <div class="c18-aside-name">${p.name}</div>
+            <div class="c18-aside-cat">${p.cat} · <span class="c18-pill-${p.status}">${p.status}</span></div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+})();
+
+/* ============================================================ C19 AGENCY ROSTER ============================================================ */
+const C19_CAT_COLORS = { web:'#38bdf8', brand:'#fb923c', music:'#c084fc', tool:'#4ade80' };
+function buildC19(filter='all') {
+  const list = filter==='all' ? PROJECTS : PROJECTS.filter(p=>p.cat===filter);
+  document.getElementById('c19roster').innerHTML = list.map((p,i)=>`
+    <div class="c19-card" style="--cc:${C19_CAT_COLORS[p.cat]||'#888'}">
+      <div class="c19-card-media" style="position:relative;overflow:hidden;background:${p.dbg}">
+        ${p.img ? `<img src="${p.img}" alt="${p.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:${p.imgfit||'cover'};object-position:center;opacity:0.7" onerror="this.style.display='none'">` : `<div class="c19-card-icon-bg"><div class="c19-card-icon">${p.icon}</div></div>`}
+        <div style="position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.85))"></div>
+        <div class="c19-card-overlay">
+          <div class="c19-card-number">${String(i+1).padStart(2,'0')}</div>
+          <div class="c19-card-overlay-name">${p.name}</div>
+        </div>
+      </div>
+      <div class="c19-card-body">
+        <div class="c19-card-cat">${p.cat}</div>
+        <div class="c19-card-desc">${p.desc.substring(0,75)}...</div>
+        <div class="c19-card-footer">
+          <span class="c19-status-badge c19-${p.status}-b">${p.status}</span>
+          <span class="c19-date-text">${p.date}</span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+buildC19();
+function c19Filter(el,f){document.querySelectorAll('.c19-ftag').forEach(t=>t.classList.remove('on'));el.classList.add('on');buildC19(f);}
+
+/* ============================================================ C20 ANNUAL REPORT ============================================================ */
+(function() {
+  const live = PROJECTS.filter(p=>p.status==='live').length;
+  document.getElementById('c20coverstats').innerHTML = [
+    {n: PROJECTS.length, l:'Total Projects'},
+    {n: live,            l:'Live & Shipped'},
+    {n:'5',              l:'Disciplines'},
+    {n:'2025',           l:'Fiscal Year'},
+  ].map(s=>`<div class="c20-cstat"><div class="c20-cstat-num">${s.n}</div><div class="c20-cstat-label">${s.l}</div></div>`).join('');
+
+  const [f1,f2,f3,...rest] = PROJECTS;
+  document.getElementById('c20featured').innerHTML = `
+    <div class="c20-feat-main">
+      <div class="c20-feat-media" style="height:220px;overflow:hidden">${smartMedia(f1,'220px',false)}</div>
+      <div class="c20-feat-eyebrow">${f1.cat} &bull; ${f1.date}</div>
+      <div class="c20-feat-title">${f1.name}</div>
+      <div class="c20-feat-body">${f1.desc}</div>
+      <div class="c20-feat-date"><a href="${f1.url||'#'}" target="_blank" style="color:#c9a84c;text-decoration:none">${f1.status.toUpperCase()} &rarr; View</a></div>
+    </div>
+    <div class="c20-feat-div"></div>
+    <div style="display:flex;flex-direction:column">
+      <div class="c20-feat-col" style="border-bottom:1px solid #e5e7eb;flex:1">
+        <div class="c20-feat-media" style="height:120px;overflow:hidden">${smartMedia(f2,'120px',false)}</div>
+        <div class="c20-feat-eyebrow">${f2.cat} &bull; ${f2.date}</div>
+        <div class="c20-feat-title" style="font-size:18px">${f2.name}</div>
+        <div class="c20-feat-body">${f2.desc.substring(0,80)}...</div>
+      </div>
+      <div class="c20-feat-col" style="flex:1">
+        <div class="c20-feat-media" style="height:120px;overflow:hidden">${smartMedia(f3,'120px',false)}</div>
+        <div class="c20-feat-eyebrow">${f3.cat} &bull; ${f3.date}</div>
+        <div class="c20-feat-title" style="font-size:18px">${f3.name}</div>
+        <div class="c20-feat-body">${f3.desc.substring(0,80)}...</div>
+      </div>
+    </div>
+    <div class="c20-feat-div"></div>
+    <div class="c20-feat-col">
+      <div class="c20-feat-eyebrow" style="margin-bottom:12px">Also Featured</div>
+      ${rest.slice(0,5).map(p=>`
+        <div style="padding:10px 0;border-bottom:1px solid #f3f4f6;cursor:pointer">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:36px;height:36px;background:${p.imgbg||p.bg};border-radius:4px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center">
+              ${p.img ? `<img src="${p.img}" style="width:36px;height:36px;object-fit:${p.imgfit||'cover'}" onerror="this.style.display='none'">` : `<span style="font-size:18px">${p.icon}</span>`}
+            </div>
+            <div>
+              <div style="font-size:12px;font-family:'Work Sans',sans-serif;font-weight:600;color:#111;margin-bottom:2px">${p.name}</div>
+              <div style="font-size:10px;font-family:'Work Sans',sans-serif;color:#9ca3af;text-transform:uppercase;letter-spacing:.1em">${p.cat}</div>
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+
+  document.getElementById('c20grid').innerHTML = rest.slice(5).map(p=>`
+    <div class="c20-small-item">
+      <div class="c20-small-media" style="overflow:hidden">${smartMedia(p,'90px',false)}</div>
+      <div class="c20-small-eyebrow">${p.cat}</div>
+      <div class="c20-small-title">${p.name}</div>
+    </div>`).join('');
+})();
+
+
+setTimeout(() => { if(document.getElementById('c13').classList.contains('active')) drawMycelium(); }, 100);
+</script>
+</body>
+</html>
