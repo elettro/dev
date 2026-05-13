@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ndless Entertainment — PR & Marketing Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #CC0000;
+  --red-deep: #8B0000;
+  --red-bright: #FF2222;
+  --black: #080808;
+  --black-2: #0d0d0d;
+  --black-3: #111111;
+  --black-4: #1a1a1a;
+  --white: #F5F0EC;
+  --gray: #888888;
+  --gray-dark: #444444;
+  --gray-light: #CCCCCC;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-serif: 'DM Serif Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3 { font-weight: 400; }
+.display { font-family: var(--font-display); letter-spacing: 0.03em; line-height: 0.95; }
+.serif { font-family: var(--font-serif); }
+.label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--red);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* ── PAGE SYSTEM ── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  height: 72px;
+  background: rgba(8,8,8,0.96);
+  border-bottom: 1px solid rgba(204,0,0,0.2);
+  backdrop-filter: blur(12px);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+.nav-logo img {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  color: var(--white);
+}
+
+.logo-text em {
+  color: var(--red);
+  font-style: normal;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav-links a {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-weight: 400;
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+.nav-cta {
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  padding: 10px 24px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.nav-cta:hover { background: var(--red-deep); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 80% 30%, rgba(139,0,0,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(204,0,0,0.08) 0%, transparent 60%);
+}
+
+.hero-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(204,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(204,0,0,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+.hero-year {
+  position: absolute;
+  top: 140px;
+  right: 60px;
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--gray-dark);
+  text-transform: uppercase;
+}
+
+.hero-number {
+  position: absolute;
+  top: 50%;
+  right: 60px;
+  transform: translateY(-60%);
+  font-family: var(--font-display);
+  font-size: 340px;
+  color: rgba(204,0,0,0.04);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 860px; }
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.hero-eyebrow-line {
+  width: 48px;
+  height: 1px;
+  background: var(--red);
+}
+
+.hero-eyebrow span {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 12vw, 160px);
+  line-height: 0.9;
+  color: var(--white);
+  margin-bottom: 40px;
+}
+
+.hero h1 .red { color: var(--red); }
+
+.hero-sub {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+}
+
+.hero-desc {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.8;
+  max-width: 380px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.btn-red {
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  padding: 16px 36px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-red:hover { background: var(--red-deep); }
+.btn-red:active { transform: scale(0.98); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 16px 36px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 400;
+  transition: border-color 0.2s;
+}
+.btn-outline:hover { border-color: rgba(255,255,255,0.5); }
+
+/* HERO STATS BAR */
+.stats-bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 60px;
+}
+
+.stat-item {
+  flex: 1;
+  padding: 32px 0;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.stat-item:last-child { border-right: none; }
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 52px;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+/* ── TICKER ── */
+.ticker {
+  background: var(--red);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-track {
+  display: inline-flex;
+  gap: 0;
+  animation: ticker 28s linear infinite;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+  padding: 0 40px;
+}
+
+.ticker-sep {
+  color: rgba(255,255,255,0.3);
+  margin: 0 0;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── SECTION SHARED ── */
+section {
+  padding: 120px 60px;
+}
+
+section.tight { padding: 80px 60px; }
+
+.section-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 80px;
+  align-items: end;
+}
+
+.section-header.full { grid-template-columns: 1fr; max-width: 700px; }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 0.95;
+  color: var(--white);
+}
+
+.section-desc {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* ── SERVICES PAGE ── */
+.services-intro {
+  background: var(--black-2);
+  border-bottom: 1px solid var(--black-4);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--black-4);
+}
+
+.service-card {
+  background: var(--black-2);
+  padding: 52px 44px;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: var(--red);
+  transition: height 0.4s;
+}
+
+.service-card:hover::before { height: 100%; }
+.service-card:hover { background: #110000; }
+
+.service-number {
+  font-family: var(--font-display);
+  font-size: 80px;
+  color: rgba(204,0,0,0.1);
+  line-height: 1;
+  margin-bottom: -20px;
+  display: block;
+}
+
+.service-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(204,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.service-icon-wrap svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--red);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.service-card h3 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.service-card p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid rgba(204,0,0,0.3);
+  padding: 4px 12px;
+}
+
+/* ── ABOUT PAGE ── */
+.about-hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 120px 60px 80px;
+  background:
+    radial-gradient(ellipse 50% 70% at 100% 0%, rgba(139,0,0,0.2) 0%, transparent 60%),
+    var(--black);
+  border-bottom: 1px solid var(--black-4);
+}
+
+.about-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-big-text {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 7vw, 100px);
+  line-height: 0.92;
+  color: var(--white);
+}
+
+.about-big-text em {
+  color: var(--red);
+  font-style: normal;
+}
+
+.about-body { padding-top: 12px; }
+
+.about-body p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+
+.about-body p strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.about-values {
+  background: var(--black-2);
+  border-top: 1px solid var(--black-4);
+  border-bottom: 1px solid var(--black-4);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--black-4);
+}
+
+.value-card {
+  background: var(--black-2);
+  padding: 48px 36px;
+}
+
+.value-n {
+  font-family: var(--font-display);
+  font-size: 60px;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.value-card h4 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--white);
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+.value-card p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+.about-process { background: var(--black); }
+
+.process-list {
+  border-top: 1px solid var(--black-4);
+}
+
+.process-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--black-4);
+}
+
+.process-num {
+  font-family: var(--font-display);
+  font-size: 48px;
+  color: rgba(204,0,0,0.3);
+}
+
+.process-row h4 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: var(--white);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.process-row p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* ── CONTACT PAGE ── */
+.contact-hero {
+  padding: 160px 60px 80px;
+  background:
+    radial-gradient(ellipse 40% 60% at 0% 50%, rgba(139,0,0,0.15) 0%, transparent 60%),
+    var(--black);
+  border-bottom: 1px solid var(--black-4);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.contact-info h2 {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 7vw, 88px);
+  line-height: 0.92;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+
+.contact-info h2 em {
+  color: var(--red);
+  font-style: normal;
+}
+
+.contact-info p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 48px;
+  max-width: 380px;
+}
+
+.contact-details { margin-top: 48px; }
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--black-4);
+}
+
+.contact-item:first-child { border-top: 1px solid var(--black-4); }
+
+.contact-item-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  text-transform: uppercase;
+  font-weight: 500;
+  min-width: 100px;
+  padding-top: 2px;
+}
+
+.contact-item-val {
+  font-size: 15px;
+  color: var(--white);
+  font-weight: 300;
+}
+
+.contact-form-wrap {
+  background: var(--black-2);
+  border: 1px solid var(--black-4);
+  padding: 52px 44px;
+}
+
+.contact-form-wrap h3 {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: var(--white);
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--black-3);
+  border: 1px solid var(--black-4);
+  color: var(--white);
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--red);
+}
+
+.form-group select option { background: var(--black-3); }
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-submit {
+  width: 100%;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  padding: 18px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.form-submit:hover { background: var(--red-deep); }
+
+/* ── HOME PAGE EXTRAS ── */
+.home-about {
+  background: var(--black);
+}
+
+.home-about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.home-about-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 6vw, 80px);
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+
+.home-about-text h2 em {
+  color: var(--red);
+  font-style: normal;
+}
+
+.home-about-text p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+.home-about-visual {
+  position: relative;
+}
+
+.quote-block {
+  border-left: 3px solid var(--red);
+  padding: 32px 40px;
+  background: var(--black-2);
+}
+
+.quote-block blockquote {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.quote-attr {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--red);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.home-services-preview {
+  background: var(--black-2);
+  border-top: 1px solid var(--black-4);
+  border-bottom: 1px solid var(--black-4);
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--black-4);
+}
+
+.preview-item {
+  background: var(--black-2);
+  padding: 44px 36px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.preview-item:hover { background: #110000; }
+
+.preview-item h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+.preview-item p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.preview-link {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--red);
+  text-transform: uppercase;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.preview-link::after {
+  content: '→';
+  transition: transform 0.2s;
+}
+
+.preview-item:hover .preview-link::after { transform: translateX(4px); }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--red);
+  padding: 80px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.cta-band-text h2 {
+  font-family: var(--font-display);
+  font-size: 56px;
+  color: var(--white);
+  line-height: 0.95;
+  margin-bottom: 12px;
+}
+
+.cta-band-text p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+}
+
+.cta-band-actions {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.btn-white {
+  background: var(--white);
+  color: var(--red);
+  border: none;
+  padding: 16px 36px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+.btn-white:hover { opacity: 0.9; }
+
+.btn-outline-white {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 16px 36px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 400;
+}
+.btn-outline-white:hover { border-color: rgba(255,255,255,0.8); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--black-4);
+  padding: 80px 60px 40px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--black-4);
+}
+
+.footer-brand .logo-text {
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.footer-brand p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.8;
+  max-width: 280px;
+}
+
+.footer-col h5 {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--white);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 13px;
+  color: var(--gray);
+  text-decoration: none;
+  margin-bottom: 14px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover { color: var(--red); }
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-bottom p {
+  font-size: 12px;
+  color: var(--gray-dark);
+}
+
+.social-row {
+  display: flex;
+  gap: 16px;
+}
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--black-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.social-btn:hover { border-color: var(--red); }
+
+.social-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--gray);
+  fill: none;
+  stroke-width: 1.5;
+  transition: stroke 0.2s;
+}
+
+.social-btn:hover svg { stroke: var(--red); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page.active .hero-content,
+.page.active .about-big-text,
+.page.active .contact-info h2 {
+  animation: fadeUp 0.7s ease forwards;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <img src="NDLESS_LOGO.png" alt="Ndless Entertainment" onerror="this.style.display='none'">
+    <span class="logo-text">NDLESS <em>ENTERTAINMENT</em></span>
+  </div>
+  <div class="nav-links">
+    <a onclick="showPage('home')" class="active" id="nav-home">Home</a>
+    <a onclick="showPage('services')" id="nav-services">Services</a>
+    <a onclick="showPage('about')" id="nav-about">About</a>
+    <a onclick="showPage('contact')" id="nav-contact">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="showPage('contact')">Book a Consultation</button>
+</nav>
+
+<!-- ══════════════════════════════════
+     HOME PAGE
+══════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-year">Est. 1994 — Present</div>
+    <div class="hero-number">30</div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span>PR & Marketing Consulting — Music & Entertainment</span>
+      </div>
+      <h1>YOUR<br>STORY.<br><span class="red">AMPLIFIED.</span></h1>
+      <div class="hero-sub">
+        <p class="hero-desc">Premier PR and marketing consulting for the music and entertainment industry. Trusted by artists, labels, and entertainment professionals for over three decades.</p>
+        <div class="hero-actions">
+          <button class="btn-red" onclick="showPage('services')">Our Services</button>
+          <button class="btn-outline" onclick="showPage('contact')">Book a Consultation</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-item" style="padding-left:0">
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Years of experience</div>
+      </div>
+      <div class="stat-item" style="padding-left:40px">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Campaigns launched</div>
+      </div>
+      <div class="stat-item" style="padding-left:40px">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Core service offerings</div>
+      </div>
+      <div class="stat-item" style="padding-left:40px">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Artist-first approach</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ticker -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">PR Campaigns <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Press Releases <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Artist Bios <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">EPK Creation <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Social Media Marketing <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Artist Consultations <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Brand Strategy <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Media Outreach <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">PR Campaigns <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Press Releases <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Artist Bios <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">EPK Creation <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Social Media Marketing <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Artist Consultations <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Brand Strategy <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+      <span class="ticker-item">Media Outreach <span class="ticker-sep">&nbsp;&nbsp;✦&nbsp;&nbsp;</span></span>
+    </div>
+  </div>
+
+  <!-- Home About -->
+  <section class="home-about">
+    <div class="home-about-inner">
+      <div class="home-about-text">
+        <span class="label">Who We Are</span>
+        <h2>Three decades.<br>One <em>mission.</em></h2>
+        <p>Ndless Entertainment has been the behind-the-scenes force for artists and entertainment professionals since 1994. We combine deep industry knowledge with modern marketing strategy to build careers that last.</p>
+        <p>From the first press release to a full campaign rollout, we handle every touchpoint of your public presence — so your story reaches the right people at the right moment.</p>
+        <button class="btn-red" style="margin-top:16px" onclick="showPage('about')">Our Story</button>
+      </div>
+      <div class="home-about-visual">
+        <div class="quote-block">
+          <blockquote>"In this industry, the right story told to the right people at the right moment changes everything. That's what we've been doing for 30 years."</blockquote>
+          <span class="quote-attr">— Ndless Entertainment</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Home Services Preview -->
+  <section class="home-services-preview tight">
+    <div class="section-header full" style="margin-bottom:0; padding-bottom:0;">
+      <span class="label">What We Offer</span>
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px;">
+        <div class="section-title">Full-service<br>PR & marketing</div>
+        <button class="btn-outline" onclick="showPage('services')">All Services →</button>
+      </div>
+    </div>
+    <div class="preview-grid">
+      <div class="preview-item" onclick="showPage('services')">
+        <h3>PR Campaigns</h3>
+        <p>Strategic campaigns that generate coverage and position you as an industry force.</p>
+        <div class="preview-link">Learn more</div>
+      </div>
+      <div class="preview-item" onclick="showPage('services')">
+        <h3>Press Releases & Bios</h3>
+        <p>Professional writing that gets picked up — from album drops to major announcements.</p>
+        <div class="preview-link">Learn more</div>
+      </div>
+      <div class="preview-item" onclick="showPage('services')">
+        <h3>EPK Creation</h3>
+        <p>Polished Electronic Press Kits that give industry professionals everything they need.</p>
+        <div class="preview-link">Learn more</div>
+      </div>
+      <div class="preview-item" onclick="showPage('services')">
+        <h3>Social Media Marketing</h3>
+        <p>Content strategy and platform management that turn followers into loyal fans.</p>
+        <div class="preview-link">Learn more</div>
+      </div>
+      <div class="preview-item" onclick="showPage('services')">
+        <h3>Artist Consultations</h3>
+        <p>One-on-one sessions for emerging and established artists ready to level up.</p>
+        <div class="preview-link">Learn more</div>
+      </div>
+      <div class="preview-item" onclick="showPage('services')">
+        <h3>Brand Strategy</h3>
+        <p>Define your identity and build a brand that resonates across every platform.</p>
+        <div class="preview-link">Learn more</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <div class="cta-band">
+    <div class="cta-band-text">
+      <h2>READY TO MAKE<br>SOME NOISE?</h2>
+      <p>Book a free consultation and let's talk about your next move.</p>
+    </div>
+    <div class="cta-band-actions">
+      <button class="btn-white" onclick="showPage('contact')">Book Free Consultation</button>
+      <button class="btn-outline-white" onclick="showPage('services')">View Services</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-text">NDLESS <em>ENTERTAINMENT</em></span>
+        <p>PR and marketing consulting for the music and entertainment industry. Trusted by artists for over 30 years.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a onclick="showPage('services')">PR Campaigns</a>
+        <a onclick="showPage('services')">Press Releases</a>
+        <a onclick="showPage('services')">Artist Bios</a>
+        <a onclick="showPage('services')">EPK Creation</a>
+        <a onclick="showPage('services')">Social Media</a>
+        <a onclick="showPage('services')">Consultations</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a onclick="showPage('about')">About Us</a>
+        <a onclick="showPage('about')">Our Story</a>
+        <a onclick="showPage('about')">Our Process</a>
+        <a onclick="showPage('contact')">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a onclick="showPage('contact')">Book a Consultation</a>
+        <a>info@ndlessentertainment.com</a>
+        <a>Press Inquiries</a>
+        <a>Social Media</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Ndless Entertainment. All rights reserved.</p>
+      <div class="social-row">
+        <div class="social-btn" title="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+        </div>
+        <div class="social-btn" title="X / Twitter">
+          <svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg>
+        </div>
+        <div class="social-btn" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </div>
+        <div class="social-btn" title="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0d0d0d" stroke="none"/></svg>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════
+     SERVICES PAGE
+══════════════════════════════════ -->
+<div class="page" id="page-services">
+
+  <section class="services-intro">
+    <div style="padding-top:60px;">
+      <span class="label">What We Do</span>
+      <div class="section-header">
+        <div class="section-title">Full-service<br>PR & marketing</div>
+        <p class="section-desc">Everything you need to build your presence, tell your story, and grow your audience — under one roof. We've been doing this for 30 years, and we know what works.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-number">01</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <h3>PR Campaigns</h3>
+      <p>Strategic campaigns designed to generate media coverage, build credibility, and position you as an industry force. We craft the narrative and get it in front of the people who matter.</p>
+      <div class="service-tags">
+        <span class="tag">Media Strategy</span>
+        <span class="tag">Placement</span>
+        <span class="tag">Pitching</span>
+        <span class="tag">Coverage</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-number">02</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <h3>Press Releases</h3>
+      <p>Professionally written releases that capture attention and get picked up. From new music drops to tour announcements and major milestones — we make news of every moment.</p>
+      <div class="service-tags">
+        <span class="tag">Writing</span>
+        <span class="tag">Distribution</span>
+        <span class="tag">Wire Services</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-number">03</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <h3>Artist Bios</h3>
+      <p>Compelling bios that tell your story, establish your voice, and open doors with labels, venues, media outlets, and fans. Short form, long form — tailored to every context.</p>
+      <div class="service-tags">
+        <span class="tag">Short Form</span>
+        <span class="tag">Long Form</span>
+        <span class="tag">Custom</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-number">04</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+      <h3>EPK Creation</h3>
+      <p>Polished Electronic Press Kits that give industry professionals everything they need to book, sign, or feature you. Design, content, and digital delivery — all handled.</p>
+      <div class="service-tags">
+        <span class="tag">Design</span>
+        <span class="tag">Content Writing</span>
+        <span class="tag">Digital Delivery</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-number">05</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </div>
+      <h3>Social Media Marketing</h3>
+      <p>Content strategy, growth campaigns, and platform management that turn casual followers into a loyal, engaged fanbase. We build your presence across every major platform.</p>
+      <div class="service-tags">
+        <span class="tag">Strategy</span>
+        <span class="tag">Content</span>
+        <span class="tag">Analytics</span>
+        <span class="tag">Growth</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <span class="service-number">06</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      </div>
+      <h3>Artist Consultations</h3>
+      <p>One-on-one sessions for both emerging and established artists. Get expert guidance on your next move — from your first single to your next album campaign. We meet you where you are.</p>
+      <div class="service-tags">
+        <span class="tag">Emerging Artists</span>
+        <span class="tag">Established</span>
+        <span class="tag">Strategy</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <div class="cta-band-text">
+      <h2>LET'S BUILD<br>YOUR CAMPAIGN.</h2>
+      <p>Book a free consultation — no obligation, just real talk about your goals.</p>
+    </div>
+    <div class="cta-band-actions">
+      <button class="btn-white" onclick="showPage('contact')">Book Free Consultation</button>
+    </div>
+  </div>
+
+  <!-- Footer repeated -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-text">NDLESS <em>ENTERTAINMENT</em></span>
+        <p>PR and marketing consulting for the music and entertainment industry. Trusted by artists for over 30 years.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a onclick="showPage('services')">PR Campaigns</a>
+        <a onclick="showPage('services')">Press Releases</a>
+        <a onclick="showPage('services')">Artist Bios</a>
+        <a onclick="showPage('services')">EPK Creation</a>
+        <a onclick="showPage('services')">Social Media</a>
+        <a onclick="showPage('services')">Consultations</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a onclick="showPage('about')">About Us</a>
+        <a onclick="showPage('about')">Our Story</a>
+        <a onclick="showPage('about')">Our Process</a>
+        <a onclick="showPage('contact')">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a onclick="showPage('contact')">Book a Consultation</a>
+        <a>info@ndlessentertainment.com</a>
+        <a>Press Inquiries</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Ndless Entertainment. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════ -->
+<div class="page" id="page-about">
+
+  <div class="about-hero">
+    <div class="about-split">
+      <div class="about-big-text">
+        THREE<br>DECADES<br>OF<br><em>RESULTS.</em>
+      </div>
+      <div class="about-body">
+        <span class="label">Our Story</span>
+        <p><strong>Ndless Entertainment was founded with one belief:</strong> every artist has a story worth telling — they just need the right team to tell it.</p>
+        <p>For over 30 years, we've been the behind-the-scenes force for artists, labels, and entertainment professionals across the music industry. We've watched the landscape change — from print to digital, from radio to streaming — and we've evolved every step of the way.</p>
+        <p>What hasn't changed is our commitment to the artists we serve. We put your vision, your brand, and your long-term career first. Always have. Always will.</p>
+        <p><strong>PR campaigns. Press releases. Artist bios. EPKs. Social media marketing. Consultations.</strong> Six core offerings built on three decades of experience.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <section class="about-values tight">
+    <span class="label">What Drives Us</span>
+    <div class="section-title" style="margin-bottom:48px; font-family: var(--font-display); font-size: clamp(40px,5vw,64px);">Our core values</div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-n">01</div>
+        <h4>Artist First</h4>
+        <p>Every decision we make starts with what's right for you and your career — not what's easiest for us.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-n">02</div>
+        <h4>Authentic Storytelling</h4>
+        <p>We don't manufacture images. We amplify what's already true and powerful about who you are.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-n">03</div>
+        <h4>Industry Relationships</h4>
+        <p>30 years of cultivated connections with media, labels, venues, and platforms. That network is your network.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-n">04</div>
+        <h4>Results-Driven</h4>
+        <p>We measure success in placements secured, audiences grown, and careers built — not just activity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="about-process">
+    <span class="label">How We Work</span>
+    <div class="section-title" style="font-family: var(--font-display); font-size: clamp(40px,5vw,64px); margin-bottom:48px;">Our process</div>
+    <div class="process-list">
+      <div class="process-row">
+        <div class="process-num">01</div>
+        <div>
+          <h4>Consultation</h4>
+          <p>We start by listening. Understanding your story, your goals, where you are in your career, and where you want to go. No two clients are the same, so no two plans are the same.</p>
+        </div>
+        <p style="font-size:13px; color:var(--gray-dark); padding-top:8px;">Free initial session · No obligation · All career stages welcome</p>
+      </div>
+      <div class="process-row">
+        <div class="process-num">02</div>
+        <div>
+          <h4>Strategy</h4>
+          <p>A tailored PR and marketing roadmap — right channels, right messaging, clear timeline, defined deliverables. Built around your goals, your budget, and your timeline.</p>
+        </div>
+        <p style="font-size:13px; color:var(--gray-dark); padding-top:8px;">Custom-built · Clear milestones · Collaborative approval process</p>
+      </div>
+      <div class="process-row">
+        <div class="process-num">03</div>
+        <div>
+          <h4>Execution</h4>
+          <p>We create, pitch, and distribute. Press releases written and sent. Campaigns launched. Social content produced. EPKs designed. You focus on the music — we handle the rest.</p>
+        </div>
+        <p style="font-size:13px; color:var(--gray-dark); padding-top:8px;">Full-service · Regular updates · Transparent reporting</p>
+      </div>
+      <div class="process-row">
+        <div class="process-num">04</div>
+        <div>
+          <h4>Results & Growth</h4>
+          <p>Placements secured, audiences grown, and a stronger brand positioned for long-term success. We track everything and refine as we go.</p>
+        </div>
+        <p style="font-size:13px; color:var(--gray-dark); padding-top:8px;">Measurable outcomes · Ongoing optimization · Long-term partnership</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <div class="cta-band-text">
+      <h2>WORK WITH<br>THE BEST.</h2>
+      <p>30 years of experience, fully at your service.</p>
+    </div>
+    <div class="cta-band-actions">
+      <button class="btn-white" onclick="showPage('contact')">Get in Touch</button>
+      <button class="btn-outline-white" onclick="showPage('services')">Our Services</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-text">NDLESS <em>ENTERTAINMENT</em></span>
+        <p>PR and marketing consulting for the music and entertainment industry. Trusted by artists for over 30 years.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a onclick="showPage('services')">PR Campaigns</a>
+        <a onclick="showPage('services')">Press Releases</a>
+        <a onclick="showPage('services')">Artist Bios</a>
+        <a onclick="showPage('services')">EPK Creation</a>
+        <a onclick="showPage('services')">Social Media</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('services')">Services</a>
+        <a onclick="showPage('contact')">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a onclick="showPage('contact')">Book a Consultation</a>
+        <a>info@ndlessentertainment.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Ndless Entertainment. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════
+     CONTACT PAGE
+══════════════════════════════════ -->
+<div class="page" id="page-contact">
+
+  <div class="contact-hero">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="label">Get in Touch</span>
+        <h2>LET'S TALK<br>ABOUT YOUR<br><em>NEXT MOVE.</em></h2>
+        <p>Whether you're an upcoming artist ready to make your mark or an established name looking to level up — we're ready to talk. Book a free consultation and let's map out a plan.</p>
+        <button class="btn-red" style="margin-bottom:48px;">Book Free Consultation</button>
+
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-item-label">Email</span>
+            <span class="contact-item-val">info@ndlessentertainment.com</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Services</span>
+            <span class="contact-item-val">PR · Marketing · Consulting</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Industry</span>
+            <span class="contact-item-val">Music & Entertainment</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Experience</span>
+            <span class="contact-item-val">30+ Years in Business</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Follow Us</span>
+            <span class="contact-item-val">@ndlessentertainment</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <h3>Send us a message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Your first name">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Your last name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Stage / Artist Name</label>
+          <input type="text" placeholder="How you're known in the industry">
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select>
+            <option value="" disabled selected>Select a service</option>
+            <option>PR Campaign</option>
+            <option>Press Release</option>
+            <option>Artist Bio</option>
+            <option>EPK Creation</option>
+            <option>Social Media Marketing</option>
+            <option>Artist Consultation</option>
+            <option>Multiple Services</option>
+            <option>Not Sure Yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your project</label>
+          <textarea placeholder="Share where you are in your career, what you're working on, and what you're hoping to achieve..."></textarea>
+        </div>
+        <button class="form-submit">Send Message →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ strip -->
+  <section style="background: var(--black-2); border-top: 1px solid var(--black-4); padding: 80px 60px;">
+    <span class="label">Common Questions</span>
+    <div class="section-title" style="font-family: var(--font-display); font-size: clamp(36px,5vw,56px); margin-bottom:48px;">FAQ</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--black-4);">
+      <div style="background: var(--black-2); padding: 36px;">
+        <h4 style="font-family: var(--font-serif); font-size:18px; color:var(--white); margin-bottom:12px; font-weight:400;">Do you work with artists at any career stage?</h4>
+        <p style="font-size:14px; color:var(--gray); line-height:1.8;">Absolutely. We work with first-time artists recording their debut single all the way to established industry veterans. Our approach is tailored to wherever you are.</p>
+      </div>
+      <div style="background: var(--black-2); padding: 36px;">
+        <h4 style="font-family: var(--font-serif); font-size:18px; color:var(--white); margin-bottom:12px; font-weight:400;">What does the free consultation include?</h4>
+        <p style="font-size:14px; color:var(--gray); line-height:1.8;">A real, no-pressure conversation about your goals, your current situation, and how we can help. No sales pitch — just honest advice from 30 years of industry experience.</p>
+      </div>
+      <div style="background: var(--black-2); padding: 36px;">
+        <h4 style="font-family: var(--font-serif); font-size:18px; color:var(--white); margin-bottom:12px; font-weight:400;">Can I hire you for just one service?</h4>
+        <p style="font-size:14px; color:var(--gray); line-height:1.8;">Yes. Whether you need a single press release or a full campaign rollout, we work with you on the scope that fits your needs and your budget.</p>
+      </div>
+      <div style="background: var(--black-2); padding: 36px;">
+        <h4 style="font-family: var(--font-serif); font-size:18px; color:var(--white); margin-bottom:12px; font-weight:400;">How long does a typical campaign take?</h4>
+        <p style="font-size:14px; color:var(--gray); line-height:1.8;">It depends on the scope. A press release can be turned around in days. A full PR campaign typically runs 4–12 weeks. We'll set clear timelines during the strategy phase.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="cta-band-text">
+      <h2>YOUR STORY<br>STARTS HERE.</h2>
+      <p>30 years of expertise, one consultation away.</p>
+    </div>
+    <div class="cta-band-actions">
+      <button class="btn-white" onclick="window.scrollTo(0,0)">Book Now</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-text">NDLESS <em>ENTERTAINMENT</em></span>
+        <p>PR and marketing consulting for the music and entertainment industry. Trusted by artists for over 30 years.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <a onclick="showPage('services')">PR Campaigns</a>
+        <a onclick="showPage('services')">Press Releases</a>
+        <a onclick="showPage('services')">Artist Bios</a>
+        <a onclick="showPage('services')">EPK Creation</a>
+        <a onclick="showPage('services')">Social Media</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('services')">Services</a>
+        <a onclick="showPage('about')">About</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a>info@ndlessentertainment.com</a>
+        <a>Press Inquiries</a>
+        <a>@ndlessentertainment</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Ndless Entertainment. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const navEl = document.getElementById('nav-' + id);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
+
