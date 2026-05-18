@@ -528,6 +528,7 @@ html, body { width: 100%; min-height: 100vh; }
 .c21-card { background:#fff; border:1px solid #e4e7ec; border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:10px; }
 .c21-card h3 { font-size:18px; color:#111; }
 .c21-card p { color:#475467; font-size:14px; line-height:1.5; }
+.c21-cat { font-size:11px; font-weight:600; color:#667085; text-transform:uppercase; letter-spacing:.06em; }
 .c21-btns { display:flex; flex-wrap:wrap; gap:8px; margin-top:auto; }
 .c21-btn { font-size:12px; font-weight:600; text-decoration:none; border-radius:8px; padding:8px 10px; border:1px solid #d0d5dd; color:#111; background:#fff; }
 .c21-btn:hover { border-color:#98a2b3; }
@@ -1495,33 +1496,39 @@ function c19Filter(el,f){document.querySelectorAll('.c19-ftag').forEach(t=>t.cla
 /* ============================================================ C21 PORTFOLIO CTA ============================================================ */
 const C21_DATA = {
   featured:[
-    {name:'Weight Loss Davie',desc:'Medical weight loss clinic website with SEO report pages.',links:[{label:'Live Website',url:'https://WeightLossDavie.com'},{label:'View Report',url:'https://weightlossdavie.com/report',kind:'report'}]},
-    {name:'The Blue Card',desc:'Non-profit website and report pages.',links:[{label:'Live Website',url:'https://bluecardfund.org'},{label:'View Report',url:'https://elettro.github.io/bluecard/report',kind:'report'},{label:'Completed Report',url:'https://elettro.github.io/bluecard/report/completed',kind:'completed'}]},
-    {name:'Seascape Resort & Marina',desc:'Waterfront resort website and SEO report page.',links:[{label:'Live Website',url:'https://elettro.github.io/seascaperesortmarina'},{label:'View Report',url:'https://elettro.github.io/seascaperesortmarina/report',kind:'report'}]},
-    {name:'Cassie-Magrath Actress',desc:'Actress portfolio website with report page.',links:[{label:'Live Website',url:'https://cassiemagrath.com'},{label:'View Report',url:'https://cassiemagrath.com/report',kind:'report'}]},
-    {name:'MBEInitiative',desc:'Bar exam prep website, dev site, and report page.',links:[{label:'Live Website',url:'https://mbeinitiative.com'},{label:'Dev Website',url:'https://elettro.github.io/mbeinitiative'},{label:'View Report',url:'https://mbeinitiative.com/report',kind:'report'}]}
+    {name:'Seascape Resort & Marina',category:'Website / Resort & Marina',desc:'Florida Keys resort and marina website with booking-focused structure, hospitality content, visual storytelling, and SEO-ready page architecture.',links:[{label:'Live Website',url:'https://elettro.github.io/seascaperesortmarina'},{label:'View Report',url:'https://elettro.github.io/seascaperesortmarina/report',kind:'report'}]},
+    {name:'Weight Loss Davie',category:'Website / Healthcare',desc:'Local healthcare lead-generation website built for conversion, compliant ad traffic, structured content, and SEO visibility.',links:[{label:'Live Website',url:'https://WeightLossDavie.com'},{label:'View Report',url:'https://weightlossdavie.com/report',kind:'report'}]},
+    {name:'The Blue Card',category:'Website / Non-Profit',desc:'Non-profit website refresh with modern page structure, accessibility-focused UX, donation pathways, program pages, and AI search schema planning.',links:[{label:'Live Website',url:'https://bluecardfund.org'},{label:'View Report',url:'https://elettro.github.io/bluecard/report',kind:'report'},{label:'Completed Report',url:'https://elettro.github.io/bluecard/report/completed',kind:'completed'}]},
+    {name:'Cassie-Magrath Actress',category:'Website / Entertainment',desc:'Actress portfolio website with clean presentation, personal branding, media focus, and professional visibility.',links:[{label:'Live Website',url:'https://cassiemagrath.com'},{label:'View Report',url:'https://cassiemagrath.com/report',kind:'report'}]},
+    {name:'MBEInitiative',category:'Website / Organization',desc:'Organization website built with a clean public-facing structure, mobile-friendly pages, and simple navigation.',links:[{label:'Live Website',url:'https://elettro.github.io/mbeinitiative'},{label:'View Report',url:'https://mbeinitiative.com/report',kind:'report'}]}
   ],
   websites:[
-    {name:'Stashbox Band',links:[{label:'Live Website',url:'https://elettro.github.io/stashbox/'}]}, {name:'City of West Palm Beach',links:[{label:'Live Website',url:'https://VisitWPB.org'}]},
-    {name:'Stashbox.ai',desc:'Online print on demand website',links:[{label:'Live Website',url:'https://Stashbox.ai'}]}, {name:'AIO Authority',links:[{label:'Live Website',url:'https://aioauthority.com/'}]},
-    {name:'Manhattan Services',links:[{label:'Live Website',url:'https://elettro.github.io/manhattanservices'}]}, {name:'Long Pole 4 Life',desc:'Non-profit website',links:[{label:'Live Website',url:'https://LongPole4Life.com'}]},
-    {name:'Nadja Atwal',desc:'Top podcaster / PR website',links:[{label:'Live Website',url:'https://NadjaAtwal.net'}]}, {name:'The Ras Box',desc:'Music artist website',links:[{label:'Live Website',url:'https://TheRasBox.com'}]},
-    {name:'Piano Music Soothing',desc:'Calm music website',links:[{label:'Live Website',url:'https://PianoMusicSoothing.com'}]}, {name:'Akme Glass Company',links:[{label:'Live Website',url:'https://elettro.github.io/akmeglasscompany'}]},
-    {name:'Stashbox Radio',links:[{label:'Live Website',url:'https://elettro.github.io/stashbox/radio'}]}, {name:'Ittytwit',desc:'Custom CMS-controlled dynamic voting website',links:[{label:'Live Website',url:'https://elettro.github.io/ittytwit'}]}
+    {name:'Stashbox Band',category:'Website / Music',desc:'Band website featuring music, videos, booking content, artist branding, and promotional pathways.',links:[{label:'Live Website',url:'https://elettro.github.io/stashbox/'}]},
+    {name:'City of West Palm Beach',category:'Website / Municipality',desc:'Public-facing city website project connected to local tourism, information architecture, and civic digital presentation.',links:[{label:'Live Website',url:'https://VisitWPB.org'}]},
+    {name:'Stashbox.ai',category:'Website / Ecommerce',desc:'Online print-on-demand Shopify website for artist merchandise, branded products, and ecommerce sales.',links:[{label:'Live Website',url:'https://Stashbox.ai'}]},
+    {name:'AIO Authority',category:'Website / AI Optimization',desc:'AI optimization brand website focused on visibility, search positioning, and authority-building content.',links:[{label:'Live Website',url:'https://aioauthority.com/'}]},
+    {name:'Manhattan Services',category:'Website / Business Services',desc:'Business services website built for clear presentation, credibility, and lead-generation structure.',links:[{label:'Live Website',url:'https://elettro.github.io/manhattanservices'}]},
+    {name:'Long Pole 4 Life',category:'Website / Non-Profit',desc:'Non-profit website built to support mission awareness, donor clarity, and simple public communication.',links:[{label:'Live Website',url:'https://LongPole4Life.com'}]},
+    {name:'Nadja Atwal',category:'Website / Media & PR',desc:'Website for top podcaster and PR personality with media-focused presentation and personal brand positioning.',links:[{label:'Live Website',url:'https://NadjaAtwal.net'}]},
+    {name:'The Ras Box',category:'Website / Music Artist',desc:'Artist website for music releases, brand identity, video content, and audience engagement.',links:[{label:'Live Website',url:'https://TheRasBox.com'}]},
+    {name:'Piano Music Soothing',category:'Website / Calm Music',desc:'Calm music website designed around relaxation, focus, sleep, and peaceful listening experiences.',links:[{label:'Live Website',url:'https://PianoMusicSoothing.com'}]},
+    {name:'Akme Glass Company',category:'Website / Local Business',desc:'Local business website for glass services with direct service presentation and conversion-focused page layout.',links:[{label:'Live Website',url:'https://elettro.github.io/akmeglasscompany'}]},
+    {name:'Stashbox Radio',category:'Website / Music App',desc:'Interactive radio page for Stashbox music with listening, filtering, and playlist-style discovery.',links:[{label:'Live Website',url:'https://elettro.github.io/stashbox/radio'}]},
+    {name:'Ittytwit',category:'Website / Custom CMS',desc:'Custom CMS-controlled dynamic voting website with interactive public voting functionality.',links:[{label:'Live Website',url:'https://elettro.github.io/ittytwit'}]}
   ],
   apps:[
-    {name:'The Man in Me',desc:'Audio visualizer',links:[{label:'Live App',url:'https://elettro.github.io/stashbox/themaninme'}]},
-    {name:'Nebula',desc:'Audio visualizer',links:[{label:'Live App',url:'https://elettro.github.io/dev/nebula/'}]}
+    {name:'The Man in Me',category:'Custom App / Audio Visualizer',desc:'Audio visualizer experience built for music presentation, motion, and immersive creative display.',links:[{label:'Live App',url:'https://elettro.github.io/stashbox/themaninme'}]},
+    {name:'Nebula',category:'Custom App / Audio Visualizer',desc:'Visual audio experience with atmospheric digital presentation and interactive creative styling.',links:[{label:'Live App',url:'https://elettro.github.io/dev/nebula/'}]}
   ],
   videos:[
-    {name:'Jon Phillips',desc:'Testimonial video',links:[{label:'Watch Video',url:'https://www.youtube.com/watch?v=L_wCyky9fuM'}]},
-    {name:'Slightly Stoopid Giant LED Videos',desc:'Concert LED video production',links:[{label:'Watch Video',url:'https://youtu.be/twa-yI5loAQ?si=tNGf9l72Y1NdDoIk'}]},
-    {name:'Pink Palm Puff Ecommerce Promo',desc:'Ecommerce product video produced from ecommerce photos',links:[{label:'Watch Video',url:'https://youtu.be/ATbfh4fptQI?si=vVsPWsYsCqStBB7y'}]},
-    {name:'Duck Racing',desc:'Plastic duck ecommerce promo video',links:[{label:'Watch Video',url:'https://youtu.be/aQc1acrf8_Y?si=6-FjbyFJ429vi2oe'}]},
-    {name:"Florida's #1 Sand Sculpturist",desc:'Promo video',links:[{label:'Watch Video',url:'https://youtu.be/Qub62f2kJCc?si=5CZl_e47NJOycBSK'}]}
+    {name:'Jon Phillips',category:'Video Production / Testimonial',desc:'Testimonial video production for brand trust, social proof, and professional credibility.',links:[{label:'Watch Video',url:'https://www.youtube.com/watch?v=L_wCyky9fuM'}]},
+    {name:'Slightly Stoopid Giant LED Videos',category:'Video Production / Concert Visuals',desc:'Giant LED video production for live concert visuals and large-format event display.',links:[{label:'Watch Video',url:'https://youtu.be/twa-yI5loAQ?si=tNGf9l72Y1NdDoIk'}]},
+    {name:'Pink Palm Puff Ecommerce Promo',category:'Video Production / Ecommerce',desc:'Ecommerce promo video produced from ecommerce photos for product marketing and social media.',links:[{label:'Watch Video',url:'https://youtu.be/ATbfh4fptQI?si=vVsPWsYsCqStBB7y'}]},
+    {name:'Duck Racing',category:'Video Production / Ecommerce Promo',desc:'Plastic duck ecommerce promo video built for product promotion, humor, and online engagement.',links:[{label:'Watch Video',url:'https://youtu.be/aQc1acrf8_Y?si=6-FjbyFJ429vi2oe'}]},
+    {name:"Florida's #1 Sand Sculpturist",category:'Video Production / Promo Video',desc:'Promotional video for Florida sand sculpting talent, built for visibility and social engagement.',links:[{label:'Watch Video',url:'https://youtu.be/Qub62f2kJCc?si=5CZl_e47NJOycBSK'}]}
   ]
 };
-function c21Card(p){return `<div class="c21-card"><h3>${p.name}</h3>${p.desc?`<p>${p.desc}</p>`:''}<div class="c21-btns">${p.links.map(l=>`<a class="c21-btn ${l.kind||''}" href="${l.url}" target="_blank" rel="noopener noreferrer">${l.label}</a>`).join('')}</div></div>`}
+function c21Card(p){return `<div class="c21-card"><h3>${p.name}</h3>${p.category?`<div class="c21-cat">${p.category}</div>`:''}${p.desc?`<p>${p.desc}</p>`:''}<div class="c21-btns">${p.links.map(l=>`<a class="c21-btn ${l.kind||''}" href="${l.url}" target="_blank" rel="noopener noreferrer">${l.label}</a>`).join('')}</div></div>`}
 function buildC21(){
   document.getElementById('c21-featured').innerHTML = C21_DATA.featured.map(c21Card).join('');
   document.getElementById('c21-websites').innerHTML = C21_DATA.websites.map(c21Card).join('');
