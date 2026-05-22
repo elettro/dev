@@ -1,0 +1,66 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Ajustement chiropratique scientifique</title>
+  <desc id="desc">Illustration d'un chiropracteur ajustant un patient avec superposition anatomique de la colonne vertébrale.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#edf9ff"/>
+      <stop offset="100%" stop-color="#d9eef7"/>
+    </linearGradient>
+    <linearGradient id="table" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1f6b86"/>
+      <stop offset="100%" stop-color="#0d455a"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0f405633"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="900" fill="url(#bg)"/>
+
+  <g opacity="0.16" stroke="#2e809e" stroke-width="4">
+    <path d="M0 150H1400"/>
+    <path d="M0 310H1400"/>
+    <path d="M0 470H1400"/>
+    <path d="M0 630H1400"/>
+    <path d="M0 790H1400"/>
+    <path d="M200 0V900"/>
+    <path d="M500 0V900"/>
+    <path d="M800 0V900"/>
+    <path d="M1100 0V900"/>
+  </g>
+
+  <rect x="190" y="500" width="920" height="170" rx="28" fill="url(#table)" filter="url(#shadow)"/>
+  <rect x="1040" y="530" width="80" height="160" rx="18" fill="#1b5f78"/>
+  <rect x="220" y="530" width="80" height="160" rx="18" fill="#1b5f78"/>
+
+  <ellipse cx="650" cy="430" rx="260" ry="95" fill="#e7d0bf"/>
+  <circle cx="940" cy="392" r="55" fill="#e7d0bf"/>
+  <path d="M425 390C420 450 480 505 580 512H760C860 505 910 450 900 395" fill="#f5e1d2"/>
+
+  <g>
+    <path d="M640 335C700 280 780 280 842 335" stroke="#2a748f" stroke-width="44" stroke-linecap="round" fill="none"/>
+    <circle cx="660" cy="317" r="29" fill="#f0c7ad"/>
+    <rect x="582" y="345" width="166" height="152" rx="62" fill="#2a748f"/>
+    <rect x="550" y="390" width="75" height="42" rx="20" fill="#f0c7ad"/>
+    <rect x="728" y="390" width="75" height="42" rx="20" fill="#f0c7ad"/>
+  </g>
+
+  <g transform="translate(580 365)">
+    <rect x="0" y="0" width="270" height="145" rx="28" fill="#ffffffd8" stroke="#8fc1d4" stroke-width="4"/>
+    <path d="M135 24V121" stroke="#14617e" stroke-width="8" stroke-linecap="round"/>
+    <g fill="#1c7695">
+      <circle cx="135" cy="34" r="11"/>
+      <circle cx="135" cy="50" r="10"/>
+      <circle cx="135" cy="66" r="10"/>
+      <circle cx="135" cy="82" r="10"/>
+      <circle cx="135" cy="98" r="10"/>
+      <circle cx="135" cy="114" r="10"/>
+    </g>
+    <path d="M88 44C106 52 116 67 117 82C118 97 109 112 90 121" stroke="#f49f42" stroke-width="6" fill="none"/>
+    <path d="M183 44C165 52 155 67 154 82C153 97 162 112 181 121" stroke="#f49f42" stroke-width="6" fill="none"/>
+  </g>
+
+  <text x="110" y="130" fill="#0f4d65" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">
+    Ajustement chiropratique guidé par la biomécanique
+  </text>
+</svg>
