@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember Smoke Reggae Share Buttons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --line: rgba(255,255,255,.09);
+      --text: #f5f5f5;
+      --muted: rgba(255,255,255,.68);
+      --green: #2f9e44;
+      --green-dark: #0f5f2a;
+      --green-bright: #55df70;
+      --yellow: #f4c430;
+      --yellow-gold: #ffcc33;
+      --yellow-soft: #ffe373;
+      --orange: #ff7a18;
+      --red: #d62828;
+      --red-dark: #a61e1e;
+      --red-bright: #ff3d3d;
+      --ember: #ff4b1f;
+      --ash: rgba(210,210,210,.72);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(47,158,68,.15), transparent 30rem),
+        radial-gradient(circle at top right, rgba(244,196,48,.12), transparent 32rem),
+        radial-gradient(circle at bottom center, rgba(214,40,40,.12), transparent 34rem),
+        var(--bg);
+      color: var(--text);
+      font-family: "Barlow", sans-serif;
+    }
+
+    body { padding: 42px 20px 76px; }
+
+    .wrap {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .hero { margin-bottom: 36px; }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: clamp(48px, 8vw, 98px);
+      line-height: .88;
+      text-transform: uppercase;
+      letter-spacing: -.035em;
+    }
+
+    .lead {
+      max-width: 980px;
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .card {
+      position: relative;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(255,204,51,.08), transparent 30%),
+        linear-gradient(180deg, rgba(255,255,255,.038), rgba(255,255,255,.016));
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 26px;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 18px 55px rgba(0,0,0,.30);
+      overflow: hidden;
+    }
+
+    .meta, .button-row {
+      position: relative;
+      z-index: 5;
+    }
+
+    .num {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 10px;
+    }
+
+    .name {
+      margin: 0 0 8px;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 35px;
+      line-height: .95;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+    }
+
+    .desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.4;
+      max-width: 620px;
+    }
+
+    .button-row {
+      padding-top: 46px;
+      min-height: 145px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .smoke-zone {
+      position: relative;
+      display: inline-block;
+      isolation: isolate;
+      overflow: visible;
+      --hold: 0;
+    }
+
+    .smoke-field {
+      position: absolute;
+      left: -110px;
+      right: -110px;
+      bottom: -48px;
+      height: 230px;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+      opacity: 1;
+      mix-blend-mode: screen;
+    }
+
+    .puff {
+      position: absolute;
+      left: 50%;
+      bottom: 42px;
+      width: var(--size, 40px);
+      height: var(--size, 40px);
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 44% 45%,
+          rgba(255,255,255,var(--core, .58)) 0 17%,
+          rgba(210,210,210,var(--mid, .36)) 32%,
+          rgba(150,150,150,var(--edge, .20)) 54%,
+          transparent 77%);
+      filter: blur(var(--blur, 13px));
+      opacity: 0;
+      transform: translate(-50%, 0) scale(.5);
+      animation-name: smoke-drift;
+      animation-duration: var(--dur, 8s);
+      animation-delay: var(--delay, 0s);
+      animation-timing-function: ease-out;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes smoke-drift {
+      0% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--x0, 0px)), 0) scale(.42);
+      }
+      7% { opacity: .86; }
+      22% { opacity: .68; }
+      52% { opacity: .42; }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--x1, 0px)), -112px) scale(var(--scale, 3.05));
+      }
+    }
+
+    .hover-smoke {
+      position: absolute;
+      left: 50%;
+      top: 55%;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle,
+          rgba(255,255,255,.76) 0 14%,
+          rgba(220,220,220,.46) 32%,
+          rgba(155,155,155,.24) 58%,
+          transparent 78%);
+      filter: blur(14px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+      transform: translate(-50%, -50%) scale(.3);
+    }
+
+    .smoke-zone:hover .hover-smoke {
+      animation: burst-smoke var(--burstDur, 1.6s) ease-out infinite;
+      animation-delay: var(--burstDelay, 0s);
+    }
+
+    .smoke-zone:hover .puff {
+      animation-duration: 2.1s;
+      filter: blur(calc(var(--blur, 13px) + 4px));
+    }
+
+    @keyframes burst-smoke {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.25);
+      }
+      15% { opacity: .86; }
+      100% {
+        opacity: 0;
+        transform:
+          translate(
+            calc(-50% + var(--burstX, 0px)),
+            calc(-50% + var(--burstY, -65px))
+          )
+          scale(var(--burstScale, 5.3));
+      }
+    }
+
+    .ember-line {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: -2px;
+      height: 7px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,245,170,.9), transparent 32%),
+        linear-gradient(90deg,
+          rgba(255,75,31,0),
+          rgba(255,120,24,.58),
+          rgba(255,224,105,.88),
+          rgba(255,75,31,.66),
+          rgba(255,75,31,0));
+      filter: blur(2.6px);
+      opacity: .18;
+      transform: scaleX(.36);
+      transform-origin: center;
+      z-index: 4;
+      pointer-events: none;
+      transition: opacity .35s ease, transform .35s ease;
+    }
+
+    .ash-cap {
+      position: absolute;
+      left: 30%;
+      right: 30%;
+      top: -4px;
+      height: 5px;
+      border-radius: 999px;
+      background:
+        linear-gradient(90deg,
+          transparent,
+          rgba(230,230,230,.35),
+          rgba(255,255,255,.76),
+          rgba(180,180,180,.45),
+          transparent);
+      filter: blur(1.4px);
+      opacity: 0;
+      transform: translateY(0) scaleX(.45);
+      transform-origin: center;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .ash-dust {
+      position: absolute;
+      left: 50%;
+      top: -4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(230,230,230,.75), transparent 70%);
+      filter: blur(2px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    .smoke-zone:hover .ember-line {
+      opacity: .96;
+      transform: scaleX(1);
+      animation: ember-flare 1.8s ease-in-out infinite alternate;
+    }
+
+    .smoke-zone:hover .ash-cap {
+      opacity: .78;
+      animation: ash-grow 4s ease-out forwards;
+    }
+
+    .smoke-zone:not(:hover) .ash-cap {
+      animation: ash-blowoff .8s ease-out;
+    }
+
+    .smoke-zone:not(:hover) .ash-dust {
+      animation: ash-dust-blow .9s ease-out;
+      animation-delay: var(--dustDelay, 0s);
+    }
+
+    @keyframes ember-flare {
+      0% {
+        filter: blur(2.3px);
+        box-shadow: 0 0 10px rgba(255,75,31,.26);
+      }
+      100% {
+        filter: blur(3.6px);
+        box-shadow: 0 0 28px rgba(255,133,24,.72), 0 0 46px rgba(255,204,51,.38);
+      }
+    }
+
+    @keyframes ash-grow {
+      0% {
+        opacity: .28;
+        transform: translateY(0) scaleX(.35);
+      }
+      45% {
+        opacity: .72;
+        transform: translateY(-1px) scaleX(.78);
+      }
+      100% {
+        opacity: .86;
+        transform: translateY(-2px) scaleX(1.08);
+      }
+    }
+
+    @keyframes ash-blowoff {
+      0% {
+        opacity: .86;
+        transform: translateY(-2px) scaleX(1.08);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(42px, -26px) rotate(8deg) scaleX(.45);
+      }
+    }
+
+    @keyframes ash-dust-blow {
+      0% {
+        opacity: .7;
+        transform: translate(-50%, 0) scale(.7);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dustX, 40px)), var(--dustY, -40px)) scale(2.2);
+      }
+    }
+
+    .share-btn {
+      --gradient: linear-gradient(90deg, var(--green) 0%, var(--yellow) 50%, var(--red) 100%);
+      --gradient-hover: linear-gradient(90deg, var(--green-bright) 0%, var(--yellow-soft) 50%, var(--red-bright) 100%);
+      --text-color: #fff;
+      --hover-text: #090909;
+      --glow: rgba(255,204,51,.28);
+      --border-glow: rgba(255,204,51,.22);
+      --shine: rgba(255,255,255,.42);
+
+      position: relative;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-width: 255px;
+      padding: 16px 28px;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background:
+        linear-gradient(#0b0b0b, #0b0b0b) padding-box,
+        var(--gradient) border-box;
+      color: var(--text-color);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      overflow: visible;
+      transition: color .28s ease, box-shadow .28s ease, transform .22s ease, filter .28s ease;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.03), 0 0 24px rgba(0,0,0,.3);
+    }
+
+    .share-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: var(--gradient-hover);
+      transform: scaleY(0);
+      transform-origin: bottom center;
+      transition: transform .34s ease;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .share-btn::after {
+      content: "";
+      position: absolute;
+      top: -120%;
+      left: -35%;
+      width: 45%;
+      height: 320%;
+      background: linear-gradient(90deg, transparent, var(--shine), transparent);
+      transform: rotate(24deg) translateX(-120%);
+      transition: transform .58s ease;
+      z-index: -1;
+      opacity: .85;
+      border-radius: inherit;
+    }
+
+    .share-btn:hover {
+      color: var(--hover-text);
+      transform: translateY(-2px);
+      filter: saturate(1.15);
+      box-shadow:
+        0 0 0 1px var(--border-glow),
+        0 12px 40px var(--glow),
+        0 0 46px rgba(47,158,68,.16),
+        0 0 52px rgba(214,40,40,.14);
+    }
+
+    .share-btn:hover::before { transform: scaleY(1); }
+    .share-btn:hover::after { transform: rotate(24deg) translateX(280%); }
+
+    .share-btn .arrow {
+      display: inline-block;
+      transition: transform .22s ease;
+      font-size: 16px;
+    }
+
+    .share-btn:hover .arrow { transform: translateX(5px); }
+
+    .tri-1 {
+      --gradient: linear-gradient(90deg, var(--green) 0%, var(--yellow) 52%, var(--red) 100%);
+      --gradient-hover: linear-gradient(90deg, var(--green-bright) 0%, var(--yellow-soft) 52%, var(--red-bright) 100%);
+    }
+
+    .tri-2 {
+      --gradient: linear-gradient(90deg, var(--red) 0%, var(--yellow) 50%, var(--green) 100%);
+      --gradient-hover: linear-gradient(90deg, var(--red-bright) 0%, var(--yellow-soft) 50%, var(--green-bright) 100%);
+      --glow: rgba(214,40,40,.27);
+    }
+
+    .tri-3 {
+      --gradient: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 28%, var(--yellow) 55%, var(--red) 100%);
+      --gradient-hover: linear-gradient(135deg, var(--green-bright) 0%, var(--yellow-soft) 55%, var(--red-bright) 100%);
+    }
+
+    .tri-4 {
+      --gradient: linear-gradient(90deg, var(--green) 0 33%, var(--yellow) 33% 66%, var(--red) 66% 100%);
+      --gradient-hover: linear-gradient(90deg, var(--green-bright) 0 33%, var(--yellow-soft) 33% 66%, var(--red-bright) 66% 100%);
+      --glow: rgba(255,204,51,.34);
+    }
+
+    .tri-5 {
+      --gradient: conic-gradient(from 180deg, var(--green), var(--yellow), var(--red), var(--green));
+      --gradient-hover: linear-gradient(90deg, var(--green-bright), var(--yellow-soft), var(--red-bright));
+      --border-glow: rgba(255,255,255,.18);
+      --glow: rgba(255,255,255,.17);
+    }
+
+    .tri-6 {
+      --gradient: linear-gradient(90deg, #0b0b0b 0 8%, var(--green) 8% 36%, var(--yellow) 36% 66%, var(--red) 66% 92%, #0b0b0b 92% 100%);
+      --gradient-hover: linear-gradient(90deg, var(--green-dark) 0%, var(--yellow-gold) 50%, var(--red-dark) 100%);
+      --hover-text: #fff;
+      --glow: rgba(166,30,30,.30);
+    }
+
+    .tri-7 {
+      --gradient: linear-gradient(120deg, var(--yellow) 0%, var(--green) 42%, var(--red) 100%);
+      --gradient-hover: linear-gradient(120deg, var(--yellow-soft) 0%, var(--green-bright) 42%, var(--red-bright) 100%);
+      --glow: rgba(115,182,82,.28);
+    }
+
+    .tri-8 {
+      --gradient: linear-gradient(90deg, var(--red-dark) 0%, var(--green-dark) 48%, var(--yellow-gold) 100%);
+      --gradient-hover: linear-gradient(90deg, var(--red-bright) 0%, var(--green-bright) 48%, var(--yellow-soft) 100%);
+      --glow: rgba(255,204,51,.26);
+    }
+
+    .tri-9 {
+      --gradient: repeating-linear-gradient(135deg, var(--green) 0 12px, var(--yellow) 12px 24px, var(--red) 24px 36px);
+      --gradient-hover: repeating-linear-gradient(135deg, var(--green-bright) 0 14px, var(--yellow-soft) 14px 28px, var(--red-bright) 28px 42px);
+      --glow: rgba(255,204,51,.24);
+    }
+
+    .tri-10 {
+      --gradient: linear-gradient(90deg, var(--green) 0%, var(--yellow) 28%, var(--red) 50%, var(--yellow) 72%, var(--green) 100%);
+      --gradient-hover: linear-gradient(90deg, var(--green-bright) 0%, var(--yellow-soft) 28%, var(--red-bright) 50%, var(--yellow-soft) 72%, var(--green-bright) 100%);
+      --glow: rgba(255,204,51,.36);
+    }
+
+    .legend {
+      margin-top: 26px;
+      color: rgba(255,255,255,.55);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .puff,
+      .hover-smoke,
+      .ember-line,
+      .ash-cap,
+      .ash-dust,
+      .share-btn,
+      .share-btn::before,
+      .share-btn::after,
+      .share-btn .arrow {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 24px 14px 46px; }
+      .card { padding: 20px; border-radius: 22px; }
+      .name { font-size: 28px; }
+      .smoke-zone, .share-btn { width: 100%; }
+      .share-btn { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">CTA Button Study</div>
+      <h1>Ember Smoke Reggae Buttons.<br>Idle Smoke + Hover Burn</h1>
+      <p class="lead">
+        Idle state emits thicker smoke. Hover creates a larger smoke puff in all directions, flares the top ember edge, grows a soft ash cap while held, then blows the ash away when the mouse leaves.
+      </p>
+    </section>
+
+    <section class="grid" id="buttonGrid"></section>
+
+    <p class="legend">
+      Hold your mouse over a button to see the ember grow. Move away and the ash blows off.
+    </p>
+  </div>
+
+  <script>
+    const buttonData = [
+      ["01", "Classic Ember Flow", "Thick idle smoke with a clean top ember flare.", "tri-1"],
+      ["02", "Reverse Fire Hit", "Red-first gradient with a broader hover smoke burst.", "tri-2"],
+      ["03", "Island Ember Slant", "Diagonal color movement with ash growth on hold.", "tri-3"],
+      ["04", "Flag Stripe Burn", "Clear tri-stripe fill with dense smoke rising upward.", "tri-4"],
+      ["05", "Vinyl Ember Ring", "Conic border with slow haze and wide hover plume.", "tri-5"],
+      ["06", "Dub Night Ash", "Darker hover state with a stronger ember top line.", "tri-6"],
+      ["07", "Golden Smoke Cloud", "Yellow-led gradient with warmer, fuller smoke.", "tri-7"],
+      ["08", "Late Night Burn", "Muted rest state with a bigger smoke burst on hover.", "tri-8"],
+      ["09", "Skank Stripe Ember", "Graphic diagonal stripes and side-drifting ash.", "tri-9"],
+      ["10", "Full Rasta Flare", "Largest ember glow and widest hover smoke pattern.", "tri-10"]
+    ];
+
+    const grid = document.getElementById("buttonGrid");
+
+    function smokeSpans(index) {
+      const puffCount = 14;
+      let html = "";
+
+      for (let i = 0; i < puffCount; i++) {
+        const delay = (index * 0.71 + i * 0.53) % 11.5;
+        const duration = 5 + ((index * 1.7 + i * 0.91) % 7);
+        const left = 12 + ((index * 13 + i * 9) % 76);
+        const size = 34 + ((index * 9 + i * 7) % 42);
+        const blur = 10 + ((index + i) % 8);
+        const x0 = -24 + ((index * 7 + i * 9) % 48);
+        const x1 = -68 + ((index * 17 + i * 21) % 136);
+        const scale = (2.8 + ((index + i) % 7) * 0.24).toFixed(2);
+        const core = (0.42 + ((index + i) % 4) * 0.05).toFixed(2);
+        const mid = (0.26 + ((index + i) % 5) * 0.03).toFixed(2);
+        const edge = (0.15 + ((index + i) % 4) * 0.02).toFixed(2);
+
+        html += `<span class="puff" style="left:${left}%; --delay:${delay.toFixed(2)}s; --dur:${duration.toFixed(2)}s; --size:${size}px; --blur:${blur}px; --x0:${x0}px; --x1:${x1}px; --scale:${scale}; --core:${core}; --mid:${mid}; --edge:${edge};"></span>`;
+      }
+
+      const burstAngles = [
+        [-92, -58, 5.7],
+        [-60, -105, 5.3],
+        [-18, -122, 5.9],
+        [20, -116, 5.5],
+        [64, -92, 5.7],
+        [98, -50, 5.8],
+        [-42, -28, 6.2],
+        [48, -32, 6.1],
+        [0, -70, 6.5]
+      ];
+
+      burstAngles.forEach((b, i) => {
+        html += `<span class="hover-smoke" style="--burstX:${b[0]}px; --burstY:${b[1]}px; --burstScale:${b[2]}; --burstDelay:${(i * .045).toFixed(2)}s; --burstDur:${(1.35 + (i % 3) * .18).toFixed(2)}s;"></span>`;
+      });
+
+      for (let i = 0; i < 9; i++) {
+        const dustX = -80 + ((index * 23 + i * 31) % 160);
+        const dustY = -20 - ((index * 11 + i * 13) % 58);
+        html += `<span class="ash-dust" style="left:${18 + i * 8}%; --dustX:${dustX}px; --dustY:${dustY}px; --dustDelay:${(i * .035).toFixed(2)}s;"></span>`;
+      }
+
+      return html;
+    }
+
+    buttonData.forEach((item, index) => {
+      const [num, name, desc, cls] = item;
+
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="meta">
+          <div class="num">${num}</div>
+          <h2 class="name">${name}</h2>
+          <p class="desc">${desc}</p>
+        </div>
+        <div class="button-row">
+          <div class="smoke-zone">
+            <div class="smoke-field" aria-hidden="true">
+              ${smokeSpans(index)}
+            </div>
+            <a href="#" class="share-btn ${cls}">
+              <span class="ember-line" aria-hidden="true"></span>
+              <span class="ash-cap" aria-hidden="true"></span>
+              Share This Video <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
