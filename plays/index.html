@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stashbox Radio Plays UI Options</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0c0c0e;
+  --surface:#131316;
+  --surface2:#1a1a1f;
+  --border:rgba(255,255,255,.08);
+  --text:#eeeae3;
+  --muted:#777;
+  --accent:#f0a500;
+  --blue:#50a0ff;
+  --green:#3ecf6e;
+  --red:#e05c5c;
+  --fh:'Bebas Neue',sans-serif;
+  --fb:'Karla',sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--fb);
+  padding:24px;
+}
+
+.page{
+  max-width:1440px;
+  margin:0 auto;
+}
+
+.hero{
+  border:1px solid rgba(240,165,0,.25);
+  background:linear-gradient(135deg,rgba(240,165,0,.13),rgba(240,165,0,.04));
+  border-radius:18px;
+  padding:28px;
+  margin-bottom:28px;
+}
+
+.hero h1{
+  font-family:var(--fh);
+  font-size:52px;
+  letter-spacing:.05em;
+}
+
+.hero p{
+  color:var(--muted);
+  margin-top:6px;
+}
+
+.option{
+  margin:34px 0;
+  border-top:1px solid var(--border);
+  padding-top:26px;
+}
+
+.option h2{
+  font-family:var(--fh);
+  font-size:34px;
+  letter-spacing:.04em;
+  color:var(--accent);
+  margin-bottom:8px;
+}
+
+.option-note{
+  color:var(--muted);
+  margin-bottom:18px;
+  max-width:900px;
+  line-height:1.45;
+}
+
+.demo-grid{
+  display:grid;
+  grid-template-columns:1fr 1.4fr;
+  gap:18px;
+  align-items:start;
+}
+
+.nowbar{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.now-art{
+  height:240px;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.now-art img{
+  height:100%;
+  max-width:100%;
+  object-fit:contain;
+}
+
+.now-info{
+  padding:16px 18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.now-title{
+  font-family:var(--fh);
+  font-size:24px;
+  letter-spacing:.04em;
+}
+
+.now-meta{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:3px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.card{
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-height:72px;
+}
+
+.card.playing{
+  border-color:var(--accent);
+  background:rgba(240,165,0,.08);
+}
+
+.thumb{
+  width:46px;
+  height:46px;
+  border-radius:8px;
+  background:var(--surface2);
+  overflow:hidden;
+  flex:0 0 auto;
+}
+
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.card-title{
+  font-weight:700;
+  font-size:14px;
+}
+
+.card-artist{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:2px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  border-radius:999px;
+  font-weight:800;
+  letter-spacing:.04em;
+  white-space:nowrap;
+}
+
+/* OPTION 1 */
+.o1 .play-badge{
+  margin-left:auto;
+  background:rgba(240,165,0,.14);
+  color:var(--accent);
+  border:1px solid rgba(240,165,0,.3);
+  padding:6px 10px;
+  font-size:12px;
+}
+
+.o1 .now-plays{
+  margin-left:auto;
+  background:var(--accent);
+  color:#111;
+  padding:10px 16px;
+  font-weight:800;
+  border-radius:999px;
+}
+
+/* OPTION 2 */
+.o2 .card{
+  padding-bottom:30px;
+}
+
+.o2 .play-line{
+  position:absolute;
+  left:0;
+  bottom:0;
+  height:4px;
+  border-radius:0 0 12px 12px;
+  background:var(--accent);
+}
+
+.o2 .play-caption{
+  position:absolute;
+  right:12px;
+  bottom:8px;
+  color:var(--accent);
+  font-size:11px;
+  font-weight:800;
+}
+
+.o2 .now-plays{
+  width:100%;
+  padding:8px 18px 16px;
+}
+
+.o2 .bar{
+  height:6px;
+  background:var(--surface2);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.o2 .bar span{
+  display:block;
+  height:100%;
+  background:var(--accent);
+}
+
+/* OPTION 3 */
+.o3 .play-badge{
+  position:absolute;
+  top:8px;
+  right:8px;
+  background:#000;
+  border:1px solid rgba(255,255,255,.14);
+  color:var(--text);
+  padding:4px 8px;
+  font-size:11px;
+}
+
+.o3 .now-info{
+  position:relative;
+}
+
+.o3 .now-plays{
+  position:absolute;
+  right:18px;
+  top:-22px;
+  background:#000;
+  border:1px solid rgba(255,255,255,.15);
+  color:var(--accent);
+  padding:8px 14px;
+  border-radius:999px;
+  font-weight:800;
+}
+
+/* OPTION 4 */
+.o4 .card{
+  border-left:5px solid var(--accent);
+}
+
+.o4 .play-stack{
+  margin-left:auto;
+  text-align:right;
+}
+
+.o4 .play-num{
+  font-family:var(--fh);
+  font-size:28px;
+  color:var(--accent);
+  line-height:1;
+}
+
+.o4 .play-label{
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.o4 .now-plays{
+  margin-left:auto;
+  text-align:right;
+}
+
+.o4 .now-plays strong{
+  font-family:var(--fh);
+  color:var(--accent);
+  font-size:36px;
+  line-height:1;
+  display:block;
+}
+
+/* OPTION 5 */
+.o5 .play-chip{
+  margin-left:auto;
+  border:1px solid rgba(80,160,255,.35);
+  color:var(--blue);
+  background:rgba(80,160,255,.1);
+  padding:6px 9px;
+  font-size:11px;
+}
+
+.o5 .now-plays{
+  margin-left:auto;
+  border:1px solid rgba(80,160,255,.35);
+  color:var(--blue);
+  background:rgba(80,160,255,.1);
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:800;
+}
+
+/* OPTION 6 */
+.o6 .rank{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(240,165,0,.13);
+  color:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+.o6 .play-small{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.o6 .now-plays{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.o6 .now-plays .rank{
+  width:44px;
+  height:44px;
+}
+
+/* OPTION 7 */
+.o7 .wave{
+  margin-left:auto;
+  display:flex;
+  align-items:end;
+  gap:2px;
+  height:24px;
+}
+
+.o7 .wave span{
+  width:4px;
+  background:var(--accent);
+  border-radius:4px;
+  opacity:.8;
+}
+
+.o7 .play-caption{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.o7 .now-plays{
+  margin-left:auto;
+  min-width:150px;
+}
+
+.o7 .now-plays strong{
+  color:var(--accent);
+}
+
+/* OPTION 8 */
+.o8 .corner{
+  position:absolute;
+  right:0;
+  top:0;
+  background:var(--accent);
+  color:#111;
+  padding:5px 9px;
+  border-radius:0 12px 0 10px;
+  font-size:11px;
+  font-weight:900;
+}
+
+.o8 .now-plays{
+  margin-left:auto;
+  background:var(--accent);
+  color:#111;
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:900;
+}
+
+/* OPTION 9 */
+.o9 .card{
+  display:grid;
+  grid-template-columns:46px 1fr 76px;
+}
+
+.o9 .play-box{
+  text-align:center;
+  border-left:1px solid var(--border);
+  padding-left:10px;
+}
+
+.o9 .play-box strong{
+  display:block;
+  color:var(--accent);
+  font-family:var(--fh);
+  font-size:24px;
+  line-height:1;
+}
+
+.o9 .play-box span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+  font-weight:800;
+}
+
+.o9 .now-plays{
+  margin-left:auto;
+  display:grid;
+  grid-template-columns:auto auto;
+  gap:8px;
+  align-items:center;
+  border-left:1px solid var(--border);
+  padding-left:18px;
+}
+
+.o9 .now-plays strong{
+  font-family:var(--fh);
+  color:var(--accent);
+  font-size:34px;
+}
+
+/* OPTION 10 */
+.o10 .heat{
+  margin-left:auto;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+}
+
+.o10 .low{background:rgba(80,160,255,.12);color:var(--blue)}
+.o10 .mid{background:rgba(240,165,0,.14);color:var(--accent)}
+.o10 .hot{background:rgba(224,92,92,.14);color:var(--red)}
+
+.o10 .now-plays{
+  margin-left:auto;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(224,92,92,.14);
+  color:var(--red);
+  font-weight:900;
+}
+
+@media(max-width:900px){
+  body{padding:14px}
+  .demo-grid{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .hero h1{font-size:40px}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <section class="hero">
+    <h1>STASHBOX RADIO PLAYS UI OPTIONS</h1>
+    <p>10 ways to show Column L Clicks as Plays on the song cards and current playing bar.</p>
+  </section>
+
+  <!-- OPTION 1 -->
+  <section class="option o1">
+    <h2>1. Clean Plays Pill</h2>
+    <p class="option-note">Best default choice. Simple. Easy to read. Works inside every card without clutter.</p>
+    <div class="demo-grid">
+      <div class="nowbar">
+        <div class="now-art"><img src="https://dummyimage.com/500x500/f0a500/000&text=STASHBOX" alt=""></div>
+        <div class="now-info">
+          <div><div class="now-title">5 Of Clubs</div><div class="now-meta">Stashbox · Blues</div></div>
+          <div class="now-plays">▶ 248 Plays</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card playing"><div class="thumb"><img src="https://dummyimage.com/100x100/f0a500/000&text=5"></div><div><div class="card-title">5 Of Clubs</div><div class="card-artist">Stashbox</div></div><div class="badge play-badge">▶ 248</div></div>
+        <div class="card"><div class="thumb"><img src="https://dummyimage.com/100x100/50a0ff/000&text=H"></div><div><div class="card-title">House On The Hill</div><div class="card-artist">Stashbox</div></div><div class="badge play-badge">▶ 91</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTION 2 -->
+  <section class="option o2">
+    <h2>2. Popularity Bar</h2>
+    <p class="option-note">Good if you want plays to feel like a chart ranking. Strong visual scan.</p>
+    <div class="demo-grid">
+      <div class="nowbar">
+        <div class="now-art"><img src="https://dummyimage.com/500x500/f0a500/000&text=STASHBOX" alt=""></div>
+        <div class="now-info"><div><div class="now-title">5 Of Clubs</div><div class="now-meta">Stashbox · Blues</div></div></div>
+        <div class="now-plays"><div class="bar"><span style="width:78%"></span></div><p class="play-caption">248 Plays</p></div>
+      </div>
+      <div class="cards">
+        <div class="card playing"><div class="thumb"><img src="https://dummyimage.com/100x100/f0a500/000&text=5"></div><div><div class="card-title">5 Of Clubs</div><div class="card-artist">Stashbox</div></div><div class="play-line" style="width:78%"></div><div class="play-caption">248 Plays</div></div>
+        <div class="card"><div class="thumb"><img src="https://dummyimage.com/100x100/50a0ff/000&text=H"></div><div><div class="card-title">House On The Hill</div><div class="card-artist">Stashbox</div></div><div class="play-line" style="width:32%"></div><div class="play-caption">91 Plays</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTION 3 -->
+  <section class="option o3">
+    <h2>3. Small Top Right Badge</h2>
+    <p class="option-note">Most compact. Good when you want the title and artwork to stay primary.</p>
+    <div class="demo-grid">
+      <div class="nowbar">
+        <div class="now-art"><img src="https://dummyimage.com/500x500/f0a500/000&text=STASHBOX" alt=""></div>
+        <div class="now-info">
+          <div><div class="now-title">5 Of Clubs</div><div class="now-meta">Stashbox · Blues</div></div>
+          <div class="now-plays">248 Plays</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card playing"><div class="play-badge">248 Plays</div><div class="thumb"><img src="https://dummyimage.com/100x100/f0a500/000&text=5"></div><div><div class="card-title">5 Of Clubs</div><div class="card-artist">Stashbox</div></div></div>
+        <div class="card"><div class="play-badge">91 Plays</div><div class="thumb"><img src="https://dummyimage.com/100x100/50a0ff/000&text=H"></div><div><div class="card-title">House On The Hill</div><div class="card-artist">Stashbox</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTION 4 -->
+  <section class="option o4">
+    <h2>4. Big Number Stack</h2>
+    <p class="option-note">Best if Plays matters as a major stat. More promotional. Strong for desktop.</p>
+    <div class="demo-grid">
+      <div class="nowbar">
+        <div class="now-art"><img src="https://dummyimage.com/500x500/f0a500/000&text=STASHBOX" alt=""></div>
+        <div class="now-info">
+          <div><div class="now-title">5 Of Clubs</div><div class="now-meta">Stashbox · Blues</div></div>
+          <div class="now-plays"><strong>248</strong><span>Plays</span></div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card playing"><div class="thumb"><img src="https://dummyimage.com/100x100/f0a500/000&text=5"></div><div><div class="card-title">5 Of Clubs</div><div class="card-artist">Stashbox</div></div><div class="play-stack"><div class="play-num">248</div><div class="play-label">Plays</div></div></div>
+        <div class="card"><div class="thumb"><img src="https://dummyimage.com/100x100/50a0ff/000&text=H"></div><div><div class="card-title">House On The Hill</div><div class="card-artist">Stashbox</div></div><div class="play-stack"><div class="play-num">91</div><div class="play-label">Plays</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTION 5 -->
+  <section class="option o5">
+    <h2>5. Blue Analytics Chip</h2>
+    <p class="option-note">Feels like a clean data metric. Good if you want Plays to look separate from genre badges.</p>
+    <div class="demo-grid">
+      <div class="nowbar">
+        <div class="now-art"><img src="https://dummyimage.com/500x500/f0a500/000&text=STASHBOX" alt=""></div>
+        <div class="now-info">
+          <div><div class="now-title">5 Of Clubs</div><div class="now-meta">Stashbox · Blues</div></div>
+          <div class="now-plays">248 total plays</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card playing"><div class="thumb"><img src="https://dummyimage.com/100x100/f0a500/000&text=5"></div><div><div class="card-title">5 Of Clubs</div><div class="card-artist">Stashbox</div></div><div class="badge play-chip">248 Plays</div></div>
+        <div class="card"><div class="thumb"><img src="https://dummyimage.com/100x100/50a0ff/000&text=H"></div><div><div class="card-title">House On The Hill</div><div class="card-artist">Stashbox</div></div><div class="badge play-chip">91 Plays</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTION 6 -->
+  <section class="option o6">
+    <h2>6. Rank Plus Plays</h2>
+    <p class="option-note">Good for future sorting by most played. Adds a chart feel without needing a separate chart.</p>
+    <div class="demo-grid">
+      <div class="nowbar">
+        <div class="now-art"><img src="https://dummyimage.com/500x500/f0a500/000&text=STASHBOX" alt=""></div>
+        <div class="now-info">
+          <div><div class="now-title">5 Of Clubs</div><div class="now-meta">Stashbox · Blues</div></div>
+          <div class="now-plays"><div class="rank">#1</div><div><strong>248 Plays</strong><div class="card-artist">Most played in Blues</div></div></div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card playing"><div class="rank">#1</div><div class="thumb"><img src="https://dummyimage.com/100x100/f0a500/000&text=5"></div><div><div class="card-title">5 Of Clubs</div><div class="card-artist">Stashbox</div><div class="play-small">248 Plays</div></div></div>
+        <div class="card"><div class="rank">#2</div><div class="thumb"><img src="https://dummyimage.com/100x100/50a0ff/000&text=H"></div><div><div class="card-title">House On The Hill</div><div class="card-artist">Stashbox</div><div class="play-small">91 Plays</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTION 7 -->
+  <section class="option o7">
+    <h2>7. Tiny Equalizer Plays</h2>
+    <p class="option-note">Most music-themed. Looks custom and on-brand for radio.</p>
+    <div class="demo-grid">
+      <div class="nowbar">
+        <div class="now-art"><img src="https://dummyimage.com/500x500/f0a500/000&text=STASHBOX" alt=""></div>
+        <div class="now-info">
+          <div><div class="now-title">5 Of Clubs</div><div class="now-meta">Stashbox · Blues</div></div>
+          <div class="now-plays"><strong>248 Plays</strong><div class="wave"><span style="height:9px"></span><span style="height:18px"></span><span style="height:24px"></span><span style="height:15px"></span><span style="height:20px"></span></div></div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card playing"><div class="thumb"><img src="https://dummyimage.com/100x100/f0a500/000&text=5"></div><div><div class="card-title">5 Of Clubs</div><div class="card-artist">Stashbox</div><div class="play-caption">248 Plays</div></div><div class="wave"><span style="height:9px"></span><span style="height:18px"></span><span style="height:24px"></span><span style="height:15px"></span></div></div>
+        <div class="card"><div class="thumb"><img src="https://dummyimage.com/100x100/50a0ff/000&text=H"></div><div><div class="card-title">House On The Hill</div><div class="card-artist">Stashbox</div><div class="play-caption">91 Plays</div></div><div class="wave"><span style="height:8px"></span><span style="height:13px"></span><span style="height:10px"></span><span style="height:16px"></span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTION 8 -->
+  <section class="option o8">
+    <h2>8. Corner Tag</h2>
+    <p class="option-note">Very visible without adding a new row. Good for dense grids.</p>
+    <div class="demo-grid">
+      <div class="nowbar">
+        <div class="now-art"><img src="https://dummyimage.com/500x500/f0a500/000&text=STASHBOX" alt=""></div>
+        <div class="now-info">
+          <div><div class="now-title">5 Of Clubs</div><div class="now-meta">Stashbox · Blues</div></div>
+          <div class="now-plays">248 Plays</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card playing"><div class="corner">248</div><div class="thumb"><img src="https://dummyimage.com/100x100/f0a500/000&text=5"></div><div><div class="card-title">5 Of Clubs</div><div class="card-artist">Stashbox</div></div></div>
+        <div class="card"><div class="corner">91</div><div class="thumb"><img src="https://dummyimage.com/100x100/50a0ff/000&text=H"></div><div><div class="card-title">House On The Hill</div><div class="card-artist">Stashbox</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTION 9 -->
+  <section class="option o9">
+    <h2>9. Dedicated Plays Column</h2>
+    <p class="option-note">Best for clarity. The plays count always lines up in the same place.</p>
+    <div class="demo-grid">
+      <div class="nowbar">
+        <div class="now-art"><img src="https://dummyimage.com/500x500/f0a500/000&text=STASHBOX" alt=""></div>
+        <div class="now-info">
+          <div><div class="now-title">5 Of Clubs</div><div class="now-meta">Stashbox · Blues</div></div>
+          <div class="now-plays"><strong>248</strong><span>Plays</span></div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card playing"><div class="thumb"><img src="https://dummyimage.com/100x100/f0a500/000&text=5"></div><div><div class="card-title">5 Of Clubs</div><div class="card-artist">Stashbox</div></div><div class="play-box"><strong>248</strong><span>Plays</span></div></div>
+        <div class="card"><div class="thumb"><img src="https://dummyimage.com/100x100/50a0ff/000&text=H"></div><div><div class="card-title">House On The Hill</div><div class="card-artist">Stashbox</div></div><div class="play-box"><strong>91</strong><span>Plays</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPTION 10 -->
+  <section class="option o10">
+    <h2>10. Heat Level Badge</h2>
+    <p class="option-note">Best marketing style. Turns raw plays into momentum: New, Rising, Hot.</p>
+    <div class="demo-grid">
+      <div class="nowbar">
+        <div class="now-art"><img src="https://dummyimage.com/500x500/f0a500/000&text=STASHBOX" alt=""></div>
+        <div class="now-info">
+          <div><div class="now-title">5 Of Clubs</div><div class="now-meta">Stashbox · Blues</div></div>
+          <div class="now-plays">HOT · 248 Plays</div>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card playing"><div class="thumb"><img src="https://dummyimage.com/100x100/f0a500/000&text=5"></div><div><div class="card-title">5 Of Clubs</div><div class="card-artist">Stashbox</div></div><div class="heat hot">HOT · 248</div></div>
+        <div class="card"><div class="thumb"><img src="https://dummyimage.com/100x100/50a0ff/000&text=H"></div><div><div class="card-title">House On The Hill</div><div class="card-artist">Stashbox</div></div><div class="heat mid">RISING · 91</div></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
