@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stashbox Sessions</title>
+  <meta name="description" content="Browse Stashbox live sessions, studio sessions, playlists, and behind-the-scenes music releases." />
+
+  <style>
+    :root {
+      --bg: #070707;
+      --bg-soft: #111111;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-strong: rgba(255, 255, 255, 0.1);
+      --text: #f6f2e8;
+      --muted: rgba(246, 242, 232, 0.72);
+      --gold: #f5c85b;
+      --green: #31b86f;
+      --red: #c92d2d;
+      --line: rgba(255, 255, 255, 0.14);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+      --max: 1180px;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(49, 184, 111, 0.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(201, 45, 45, 0.15), transparent 32%),
+        linear-gradient(180deg, #050505, #111 55%, #050505);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      padding: 46px 18px 90px;
+    }
+
+    .container {
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: clamp(58px, 8vw, 110px) 0 46px;
+      text-align: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0 auto 18px;
+      max-width: 900px;
+      font-size: clamp(2.4rem, 7vw, 6.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      margin: 0 auto;
+      max-width: 780px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .chooser-note {
+      margin: 0 auto 30px;
+      max-width: 900px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .layout-section {
+      margin: 36px 0 70px;
+      padding: clamp(22px, 4vw, 36px);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: rgba(0, 0, 0, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .layout-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+    }
+
+    .layout-heading h2 {
+      margin: 0;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      letter-spacing: -0.04em;
+    }
+
+    .layout-heading p {
+      margin: 0;
+      max-width: 480px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .session-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      backdrop-filter: blur(10px);
+    }
+
+    .session-card h3 {
+      margin: 0 0 8px;
+      font-size: clamp(1.25rem, 2vw, 1.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .date {
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .songs {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .songs li {
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .songs li:last-child {
+      border-bottom: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 18px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: #111;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .btn.dark {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .badge {
+      display: inline-flex;
+      margin-bottom: 14px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(245, 200, 91, 0.12);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .option-1-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .option-1-grid .session-card {
+      padding: 26px;
+    }
+
+    .option-2-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .option-2-list .session-card {
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      align-items: center;
+      gap: 24px;
+      padding: 22px;
+    }
+
+    .session-number {
+      display: grid;
+      place-items: center;
+      min-height: 140px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(49, 184, 111, 0.38), rgba(201, 45, 45, 0.32));
+      color: var(--text);
+      font-size: 3rem;
+      font-weight: 950;
+      letter-spacing: -0.08em;
+    }
+
+    .option-3-featured {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+    }
+
+    .option-3-featured .big {
+      padding: 34px;
+      min-height: 420px;
+      background:
+        linear-gradient(135deg, rgba(245, 200, 91, 0.12), rgba(49, 184, 111, 0.14)),
+        var(--card);
+    }
+
+    .option-3-featured .small-stack {
+      display: grid;
+      gap: 22px;
+    }
+
+    .option-3-featured .small-stack .session-card {
+      padding: 24px;
+    }
+
+    .option-4-timeline {
+      position: relative;
+      display: grid;
+      gap: 20px;
+      padding-left: 28px;
+    }
+
+    .option-4-timeline:before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(var(--gold), var(--green), var(--red));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 24px;
+    }
+
+    .timeline-item:before {
+      content: "";
+      position: absolute;
+      left: -27px;
+      top: 28px;
+      width: 16px;
+      height: 16px;
+      border: 3px solid var(--bg);
+      border-radius: 999px;
+      background: var(--gold);
+    }
+
+    .option-5-magazine {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 18px;
+    }
+
+    .option-5-magazine .session-card {
+      padding: 24px;
+    }
+
+    .option-5-magazine .wide {
+      grid-column: span 4;
+      min-height: 320px;
+    }
+
+    .option-5-magazine .narrow {
+      grid-column: span 2;
+    }
+
+    .option-6-compact {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option-6-compact .session-card {
+      display: grid;
+      grid-template-columns: 90px 1fr 220px;
+      align-items: center;
+      gap: 18px;
+      padding: 16px;
+      border-radius: 18px;
+    }
+
+    .mini-number {
+      color: var(--gold);
+      font-size: 1.6rem;
+      font-weight: 950;
+    }
+
+    .mini-songs {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .option-7-poster {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+    }
+
+    .poster-card {
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px;
+      background:
+        linear-gradient(145deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.72)),
+        radial-gradient(circle at top right, rgba(245, 200, 91, 0.26), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(49, 184, 111, 0.28), transparent 40%);
+    }
+
+    .poster-card h3 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      text-transform: uppercase;
+    }
+
+    .option-8-tabs {
+      display: grid;
+      gap: 18px;
+    }
+
+    .tab-card {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 22px;
+      padding: 22px;
+    }
+
+    .tab-label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 180px;
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(245, 200, 91, 0.12);
+    }
+
+    .option-9-minimal {
+      display: grid;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .minimal-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 260px auto;
+      align-items: center;
+      gap: 18px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.045);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .minimal-row:last-child {
+      border-bottom: 0;
+    }
+
+    .option-10-media {
+      display: grid;
+      gap: 24px;
+    }
+
+    .media-card {
+      display: grid;
+      grid-template-columns: 38% 1fr;
+      gap: 0;
+      min-height: 300px;
+    }
+
+    .media-art {
+      display: grid;
+      place-items: center;
+      min-height: 300px;
+      background:
+        linear-gradient(135deg, rgba(201, 45, 45, 0.22), rgba(49, 184, 111, 0.24)),
+        rgba(255, 255, 255, 0.04);
+      color: var(--gold);
+      font-size: 4.5rem;
+      font-weight: 950;
+      letter-spacing: -0.08em;
+    }
+
+    .media-content {
+      padding: 30px;
+    }
+
+    @media (max-width: 860px) {
+      .layout-heading {
+        display: block;
+      }
+
+      .layout-heading p {
+        margin-top: 10px;
+      }
+
+      .option-1-grid,
+      .option-3-featured,
+      .option-7-poster {
+        grid-template-columns: 1fr;
+      }
+
+      .option-2-list .session-card,
+      .option-6-compact .session-card,
+      .tab-card,
+      .minimal-row,
+      .media-card {
+        grid-template-columns: 1fr;
+      }
+
+      .option-5-magazine {
+        grid-template-columns: 1fr;
+      }
+
+      .option-5-magazine .wide,
+      .option-5-magazine .narrow {
+        grid-column: auto;
+      }
+
+      .session-number,
+      .media-art {
+        min-height: 160px;
+      }
+
+      .minimal-row .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="container">
+      <header class="hero">
+        <div class="kicker">Stashbox.com / Sessions</div>
+        <h1>Stashbox Sessions</h1>
+        <p>Browse the latest Stashbox live sessions, studio cuts, acoustic moments, playlists, collaborations, and behind-the-scenes music drops.</p>
+      </header>
+
+      <div class="chooser-note">
+        These are 10 different directory layouts for /stashbox/sessions/. Session 02 appears first because the newest session should always stack on top.
+      </div>
+
+      <!-- OPTION 1 -->
+      <section class="layout-section">
+        <div class="layout-heading">
+          <h2>Option 1: Clean Blog Card Grid</h2>
+          <p>Best simple version. Easy to add new sessions by copying one card and placing it at the top.</p>
+        </div>
+
+        <div class="option-1-grid">
+          <article class="session-card">
+            <span class="badge">Newest Session</span>
+            <h3>Session 02: Studio Session Title Here</h3>
+            <div class="date">June 2026</div>
+            <ul class="songs">
+              <li>Song Title One</li>
+              <li>Song Title Two</li>
+              <li>Song Title Three</li>
+            </ul>
+            <a class="btn" href="/stashbox/sessions/02/">View Session</a>
+          </article>
+
+          <article class="session-card">
+            <span class="badge">Archive Session</span>
+            <h3>Session 01: First Stashbox Session</h3>
+            <div class="date">May 2026</div>
+            <ul class="songs">
+              <li>Song Title One</li>
+              <li>Song Title Two</li>
+              <li>Song Title Three</li>
+            </ul>
+            <a class="btn" href="/stashbox/sessions/01/">View Session</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- OPTION 2 -->
+      <section class="layout-section">
+        <div class="layout-heading">
+          <h2>Option 2: Horizontal Blog Roll</h2>
+          <p>Strong for a growing archive. Feels like a music journal or release feed.</p>
+        </div>
+
+        <div class="option-2-list">
+          <article class="session-card">
+            <div class="session-number">02</div>
+            <div>
+              <span class="badge">Latest</span>
+              <h3>Session 02: Studio Session Title Here</h3>
+              <div class="date">June 2026</div>
+              <ul class="songs">
+                <li>Song Title One</li>
+                <li>Song Title Two</li>
+                <li>Song Title Three</li>
+              </ul>
+            </div>
+            <a class="btn" href="/stashbox/sessions/02/">Open</a>
+          </article>
+
+          <article class="session-card">
+            <div class="session-number">01</div>
+            <div>
+              <span class="badge">Archive</span>
+              <h3>Session 01: First Stashbox Session</h3>
+              <div class="date">May 2026</div>
+              <ul class="songs">
+                <li>Song Title One</li>
+                <li>Song Title Two</li>
+                <li>Song Title Three</li>
+              </ul>
+            </div>
+            <a class="btn" href="/stashbox/sessions/01/">Open</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- OPTION 3 -->
+      <section class="layout-section">
+        <div class="layout-heading">
+          <h2>Option 3: Latest Session Featured</h2>
+          <p>Best if each new session deserves the spotlight. Latest session gets a bigger card.</p>
+        </div>
+
+        <div class="option-3-featured">
+          <article class="session-card big">
+            <span class="badge">Featured Latest Session</span>
+            <h3>Session 02: Studio Session Title Here</h3>
+            <div class="date">June 2026</div>
+            <ul class="songs">
+              <li>Song Title One</li>
+              <li>Song Title Two</li>
+              <li>Song Title Three</li>
+              <li>Song Title Four</li>
+            </ul>
+            <a class="btn" href="/stashbox/sessions/02/">Play Session 02</a>
+          </article>
+
+          <div class="small-stack">
+            <article class="session-card">
+              <span class="badge">Previous Session</span>
+              <h3>Session 01: First Stashbox Session</h3>
+              <div class="date">May 2026</div>
+              <ul class="songs">
+                <li>Song Title One</li>
+                <li>Song Title Two</li>
+              </ul>
+              <a class="btn dark" href="/stashbox/sessions/01/">View Archive</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- OPTION 4 -->
+      <section class="layout-section">
+        <div class="layout-heading">
+          <h2>Option 4: Session Timeline</h2>
+          <p>Good for storytelling. Each session becomes a chapter in the Stashbox history.</p>
+        </div>
+
+        <div class="option-4-timeline">
+          <article class="session-card timeline-item">
+            <span class="badge">Session 02</span>
+            <h3>Studio Session Title Here</h3>
+            <div class="date">June 2026</div>
+            <ul class="songs">
+              <li>Song Title One</li>
+              <li>Song Title Two</li>
+              <li>Song Title Three</li>
+            </ul>
+            <a class="btn" href="/stashbox/sessions/02/">View Session</a>
+          </article>
+
+          <article class="session-card timeline-item">
+            <span class="badge">Session 01</span>
+            <h3>First Stashbox Session</h3>
+            <div class="date">May 2026</div>
+            <ul class="songs">
+              <li>Song Title One</li>
+              <li>Song Title Two</li>
+              <li>Song Title Three</li>
+            </ul>
+            <a class="btn" href="/stashbox/sessions/01/">View Session</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- OPTION 5 -->
+      <section class="layout-section">
+        <div class="layout-heading">
+          <h2>Option 5: Magazine Layout</h2>
+          <p>More visual and editorial. Great once you have 6 to 20 sessions stacked up.</p>
+        </div>
+
+        <div class="option-5-magazine">
+          <article class="session-card wide">
+            <span class="badge">Latest Drop</span>
+            <h3>Session 02: Studio Session Title Here</h3>
+            <div class="date">June 2026</div>
+            <ul class="songs">
+              <li>Song Title One</li>
+              <li>Song Title Two</li>
+              <li>Song Title Three</li>
+            </ul>
+            <a class="btn" href="/stashbox/sessions/02/">View Session</a>
+          </article>
+
+          <article class="session-card narrow">
+            <span class="badge">Archive</span>
+            <h3>Session 01</h3>
+            <div class="date">May 2026</div>
+            <ul class="songs">
+              <li>Song Title One</li>
+              <li>Song Title Two</li>
+            </ul>
+            <a class="btn dark" href="/stashbox/sessions/01/">Open</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- OPTION 6 -->
+      <section class="layout-section">
+        <div class="layout-heading">
+          <h2>Option 6: Compact Release List</h2>
+          <p>Best when you expect many sessions. Fast to scan. Clean on mobile.</p>
+        </div>
+
+        <div class="option-6-compact">
+          <article class="session-card">
+            <div class="mini-number">02</div>
+            <div>
+              <h3>Studio Session Title Here</h3>
+              <div class="date">June 2026</div>
+            </div>
+            <div class="mini-songs">Song Title One, Song Title Two, Song Title Three</div>
+            <a class="btn" href="/stashbox/sessions/02/">View</a>
+          </article>
+
+          <article class="session-card">
+            <div class="mini-number">01</div>
+            <div>
+              <h3>First Stashbox Session</h3>
+              <div class="date">May 2026</div>
+            </div>
+            <div class="mini-songs">Song Title One, Song Title Two, Song Title Three</div>
+            <a class="btn" href="/stashbox/sessions/01/">View</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- OPTION 7 -->
+      <section class="layout-section">
+        <div class="layout-heading">
+          <h2>Option 7: Concert Poster Cards</h2>
+          <p>Most visual and branded. Feels like collectible session posters.</p>
+        </div>
+
+        <div class="option-7-poster">
+          <article class="session-card poster-card">
+            <div>
+              <span class="badge">Session 02</span>
+              <h3>Studio Session Title Here</h3>
+            </div>
+            <div>
+              <div class="date">June 2026</div>
+              <ul class="songs">
+                <li>Song Title One</li>
+                <li>Song Title Two</li>
+                <li>Song Title Three</li>
+              </ul>
+              <a class="btn" href="/stashbox/sessions/02/">View Session</a>
+            </div>
+          </article>
+
+          <article class="session-card poster-card">
+            <div>
+              <span class="badge">Session 01</span>
+              <h3>First Stashbox Session</h3>
+            </div>
+            <div>
+              <div class="date">May 2026</div>
+              <ul class="songs">
+                <li>Song Title One</li>
+                <li>Song Title Two</li>
+                <li>Song Title Three</li>
+              </ul>
+              <a class="btn" href="/stashbox/sessions/01/">View Session</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- OPTION 8 -->
+      <section class="layout-section">
+        <div class="layout-heading">
+          <h2>Option 8: Label + Details Cards</h2>
+          <p>Clean split layout. Session number/date on the left, playlist on the right.</p>
+        </div>
+
+        <div class="option-8-tabs">
+          <article class="session-card tab-card">
+            <div class="tab-label">
+              <span class="badge">Latest</span>
+              <h3>Session 02</h3>
+              <div class="date">June 2026</div>
+            </div>
+            <div>
+              <h3>Studio Session Title Here</h3>
+              <ul class="songs">
+                <li>Song Title One</li>
+                <li>Song Title Two</li>
+                <li>Song Title Three</li>
+              </ul>
+              <a class="btn" href="/stashbox/sessions/02/">View Full Session</a>
+            </div>
+          </article>
+
+          <article class="session-card tab-card">
+            <div class="tab-label">
+              <span class="badge">Archive</span>
+              <h3>Session 01</h3>
+              <div class="date">May 2026</div>
+            </div>
+            <div>
+              <h3>First Stashbox Session</h3>
+              <ul class="songs">
+                <li>Song Title One</li>
+                <li>Song Title Two</li>
+                <li>Song Title Three</li>
+              </ul>
+              <a class="btn" href="/stashbox/sessions/01/">View Full Session</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- OPTION 9 -->
+      <section class="layout-section">
+        <div class="layout-heading">
+          <h2>Option 9: Minimal Archive Table</h2>
+          <p>Most practical. Best when sessions grow into a large directory.</p>
+        </div>
+
+        <div class="option-9-minimal">
+          <article class="minimal-row">
+            <div class="date">Session 02</div>
+            <h3>Studio Session Title Here</h3>
+            <div class="mini-songs">Song Title One, Song Title Two, Song Title Three</div>
+            <a class="btn" href="/stashbox/sessions/02/">Open</a>
+          </article>
+
+          <article class="minimal-row">
+            <div class="date">Session 01</div>
+            <h3>First Stashbox Session</h3>
+            <div class="mini-songs">Song Title One, Song Title Two, Song Title Three</div>
+            <a class="btn" href="/stashbox/sessions/01/">Open</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- OPTION 10 -->
+      <section class="layout-section">
+        <div class="layout-heading">
+          <h2>Option 10: Media Feature Rows</h2>
+          <p>Best if each session gets a thumbnail, cover image, or YouTube preview later.</p>
+        </div>
+
+        <div class="option-10-media">
+          <article class="session-card media-card">
+            <div class="media-art">02</div>
+            <div class="media-content">
+              <span class="badge">Newest Session</span>
+              <h3>Session 02: Studio Session Title Here</h3>
+              <div class="date">June 2026</div>
+              <ul class="songs">
+                <li>Song Title One</li>
+                <li>Song Title Two</li>
+                <li>Song Title Three</li>
+              </ul>
+              <a class="btn" href="/stashbox/sessions/02/">View Session</a>
+            </div>
+          </article>
+
+          <article class="session-card media-card">
+            <div class="media-art">01</div>
+            <div class="media-content">
+              <span class="badge">Archive Session</span>
+              <h3>Session 01: First Stashbox Session</h3>
+              <div class="date">May 2026</div>
+              <ul class="songs">
+                <li>Song Title One</li>
+                <li>Song Title Two</li>
+                <li>Song Title Three</li>
+              </ul>
+              <a class="btn" href="/stashbox/sessions/01/">View Session</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
