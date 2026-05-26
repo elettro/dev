@@ -612,7 +612,11 @@ main{flex:1;padding:0}
 /* ═══════════════════════════════════════════════════════════════════
    DATA LAYER — connections & normalisation
    ═══════════════════════════════════════════════════════════════════ */
-const API_URL = 'https://script.google.com/macros/s/AKfycbyN4kknORrO7uxwf8O6YJZF8chkX9Z7VMrF15uyh2iP1_OX_T8-ouPqPJ_ORmzTAZsMWw/exec?dashboard=1&type=all';
+const CONNECTORS = [
+  { name:'primary', url:'https://script.google.com/macros/s/AKfycbyN4kknORrO7uxwf8O6YJZF8chkX9Z7VMrF15uyh2iP1_OX_T8-ouPqPJ_ORmzTAZsMWw/exec?dashboard=1&type=all' },
+  { name:'dashboard-only', url:'https://script.google.com/macros/s/AKfycbyN4kknORrO7uxwf8O6YJZF8chkX9Z7VMrF15uyh2iP1_OX_T8-ouPqPJ_ORmzTAZsMWw/exec?dashboard=1' },
+  { name:'base', url:'https://script.google.com/macros/s/AKfycbyN4kknORrO7uxwf8O6YJZF8chkX9Z7VMrF15uyh2iP1_OX_T8-ouPqPJ_ORmzTAZsMWw/exec' },
+];
 
 const SEO_SCORES = [
   ['Stashbox.com', 7.6, 6.8],
@@ -1172,6 +1176,46 @@ function processPayload(raw) {
   return { songs, vids, kpis };
 }
 
+
+function normalizeRawPayload(raw) {
+  // Support multiple connector shapes without changing any of the 5 view renderers.
+  if (!raw || typeof raw !== 'object') return { radio:[], videos:[], meta:{} };
+
+  if (Array.isArray(raw.radio) || Array.isArray(raw.videos)) {
+    return {
+      radio: Array.isArray(raw.radio) ? raw.radio : [],
+      videos: Array.isArray(raw.videos) ? raw.videos : [],
+      meta: raw.meta || {},
+    };
+  }
+
+  const payload = raw.data || raw.payload || raw.result || {};
+  const radio = payload.radio || payload.songs || payload.tracks || raw.songs || raw.tracks || [];
+  const videos = payload.videos || payload.video || raw.videos || raw.video || [];
+  const meta = payload.meta || raw.meta || {};
+  return {
+    radio: Array.isArray(radio) ? radio : [],
+    videos: Array.isArray(videos) ? videos : [],
+    meta
+  };
+}
+
+async function fetchLiveData() {
+  const errors = [];
+  for (const c of CONNECTORS) {
+    try {
+      const resp = await fetch(c.url, { cache:'no-store' });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const raw = normalizeRawPayload(await resp.json());
+      if (!raw.radio.length && !raw.videos.length) throw new Error('no rows');
+      return { raw, connector: c.name };
+    } catch (err) {
+      errors.push(`${c.name}: ${err.message}`);
+    }
+  }
+  throw new Error(errors.join(' | '));
+}
+
 function setStatus(live, text) {
   document.getElementById('status-dot').className = `dot ${live?'dot-live':'dot-fallback'}`;
   document.getElementById('status-text').textContent = text;
@@ -1182,30 +1226,37 @@ function renderAll(D) {
 }
 
 async function boot() {
-  document.getElementById('load-status').textContent = 'Fetching live data…';
+  const loadStatus = document.getElementById('load-status');
+  const loadingEl = document.getElementById('loading');
+  const app = document.getElementById('app');
+  loadStatus.textContent = 'Fetching live data…';
 
   let D;
   try {
-    const resp = await fetch(API_URL, {cache:'no-store'});
-    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    const raw = await resp.json();
-    if (!Array.isArray(raw.radio) || !raw.radio.length) throw new Error('empty');
+    const { raw, connector } = await fetchLiveData();
     D = processPayload(raw);
-    setStatus(true, `Live · ${D.songs.length} tracks · ${D.vids.length} videos`);
-    document.getElementById('load-status').textContent = 'Live data loaded ✓';
+    setStatus(true, `Live (${connector}) · ${D.songs.length} tracks · ${D.vids.length} videos`);
+    loadStatus.textContent = 'Live data loaded ✓';
   } catch(err) {
     console.warn('[dashboard] API failed, using fallback:', err.message);
     D = processPayload(makeFallback());
     setStatus(false, 'Sample mode — API unavailable');
-    document.getElementById('load-status').textContent = 'Using sample data';
+    loadStatus.textContent = 'Using sample data';
   }
 
-  renderAll(D);
-
-  // Show app
-  document.getElementById('loading').classList.add('done');
-  const app = document.getElementById('app');
-  app.classList.add('ready');
+  try {
+    renderAll(D);
+  } catch (err) {
+    console.error('[dashboard] render failed, forcing fallback render:', err);
+    D = processPayload(makeFallback());
+    setStatus(false, 'Sample mode — render recovery');
+    loadStatus.textContent = 'Recovered with sample data';
+    renderAll(D);
+  } finally {
+    // Always reveal the app so loader cannot get stuck forever.
+    loadingEl.classList.add('done');
+    app.classList.add('ready');
+  }
 }
 
 /* ─── Tab switching ─────────────────────────────────────────────── */
