@@ -1236,7 +1236,7 @@ async function boot() {
     const { raw, connector } = await fetchLiveData();
     D = processPayload(raw);
     setStatus(true, `Live (${connector}) · ${D.songs.length} tracks · ${D.vids.length} videos`);
-    loadStatus.textContent = 'Live data loaded ✓';
+    document.getElementById('load-status').textContent = 'Live data loaded ✓';
   } catch(err) {
     console.warn('[dashboard] API failed, using fallback:', err.message);
     D = processPayload(makeFallback());
