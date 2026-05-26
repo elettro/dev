@@ -693,7 +693,9 @@ function normVideo(r) {
 }
 
 function sum(arr, fn) { return arr.reduce((a, x) => a + fn(x), 0); }
-function top(arr, fn) { return arr.slice().sort((a,b) => fn(b)-fn(a)); }
+function sortByMetric(arr, fn) {
+  return arr.slice().sort((a, b) => fn(b) - fn(a));
+}
 
 function fmt(n) {
   n = pn(n);
@@ -742,10 +744,10 @@ function makeFallback() {
 /* ── VIEW 1: Command Centre ───────────────────────────────────────── */
 function renderV1(D) {
   const { songs, vids, kpis } = D;
-  const byPlays  = top(songs, s=>s.plays);
-  const byAvg    = top(songs, s=>s.avg);
-  const byShares = top(songs, s=>s.shares);
-  const byVLikes = top(vids, v=>v.likes);
+  const byPlays  = sortByMetric(songs, s=>s.plays);
+  const byAvg    = sortByMetric(songs, s=>s.avg);
+  const byShares = sortByMetric(songs, s=>s.shares);
+  const byVLikes = sortByMetric(vids, v=>v.likes);
 
   const kpiHtml = `
     <div class="bento col-12 kpis-row" style="display:grid;grid-template-columns:repeat(6,1fr);gap:.75rem;margin-bottom:.75rem">
@@ -840,8 +842,8 @@ function renderV1(D) {
 /* ── VIEW 2: Broadcast Room ──────────────────────────────────────── */
 function renderV2(D) {
   const { songs, vids, kpis } = D;
-  const byPlays  = top(songs, s=>s.plays);
-  const byAvg    = top(songs, s=>s.avg);
+  const byPlays  = sortByMetric(songs, s=>s.plays);
+  const byAvg    = sortByMetric(songs, s=>s.avg);
 
   document.getElementById('v2').innerHTML = `
   <div class="broadcast-header">
@@ -909,7 +911,7 @@ function renderV2(D) {
 /* ── VIEW 3: Ice Sheet ───────────────────────────────────────────── */
 function renderV3(D) {
   const { songs, vids, kpis } = D;
-  const byPlays  = top(songs, s=>s.plays);
+  const byPlays  = sortByMetric(songs, s=>s.plays);
   const maxPlays = byPlays[0]?.plays || 1;
 
   const rows = byPlays.slice(0,30).map((s,i)=>`
@@ -932,7 +934,7 @@ function renderV3(D) {
       </div>
     </div>`).join('');
 
-  const vids10 = top(vids, v=>v.likes).slice(0,10);
+  const vids10 = sortByMetric(vids, v=>v.likes).slice(0,10);
 
   document.getElementById('v3').innerHTML = `
   <div class="v3-topbar">
@@ -989,9 +991,9 @@ function renderV3(D) {
 /* ── VIEW 4: Night Market ────────────────────────────────────────── */
 function renderV4(D) {
   const { songs, vids, kpis } = D;
-  const byPlays  = top(songs, s=>s.plays);
-  const byAvg    = top(songs, s=>s.avg);
-  const byShares = top(songs, s=>s.shares);
+  const byPlays  = sortByMetric(songs, s=>s.plays);
+  const byAvg    = sortByMetric(songs, s=>s.avg);
+  const byShares = sortByMetric(songs, s=>s.shares);
 
   const listHtml = (items, label, fn) =>
     items.slice(0,8).map((s,i)=>`
@@ -1047,7 +1049,7 @@ function renderV4(D) {
     <!-- Videos -->
     <div class="nm-card">
       <div class="nm-card-title">▶ Top Videos</div>
-      ${top(vids,v=>v.likes).slice(0,8).map((v,i)=>`
+      ${sortByMetric(vids,v=>v.likes).slice(0,8).map((v,i)=>`
         <div class="nm-list-item">
           <div class="nm-idx">${String(i+1).padStart(2,'0')}</div>
           <div class="nm-li-body">
@@ -1083,8 +1085,8 @@ function renderV4(D) {
 /* ── VIEW 5: Mercury ─────────────────────────────────────────────── */
 function renderV5(D) {
   const { songs, vids, kpis } = D;
-  const byPlays  = top(songs, s=>s.plays);
-  const byShares = top(songs, s=>s.shares);
+  const byPlays  = sortByMetric(songs, s=>s.plays);
+  const byShares = sortByMetric(songs, s=>s.shares);
 
   const rankRows = (items, label, fn) =>
     items.slice(0,12).map((s,i)=>`
@@ -1142,7 +1144,7 @@ function renderV5(D) {
 
       <div class="merc-sidebar-section">
         <div class="merc-sidebar-h">Top Videos</div>
-        ${top(vids,v=>v.likes).slice(0,6).map((v,i)=>`
+        ${sortByMetric(vids,v=>v.likes).slice(0,6).map((v,i)=>`
           <div class="merc-score-item">
             <span style="font-size:.78rem">${v.title}</span>
             <span class="pill pill-p">♥ ${fmt(v.likes)}</span>
