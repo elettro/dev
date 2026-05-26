@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stashbox Radio — Merch Rail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0c0c0e;--surface:#131316;--surface2:#1a1a1f;--surface3:#222228;
+  --border:rgba(255,255,255,0.07);--border-h:rgba(255,255,255,0.16);
+  --text:#eeeae3;--muted:#666;--muted2:#3a3a3a;
+  --accent:#f0a500;--accent-d:rgba(240,165,0,0.1);
+  --green:#3ecf6e;
+  --fh:'Bebas Neue',sans-serif;--fb:'Karla',sans-serif;
+  --rail:300px;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15px;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+/* ── LAYOUT ── */
+.site-nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(12,12,14,.93);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:14px;
+  padding:0 1.5rem;height:56px;
+}
+.s-logo{font-family:var(--fh);font-size:28px;letter-spacing:.06em;color:var(--accent);}
+.s-logo span{color:var(--text);}
+.s-nav-badge{
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 10px;border-radius:4px;
+  background:rgba(240,165,0,.12);color:var(--accent);border:1px solid rgba(240,165,0,.2);
+}
+.s-nav-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.s-count{font-size:12px;color:var(--muted);}
+
+/* Two-column layout */
+.layout{
+  display:grid;
+  grid-template-columns:1fr var(--rail);
+  gap:0;
+  max-width:1300px;
+  margin:0 auto;
+}
+/* On mobile collapse rail */
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr;}
+  .merch-rail{display:none;}
+  .m-merch-strip{display:block !important;}
+}
+
+/* ── LEFT: RADIO ── */
+.radio-col{
+  border-right:1px solid var(--border);
+  padding:1.5rem;
+  min-height:calc(100vh - 56px);
+}
+
+/* Player */
+.now-playing-block{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;margin-bottom:1.5rem;
+}
+.np-art{
+  width:100%;height:240px;background:#000;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.np-art img{width:100%;height:100%;object-fit:cover;}
+.np-art-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,12,14,.9) 0%,transparent 55%);}
+.np-art-playing{
+  position:absolute;bottom:14px;left:16px;
+  font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);background:rgba(12,12,14,.8);border:1px solid rgba(240,165,0,.3);
+  padding:4px 10px;border-radius:4px;
+  display:flex;align-items:center;gap:6px;
+}
+.eq-dots{display:flex;gap:2px;align-items:flex-end;}
+.eq-dot{width:3px;border-radius:1px;background:var(--accent);animation:eq .6s ease-in-out infinite alternate;}
+.eq-dot:nth-child(1){height:8px;animation-delay:0s;}
+.eq-dot:nth-child(2){height:14px;animation-delay:.15s;}
+.eq-dot:nth-child(3){height:6px;animation-delay:.3s;}
+.eq-dot:nth-child(4){height:12px;animation-delay:.1s;}
+@keyframes eq{from{transform:scaleY(.4)}to{transform:scaleY(1)}}
+
+.np-body{padding:16px 20px 20px;}
+.np-title{font-family:var(--fh);font-size:28px;letter-spacing:.04em;color:var(--text);}
+.np-artist{font-size:13px;color:var(--muted);margin-top:3px;}
+.np-genre{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:rgba(62,207,110,.12);color:var(--green);margin-top:6px;}
+.np-controls{display:flex;align-items:center;gap:10px;margin-top:14px;}
+.ncb{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;}
+.ncb:hover{border-color:var(--border-h);color:var(--text);}
+.ncb.play{width:50px;height:50px;background:var(--accent);border-color:var(--accent);color:#0c0c0e;font-size:20px;}
+.np-plays{margin-left:auto;background:rgba(240,165,0,.1);color:var(--accent);border:1px solid rgba(240,165,0,.2);border-radius:999px;padding:5px 12px;font-size:11px;font-weight:800;}
+.np-prog{width:100%;height:3px;background:var(--surface3);border-radius:999px;margin-top:14px;cursor:pointer;}
+.np-prog-fill{height:100%;background:var(--accent);border-radius:999px;width:35%;}
+
+/* Track sections */
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.sec-dot{width:8px;height:8px;border-radius:50%;}
+.sec-name{font-family:var(--fh);font-size:22px;letter-spacing:.05em;}
+.sec-count{font-size:11px;color:var(--muted);}
+.sec-shuf{margin-left:auto;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--muted);cursor:pointer;padding:5px 10px;transition:all .15s;}
+.sec-shuf:hover{border-color:var(--border-h);color:var(--text);}
+.sec-block{margin-bottom:1.75rem;}
+
+.trow{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:all .15s;border:1px solid transparent;}
+.trow:hover{background:var(--surface2);border-color:var(--border);}
+.trow.playing{background:var(--accent-d);border-color:var(--accent);}
+.trow-num{font-size:11px;color:var(--muted2);width:18px;text-align:center;}
+.trow.playing .trow-num{color:var(--accent);}
+.trow-thumb{width:38px;height:38px;border-radius:6px;background:var(--surface3);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.trow-thumb img{width:100%;height:100%;object-fit:cover;}
+.trow-info{flex:1;min-width:0;}
+.trow-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.trow.playing .trow-title{color:var(--accent);}
+.trow-artist{font-size:11px;color:var(--muted);margin-top:1px;}
+.trow-plays{font-size:10px;font-weight:800;color:var(--accent);background:rgba(240,165,0,.1);padding:2px 6px;border-radius:999px;flex-shrink:0;}
+
+/* ── RIGHT: MERCH RAIL ── */
+.merch-rail{
+  position:sticky;top:56px;
+  height:calc(100vh - 56px);
+  overflow-y:auto;
+  padding:20px 16px 24px;
+  scrollbar-width:thin;
+  scrollbar-color:var(--muted2) transparent;
+}
+.merch-rail::-webkit-scrollbar{width:3px;}
+.merch-rail::-webkit-scrollbar-thumb{background:var(--muted2);}
+
+.rail-title{
+  font-family:var(--fh);font-size:20px;letter-spacing:.06em;color:var(--text);
+  margin-bottom:4px;
+}
+.rail-sub{font-size:11px;color:var(--muted);margin-bottom:16px;}
+
+/* Featured / song-matched card */
+.rail-featured{
+  background:linear-gradient(135deg,rgba(240,165,0,.12),rgba(224,92,42,.06));
+  border:1px solid rgba(240,165,0,.3);
+  border-radius:12px;overflow:hidden;margin-bottom:16px;
+  text-decoration:none;display:block;
+  transition:border-color .2s,transform .2s;
+  position:relative;
+}
+.rail-featured:hover{border-color:rgba(240,165,0,.55);transform:translateY(-1px);}
+.rail-feat-img{width:100%;aspect-ratio:1;overflow:hidden;background:#000;}
+.rail-feat-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s;}
+.rail-featured:hover .rail-feat-img img{transform:scale(1.04);}
+.rail-feat-tag{
+  position:absolute;top:10px;left:10px;
+  font-size:8px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 8px;border-radius:4px;
+  background:var(--accent);color:#0c0c0e;
+}
+.rail-feat-body{padding:12px;}
+.rail-feat-label{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;}
+.rail-feat-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.35;}
+.rail-feat-price{font-family:var(--fh);font-size:18px;letter-spacing:.04em;color:var(--accent);margin-top:5px;}
+.rail-feat-btn{
+  display:block;width:100%;
+  background:var(--accent);color:#0c0c0e;
+  border:none;border-radius:7px;
+  font-family:var(--fh);font-size:15px;letter-spacing:.06em;
+  padding:10px;cursor:pointer;margin-top:10px;
+  text-align:center;text-decoration:none;
+  transition:opacity .2s;
+}
+.rail-feat-btn:hover{opacity:.88;}
+
+/* Rail section label */
+.rail-sec{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 10px;display:flex;align-items:center;gap:8px;}
+.rail-sec::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* Compact cards */
+.rail-item{
+  display:flex;gap:10px;align-items:center;
+  background:var(--surface2);border:1px solid var(--border);border-radius:10px;
+  padding:10px;margin-bottom:8px;cursor:pointer;
+  text-decoration:none;transition:all .15s;
+}
+.rail-item:hover{border-color:var(--border-h);transform:translateX(2px);}
+.rail-item-img{width:52px;height:52px;border-radius:8px;overflow:hidden;flex-shrink:0;background:var(--surface3);}
+.rail-item-img img{width:100%;height:100%;object-fit:cover;}
+.rail-item-info{flex:1;min-width:0;}
+.rail-item-name{font-size:12px;font-weight:600;color:var(--text);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.rail-item-price{font-family:var(--fh);font-size:15px;letter-spacing:.04em;color:var(--accent);margin-top:3px;}
+.rail-item-arrow{color:var(--muted);font-size:16px;flex-shrink:0;transition:transform .15s;}
+.rail-item:hover .rail-item-arrow{transform:translateX(3px);color:var(--accent);}
+
+/* View all */
+.rail-view-all{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:12px;border:1px solid var(--border);border-radius:8px;
+  color:var(--muted);font-size:12px;font-weight:600;
+  text-decoration:none;transition:all .15s;margin-top:4px;
+}
+.rail-view-all:hover{border-color:var(--border-h);color:var(--text);}
+
+/* Mobile merch strip (shown only on mobile) */
+.m-merch-strip{display:none;padding:1.25rem;border-top:1px solid var(--border);background:var(--surface);}
+.m-strip-title{font-family:var(--fh);font-size:22px;letter-spacing:.06em;color:var(--text);margin-bottom:12px;}
+.m-strip-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;}
+.m-strip-scroll::-webkit-scrollbar{display:none;}
+.m-strip-card{flex-shrink:0;width:150px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;transition:border-color .15s;}
+.m-strip-card:hover{border-color:rgba(240,165,0,.35);}
+.m-strip-img{width:100%;aspect-ratio:1;overflow:hidden;background:#000;}
+.m-strip-img img{width:100%;height:100%;object-fit:cover;}
+.m-strip-info{padding:8px;}
+.m-strip-name{font-size:11px;font-weight:600;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.m-strip-price{font-family:var(--fh);font-size:14px;color:var(--accent);margin-top:3px;}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <div class="s-logo">STASH<span>BOX</span></div>
+  <span class="s-nav-badge">Radio</span>
+  <div class="s-nav-right">
+    <span class="s-count">48 tracks</span>
+  </div>
+</nav>
+
+<!-- TWO-COLUMN LAYOUT -->
+<div class="layout">
+
+  <!-- ── RADIO COL ── -->
+  <div class="radio-col">
+
+    <!-- NOW PLAYING -->
+    <div class="now-playing-block">
+      <div class="np-art">
+        <img src="https://stashbox.ai/cdn/shop/files/15326049029982271475_2048.jpg?v=1750620993" alt="Tahitian Girl" onerror="this.style.display='none'"/>
+        <div class="np-art-overlay"></div>
+        <div class="np-art-playing">
+          <div class="eq-dots">
+            <div class="eq-dot"></div><div class="eq-dot"></div><div class="eq-dot"></div><div class="eq-dot"></div>
+          </div>
+          Now Playing
+        </div>
+      </div>
+      <div class="np-body">
+        <div class="np-title">Tahitian Girl</div>
+        <div class="np-artist">Stashbox · Tahiti Cora</div>
+        <span class="np-genre">Reggae</span>
+        <div class="np-controls">
+          <button class="ncb">◀</button>
+          <button class="ncb play" onclick="this.textContent=this.textContent==='⏸'?'▶':'⏸'">⏸</button>
+          <button class="ncb">▶▶</button>
+          <button class="ncb" title="Shuffle">⊙</button>
+          <span class="np-plays">▶ 124 Plays</span>
+        </div>
+        <div class="np-prog"><div class="np-prog-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- TRACK SECTIONS -->
+    <div class="sec-block">
+      <div class="sec-hdr">
+        <div class="sec-dot" style="background:#3ecf6e;"></div>
+        <div class="sec-name">🌴 Reggae</div>
+        <div class="sec-count">12 tracks</div>
+        <button class="sec-shuf">⇄ Shuffle</button>
+      </div>
+      <div class="trow playing">
+        <div class="trow-num">♪</div>
+        <div class="trow-thumb"><img src="https://stashbox.ai/cdn/shop/files/15326049029982271475_2048.jpg?v=1750620993" alt="" onerror="this.style.display='none'"/></div>
+        <div class="trow-info"><div class="trow-title">Tahitian Girl</div><div class="trow-artist">Stashbox</div></div>
+        <div class="trow-plays">124</div>
+      </div>
+      <div class="trow">
+        <div class="trow-num">2</div>
+        <div class="trow-thumb" style="font-size:16px;">🌴</div>
+        <div class="trow-info"><div class="trow-title">Rasta Groove</div><div class="trow-artist">Stashbox</div></div>
+        <div class="trow-plays">67</div>
+      </div>
+      <div class="trow">
+        <div class="trow-num">3</div>
+        <div class="trow-thumb" style="font-size:16px;">🥁</div>
+        <div class="trow-info"><div class="trow-title">Island Time</div><div class="trow-artist">Stashbox</div></div>
+        <div class="trow-plays">44</div>
+      </div>
+    </div>
+
+    <div class="sec-block">
+      <div class="sec-hdr">
+        <div class="sec-dot" style="background:#f0a500;"></div>
+        <div class="sec-name">🎸 Rock</div>
+        <div class="sec-count">9 tracks</div>
+        <button class="sec-shuf">⇄ Shuffle</button>
+      </div>
+      <div class="trow">
+        <div class="trow-num">1</div>
+        <div class="trow-thumb"><img src="https://stashbox.ai/cdn/shop/files/14270417816424240846_2048.jpg?v=1750101849" alt="" onerror="this.style.display='none'"/></div>
+        <div class="trow-info"><div class="trow-title">In Love With You</div><div class="trow-artist">Stashbox</div></div>
+        <div class="trow-plays">89</div>
+      </div>
+      <div class="trow">
+        <div class="trow-num">2</div>
+        <div class="trow-thumb" style="font-size:16px;">🎸</div>
+        <div class="trow-info"><div class="trow-title">Guitar Girl</div><div class="trow-artist">Stashbox</div></div>
+        <div class="trow-plays">58</div>
+      </div>
+      <div class="trow">
+        <div class="trow-num">3</div>
+        <div class="trow-thumb" style="font-size:16px;">🔥</div>
+        <div class="trow-info"><div class="trow-title">Drinking Fire</div><div class="trow-artist">Stashbox</div></div>
+        <div class="trow-plays">51</div>
+      </div>
+    </div>
+
+    <!-- Mobile merch strip (shown only <900px) -->
+    <div class="m-merch-strip">
+      <div class="m-strip-title">STASHBOX MERCH</div>
+      <div class="m-strip-scroll">
+        <a class="m-strip-card" href="https://stashbox.ai/products/tahitian-girl-tahiti-cora-song-t-shirt-stashbox-edition" target="_blank">
+          <div class="m-strip-img"><img src="https://stashbox.ai/cdn/shop/files/617706598181225270_2048.jpg?v=1750620996" alt=""/></div>
+          <div class="m-strip-info"><div class="m-strip-name">Tahitian Girl T-Shirt</div><div class="m-strip-price">$14.99</div></div>
+        </a>
+        <a class="m-strip-card" href="https://stashbox.ai/products/womens-vintage-music-tee-in-love-with-you-graphic-casual-fashion-gift-for-music-lovers-concert-wear-everyday-style" target="_blank">
+          <div class="m-strip-img"><img src="https://stashbox.ai/cdn/shop/files/14270417816424240846_2048.jpg?v=1750101849" alt=""/></div>
+          <div class="m-strip-info"><div class="m-strip-name">In Love With You Tee</div><div class="m-strip-price">$17.33</div></div>
+        </a>
+        <a class="m-strip-card" href="https://stashbox.ai/products/round-rug-stashbox-rasta-green-yellow-red-tropical-des" target="_blank">
+          <div class="m-strip-img" style="background:linear-gradient(135deg,#1a1a0a,#0c0c0e);display:flex;align-items:center;justify-content:center;font-size:32px;">🌿</div>
+          <div class="m-strip-info"><div class="m-strip-name">Rasta Round Rug</div><div class="m-strip-price">Shop →</div></div>
+        </a>
+        <a class="m-strip-card" href="https://stashbox.ai/products/unisex-heavy-cotton-tee-stashbox-drinking-fire-001" target="_blank">
+          <div class="m-strip-img" style="background:linear-gradient(135deg,#1a0505,#0c0c0e);display:flex;align-items:center;justify-content:center;font-size:32px;">🔥</div>
+          <div class="m-strip-info"><div class="m-strip-name">Drinking Fire Tee 001</div><div class="m-strip-price">Shop →</div></div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── MERCH RAIL ── -->
+  <div class="merch-rail">
+    <div class="rail-title">MERCH SHOP</div>
+    <div class="rail-sub">Official Stashbox drops</div>
+
+    <!-- Featured: song-matched -->
+    <a class="rail-featured" href="https://stashbox.ai/products/tahitian-girl-tahiti-cora-song-t-shirt-stashbox-edition" target="_blank">
+      <div class="rail-feat-tag">🎵 Playing Now</div>
+      <div class="rail-feat-img">
+        <img src="https://stashbox.ai/cdn/shop/files/617706598181225270_2048.jpg?v=1750620996" alt="Tahitian Girl Tee"/>
+      </div>
+      <div class="rail-feat-body">
+        <div class="rail-feat-label">Song Merch · Wear This Track</div>
+        <div class="rail-feat-name">Tahitian Girl – Tahiti Cora T-Shirt – Stashbox Edition</div>
+        <div class="rail-feat-price">$14.99</div>
+        <a class="rail-feat-btn" href="https://stashbox.ai/products/tahitian-girl-tahiti-cora-song-t-shirt-stashbox-edition" target="_blank">Shop Now →</a>
+      </div>
+    </a>
+
+    <div class="rail-sec">More Drops</div>
+
+    <a class="rail-item" href="https://stashbox.ai/products/womens-vintage-music-tee-in-love-with-you-graphic-casual-fashion-gift-for-music-lovers-concert-wear-everyday-style" target="_blank">
+      <div class="rail-item-img">
+        <img src="https://stashbox.ai/cdn/shop/files/14270417816424240846_2048.jpg?v=1750101849" alt="In Love With You Tee"/>
+      </div>
+      <div class="rail-item-info">
+        <div class="rail-item-name">Women's 'In Love With You' Vintage Music Tee</div>
+        <div class="rail-item-price">$17.33</div>
+      </div>
+      <div class="rail-item-arrow">›</div>
+    </a>
+
+    <a class="rail-item" href="https://stashbox.ai/products/round-rug-stashbox-rasta-green-yellow-red-tropical-des" target="_blank">
+      <div class="rail-item-img" style="background:linear-gradient(135deg,#1a2010,#0c0c0e);display:flex;align-items:center;justify-content:center;font-size:24px;">🌿</div>
+      <div class="rail-item-info">
+        <div class="rail-item-name">Round Rug – Rasta Green Yellow Red Tropical</div>
+        <div class="rail-item-price">Shop →</div>
+      </div>
+      <div class="rail-item-arrow">›</div>
+    </a>
+
+    <a class="rail-item" href="https://stashbox.ai/products/unisex-heavy-cotton-tee-stashbox-drinking-fire-001" target="_blank">
+      <div class="rail-item-img" style="background:linear-gradient(135deg,#200808,#0c0c0e);display:flex;align-items:center;justify-content:center;font-size:24px;">🔥</div>
+      <div class="rail-item-info">
+        <div class="rail-item-name">Unisex Heavy Cotton Tee – Drinking Fire 001</div>
+        <div class="rail-item-price">Shop →</div>
+      </div>
+      <div class="rail-item-arrow">›</div>
+    </a>
+
+    <div class="rail-sec" style="margin-top:20px;">Catalog</div>
+    <a class="rail-view-all" href="https://stashbox.ai" target="_blank">
+      View All Stashbox Merch →
+    </a>
+
+    <!-- small brand blurb -->
+    <div style="margin-top:20px;padding:14px;background:var(--surface2);border-radius:10px;border:1px solid var(--border);">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">About</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.55;">High quality limited edition Stashbox artwork merch — shirts, rugs, pint glasses, bikinis & more. Each drop tied to a song.</div>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+        <a href="https://twitter.com/stashboxmusic" target="_blank" style="color:var(--muted);font-size:11px;text-decoration:none;">Twitter</a>
+        <a href="https://www.instagram.com/stashboxmusic/" target="_blank" style="color:var(--muted);font-size:11px;text-decoration:none;">Instagram</a>
+        <a href="https://www.youtube.com/@stashboxband" target="_blank" style="color:var(--muted);font-size:11px;text-decoration:none;">YouTube</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /layout -->
+
+<script>
+// Highlight on click
+document.querySelectorAll('.trow').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.trow').forEach(x=>x.classList.remove('playing'));
+    el.classList.add('playing');
+  });
+});
+</script>
+</body>
+</html>
