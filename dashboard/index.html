@@ -1226,7 +1226,10 @@ function renderAll(D) {
 }
 
 async function boot() {
-  document.getElementById('load-status').textContent = 'Fetching live data…';
+  const loadStatus = document.getElementById('load-status');
+  const loadingEl = document.getElementById('loading');
+  const app = document.getElementById('app');
+  loadStatus.textContent = 'Fetching live data…';
 
   let D;
   try {
@@ -1238,15 +1241,22 @@ async function boot() {
     console.warn('[dashboard] API failed, using fallback:', err.message);
     D = processPayload(makeFallback());
     setStatus(false, 'Sample mode — API unavailable');
-    document.getElementById('load-status').textContent = 'Using sample data';
+    loadStatus.textContent = 'Using sample data';
   }
 
-  renderAll(D);
-
-  // Show app
-  document.getElementById('loading').classList.add('done');
-  const app = document.getElementById('app');
-  app.classList.add('ready');
+  try {
+    renderAll(D);
+  } catch (err) {
+    console.error('[dashboard] render failed, forcing fallback render:', err);
+    D = processPayload(makeFallback());
+    setStatus(false, 'Sample mode — render recovery');
+    loadStatus.textContent = 'Recovered with sample data';
+    renderAll(D);
+  } finally {
+    // Always reveal the app so loader cannot get stuck forever.
+    loadingEl.classList.add('done');
+    app.classList.add('ready');
+  }
 }
 
 /* ─── Tab switching ─────────────────────────────────────────────── */
