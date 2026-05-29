@@ -18,9 +18,7 @@
       --shadow: 0 24px 70px rgba(7, 20, 47, 0.14);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -30,17 +28,14 @@
       line-height: 1.6;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .site-header {
       position: sticky;
       top: 0;
       z-index: 20;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.24);
-      background: rgba(7, 20, 47, 0.88);
+      border-bottom: 1px solid rgba(255,255,255,0.24);
+      background: rgba(7,20,47,0.88);
       backdrop-filter: blur(18px);
     }
 
@@ -57,36 +52,27 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      min-width: 0;
       padding: 8px 12px;
-      border: 1px solid rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255,255,255,0.72);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.16);
     }
 
-    .brand-logo {
-      display: block;
-      width: auto;
-      max-height: 42px;
-      object-fit: contain;
-    }
+    .brand-logo { display: block; width: auto; max-height: 42px; object-fit: contain; }
 
     .main-nav {
       display: flex;
       align-items: center;
-      gap: clamp(14px, 2vw, 28px);
-      color: rgba(255, 255, 255, 0.88);
+      gap: clamp(14px,2vw,28px);
+      color: rgba(255,255,255,0.88);
       font-size: 0.95rem;
       font-weight: 700;
     }
 
-    .main-nav a:hover {
-      color: var(--white);
-    }
+    .main-nav a:hover { color: var(--white); }
 
-    .nav-cta,
-    .button {
+    .nav-cta, .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -100,19 +86,16 @@
     .nav-cta {
       color: var(--white);
       background: linear-gradient(135deg, var(--red), #ed4860);
-      box-shadow: 0 14px 34px rgba(207, 24, 53, 0.28);
+      box-shadow: 0 14px 34px rgba(207,24,53,0.28);
     }
 
-    .button:hover,
-    .nav-cta:hover {
-      transform: translateY(-2px);
-    }
+    .button:hover, .nav-cta:hover { transform: translateY(-2px); }
 
     .hero {
       overflow: hidden;
       position: relative;
       background:
-        radial-gradient(circle at 84% 18%, rgba(207, 24, 53, 0.18), transparent 28%),
+        radial-gradient(circle at 84% 18%, rgba(207,24,53,0.18), transparent 28%),
         linear-gradient(135deg, #07142f 0%, #0a2c74 52%, #0e4fb6 100%);
       color: var(--white);
     }
@@ -123,7 +106,7 @@
       inset: auto -10% -32% 38%;
       height: 420px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255,255,255,0.12);
       filter: blur(20px);
     }
 
@@ -134,7 +117,7 @@
       margin: 0 auto;
       padding: 92px 0 104px;
       display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.78fr);
+      grid-template-columns: minmax(0,1.02fr) minmax(320px,0.78fr);
       gap: 58px;
       align-items: center;
     }
@@ -144,19 +127,13 @@
       align-items: center;
       padding: 14px 18px;
       margin-bottom: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.38);
+      border: 1px solid rgba(255,255,255,0.38);
       border-radius: 26px;
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255,255,255,0.96);
       box-shadow: var(--shadow);
     }
 
-    .hero-logo {
-      display: block;
-      width: auto;
-      max-width: 220px;
-      max-height: 134px;
-      object-fit: contain;
-    }
+    .hero-logo { display: block; width: auto; max-width: 220px; max-height: 134px; object-fit: contain; }
 
     .eyebrow {
       display: inline-flex;
@@ -170,25 +147,20 @@
       text-transform: uppercase;
     }
 
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
-    }
+    h1, h2, h3, p { margin-top: 0; }
 
     h1 {
       max-width: 760px;
       margin-bottom: 24px;
-      font-size: clamp(2.8rem, 7vw, 5.8rem);
+      font-size: clamp(2.8rem,7vw,5.8rem);
       line-height: 0.96;
       letter-spacing: -0.07em;
     }
 
     .hero-copy {
       max-width: 660px;
-      color: rgba(255, 255, 255, 0.78);
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,0.78);
+      font-size: clamp(1.05rem,2vw,1.25rem);
     }
 
     .hero-actions {
@@ -201,21 +173,21 @@
     .button-primary {
       color: var(--white);
       background: linear-gradient(135deg, var(--red), #f35369);
-      box-shadow: 0 18px 38px rgba(207, 24, 53, 0.34);
+      box-shadow: 0 18px 38px rgba(207,24,53,0.34);
     }
 
     .button-secondary {
       color: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.32);
-      background: rgba(255, 255, 255, 0.11);
+      border: 1px solid rgba(255,255,255,0.32);
+      background: rgba(255,255,255,0.11);
     }
 
     .hero-card {
       position: relative;
       padding: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255,255,255,0.22);
       border-radius: 34px;
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255,255,255,0.12);
       box-shadow: var(--shadow);
       backdrop-filter: blur(18px);
     }
@@ -228,72 +200,46 @@
       margin-bottom: 28px;
       border-radius: 50%;
       background: radial-gradient(circle, var(--red) 0 36%, #fff 37% 60%, var(--navy) 61% 100%);
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+      box-shadow: 0 18px 42px rgba(0,0,0,0.24);
     }
 
-    .metric-grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 26px;
-    }
+    .metric-grid { display: grid; gap: 14px; margin-top: 26px; }
 
-    .metric {
-      padding: 18px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.12);
-    }
+    .metric { padding: 18px; border-radius: 20px; background: rgba(255,255,255,0.12); }
+    .metric strong { display: block; font-size: 1.8rem; line-height: 1; }
 
-    .metric strong {
-      display: block;
-      font-size: 1.8rem;
-      line-height: 1;
-    }
-
-    section {
-      padding: 88px 0;
-    }
+    section { padding: 88px 0; }
 
     .section-wrap {
       width: min(1180px, calc(100% - 36px));
       margin: 0 auto;
     }
 
-    .section-heading {
-      max-width: 720px;
-      margin-bottom: 38px;
-    }
+    .section-heading { max-width: 720px; margin-bottom: 38px; }
 
     .section-heading h2 {
       margin-bottom: 16px;
-      font-size: clamp(2rem, 4vw, 3.35rem);
+      font-size: clamp(2rem,4vw,3.35rem);
       line-height: 1.04;
       letter-spacing: -0.045em;
     }
 
-    .section-heading p {
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
+    .section-heading p { color: var(--muted); font-size: 1.08rem; }
 
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0,1fr));
       gap: 22px;
     }
 
-    .service-card,
-    .price-card,
-    .contact-panel {
+    .service-card, .price-card, .contact-panel {
       border: 1px solid var(--line);
       border-radius: 28px;
       background: var(--white);
-      box-shadow: 0 18px 55px rgba(8, 39, 103, 0.08);
+      box-shadow: 0 18px 55px rgba(8,39,103,0.08);
     }
 
-    .service-card,
-    .price-card {
-      padding: 28px;
-    }
+    .service-card, .price-card { padding: 28px; }
 
     .icon {
       width: 52px;
@@ -301,19 +247,103 @@
       margin-bottom: 24px;
       border-radius: 18px;
       background: linear-gradient(135deg, var(--navy), var(--blue));
-      box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 0 0 10px rgba(255,255,255,0.1);
     }
 
-    .service-card h3,
-    .price-card h3 {
-      margin-bottom: 12px;
-      font-size: 1.3rem;
+    .service-card h3, .price-card h3 { margin-bottom: 12px; font-size: 1.3rem; }
+    .service-card p, .price-card p { color: var(--muted); }
+
+    /* ── DATABASE CATEGORIES SECTION ── */
+    .db-categories {
+      background: linear-gradient(180deg, var(--white) 0%, #eef4ff 100%);
+      padding: 88px 0;
     }
 
-    .service-card p,
-    .price-card p {
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .category-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: 0 8px 28px rgba(8,39,103,0.07);
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      cursor: default;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 22px 52px rgba(8,39,103,0.15);
+    }
+
+    .category-img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .category-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 18px 16px 20px;
+    }
+
+    .category-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .category-card h3 {
+      margin: 0;
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .category-card p {
+      margin: 0;
+      font-size: 0.79rem;
       color: var(--muted);
+      line-height: 1.45;
     }
+
+    .ic-red    { background: #fff0f2; }
+    .ic-navy   { background: #eaf0fd; }
+    .ic-blue   { background: #e6f1ff; }
+    .ic-teal   { background: #e1f5ee; }
+    .ic-amber  { background: #faeeda; }
+    .ic-green  { background: #eaf3de; }
+    .ic-coral  { background: #faece7; }
+    .ic-slate  { background: #eef1f7; }
+    .ic-indigo { background: #ede9fe; }
+    .ic-pink   { background: #fbeaf0; }
+
+    .db-categories .section-heading { margin-bottom: 42px; }
+    /* ── END DATABASE CATEGORIES ── */
 
     .pricing {
       background: linear-gradient(180deg, #f7faff 0%, var(--sky) 100%);
@@ -325,10 +355,7 @@
       transform: translateY(-10px);
     }
 
-    .price-card.featured p,
-    .price-card.featured li {
-      color: rgba(255, 255, 255, 0.74);
-    }
+    .price-card.featured p, .price-card.featured li { color: rgba(255,255,255,0.74); }
 
     .price {
       margin: 18px 0;
@@ -337,26 +364,11 @@
       letter-spacing: -0.05em;
     }
 
-    .price span {
-      color: var(--muted);
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0;
-    }
+    .price span { color: var(--muted); font-size: 0.95rem; font-weight: 700; letter-spacing: 0; }
+    .price-card.featured .price span { color: rgba(255,255,255,0.6); }
 
-    .price-card.featured .price span {
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 20px;
-      color: var(--muted);
-    }
-
-    li + li {
-      margin-top: 8px;
-    }
+    ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    li + li { margin-top: 8px; }
 
     .contact-panel {
       display: grid;
@@ -365,17 +377,13 @@
       padding: 34px;
       align-items: center;
       background:
-        radial-gradient(circle at 85% 10%, rgba(207, 24, 53, 0.12), transparent 24%),
+        radial-gradient(circle at 85% 10%, rgba(207,24,53,0.12), transparent 24%),
         var(--white);
     }
 
-    .contact-panel form {
-      display: grid;
-      gap: 14px;
-    }
+    .contact-panel form { display: grid; gap: 14px; }
 
-    input,
-    textarea {
+    input, textarea {
       width: 100%;
       border: 1px solid var(--line);
       border-radius: 16px;
@@ -385,14 +393,11 @@
       background: #f9fbff;
     }
 
-    textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
+    textarea { min-height: 130px; resize: vertical; }
 
     .site-footer {
       padding: 42px 0;
-      color: rgba(255, 255, 255, 0.72);
+      color: rgba(255,255,255,0.72);
       background: var(--ink);
     }
 
@@ -410,83 +415,35 @@
       align-items: center;
       padding: 7px 10px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255,255,255,0.96);
     }
 
-    .footer-logo {
-      display: block;
-      width: auto;
-      max-height: 36px;
-      object-fit: contain;
-    }
+    .footer-logo { display: block; width: auto; max-height: 36px; object-fit: contain; }
+    .footer-note { margin: 0; text-align: right; }
 
-    .footer-note {
-      margin: 0;
-      text-align: right;
+    @media (max-width: 1024px) {
+      .categories-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
     }
 
     @media (max-width: 860px) {
-      .nav-wrap {
-        min-height: auto;
-        padding: 16px 0;
-        flex-wrap: wrap;
-      }
-
-      .main-nav {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px 18px;
-      }
-
-      .brand-logo {
-        max-height: 38px;
-      }
-
-      .hero-grid,
-      .contact-panel {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-grid {
-        padding-top: 64px;
-      }
-
-      .card-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .price-card.featured {
-        transform: none;
-      }
-
-      .footer-wrap {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .footer-note {
-        text-align: left;
-      }
+      .nav-wrap { min-height: auto; padding: 16px 0; flex-wrap: wrap; }
+      .main-nav { order: 3; width: 100%; justify-content: center; flex-wrap: wrap; gap: 12px 18px; }
+      .brand-logo { max-height: 38px; }
+      .hero-grid, .contact-panel { grid-template-columns: 1fr; }
+      .hero-grid { padding-top: 64px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .price-card.featured { transform: none; }
+      .categories-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .footer-wrap { align-items: flex-start; flex-direction: column; }
+      .footer-note { text-align: left; }
     }
 
     @media (max-width: 560px) {
-      .nav-cta {
-        width: 100%;
-      }
-
-      .brand {
-        margin: 0 auto;
-      }
-
-      .hero-actions .button {
-        width: 100%;
-      }
-
-      .hero-logo {
-        max-width: 190px;
-      }
+      .nav-cta { width: 100%; }
+      .brand { margin: 0 auto; }
+      .hero-actions .button { width: 100%; }
+      .hero-logo { max-width: 190px; }
+      .categories-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -498,6 +455,7 @@
       </a>
       <nav class="main-nav" aria-label="Primary navigation">
         <a href="#services">Services</a>
+        <a href="#databases">Databases</a>
         <a href="#pricing">Plans</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -558,6 +516,131 @@
         </div>
       </div>
     </section>
+
+    <!-- DATABASE CATEGORIES SECTION -->
+    <section id="databases" class="db-categories" aria-labelledby="db-title">
+      <div class="section-wrap">
+        <div class="section-heading db-categories">
+          <p class="eyebrow" style="color: var(--blue);">Database Categories</p>
+          <h2 id="db-title">Precision data across every major industry vertical.</h2>
+          <p>DataSeek maintains curated, continuously updated contact databases spanning ten high-value sectors — giving your team the reach it needs without the noise.</p>
+        </div>
+        <div class="categories-grid">
+
+          <article class="category-card">
+            <img class="category-img" src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=260&fit=crop&auto=format" alt="Athletics" loading="lazy">
+            <div class="category-body">
+              <div class="category-label">
+                <div class="category-icon ic-red" aria-hidden="true">🏆</div>
+                <h3>Athletics</h3>
+              </div>
+              <p>Coaches, athletic directors, and program decision-makers across high school and collegiate sports.</p>
+            </div>
+          </article>
+
+          <article class="category-card">
+            <img class="category-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=260&fit=crop&auto=format" alt="Business Services" loading="lazy">
+            <div class="category-body">
+              <div class="category-label">
+                <div class="category-icon ic-navy" aria-hidden="true">💼</div>
+                <h3>Business Services</h3>
+              </div>
+              <p>Key contacts at professional services firms, agencies, and B2B organizations nationwide.</p>
+            </div>
+          </article>
+
+          <article class="category-card">
+            <img class="category-img" src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=260&fit=crop&auto=format" alt="Education" loading="lazy">
+            <div class="category-body">
+              <div class="category-label">
+                <div class="category-icon ic-blue" aria-hidden="true">🎓</div>
+                <h3>Education</h3>
+              </div>
+              <p>Administrators, department heads, and procurement contacts across K–12 and higher education.</p>
+            </div>
+          </article>
+
+          <article class="category-card">
+            <img class="category-img" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&h=260&fit=crop&auto=format" alt="Elite Consumers" loading="lazy">
+            <div class="category-body">
+              <div class="category-label">
+                <div class="category-icon ic-amber" aria-hidden="true">⭐</div>
+                <h3>Elite Consumers</h3>
+              </div>
+              <p>High-net-worth individuals segmented by lifestyle, purchasing behavior, and geography.</p>
+            </div>
+          </article>
+
+          <article class="category-card">
+            <img class="category-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=260&fit=crop&auto=format" alt="Financial Services" loading="lazy">
+            <div class="category-body">
+              <div class="category-label">
+                <div class="category-icon ic-green" aria-hidden="true">📈</div>
+                <h3>Financial Services</h3>
+              </div>
+              <p>Decision-makers at banks, credit unions, wealth management firms, and insurance providers.</p>
+            </div>
+          </article>
+
+          <article class="category-card">
+            <img class="category-img" src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=260&fit=crop&auto=format" alt="Health Care" loading="lazy">
+            <div class="category-body">
+              <div class="category-label">
+                <div class="category-icon ic-teal" aria-hidden="true">🏥</div>
+                <h3>Health Care</h3>
+              </div>
+              <p>Physicians, practice managers, hospital administrators, and clinical procurement contacts.</p>
+            </div>
+          </article>
+
+          <article class="category-card">
+            <img class="category-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=260&fit=crop&auto=format" alt="Hospitality" loading="lazy">
+            <div class="category-body">
+              <div class="category-label">
+                <div class="category-icon ic-coral" aria-hidden="true">🏨</div>
+                <h3>Hospitality</h3>
+              </div>
+              <p>General managers, F&amp;B directors, and operations leads at hotels, resorts, and venues.</p>
+            </div>
+          </article>
+
+          <article class="category-card">
+            <img class="category-img" src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=400&h=260&fit=crop&auto=format" alt="Manufacturing" loading="lazy">
+            <div class="category-body">
+              <div class="category-label">
+                <div class="category-icon ic-slate" aria-hidden="true">🏭</div>
+                <h3>Manufacturing</h3>
+              </div>
+              <p>Plant managers, purchasing agents, and operations executives across industrial sectors.</p>
+            </div>
+          </article>
+
+          <article class="category-card">
+            <img class="category-img" src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=400&h=260&fit=crop&auto=format" alt="Recreation" loading="lazy">
+            <div class="category-body">
+              <div class="category-label">
+                <div class="category-icon ic-indigo" aria-hidden="true">⛳</div>
+                <h3>Recreation</h3>
+              </div>
+              <p>Country clubs, golf facilities, marinas, and leisure destination contacts and decision-makers.</p>
+            </div>
+          </article>
+
+          <article class="category-card">
+            <img class="category-img" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=260&fit=crop&auto=format" alt="Retail" loading="lazy">
+            <div class="category-body">
+              <div class="category-label">
+                <div class="category-icon ic-pink" aria-hidden="true">🛍️</div>
+                <h3>Retail</h3>
+              </div>
+              <p>Buyers, store directors, and regional managers at independent and chain retail operations.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+    <!-- END DATABASE CATEGORIES -->
 
     <section id="pricing" class="pricing" aria-labelledby="pricing-title">
       <div class="section-wrap">
