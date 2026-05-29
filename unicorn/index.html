@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Unicorn Animations</title>
+  <meta name="description" content="Numbered Unicorn Studio animation previews for review and selection." />
+
+  <style>
+    :root {
+      --bg: #05070d;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-border: rgba(255, 255, 255, 0.14);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.72);
+      --accent: #6be4ff;
+      --accent-2: #8f7cff;
+      --max: 1440px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(107, 228, 255, 0.16), transparent 34%),
+        radial-gradient(circle at top right, rgba(143, 124, 255, 0.18), transparent 30%),
+        linear-gradient(180deg, #05070d 0%, #0a1020 48%, #05070d 100%);
+      color: var(--text);
+    }
+
+    .site-wrap {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(5, 7, 13, 0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .nav {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand strong {
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .jump-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .jump-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 9px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .jump-nav a:hover {
+      border-color: rgba(107, 228, 255, 0.55);
+      color: var(--accent);
+    }
+
+    .hero {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      padding: clamp(56px, 8vw, 96px) 0 36px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(107, 228, 255, 0.08);
+      border: 1px solid rgba(107, 228, 255, 0.25);
+      color: var(--accent);
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 7vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      margin: 0;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 24px auto 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.55;
+    }
+
+    .section {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      padding: 34px 0;
+    }
+
+    .animation-card {
+      margin: 0 0 42px;
+      padding: clamp(16px, 2vw, 24px);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035));
+      border: 1px solid var(--panel-border);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+    }
+
+    .animation-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .animation-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .number {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #06101a;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 28px rgba(107, 228, 255, 0.22);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      letter-spacing: -0.035em;
+    }
+
+    .project-id {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .unicorn-frame {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      min-height: 360px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .unicorn-frame > div[data-us-project] {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    footer {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      padding: 34px 0 54px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 800px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .jump-nav {
+        justify-content: flex-start;
+      }
+
+      .jump-nav a {
+        font-size: 0.82rem;
+        padding: 8px 10px;
+      }
+
+      .hero {
+        text-align: left;
+      }
+
+      .hero p {
+        margin-left: 0;
+      }
+
+      .animation-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .unicorn-frame {
+        min-height: 300px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .unicorn-frame {
+        min-height: 260px;
+        aspect-ratio: 9 / 12;
+      }
+
+      .animation-card {
+        border-radius: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site-wrap">
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <strong>Unicorn Animations</strong>
+          <span>Numbered preview sheet</span>
+        </div>
+
+        <nav class="jump-nav" aria-label="Animation navigation">
+          <a href="#animation-1">1</a>
+          <a href="#animation-2">2</a>
+          <a href="#animation-3">3</a>
+          <a href="#animation-4">4</a>
+          <a href="#animation-5">5</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Unicorn Studio Review Page</div>
+        <h1>Unicorn Animations</h1>
+        <p>
+          Five embedded Unicorn Studio animation concepts, numbered for easy review,
+          feedback, and future selection.
+        </p>
+      </section>
+
+      <section class="section">
+        <article class="animation-card" id="animation-1">
+          <div class="animation-header">
+            <div class="animation-title">
+              <div class="number">1</div>
+              <h2>Unicorn Animation 1</h2>
+            </div>
+            <div class="project-id">Project: O4k7vTNtuy0scm3iXa59</div>
+          </div>
+
+          <div class="unicorn-frame">
+            <div data-us-project="O4k7vTNtuy0scm3iXa59"></div>
+          </div>
+        </article>
+
+        <article class="animation-card" id="animation-2">
+          <div class="animation-header">
+            <div class="animation-title">
+              <div class="number">2</div>
+              <h2>Unicorn Animation 2</h2>
+            </div>
+            <div class="project-id">Project: nGxQC4Cyr65OSy3T2iS2</div>
+          </div>
+
+          <div class="unicorn-frame">
+            <div data-us-project="nGxQC4Cyr65OSy3T2iS2"></div>
+          </div>
+        </article>
+
+        <article class="animation-card" id="animation-3">
+          <div class="animation-header">
+            <div class="animation-title">
+              <div class="number">3</div>
+              <h2>Unicorn Animation 3</h2>
+            </div>
+            <div class="project-id">Project: qxiTNwbeQUhKdXpaziVq</div>
+          </div>
+
+          <div class="unicorn-frame">
+            <div data-us-project="qxiTNwbeQUhKdXpaziVq"></div>
+          </div>
+        </article>
+
+        <article class="animation-card" id="animation-4">
+          <div class="animation-header">
+            <div class="animation-title">
+              <div class="number">4</div>
+              <h2>Unicorn Animation 4</h2>
+            </div>
+            <div class="project-id">Project: XgORfOrbRoe7R1TCH8z6</div>
+          </div>
+
+          <div class="unicorn-frame">
+            <div data-us-project="XgORfOrbRoe7R1TCH8z6"></div>
+          </div>
+        </article>
+
+        <article class="animation-card" id="animation-5">
+          <div class="animation-header">
+            <div class="animation-title">
+              <div class="number">5</div>
+              <h2>Unicorn Animation 5</h2>
+            </div>
+            <div class="project-id">Project: 5tVJVRDT08KwQByb2sbc</div>
+          </div>
+
+          <div class="unicorn-frame">
+            <div data-us-project="5tVJVRDT08KwQByb2sbc"></div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      Unicorn Animations Review Page
+    </footer>
+  </div>
+
+  <script type="text/javascript">
+    (function () {
+      function initUnicornStudio() {
+        if (window.UnicornStudio && window.UnicornStudio.init) {
+          window.UnicornStudio.init();
+        }
+      }
+
+      if (window.UnicornStudio && window.UnicornStudio.init) {
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initUnicornStudio);
+        } else {
+          initUnicornStudio();
+        }
+      } else {
+        window.UnicornStudio = { isInitialized: false };
+        var script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.12/dist/unicornStudio.umd.js";
+        script.onload = function () {
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initUnicornStudio);
+          } else {
+            initUnicornStudio();
+          }
+        };
+        (document.head || document.body).appendChild(script);
+      }
+    })();
+  </script>
+</body>
+</html>
